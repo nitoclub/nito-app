@@ -1,6 +1,9 @@
 *.iml
 .gradle
-.idea
+.idea/*
+# Keep the project icon.
+!/.idea/icon.png
+
 .DS_Store
 build
 captures
