@@ -1,0 +1,42 @@
+name: Bug Report
+description: バグレポートを提出する
+title: "[Bug]: "
+labels: [ "bug", "triage me" ]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        この度はバグレポートにご協力いただき、ありがとうございます。
+
+  - type: checkboxes
+    attributes:
+      label: これに対する既存の課題はありますか？
+      description: あなたが遭遇したバグについて、すでに課題が存在しないかどうか検索してください。
+      options:
+        - label: 既存の問題を検索してみました
+          required: true
+
+  - type: checkboxes
+    attributes:
+      label: この問題についての StackOverflow の質問はありますか？
+      description: あなたが遭遇したバグについて、すでに回答がある問題が存在する場合は [StackOverflow](https://stackoverflow.com/questions/tagged/android-jetpack) を検索してください。
+      options:
+        - label: StackOverflow を検索してみました
+          required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 何があったんですか？
+      description: また、どのようなことを期待していたのか、教えてください。
+      placeholder: あなたが見たものを教えてください
+      value: "バグが起きた！？"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 関連する Log の出力
+      description: 関連する Logcat の出力をコピーして貼り付けてください。これは自動的にコードにフォーマットされますので、バックティックは必要ありません。
+      render: shell
