@@ -13,7 +13,6 @@ class AndroidFeaturePlugin : Plugin<Project> {
                 apply("nito.primitive.android.kotlin")
                 apply("nito.primitive.android.compose")
                 apply("nito.primitive.android.hilt")
-                apply("nito.primitive.android.roborazzi")
                 apply("nito.primitive.detekt")
             }
 

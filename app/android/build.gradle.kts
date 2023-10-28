@@ -38,7 +38,7 @@ dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.core.ui)
 
-//    implementation(projects.feature.main)
+    implementation(projects.feature.top)
 //    implementation(projects.feature.contributors)
 //    implementation(projects.feature.sessions)
 //    implementation(projects.feature.about)
