@@ -1,0 +1,19 @@
+# ==================== Format ====================
+:emoji: Subject
+
+# ==================== Emojis ====================
+# ✨  :sparkles: 新機能追加（New Feature）
+# 🎉  :tada: 大きな機能追加（Big New Feature）
+# 👍  :+1: 機能改善（Update）
+# 🐛  :bug: バグ修正（Bugfix）
+# ♻  :recycle: リファクタリング(Refactoring)
+# 📚  :books: ドキュメント修正（Documentation）
+# 🎨  :art: デザインUI/UX(Accessibility)
+# 🚀  :rocket: パフォーマンス改善（Performance）
+# 🔧  :wrench: ツール（Tooling）
+# 💚  :green_heart: テスト/CI（Tests/CI）
+# 💩  :hankey: 非推奨追加（Deprecation）
+# 🗑️  :wastebasket: 削除（Removal）
+# 🆙  :up: ライブラリアップデート(Library Update)
+# 🚧  :construction: WIP(Work In Progress)
+# 🔖  :bookmark: バージョンタグ（Version Tag）

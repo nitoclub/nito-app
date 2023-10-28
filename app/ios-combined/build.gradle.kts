@@ -1,0 +1,55 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.BitcodeEmbeddingMode
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+
+plugins {
+    id("nito.primitive.kmp")
+    id("nito.primitive.kmp.android")
+    id("nito.primitive.kmp.ios")
+}
+
+@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
+kotlin {
+    val frameworkName = "NitoCombined"
+    val xcf = XCFramework(frameworkName)
+
+    targets.filterIsInstance<KotlinNativeTarget>()
+        .forEach {
+            it.binaries {
+                framework {
+                    baseName = frameworkName
+                    // compose for iOS(skiko) needs to be static library
+                    isStatic = true
+                    embedBitcode(BitcodeEmbeddingMode.DISABLE)
+                    binaryOption("bundleId", "club.nito.ios.combined")
+                    binaryOption("bundleVersion", version.toString())
+                    binaryOption("bundleShortVersionString", version.toString())
+                    xcf.add(this)
+
+//                    export(projects.core.model)
+//                    export(projects.core.data)
+                }
+            }
+        }
+
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                //put your multiplatform dependencies here
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+//                implementation(libs.kotlin.test)
+            }
+        }
+    }
+}
+
+android {
+    namespace = "club.nito"
+    compileSdk = 34
+    defaultConfig {
+        minSdk = 31
+    }
+}
