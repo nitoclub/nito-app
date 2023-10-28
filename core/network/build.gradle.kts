@@ -14,6 +14,10 @@ kotlin {
             dependencies {
                 implementation(projects.core.common)
                 implementation(projects.core.model)
+
+                implementation(libs.supabaseGotrue)
+                implementation(libs.supabasePostgrest)
+                implementation(libs.supabaseRealtime)
             }
         }
     }

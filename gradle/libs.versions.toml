@@ -41,6 +41,7 @@ twitterComposeRule = "0.0.26"
 lottie = "6.1.0"
 kover = "0.7.3"
 androidxLifecycleProcess = "2.6.2"
+supabase = "1.4.5"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -116,6 +117,10 @@ ktorClientOkHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor"
 ktorClientDarwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktorKotlinxSerialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktorContentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+
+supabaseGotrue = { module = "io.github.jan-tennert.supabase:gotrue-kt", version.ref = "supabase" }
+supabaseRealtime = { module = "io.github.jan-tennert.supabase:realtime-kt", version.ref = "supabase" }
+supabasePostgrest = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "supabase" }
 
 okHttpCore = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
 okHttpLoggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttp" }
