@@ -1,4 +1,4 @@
-package club.nito.android.ui.theme
+package club.nito.core.designsystem.theme
 
 import android.app.Activity
 import android.os.Build
