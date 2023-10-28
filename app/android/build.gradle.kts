@@ -33,7 +33,11 @@ dependencies {
 //    implementation(libs.androidx.activity.compose)
 //    debugImplementation(libs.compose.ui.tooling)
 
-//    implementation(projects.app.iosCombined)
+    implementation(projects.core.model)
+    implementation(projects.core.data)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.ui)
+
 //    implementation(projects.feature.main)
 //    implementation(projects.feature.contributors)
 //    implementation(projects.feature.sessions)
@@ -42,10 +46,7 @@ dependencies {
 //    implementation(projects.feature.floorMap)
 //    implementation(projects.feature.achievements)
 //    implementation(projects.feature.staff)
-//    implementation(projects.core.model)
-//    implementation(projects.core.data)
-//    implementation(projects.core.designsystem)
-//    implementation(projects.core.ui)
+
     implementation(libs.composeNavigation)
     implementation(libs.composeHiltNavigtation)
     implementation(libs.composeMaterialWindowSize)
