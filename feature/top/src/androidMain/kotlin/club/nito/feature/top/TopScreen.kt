@@ -4,9 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,6 +46,14 @@ private fun TopScreen(
                         text = "Top",
                     )
                 },
+                actions = {
+                    IconButton(onClick = onSettingsClick) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings",
+                        )
+                    }
+                },
             )
         },
         content = { padding ->
@@ -56,11 +67,6 @@ private fun TopScreen(
                     onRecentScheduleClick = { onScheduleClick() },
                     onScheduleListClick = onScheduleClick,
                 )
-                Button(onClick = onSettingsClick) {
-                    Text(
-                        text = "Settings",
-                    )
-                }
             }
         },
     )
