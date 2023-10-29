@@ -9,7 +9,7 @@ data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
         return (1..limit).map {
             createFakeNetworkSchedule(
                 id = it.toString(),
-                scheduledAt = "2021/01/$it",
+                scheduledAt = "2XXX年XX月${it}日 XX時XX分",
             )
         }.map(NetworkSchedule::toSchedule)
     }
@@ -17,7 +17,7 @@ data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
     override suspend fun getSchedule(id: String): Schedule {
         return createFakeNetworkSchedule(
             id = id,
-            scheduledAt = "2021/01/$id",
+            scheduledAt = "2XXX年XX月X1日 XX時XX分",
         ).toSchedule()
     }
 }

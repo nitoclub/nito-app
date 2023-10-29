@@ -14,19 +14,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import club.nito.core.designsystem.component.Text
+import club.nito.core.model.Schedule
 
 @Composable
 fun ScheduleItem(
-    scheduleId: String,
+    schedule: Schedule,
     modifier: Modifier = Modifier,
-    onScheduleClick: (scheduleId: String) -> Unit = {},
+    onScheduleClick: (schedule: Schedule) -> Unit = {},
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 48.dp)
             .clickable {
-                onScheduleClick(scheduleId)
+                onScheduleClick(schedule)
             }
             .padding(8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
@@ -37,7 +38,7 @@ fun ScheduleItem(
             contentDescription = "Date",
         )
         Text(
-            text = "2XXX年XX月XX日 XX時XX分",
+            text = schedule.scheduledAt,
         )
     }
 }

@@ -13,6 +13,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(projects.core.model)
+                implementation(projects.core.domain)
                 implementation(projects.core.ui)
                 implementation(projects.core.designsystem)
 

@@ -2,6 +2,7 @@ plugins {
     id("nito.primitive.androidapplication")
     id("nito.primitive.android.kotlin")
     id("nito.primitive.android.compose")
+    id("nito.primitive.android.hilt")
 }
 
 android {
@@ -26,14 +27,10 @@ android {
 }
 
 dependencies {
-//    implementation(libs.compose.ui)
-//    implementation(libs.compose.ui.tooling.preview)
-//    implementation(libs.compose.material3)
-//    implementation(libs.androidx.activity.compose)
-//    debugImplementation(libs.compose.ui.tooling)
-
     implementation(projects.core.model)
     implementation(projects.core.data)
+    implementation(projects.core.network)
+    implementation(projects.core.domain)
     implementation(projects.core.designsystem)
     implementation(projects.core.ui)
 

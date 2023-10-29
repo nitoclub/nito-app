@@ -4,27 +4,31 @@ import club.nito.core.data.ScheduleRepository
 import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.Schedule
 import club.nito.core.model.toNitoError
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * 直近のスケジュールを取得するユースケース
  */
 sealed interface GetRecentScheduleUseCase {
-    suspend operator fun invoke(): FetchSingleResult<Schedule>
+    operator fun invoke(): Flow<FetchSingleResult<Schedule>>
 }
 
 class GetRecentScheduleExecutor(
     private val scheduleRepository: ScheduleRepository,
 ) : GetRecentScheduleUseCase {
-    override suspend fun invoke(): FetchSingleResult<Schedule> {
+    override fun invoke(): Flow<FetchSingleResult<Schedule>> = flow {
         val data = try {
             scheduleRepository.getScheduleList(limit = 1)
         } catch (e: Throwable) {
-            return FetchSingleResult.Failure(error = e.toNitoError())
+            emit(FetchSingleResult.Failure(error = e.toNitoError()))
+            return@flow
         }
 
         if (data.isEmpty()) {
-            return FetchSingleResult.NoContent
+            emit(FetchSingleResult.NoContent)
+            return@flow
         }
-        return FetchSingleResult.Success(data.first())
+        emit(FetchSingleResult.Success(data.first()))
     }
 }
