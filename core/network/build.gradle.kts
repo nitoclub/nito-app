@@ -4,6 +4,7 @@ plugins {
     id("nito.primitive.kmp.ios")
     id("nito.primitive.kmp.android.hilt")
     id("nito.primitive.detekt")
+    id("nito.primitive.kmp.serialization")
 }
 
 android.namespace = "club.nito.core.network"
@@ -15,12 +16,34 @@ kotlin {
                 implementation(projects.core.common)
                 implementation(projects.core.model)
 
+                implementation(libs.kotlinxCoroutinesCore)
+
+                implementation(libs.okIo)
+                implementation(libs.ktorClientCore)
+                implementation(libs.ktorKotlinxSerialization)
+                implementation(libs.ktorContentNegotiation)
+
                 implementation(libs.supabaseGotrue)
                 implementation(libs.supabasePostgrest)
                 implementation(libs.supabaseRealtime)
             }
         }
+
+        androidMain {
+            dependencies {
+                implementation(libs.ktorClientOkHttp)
+                implementation(libs.multiplatformFirebaseAuth)
+                implementation(libs.okHttpLoggingInterceptor)
+                implementation(libs.okHttpLoggingInterceptor)
+                implementation(libs.firebaseRemoteConfig)
+                implementation(libs.androidxLifecycleProcess)
+            }
+        }
+
+        iosMain {
+            dependencies {
+                implementation(libs.ktorClientDarwin)
+            }
+        }
     }
-}
-dependencies {
 }
