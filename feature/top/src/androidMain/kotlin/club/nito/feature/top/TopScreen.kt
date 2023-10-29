@@ -9,6 +9,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,20 +18,30 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
+import club.nito.feature.top.component.ConfirmParticipateDialog
 import club.nito.feature.top.component.ScheduleSection
 
 @Composable
 fun TopRoute(
     viewModel: TopViewModel = hiltViewModel(),
-    onScheduleClick: () -> Unit = {},
+    onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
+    viewModel.event.collectAsState(initial = null).value?.let {
+        LaunchedEffect(it.hashCode()) {
+            when (it) {
+                TopEvent.NavigateToScheduleList -> onScheduleListClick()
+                TopEvent.NavigateToSettings -> onSettingsClick()
+            }
+            viewModel.consume(it)
+        }
+    }
+
     val uiState by viewModel.uiState.collectAsState()
 
     TopScreen(
         uiState = uiState,
-        onScheduleClick = onScheduleClick,
-        onSettingsClick = onSettingsClick,
+        dispatch = viewModel::dispatch,
     )
 }
 
@@ -38,19 +49,21 @@ fun TopRoute(
 @Composable
 private fun TopScreen(
     uiState: TopScreenUiState,
-    onScheduleClick: () -> Unit = {},
-    onSettingsClick: () -> Unit = {},
+    dispatch: (TopIntent) -> Unit = {},
 ) {
+    val recentSchedule = uiState.recentSchedule
+    val confirmParticipateDialog = uiState.confirmParticipateDialog
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "Top",
+                        text = "トップ",
                     )
                 },
                 actions = {
-                    IconButton(onClick = onSettingsClick) {
+                    IconButton(onClick = { dispatch(TopIntent.ClickSettings) }) {
                         Icon(
                             imageVector = Icons.Default.Settings,
                             contentDescription = "Settings",
@@ -60,6 +73,13 @@ private fun TopScreen(
             )
         },
         content = { padding ->
+            if (confirmParticipateDialog is ConfirmParticipateDialogUiState.Show) {
+                ConfirmParticipateDialog(
+                    schedule = confirmParticipateDialog.schedule,
+                    onDismissRequest = { dispatch(TopIntent.ClickDismissConfirmParticipateDialog) },
+                )
+            }
+
             Column(
                 modifier = Modifier
                     .padding(padding)
@@ -67,9 +87,9 @@ private fun TopScreen(
                 verticalArrangement = Arrangement.spacedBy(32.dp),
             ) {
                 ScheduleSection(
-                    recentSchedule = uiState.recentSchedule,
-                    onRecentScheduleClick = { onScheduleClick() },
-                    onScheduleListClick = onScheduleClick,
+                    recentSchedule = recentSchedule,
+                    onRecentScheduleClick = { dispatch(TopIntent.ClickShowConfirmParticipateDialog(it)) },
+                    onScheduleListClick = { dispatch(TopIntent.ClickScheduleList) },
                 )
             }
         },

@@ -12,14 +12,14 @@ fun NavController.navigateToTop(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.topScreen(
-    onScheduleClick: () -> Unit = {},
+    onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
     composable(
         route = topNavigationRoute,
     ) {
         TopRoute(
-            onScheduleClick = onScheduleClick,
+            onScheduleListClick = onScheduleListClick,
             onSettingsClick = onSettingsClick,
         )
     }

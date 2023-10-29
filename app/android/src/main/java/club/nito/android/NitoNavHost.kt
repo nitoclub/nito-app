@@ -28,7 +28,7 @@ fun NitoNavHost(
         modifier = modifier,
     ) {
         topScreen(
-            onScheduleClick = navController::navigateToSchedule,
+            onScheduleListClick = navController::navigateToSchedule,
             onSettingsClick = navController::navigateToSettings,
         )
         authScreen(
