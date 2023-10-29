@@ -18,8 +18,28 @@ fun TopAppBar(
     actions: @Composable RowScope.() -> Unit = {},
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
-    scrollBehavior: TopAppBarScrollBehavior? = null
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) = androidx.compose.material3.TopAppBar(
+    title = title,
+    modifier = modifier,
+    navigationIcon = navigationIcon,
+    actions = actions,
+    windowInsets = windowInsets,
+    colors = colors,
+    scrollBehavior = scrollBehavior,
+)
+
+@ExperimentalMaterial3Api
+@Composable
+fun CenterAlignedTopAppBar(
+    title: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    navigationIcon: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {},
+    windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
+    colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+) = androidx.compose.material3.CenterAlignedTopAppBar(
     title = title,
     modifier = modifier,
     navigationIcon = navigationIcon,

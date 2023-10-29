@@ -6,8 +6,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import club.nito.feature.auth.authScreen
+import club.nito.feature.auth.navigateToAuth
+import club.nito.feature.schedule.navigateToSchedule
 import club.nito.feature.schedule.scheduleScreen
+import club.nito.feature.settings.navigateToSettings
 import club.nito.feature.settings.settingsScreen
+import club.nito.feature.top.navigateToTop
 import club.nito.feature.top.topNavigationRoute
 import club.nito.feature.top.topScreen
 
@@ -23,9 +27,16 @@ fun NitoNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        topScreen()
-        authScreen()
+        topScreen(
+            onScheduleClick = navController::navigateToSchedule,
+            onSettingsClick = navController::navigateToSettings,
+        )
+        authScreen(
+            onSignInClick = navController::navigateToTop,
+        )
         scheduleScreen()
-        settingsScreen()
+        settingsScreen(
+            onSignOutClick = navController::navigateToAuth,
+        )
     }
 }

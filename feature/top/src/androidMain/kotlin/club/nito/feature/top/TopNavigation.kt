@@ -11,10 +11,16 @@ fun NavController.navigateToTop(navOptions: NavOptions? = null) {
     this.navigate(topNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.topScreen() {
+fun NavGraphBuilder.topScreen(
+    onScheduleClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {},
+) {
     composable(
         route = topNavigationRoute,
     ) {
-        TopRoute()
+        TopRoute(
+            onScheduleClick = onScheduleClick,
+            onSettingsClick = onSettingsClick,
+        )
     }
 }

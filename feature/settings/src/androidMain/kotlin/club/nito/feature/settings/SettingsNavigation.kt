@@ -11,10 +11,12 @@ fun NavController.navigateToSettings(navOptions: NavOptions? = null) {
     this.navigate(settingsNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.settingsScreen() {
+fun NavGraphBuilder.settingsScreen(
+    onSignOutClick: () -> Unit = {},
+) {
     composable(
         route = settingsNavigationRoute,
     ) {
-        SettingsRoute()
+        SettingsRoute(onSignOutClick = onSignOutClick)
     }
 }

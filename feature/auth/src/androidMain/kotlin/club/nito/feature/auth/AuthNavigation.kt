@@ -11,10 +11,12 @@ fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(authNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.authScreen() {
+fun NavGraphBuilder.authScreen(
+    onSignInClick: () -> Unit = {},
+) {
     composable(
         route = authNavigationRoute,
     ) {
-        AuthRoute()
+        AuthRoute(onSignInClick = onSignInClick)
     }
 }
