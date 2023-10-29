@@ -10,8 +10,11 @@ class OfflineFirstScheduleRepository(
 ) : ScheduleRepository {
     override val scheduleListFlow: Flow<List<Schedule>> = flow {
         // TODO: LocalDataSource
-        emit(remoteDataSource.getScheduleList())
+        emit(remoteDataSource.getScheduleList(limit = 10))
     }
+
+    override suspend fun getScheduleList(limit: Long): List<Schedule> =
+        remoteDataSource.getScheduleList(limit = limit)
 
     override fun scheduleFlow(id: String): Flow<Schedule> = flow {
         // TODO: LocalDataSource

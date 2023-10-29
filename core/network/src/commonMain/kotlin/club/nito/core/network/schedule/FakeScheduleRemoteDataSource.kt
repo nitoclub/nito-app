@@ -5,8 +5,8 @@ import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.schedule.model.createFakeNetworkSchedule
 
 data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
-    override suspend fun getScheduleList(): List<Schedule> {
-        return (1..10).map {
+    override suspend fun getScheduleList(limit: Long): List<Schedule> {
+        return (1..limit).map {
             createFakeNetworkSchedule(
                 id = it.toString(),
                 scheduledAt = "2021/01/$it",
