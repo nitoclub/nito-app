@@ -1,13 +1,63 @@
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+out/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+
+# Windows thumbnail db
+Thumbs.db
+
+# IDEA/Android Studio project files, because
+# the project can be imported from settings.gradle.kts
 *.iml
-.gradle
 .idea/*
+!.idea/copyright
+!.idea/codeInsightSettings.xml
 # Keep the project icon.
 !/.idea/icon.png
+# Keep the code styles.
+!/.idea/codeStyles
+/.idea/codeStyles/*
+!/.idea/codeStyles/Project.xml
+!/.idea/codeStyles/codeStyleConfig.xml
+# Suppress typo
+!/.idea/dictionaries
+/.idea/dictionaries/*
+!/.idea/dictionaries/dictionary.xml
 
+# Gradle cache
+.gradle
+
+# Sandbox stuff
+_sandbox
+
+# Android Studio captures folder
+captures/
+Footer
+
+# iOS
 .DS_Store
-build
-captures
-.externalNativeBuild
-.cxx
-local.properties
 xcuserdata
+DerivedData
+
+# Android Key
+app/android/src/prod/google-services.json
+app/android/keystore.properties
+app/android/nito.keystore
