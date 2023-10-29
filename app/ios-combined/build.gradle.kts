@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     id("nito.primitive.kmp")
-    id("nito.primitive.kmp.android")
     id("nito.primitive.kmp.ios")
 }
 
@@ -26,8 +25,8 @@ kotlin {
                     binaryOption("bundleShortVersionString", version.toString())
                     xcf.add(this)
 
-//                    export(projects.core.model)
-//                    export(projects.core.data)
+                    export(projects.core.model)
+                    export(projects.core.data)
                 }
             }
         }
@@ -35,7 +34,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                //put your multiplatform dependencies here
+                api(projects.core.model)
+                api(projects.core.data)
+                api(projects.core.ui)
             }
         }
         val commonTest by getting {
@@ -43,13 +44,5 @@ kotlin {
 //                implementation(libs.kotlin.test)
             }
         }
-    }
-}
-
-android {
-    namespace = "club.nito"
-    compileSdk = 34
-    defaultConfig {
-        minSdk = 31
     }
 }

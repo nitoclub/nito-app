@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0518CBC72AEC05BB003599DC /* NitoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518CBC62AEC05BB003599DC /* NitoApp.swift */; };
-		0518CBC92AEC05BB003599DC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518CBC82AEC05BB003599DC /* ContentView.swift */; };
 		0518CBCB2AEC05BC003599DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0518CBCA2AEC05BC003599DC /* Assets.xcassets */; };
 		0518CBCE2AEC05BC003599DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0518CBCD2AEC05BC003599DC /* Preview Assets.xcassets */; };
 		059F5C212AED017D006DF448 /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = 059F5C202AED017D006DF448 /* Navigation */; };
@@ -17,7 +16,6 @@
 /* Begin PBXFileReference section */
 		0518CBC32AEC05BB003599DC /* Nito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nito.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0518CBC62AEC05BB003599DC /* NitoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NitoApp.swift; sourceTree = "<group>"; };
-		0518CBC82AEC05BB003599DC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0518CBCA2AEC05BC003599DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0518CBCD2AEC05BC003599DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		059F5C1B2AEC9107006DF448 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Modules; path = ../../Modules; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				0518CBC62AEC05BB003599DC /* NitoApp.swift */,
-				0518CBC82AEC05BB003599DC /* ContentView.swift */,
 				0518CBCA2AEC05BC003599DC /* Assets.xcassets */,
 				0518CBCC2AEC05BC003599DC /* Preview Content */,
 			);
@@ -154,7 +151,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0518CBC92AEC05BB003599DC /* ContentView.swift in Sources */,
 				0518CBC72AEC05BB003599DC /* NitoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
