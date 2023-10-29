@@ -9,28 +9,28 @@ import club.nito.core.designsystem.component.Text
 import club.nito.core.designsystem.component.TopAppBar
 
 @Composable
-fun SchedulesRoute() {
-    SchedulesScreen()
+fun ScheduleRoute() {
+    ScheduleScreen()
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SchedulesScreen() {
+private fun ScheduleScreen() {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text(
-                        text = "Schedules",
+                        text = "Schedule",
                     )
                 },
             )
         },
         content = { padding ->
             Text(
-                text = "Schedules",
+                text = "Schedule",
                 modifier = Modifier.padding(padding),
             )
-        }
+        },
     )
 }

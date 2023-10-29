@@ -14,8 +14,14 @@ kotlin {
             dependencies {
                 implementation(projects.core.model)
                 implementation(projects.core.ui)
-                implementation(libs.kotlinxCoroutinesCore)
                 implementation(projects.core.designsystem)
+
+                implementation(libs.kotlinxCoroutinesCore)
+            }
+        }
+        androidMain {
+            dependencies {
+                implementation(libs.composeHiltNavigtation)
             }
         }
     }
