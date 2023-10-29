@@ -26,7 +26,6 @@ android {
 }
 
 dependencies {
-//    implementation(projects.app.iosCombined)
 //    implementation(libs.compose.ui)
 //    implementation(libs.compose.ui.tooling.preview)
 //    implementation(libs.compose.material3)
@@ -39,13 +38,9 @@ dependencies {
     implementation(projects.core.ui)
 
     implementation(projects.feature.top)
-//    implementation(projects.feature.contributors)
-//    implementation(projects.feature.sessions)
-//    implementation(projects.feature.about)
-//    implementation(projects.feature.sponsors)
-//    implementation(projects.feature.floorMap)
-//    implementation(projects.feature.achievements)
-//    implementation(projects.feature.staff)
+    implementation(projects.feature.auth)
+    implementation(projects.feature.schedule)
+    implementation(projects.feature.settings)
 
     implementation(libs.composeNavigation)
     implementation(libs.composeHiltNavigtation)
