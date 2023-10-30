@@ -6,5 +6,6 @@ sealed class TopIntent {
     data object ClickScheduleList : TopIntent()
     data object ClickSettings : TopIntent()
     data class ClickShowConfirmParticipateDialog(val schedule: Schedule) : TopIntent()
+    data class ClickParticipateSchedule(val schedule: Schedule) : TopIntent()
     data object ClickDismissConfirmParticipateDialog : TopIntent()
 }

@@ -11,6 +11,7 @@ import club.nito.core.model.Schedule
 @Composable
 internal fun ConfirmParticipateDialog(
     schedule: Schedule,
+    onParticipateRequest: (schedule: Schedule) -> Unit,
     onDismissRequest: () -> Unit,
 ) {
     AlertDialog(
@@ -39,7 +40,7 @@ internal fun ConfirmParticipateDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = onDismissRequest) {
+            TextButton(onClick = { onParticipateRequest(schedule) }) {
                 Text(
                     text = "参加する",
                     style = MaterialTheme.typography.labelLarge,

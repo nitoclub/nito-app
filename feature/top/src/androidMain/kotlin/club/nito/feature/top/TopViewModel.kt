@@ -6,6 +6,7 @@ import club.nito.core.domain.GetRecentScheduleUseCase
 import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.Schedule
 import club.nito.core.ui.buildUiState
+import club.nito.core.ui.message.UserMessageStateHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,9 @@ import javax.inject.Inject
 @HiltViewModel
 class TopViewModel @Inject constructor(
     getRecentScheduleUseCase: GetRecentScheduleUseCase,
-) : ViewModel() {
+    val userMessageStateHolder: UserMessageStateHolder,
+) : ViewModel(),
+    UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<Schedule?>(null)
 
     private val recentSchedule = getRecentScheduleUseCase().stateIn(
@@ -47,6 +50,11 @@ class TopViewModel @Inject constructor(
         viewModelScope.launch {
             when (intent) {
                 is TopIntent.ClickShowConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(intent.schedule)
+                is TopIntent.ClickParticipateSchedule -> {
+                    showConfirmParticipateSchedule.emit(null)
+                    userMessageStateHolder.showMessage("${intent.schedule.scheduledAt} に参加登録しました 🎉")
+                }
+
                 TopIntent.ClickDismissConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(null)
                 TopIntent.ClickScheduleList -> _events.emit(_events.value + TopEvent.NavigateToScheduleList)
                 TopIntent.ClickSettings -> _events.emit(_events.value + TopEvent.NavigateToSettings)
