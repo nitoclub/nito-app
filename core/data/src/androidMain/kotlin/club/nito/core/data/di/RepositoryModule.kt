@@ -1,7 +1,10 @@
 package club.nito.core.data.di
 
+import club.nito.core.data.AuthRepository
+import club.nito.core.data.DefaultAuthRepository
 import club.nito.core.data.OfflineFirstScheduleRepository
 import club.nito.core.data.ScheduleRepository
+import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -12,6 +15,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class RepositoryModule {
+    @Provides
+    @Singleton
+    fun provideAuthRepository(
+        remoteDataSource: AuthRemoteDataSource,
+    ): AuthRepository = DefaultAuthRepository(
+        remoteDataSource = remoteDataSource,
+    )
+
     @Provides
     @Singleton
     fun provideScheduleRepository(
