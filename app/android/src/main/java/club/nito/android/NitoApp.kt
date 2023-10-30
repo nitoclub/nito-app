@@ -8,8 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import club.nito.core.designsystem.theme.NitoTheme
 import club.nito.core.model.AuthStatus
-import club.nito.feature.auth.authNavigationRoute
-import club.nito.feature.top.topNavigationRoute
 
 @Composable
 fun NitoApp(

@@ -6,6 +6,7 @@ import club.nito.core.model.UserMfaFactor
 import club.nito.core.model.UserSession
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.SessionStatus
+import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -63,4 +64,11 @@ class SupabaseAuthRemoteDataSource(
             is SessionStatus.NetworkError -> AuthStatus.NetworkError
         }
     }
+
+    override suspend fun signIn(email: String, password: String) = goTrue.loginWith(Email) {
+        this.email = email
+        this.password = password
+    }
+
+    override suspend fun signOut() = goTrue.logout()
 }

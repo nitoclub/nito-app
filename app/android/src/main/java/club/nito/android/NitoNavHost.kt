@@ -1,5 +1,6 @@
 package club.nito.android
 
+import android.util.Log
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,13 +11,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import club.nito.core.model.AuthStatus
-import club.nito.feature.auth.authScreen
-import club.nito.feature.auth.navigateToAuth
+import club.nito.feature.auth.navigateToSignIn
+import club.nito.feature.auth.signInNavigationRoute
+import club.nito.feature.auth.signInScreen
 import club.nito.feature.schedule.navigateToSchedule
 import club.nito.feature.schedule.scheduleScreen
 import club.nito.feature.settings.navigateToSettings
 import club.nito.feature.settings.settingsScreen
 import club.nito.feature.top.navigateToTop
+import club.nito.feature.top.topNavigationRoute
 import club.nito.feature.top.topScreen
 
 const val rootNavigationRoute = "root_route"
@@ -43,12 +46,28 @@ fun NitoNavHost(
             onScheduleListClick = navController::navigateToSchedule,
             onSettingsClick = navController::navigateToSettings,
         )
-        authScreen(
-            onSignInClick = navController::navigateToTop,
+        signInScreen(
+            onSignedIn = {
+                navController.navigateToTop(
+                    navOptions = navOptions {
+                        popUpTo(signInNavigationRoute) {
+                            inclusive = true
+                        }
+                    },
+                )
+            },
         )
         scheduleScreen()
         settingsScreen(
-            onSignOutClick = navController::navigateToAuth,
+            onSignedOut = {
+                navController.navigateToSignIn(
+                    navOptions = navOptions {
+                        popUpTo(topNavigationRoute) {
+                            inclusive = true
+                        }
+                    },
+                )
+            },
         )
     }
 }
@@ -58,8 +77,10 @@ private fun NavGraphBuilder.root(
     navController: NavHostController,
 ) = composable(rootNavigationRoute) {
     LaunchedEffect(authStatus) {
+        Log.e("authStatus", authStatus.toString())
+
         when (authStatus) {
-            AuthStatus.NotAuthenticated -> navController.navigateToAuth(
+            AuthStatus.NotAuthenticated -> navController.navigateToSignIn(
                 navOptions = navOptions {
                     popUpTo(rootNavigationRoute) {
                         inclusive = true

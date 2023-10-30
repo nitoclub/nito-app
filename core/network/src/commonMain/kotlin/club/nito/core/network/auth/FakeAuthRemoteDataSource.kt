@@ -18,8 +18,6 @@ data object FakeAuthRemoteDataSource : AuthRemoteDataSource {
         GlobalScope.launch {
             delay(1000)
 
-//            _authStatus.value = AuthStatus.NotAuthenticated
-
             _authStatus.value = AuthStatus.Authenticated(
                 session = authenticatedUserSession,
             )
@@ -55,4 +53,10 @@ data object FakeAuthRemoteDataSource : AuthRemoteDataSource {
         ),
         type = "type",
     )
+
+    override suspend fun signIn(email: String, password: String) = _authStatus.emit(
+        AuthStatus.Authenticated(session = authenticatedUserSession),
+    )
+
+    override suspend fun signOut() = _authStatus.emit(AuthStatus.NotAuthenticated)
 }

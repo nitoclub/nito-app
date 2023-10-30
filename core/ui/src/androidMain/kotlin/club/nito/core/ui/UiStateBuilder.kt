@@ -36,3 +36,23 @@ fun <T1, T2, R> ViewModel.buildUiState(
         flow2.value,
     ),
 )
+
+fun <T1, T2, T3, R> ViewModel.buildUiState(
+    flow: StateFlow<T1>,
+    flow2: StateFlow<T2>,
+    flow3: StateFlow<T3>,
+    transform: (T1, T2, T3) -> R,
+): StateFlow<R> = combine(
+    flow = flow,
+    flow2 = flow2,
+    flow3 = flow3,
+    transform = transform,
+).stateIn(
+    scope = viewModelScope,
+    started = SharingStarted.WhileSubscribed(5_000),
+    initialValue = transform(
+        flow.value,
+        flow2.value,
+        flow3.value,
+    ),
+)
