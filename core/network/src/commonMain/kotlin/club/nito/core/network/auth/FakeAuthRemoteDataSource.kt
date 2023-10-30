@@ -3,19 +3,21 @@ package club.nito.core.network.auth
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.UserInfo
 import club.nito.core.model.UserSession
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-data object FakeAuthRemoteDataSource : AuthRemoteDataSource {
+class FakeAuthRemoteDataSource(
+    coroutineScope: CoroutineScope,
+) : AuthRemoteDataSource {
 
     private val _authStatus = MutableStateFlow<AuthStatus>(AuthStatus.Loading)
     override val authStatus: Flow<AuthStatus> = _authStatus
 
     init {
-        GlobalScope.launch {
+        coroutineScope.launch {
             delay(1000)
 
             _authStatus.value = AuthStatus.Authenticated(

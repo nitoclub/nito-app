@@ -1,5 +1,6 @@
 package club.nito.core.network.di
 
+import club.nito.core.common.network.di.ApplicationScope
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.auth.FakeAuthRemoteDataSource
 import club.nito.core.network.schedule.FakeScheduleRemoteDataSource
@@ -8,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -15,7 +17,11 @@ import javax.inject.Singleton
 class NetworkModule {
     @Provides
     @Singleton
-    fun provideAuthRemoteDataSource(): AuthRemoteDataSource = FakeAuthRemoteDataSource
+    fun provideAuthRemoteDataSource(
+        @ApplicationScope coroutineScope: CoroutineScope,
+    ): AuthRemoteDataSource = FakeAuthRemoteDataSource(
+        coroutineScope = coroutineScope,
+    )
 
     @Provides
     @Singleton
