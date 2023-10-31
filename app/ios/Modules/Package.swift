@@ -36,6 +36,9 @@ let package = Package(
             targets: ["Top"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
+    ],
     targets: [
         .target(
             name: "About",
@@ -83,7 +86,7 @@ let package = Package(
             name: "ModulesTests",
             dependencies: ["About"]
         ),
-        
+
         .binaryTarget(
             name: "NitoCombined",
             path: "../../ios-combined/build/XCFrameworks/release/NitoCombined.xcframework"
