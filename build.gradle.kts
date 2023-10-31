@@ -5,9 +5,9 @@ plugins {
     alias(libs.plugins.kotlinxKover) apply false
 }
 
-tasks.register("clean", Delete::class) {
-    delete(rootProject.layout.buildDirectory)
-}
+//tasks.register("clean", Delete::class) {
+//    delete(rootProject.layout.buildDirectory)
+//}
 
 buildscript {
     configurations.all {

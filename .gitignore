@@ -61,3 +61,6 @@ DerivedData
 app/android/src/prod/google-services.json
 app/android/keystore.properties
 app/android/nito.keystore
+
+# Web
+*yarn.lock

@@ -10,6 +10,10 @@ plugins {
 android.namespace = "club.nito.core.designsystem"
 
 kotlin {
+    js {
+        browser()
+    }
+
     sourceSets {
         commonMain {
             dependencies {
