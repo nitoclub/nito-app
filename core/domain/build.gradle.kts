@@ -19,5 +19,10 @@ kotlin {
                 implementation(libs.kotlinxCoroutinesCore)
             }
         }
+        iosMain {
+            dependencies {
+                implementation(libs.koin)
+            }
+        }
     }
 }

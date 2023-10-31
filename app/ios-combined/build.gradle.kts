@@ -26,22 +26,29 @@ kotlin {
                     xcf.add(this)
 
                     export(projects.core.model)
+                    export(projects.core.domain)
                     export(projects.core.data)
                 }
             }
         }
 
     sourceSets {
-        val commonMain by getting {
+        commonMain {
             dependencies {
                 api(projects.core.model)
+                api(projects.core.domain)
                 api(projects.core.data)
                 api(projects.core.ui)
             }
         }
-        val commonTest by getting {
+        commonTest {
             dependencies {
 //                implementation(libs.kotlin.test)
+            }
+        }
+        iosMain {
+            dependencies {
+                implementation(libs.koin)
             }
         }
     }

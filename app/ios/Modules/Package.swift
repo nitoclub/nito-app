@@ -43,12 +43,14 @@ let package = Package(
         .target(
             name: "About",
             dependencies: [
+                "KmpContainer",
                 "NitoCombined",
             ]
         ),
         .target(
             name: "Auth",
             dependencies: [
+                "KmpContainer",
                 "NitoCombined",
             ]
         ),
@@ -60,24 +62,28 @@ let package = Package(
                 "Schedule",
                 "Settings",
                 "Top",
+                "KmpContainer",
                 "NitoCombined",
             ]
         ),
         .target(
             name: "Schedule",
             dependencies: [
+                "KmpContainer",
                 "NitoCombined",
             ]
         ),
         .target(
             name: "Settings",
             dependencies: [
+                "KmpContainer",
                 "NitoCombined",
             ]
         ),
         .target(
             name: "Top",
             dependencies: [
+                "KmpContainer",
                 "NitoCombined",
             ]
         ),
@@ -87,6 +93,13 @@ let package = Package(
             dependencies: ["About"]
         ),
 
+        .target(
+            name: "KmpContainer",
+            dependencies: [
+                "NitoCombined",
+                .product(name: "Dependencies", package: "swift-dependencies"),
+            ]
+        ),
         .binaryTarget(
             name: "NitoCombined",
             path: "../../ios-combined/build/XCFrameworks/release/NitoCombined.xcframework"
