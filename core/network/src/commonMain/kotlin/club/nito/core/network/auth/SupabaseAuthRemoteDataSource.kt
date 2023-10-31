@@ -64,7 +64,7 @@ class SupabaseAuthRemoteDataSource(
 
             is SessionStatus.NotAuthenticated -> FetchSingleResult.Success(AuthStatus.NotAuthenticated)
             is SessionStatus.LoadingFromStorage -> FetchSingleResult.Loading
-            is SessionStatus.NetworkError -> FetchSingleResult.NoContent
+            is SessionStatus.NetworkError -> FetchSingleResult.Failure(null)
         }
     }
 

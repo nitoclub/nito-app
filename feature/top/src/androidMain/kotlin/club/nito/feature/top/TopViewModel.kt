@@ -3,7 +3,7 @@ package club.nito.feature.top
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import club.nito.core.domain.GetRecentScheduleUseCase
-import club.nito.core.model.FetchSingleResult
+import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.Schedule
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
@@ -28,7 +28,7 @@ class TopViewModel @Inject constructor(
     private val recentSchedule = getRecentScheduleUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = FetchSingleResult.Loading,
+        initialValue = FetchSingleContentResult.Loading,
     )
 
     val uiState: StateFlow<TopScreenUiState> = buildUiState(

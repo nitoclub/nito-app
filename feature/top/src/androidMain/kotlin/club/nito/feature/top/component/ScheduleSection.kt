@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import club.nito.core.designsystem.component.Text
+import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.Schedule
 import club.nito.core.ui.ScheduleItem
 
 @Composable
 internal fun ScheduleSection(
-    recentSchedule: FetchSingleResult<Schedule>,
+    recentSchedule: FetchSingleContentResult<Schedule>,
     modifier: Modifier = Modifier,
     onRecentScheduleClick: (schedule: Schedule) -> Unit = {},
     onScheduleListClick: () -> Unit = {},
@@ -42,14 +43,14 @@ internal fun ScheduleSection(
             )
 
             when (recentSchedule) {
-                FetchSingleResult.Loading -> LoadingSchedule()
-                FetchSingleResult.NoContent -> NoSchedule()
-                is FetchSingleResult.Success -> ScheduleItem(
+                FetchSingleContentResult.Loading -> LoadingSchedule()
+                FetchSingleContentResult.NoContent -> NoSchedule()
+                is FetchSingleContentResult.Success -> ScheduleItem(
                     schedule = recentSchedule.data,
                     onScheduleClick = onRecentScheduleClick,
                 )
 
-                is FetchSingleResult.Failure -> FailureSchedule()
+                is FetchSingleContentResult.Failure -> FailureSchedule()
             }
 
             TextButton(
