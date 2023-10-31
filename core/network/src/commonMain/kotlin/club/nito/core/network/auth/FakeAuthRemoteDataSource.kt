@@ -1,6 +1,7 @@
 package club.nito.core.network.auth
 
 import club.nito.core.model.AuthStatus
+import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.UserInfo
 import club.nito.core.model.UserSession
 import kotlinx.coroutines.CoroutineScope
@@ -13,15 +14,17 @@ class FakeAuthRemoteDataSource(
     coroutineScope: CoroutineScope,
 ) : AuthRemoteDataSource {
 
-    private val _authStatus = MutableStateFlow<AuthStatus>(AuthStatus.Loading)
-    override val authStatus: Flow<AuthStatus> = _authStatus
+    private val _authStatus = MutableStateFlow<FetchSingleResult<AuthStatus>>(FetchSingleResult.Loading)
+    override val authStatus: Flow<FetchSingleResult<AuthStatus>> = _authStatus
 
     init {
         coroutineScope.launch {
             delay(1000)
 
-            _authStatus.value = AuthStatus.Authenticated(
-                session = authenticatedUserSession,
+            _authStatus.value = FetchSingleResult.Success(
+                AuthStatus.Authenticated(
+                    session = authenticatedUserSession,
+                ),
             )
         }
     }
@@ -57,8 +60,12 @@ class FakeAuthRemoteDataSource(
     )
 
     override suspend fun signIn(email: String, password: String) = _authStatus.emit(
-        AuthStatus.Authenticated(session = authenticatedUserSession),
+        FetchSingleResult.Success(
+            AuthStatus.Authenticated(session = authenticatedUserSession),
+        ),
     )
 
-    override suspend fun signOut() = _authStatus.emit(AuthStatus.NotAuthenticated)
+    override suspend fun signOut() = _authStatus.emit(
+        FetchSingleResult.Success(AuthStatus.NotAuthenticated),
+    )
 }

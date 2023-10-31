@@ -1,6 +1,5 @@
 package club.nito.android
 
-import android.util.Log
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -27,7 +26,7 @@ const val rootNavigationRoute = "root_route"
 @Composable
 fun NitoNavHost(
     windowSize: WindowSizeClass,
-    authStatus: AuthStatus,
+    authStatus: AuthStatus?,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = rootNavigationRoute,
@@ -73,12 +72,10 @@ fun NitoNavHost(
 }
 
 private fun NavGraphBuilder.root(
-    authStatus: AuthStatus,
+    authStatus: AuthStatus?,
     navController: NavHostController,
 ) = composable(rootNavigationRoute) {
     LaunchedEffect(authStatus) {
-        Log.e("authStatus", authStatus.toString())
-
         when (authStatus) {
             AuthStatus.NotAuthenticated -> navController.navigateToSignIn(
                 navOptions = navOptions {

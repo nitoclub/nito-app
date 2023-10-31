@@ -12,7 +12,7 @@ import club.nito.core.model.AuthStatus
 @Composable
 fun NitoApp(
     windowSize: WindowSizeClass,
-    authStatus: AuthStatus,
+    authStatus: AuthStatus?,
     modifier: Modifier = Modifier,
 ) {
     NitoTheme {

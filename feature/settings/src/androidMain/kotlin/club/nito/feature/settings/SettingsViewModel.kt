@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.SignOutUseCase
 import club.nito.core.model.AuthStatus
+import club.nito.core.model.FetchSingleResult
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,14 +30,14 @@ class SettingsViewModel @Inject constructor(
     private val authStatus = observeAuthStatusUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = AuthStatus.Loading,
+        initialValue = FetchSingleResult.Loading,
     )
 
     val uiState: StateFlow<SettingsScreenUiState> = buildUiState(
         authStatus,
     ) { authStatus ->
         SettingsScreenUiState(
-            isSignOuting = authStatus is AuthStatus.Loading,
+            isSignOuting = authStatus is FetchSingleResult.Loading,
         )
     }
 
@@ -46,7 +47,7 @@ class SettingsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             authStatus.collectLatest {
-                if (it is AuthStatus.NotAuthenticated) {
+                if (it is FetchSingleResult.Success && it.data is AuthStatus.NotAuthenticated) {
                     _events.emit(listOf(SettingsEvent.SignedOut))
                 }
             }

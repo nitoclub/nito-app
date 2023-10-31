@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.SignInUseCase
 import club.nito.core.model.AuthStatus
+import club.nito.core.model.FetchSingleResult
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +32,7 @@ class SignInViewModel @Inject constructor(
     private val authStatus = observeAuthStatusUseCase().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = AuthStatus.Loading,
+        initialValue = FetchSingleResult.Loading,
     )
 
     val uiState: StateFlow<SignInScreenUiState> = buildUiState(
@@ -42,7 +43,7 @@ class SignInViewModel @Inject constructor(
         SignInScreenUiState(
             email = email,
             password = password,
-            isSignInning = authStatus is AuthStatus.Loading,
+            isSignInning = authStatus is FetchSingleResult.Loading,
         )
     }
 
@@ -52,7 +53,7 @@ class SignInViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             authStatus.collectLatest {
-                if (it is AuthStatus.Authenticated) {
+                if (it is FetchSingleResult.Success && it.data is AuthStatus.Authenticated) {
                     _events.emit(listOf(SignInEvent.SignedIn))
                 }
             }

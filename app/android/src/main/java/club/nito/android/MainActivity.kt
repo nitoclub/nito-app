@@ -80,7 +80,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun shouldAuthStatus(
     uiState: MainActivityUiState,
-): AuthStatus = when (uiState) {
-    MainActivityUiState.Loading -> AuthStatus.Loading
+): AuthStatus? = when (uiState) {
+    MainActivityUiState.Loading -> null
     is MainActivityUiState.Success -> uiState.authStatus
 }
