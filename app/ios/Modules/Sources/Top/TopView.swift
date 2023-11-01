@@ -1,4 +1,5 @@
 import Common
+import Dependencies
 import SwiftUI
 import NitoCombined
 
@@ -30,14 +31,18 @@ public struct TopView<ScheduleListView: View, SettingsView: View>: View {
                 Text(Greeting().greet())
 
                 Group {
-                    switch stateMachine.state.recentSchedule {
+                    switch stateMachine.state.recentScheduleUIState {
                         case .initial, .loading:
                             ProgressView()
                                 .task {
                                     await stateMachine.load()
                                 }
                         case .loaded(let recentSchedule):
-                            Text(recentSchedule.scheduledAt.toDate().ISO8601Format())
+                            Text(
+                                recentSchedule.formatter.string(
+                                    from: recentSchedule.data.scheduledAt.toDate()
+                                )
+                            )
                         case .failed:
                             EmptyView()
                         }

@@ -5,11 +5,17 @@ import KmpContainer
 import NitoCombined
 
 struct TopViewUIState: UIState {
-    var recentSchedule: LoadingState<Schedule> = .initial
+    var recentScheduleUIState: LoadingState<RecentScheduleUIState> = .initial
+}
+
+struct RecentScheduleUIState: UIState {
+    var data: Schedule
+    var formatter: DateFormatter
 }
 
 @MainActor
 final class TopStateMachine: ObservableObject {
+    @Dependency(\.dateTimeFormatter) var dateTimeFormatterProvider
     @Dependency(\.getRecentScheduleUseCase) var getRecentScheduleUseCase
 
     @Published var state: TopViewUIState = .init()
@@ -26,7 +32,7 @@ final class TopStateMachine: ObservableObject {
     }
 
     func load() async {
-        state.recentSchedule = .loading
+        state.recentScheduleUIState = .loading
 
         loadTask = Task {
             do {
@@ -34,7 +40,7 @@ final class TopStateMachine: ObservableObject {
                     cachedRecentSchedule = recentSchedule.data
                 }
             } catch let error {
-                state.recentSchedule = .failed(error)
+                state.recentScheduleUIState = .failed(error)
             }
         }
     }
@@ -43,8 +49,11 @@ final class TopStateMachine: ObservableObject {
         guard let cachedRecentSchedule = cachedRecentSchedule else {
             return
         }
-        state.recentSchedule = .loaded(
-            cachedRecentSchedule
+        state.recentScheduleUIState = .loaded(
+            RecentScheduleUIState(
+                data: cachedRecentSchedule,
+                formatter: dateTimeFormatterProvider.dateTimeFormatter
+            )
         )
     }
 }

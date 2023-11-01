@@ -44,6 +44,7 @@ let package = Package(
             name: "Common",
             dependencies: [
                 "NitoCombined",
+                .product(name: "Dependencies", package: "swift-dependencies"),
             ]
         ),
         .target(
