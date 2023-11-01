@@ -42,7 +42,9 @@ let package = Package(
     targets: [
         .target(
             name: "Common",
-            dependencies: []
+            dependencies: [
+                "NitoCombined",
+            ]
         ),
         .target(
             name: "About",

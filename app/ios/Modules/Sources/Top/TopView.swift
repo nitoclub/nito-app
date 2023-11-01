@@ -8,6 +8,8 @@ enum TopRouting: Hashable {
 }
 
 public struct TopView<ScheduleListView: View, SettingsView: View>: View {
+    @StateObject var stateMachine: TopStateMachine = .init()
+    
     private let scheduleListViewProvider: ViewProvider<Void, ScheduleListView>
     private let settingsViewProvider: ViewProvider<Void, SettingsView>
 
@@ -27,6 +29,20 @@ public struct TopView<ScheduleListView: View, SettingsView: View>: View {
                     .foregroundStyle(.tint)
                 Text(Greeting().greet())
 
+                Group {
+                    switch stateMachine.state.recentSchedule {
+                        case .initial, .loading:
+                            ProgressView()
+                                .task {
+                                    await stateMachine.load()
+                                }
+                        case .loaded(let recentSchedule):
+                            Text(recentSchedule.scheduledAt.toDate().ISO8601Format())
+                        case .failed:
+                            EmptyView()
+                        }
+                }
+                
                 NavigationLink(value: TopRouting.scheduleList) {
                     Text("スケジュール一覧を見る")
                 }
