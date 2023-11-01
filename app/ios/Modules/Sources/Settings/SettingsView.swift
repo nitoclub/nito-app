@@ -14,6 +14,7 @@ public struct SettingsView: View {
             Text(Greeting().greet())
         }
         .padding()
+        .navigationTitle("設定")
     }
 }
 

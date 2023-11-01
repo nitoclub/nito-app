@@ -1,11 +1,11 @@
 import SwiftUI
-import Top
+import Navigation
 
 @main
 struct NitoApp: App {
     var body: some Scene {
         WindowGroup {
-            TopView()
+            RootView()
         }
     }
 }

@@ -41,6 +41,10 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "Common",
+            dependencies: []
+        ),
+        .target(
             name: "About",
             dependencies: [
                 "KmpContainer",
@@ -50,6 +54,7 @@ let package = Package(
         .target(
             name: "Auth",
             dependencies: [
+                "Common",
                 "KmpContainer",
                 "NitoCombined",
             ]
@@ -57,6 +62,7 @@ let package = Package(
         .target(
             name: "Navigation",
             dependencies: [
+                "Common",
                 "About",
                 "Auth",
                 "Schedule",
@@ -69,6 +75,7 @@ let package = Package(
         .target(
             name: "Schedule",
             dependencies: [
+                "Common",
                 "KmpContainer",
                 "NitoCombined",
             ]
@@ -76,6 +83,7 @@ let package = Package(
         .target(
             name: "Settings",
             dependencies: [
+                "Common",
                 "KmpContainer",
                 "NitoCombined",
             ]
@@ -83,6 +91,7 @@ let package = Package(
         .target(
             name: "Top",
             dependencies: [
+                "Common",
                 "KmpContainer",
                 "NitoCombined",
             ]
