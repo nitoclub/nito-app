@@ -1,24 +1,24 @@
 package club.nito.core.network.schedule.model
 
 import club.nito.core.model.Schedule
-import kotlinx.serialization.SerialName
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class NetworkSchedule(
-    val id: String,
-    @SerialName("scheduled_at")
-    val scheduledAt: String,
+    val id: Long,
+    val scheduledAt: Instant,
 ) {
     fun toSchedule() = Schedule(
-        id = id,
+        id = "$id",
         scheduledAt = scheduledAt,
     )
 }
 
 internal fun createFakeNetworkSchedule(
-    id: String = "1",
-    scheduledAt: String = "2021/01/01",
+    id: Long = 1,
+    scheduledAt: Instant = Clock.System.now(),
 ) = NetworkSchedule(
     id = id,
     scheduledAt = scheduledAt,

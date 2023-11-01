@@ -2,6 +2,7 @@ package club.nito.feature.top
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.domain.GetRecentScheduleUseCase
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.Schedule
@@ -21,6 +22,7 @@ import javax.inject.Inject
 class TopViewModel @Inject constructor(
     getRecentScheduleUseCase: GetRecentScheduleUseCase,
     val userMessageStateHolder: UserMessageStateHolder,
+    private val dateTimeFormatter: NitoDateTimeFormatter,
 ) : ViewModel(),
     UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<Schedule?>(null)
@@ -36,6 +38,7 @@ class TopViewModel @Inject constructor(
         recentSchedule,
     ) { showConfirmParticipateSchedule, recentSchedule ->
         TopScreenUiState(
+            dateTimeFormatter = dateTimeFormatter,
             recentSchedule = recentSchedule,
             confirmParticipateDialog = showConfirmParticipateSchedule
                 ?.let(ConfirmParticipateDialogUiState::Show)
@@ -52,7 +55,9 @@ class TopViewModel @Inject constructor(
                 is TopIntent.ClickShowConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(intent.schedule)
                 is TopIntent.ClickParticipateSchedule -> {
                     showConfirmParticipateSchedule.emit(null)
-                    userMessageStateHolder.showMessage("${intent.schedule.scheduledAt} に参加登録しました 🎉")
+
+                    val scheduledAt = dateTimeFormatter.formatDateTimeString(intent.schedule.scheduledAt)
+                    userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
                 }
 
                 TopIntent.ClickDismissConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(null)

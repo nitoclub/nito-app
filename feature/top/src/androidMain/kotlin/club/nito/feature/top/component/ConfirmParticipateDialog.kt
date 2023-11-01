@@ -5,12 +5,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
+import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.designsystem.component.Text
 import club.nito.core.model.Schedule
 
 @Composable
 internal fun ConfirmParticipateDialog(
     schedule: Schedule,
+    dateTimeFormatter: NitoDateTimeFormatter,
     onParticipateRequest: (schedule: Schedule) -> Unit,
     onDismissRequest: () -> Unit,
 ) {
@@ -25,7 +27,7 @@ internal fun ConfirmParticipateDialog(
         },
         text = {
             Text(
-                text = "${schedule.scheduledAt}のトランポリンに参加しますか？",
+                text = "${dateTimeFormatter.formatDateTimeString(schedule.scheduledAt)} 集合のトランポリンに参加しますか？",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

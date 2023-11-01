@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
  */
 sealed interface ScheduleRepository {
     val scheduleListFlow: Flow<List<Schedule>>
-    suspend fun getScheduleList(limit: Long): List<Schedule>
+    suspend fun getScheduleList(limit: Int): List<Schedule>
     fun scheduleFlow(id: String): Flow<Schedule>
 }

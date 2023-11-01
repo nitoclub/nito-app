@@ -89,6 +89,7 @@ private fun TopScreen(
             if (confirmParticipateDialog is ConfirmParticipateDialogUiState.Show) {
                 ConfirmParticipateDialog(
                     schedule = confirmParticipateDialog.schedule,
+                    dateTimeFormatter = uiState.dateTimeFormatter,
                     onParticipateRequest = { dispatch(TopIntent.ClickParticipateSchedule(it)) },
                     onDismissRequest = { dispatch(TopIntent.ClickDismissConfirmParticipateDialog) },
                 )
@@ -102,6 +103,7 @@ private fun TopScreen(
             ) {
                 ScheduleSection(
                     recentSchedule = recentSchedule,
+                    dateTimeFormatter = uiState.dateTimeFormatter,
                     onRecentScheduleClick = { dispatch(TopIntent.ClickShowConfirmParticipateDialog(it)) },
                     onScheduleListClick = { dispatch(TopIntent.ClickScheduleList) },
                 )

@@ -13,7 +13,7 @@ class OfflineFirstScheduleRepository(
         emit(remoteDataSource.getScheduleList(limit = 10))
     }
 
-    override suspend fun getScheduleList(limit: Long): List<Schedule> =
+    override suspend fun getScheduleList(limit: Int): List<Schedule> =
         remoteDataSource.getScheduleList(limit = limit)
 
     override fun scheduleFlow(id: String): Flow<Schedule> = flow {

@@ -13,12 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.designsystem.component.Text
 import club.nito.core.model.Schedule
 
 @Composable
 fun ScheduleItem(
     schedule: Schedule,
+    dateTimeFormatter: NitoDateTimeFormatter,
     modifier: Modifier = Modifier,
     onScheduleClick: (schedule: Schedule) -> Unit = {},
 ) {
@@ -38,7 +40,7 @@ fun ScheduleItem(
             contentDescription = "Date",
         )
         Text(
-            text = schedule.scheduledAt,
+            text = dateTimeFormatter.formatDateTimeString(schedule.scheduledAt),
         )
     }
 }

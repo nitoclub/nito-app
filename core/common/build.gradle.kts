@@ -13,6 +13,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlinxCoroutinesCore)
+                implementation(libs.kotlinxDatetime)
             }
         }
         iosMain {
