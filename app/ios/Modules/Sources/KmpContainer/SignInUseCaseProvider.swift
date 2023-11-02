@@ -18,8 +18,8 @@ extension SignInUseCaseProvider: DependencyKey {
     )
 }
 
-public extension DependencyValues {
-    var signInUseCase: SignInUseCaseProvider {
+extension DependencyValues {
+    public var signInUseCase: SignInUseCaseProvider {
         get { self[SignInUseCaseProvider.self] }
         set { self[SignInUseCaseProvider.self] = newValue }
     }

@@ -19,3 +19,9 @@ cd ../../
 # Xcode プロジェクトを開く
 open App/Nito/Nito.xcodeproj
 ```
+
+## フォーマット
+
+```shell
+swift-format -r . -i
+```

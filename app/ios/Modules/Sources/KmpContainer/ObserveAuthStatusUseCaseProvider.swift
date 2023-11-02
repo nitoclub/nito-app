@@ -11,15 +11,16 @@ public struct ObserveAuthStatusUseCaseProvider {
 
 extension ObserveAuthStatusUseCaseProvider: DependencyKey {
     @MainActor
-    static public var liveValue: ObserveAuthStatusUseCaseProvider = ObserveAuthStatusUseCaseProvider(
-        execute: {
-            observeAuthStatusUseCase.invoke().stream()
-        }
-    )
+    static public var liveValue: ObserveAuthStatusUseCaseProvider =
+        ObserveAuthStatusUseCaseProvider(
+            execute: {
+                observeAuthStatusUseCase.invoke().stream()
+            }
+        )
 }
 
-public extension DependencyValues {
-    var observeAuthStatusUseCase: ObserveAuthStatusUseCaseProvider {
+extension DependencyValues {
+    public var observeAuthStatusUseCase: ObserveAuthStatusUseCaseProvider {
         get { self[ObserveAuthStatusUseCaseProvider.self] }
         set { self[ObserveAuthStatusUseCaseProvider.self] = newValue }
     }

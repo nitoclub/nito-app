@@ -1,5 +1,6 @@
-import SwiftUI
+import Auth
 import Settings
+import SwiftUI
 import Top
 
 public struct RootView: View {
@@ -8,7 +9,7 @@ public struct RootView: View {
     public init() {}
 
     public var body: some View {
-        TopView(
+        let topView = TopView(
             scheduleListViewProvider: { _ in
                 EmptyView()
             },
@@ -16,5 +17,10 @@ public struct RootView: View {
                 SettingsView()
             }
         )
+        topView
+
+//        SignInView(
+//            topViewProvider: { _ in topView }
+//        )
     }
 }

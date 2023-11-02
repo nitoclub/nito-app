@@ -2,7 +2,8 @@ package club.nito.ios.combined
 
 import club.nito.core.data.dataModule
 import club.nito.core.domain.useCaseModule
-import club.nito.core.network.networkModule
+import club.nito.core.network.remoteDataSourceModule
+import club.nito.core.network.supabaseClientModule
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import kotlin.reflect.KClass
@@ -13,7 +14,9 @@ class KmpEntryPoint {
     fun init() {
         koinApplication = startKoin {
             modules(
-                networkModule,
+                supabaseClientModule,
+                remoteDataSourceModule,
+//                fakeRemoteDataSourceModule,
                 dataModule,
                 useCaseModule,
             )
