@@ -1,5 +1,5 @@
-import SwiftUI
 import Navigation
+import SwiftUI
 
 @main
 struct NitoApp: App {

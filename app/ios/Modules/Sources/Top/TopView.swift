@@ -1,7 +1,7 @@
 import Common
 import Dependencies
-import SwiftUI
 import NitoCombined
+import SwiftUI
 
 enum TopRouting: Hashable {
     case scheduleList
@@ -10,7 +10,7 @@ enum TopRouting: Hashable {
 
 public struct TopView<ScheduleListView: View, SettingsView: View>: View {
     @StateObject var stateMachine: TopStateMachine = .init()
-    
+
     private let scheduleListViewProvider: ViewProvider<Void, ScheduleListView>
     private let settingsViewProvider: ViewProvider<Void, SettingsView>
 
@@ -32,36 +32,36 @@ public struct TopView<ScheduleListView: View, SettingsView: View>: View {
 
                 Group {
                     switch stateMachine.state.recentScheduleUIState {
-                        case .initial, .loading:
-                            ProgressView()
-                                .task {
-                                    await stateMachine.load()
-                                }
-                        case .loaded(let recentSchedule):
-                            Text(
-                                recentSchedule.formatter.string(
-                                    from: recentSchedule.data.scheduledAt.toDate()
-                                )
+                    case .initial, .loading:
+                        ProgressView()
+                            .task {
+                                await stateMachine.load()
+                            }
+                    case .loaded(let recentSchedule):
+                        Text(
+                            recentSchedule.formatter.string(
+                                from: recentSchedule.data.scheduledAt.toDate()
                             )
-                        case .failed:
-                            EmptyView()
-                        }
+                        )
+                    case .failed:
+                        EmptyView()
+                    }
                 }
-                
+
                 NavigationLink(value: TopRouting.scheduleList) {
                     Text("スケジュール一覧を見る")
                 }
                 NavigationLink(value: TopRouting.settings) {
-                        HStack(spacing: 16) {
-                            Image(systemName: "wrench")
-                                .renderingMode(.template)
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                            Text("設定")
-                        }
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 24)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack(spacing: 16) {
+                        Image(systemName: "wrench")
+                            .renderingMode(.template)
+                            .imageScale(.large)
+                            .foregroundStyle(.tint)
+                        Text("設定")
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 24)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
             .padding()
@@ -80,7 +80,7 @@ public struct TopView<ScheduleListView: View, SettingsView: View>: View {
 
 #Preview {
     TopView(
-        scheduleListViewProvider: {_ in EmptyView()},
-        settingsViewProvider: {_ in EmptyView()}
+        scheduleListViewProvider: { _ in EmptyView() },
+        settingsViewProvider: { _ in EmptyView() }
     )
 }

@@ -36,7 +36,9 @@ final class TopStateMachine: ObservableObject {
 
         loadTask = Task {
             do {
-                for try await case let recentSchedule as FetchSingleContentResultSuccess<Schedule> in getRecentScheduleUseCase.execute() {
+                for try await case let recentSchedule as FetchSingleContentResultSuccess<Schedule>
+                    in getRecentScheduleUseCase.execute()
+                {
                     cachedRecentSchedule = recentSchedule.data
                 }
             } catch let error {

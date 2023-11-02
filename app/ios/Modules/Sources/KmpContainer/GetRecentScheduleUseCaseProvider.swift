@@ -11,15 +11,16 @@ public struct GetRecentScheduleUseCaseProvider {
 
 extension GetRecentScheduleUseCaseProvider: DependencyKey {
     @MainActor
-    static public var liveValue: GetRecentScheduleUseCaseProvider = GetRecentScheduleUseCaseProvider(
-        execute: {
-            getRecentScheduleUseCase.invoke().stream()
-        }
-    )
+    static public var liveValue: GetRecentScheduleUseCaseProvider =
+        GetRecentScheduleUseCaseProvider(
+            execute: {
+                getRecentScheduleUseCase.invoke().stream()
+            }
+        )
 }
 
-public extension DependencyValues {
-    var getRecentScheduleUseCase: GetRecentScheduleUseCaseProvider {
+extension DependencyValues {
+    public var getRecentScheduleUseCase: GetRecentScheduleUseCaseProvider {
         get { self[GetRecentScheduleUseCaseProvider.self] }
         set { self[GetRecentScheduleUseCaseProvider.self] = newValue }
     }

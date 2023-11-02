@@ -19,8 +19,8 @@ extension DateTimeFormatterProvider: DependencyKey {
     )
 }
 
-public extension DependencyValues {
-    var dateTimeFormatter: DateTimeFormatterProvider {
+extension DependencyValues {
+    public var dateTimeFormatter: DateTimeFormatterProvider {
         get { self[DateTimeFormatterProvider.self] }
         set { self[DateTimeFormatterProvider.self] = newValue }
     }

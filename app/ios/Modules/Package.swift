@@ -37,7 +37,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0"),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -45,6 +45,13 @@ let package = Package(
             dependencies: [
                 "NitoCombined",
                 .product(name: "Dependencies", package: "swift-dependencies"),
+            ]
+        ),
+        .target(
+            name: "Model",
+            dependencies: [
+                "Common",
+                "NitoCombined",
             ]
         ),
         .target(
@@ -58,6 +65,7 @@ let package = Package(
             name: "Auth",
             dependencies: [
                 "Common",
+                "Model",
                 "KmpContainer",
                 "NitoCombined",
             ]
@@ -115,6 +123,6 @@ let package = Package(
         .binaryTarget(
             name: "NitoCombined",
             path: "../../ios-combined/build/XCFrameworks/release/NitoCombined.xcframework"
-        )
+        ),
     ]
 )

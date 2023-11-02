@@ -18,8 +18,8 @@ extension SignOutUseCaseProvider: DependencyKey {
     )
 }
 
-public extension DependencyValues {
-    var signOutUseCase: SignOutUseCaseProvider {
+extension DependencyValues {
+    public var signOutUseCase: SignOutUseCaseProvider {
         get { self[SignOutUseCaseProvider.self] }
         set { self[SignOutUseCaseProvider.self] = newValue }
     }
