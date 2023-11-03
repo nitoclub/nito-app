@@ -2,6 +2,8 @@ package club.nito.core.network
 
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.auth.FakeAuthRemoteDataSource
+import club.nito.core.network.participation.FakeParticipationRemoteDataSource
+import club.nito.core.network.participation.ParticipationRemoteDataSource
 import club.nito.core.network.schedule.FakeScheduleRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import kotlinx.coroutines.CoroutineScope
@@ -17,4 +19,5 @@ val fakeRemoteDataSourceModule: Module = module {
         )
     }
     single<ScheduleRemoteDataSource> { FakeScheduleRemoteDataSource }
+    single<ParticipationRemoteDataSource> { FakeParticipationRemoteDataSource }
 }

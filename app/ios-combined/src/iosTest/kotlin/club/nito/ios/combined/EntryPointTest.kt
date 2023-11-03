@@ -7,6 +7,7 @@ import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.SignInUseCase
 import club.nito.core.domain.SignOutUseCase
 import club.nito.core.network.auth.AuthRemoteDataSource
+import club.nito.core.network.participation.ParticipationRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.GoTrue
@@ -26,6 +27,7 @@ class EntryPointTest {
 
         assertNotNull(kmpEntryPoint.get<AuthRemoteDataSource>())
         assertNotNull(kmpEntryPoint.get<ScheduleRemoteDataSource>())
+        assertNotNull(kmpEntryPoint.get<ParticipationRemoteDataSource>())
 
         assertNotNull(kmpEntryPoint.get<AuthRepository>())
         assertNotNull(kmpEntryPoint.get<ScheduleRepository>())

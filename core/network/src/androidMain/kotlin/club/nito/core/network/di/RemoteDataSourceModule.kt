@@ -3,6 +3,8 @@ package club.nito.core.network.di
 import club.nito.core.common.network.di.ApplicationScope
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.auth.SupabaseAuthRemoteDataSource
+import club.nito.core.network.participation.ParticipationRemoteDataSource
+import club.nito.core.network.participation.SupabaseParticipationRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import club.nito.core.network.schedule.SupabaseScheduleRemoteDataSource
 import dagger.Module
@@ -31,6 +33,14 @@ class RemoteDataSourceModule {
     fun provideScheduleRemoteDataSource(
         client: SupabaseClient,
     ): ScheduleRemoteDataSource = SupabaseScheduleRemoteDataSource(
+        client = client,
+    )
+
+    @Provides
+    @Singleton
+    fun provideParticipationRemoteDataSource(
+        client: SupabaseClient,
+    ): ParticipationRemoteDataSource = SupabaseParticipationRemoteDataSource(
         client = client,
     )
 }
