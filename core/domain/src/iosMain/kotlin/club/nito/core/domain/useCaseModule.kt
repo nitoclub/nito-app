@@ -10,4 +10,5 @@ val useCaseModule: Module = module {
     singleOf(::SignInExecutor) bind SignInUseCase::class
     singleOf(::SignOutExecutor) bind SignOutUseCase::class
     singleOf(::GetRecentScheduleExecutor) bind GetRecentScheduleUseCase::class
+    singleOf(::ParticipateExecutor) bind ParticipateUseCase::class
 }

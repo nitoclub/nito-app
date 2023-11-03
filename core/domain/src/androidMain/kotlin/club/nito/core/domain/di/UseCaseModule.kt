@@ -1,11 +1,14 @@
 package club.nito.core.domain.di
 
 import club.nito.core.data.AuthRepository
+import club.nito.core.data.ParticipationRepository
 import club.nito.core.data.ScheduleRepository
 import club.nito.core.domain.GetRecentScheduleExecutor
 import club.nito.core.domain.GetRecentScheduleUseCase
 import club.nito.core.domain.ObserveAuthStatusExecutor
 import club.nito.core.domain.ObserveAuthStatusUseCase
+import club.nito.core.domain.ParticipateExecutor
+import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.domain.SignInExecutor
 import club.nito.core.domain.SignInUseCase
 import club.nito.core.domain.SignOutExecutor
@@ -44,5 +47,12 @@ class UseCaseModule {
         scheduleRepository: ScheduleRepository,
     ): GetRecentScheduleUseCase = GetRecentScheduleExecutor(
         scheduleRepository = scheduleRepository,
+    )
+
+    @Provides
+    fun provideParticipateUseCase(
+        participationRepository: ParticipationRepository,
+    ): ParticipateUseCase = ParticipateExecutor(
+        participationRepository = participationRepository,
     )
 }

@@ -8,4 +8,5 @@ import org.koin.dsl.module
 val dataModule: Module = module {
     singleOf(::DefaultAuthRepository) bind AuthRepository::class
     singleOf(::OfflineFirstScheduleRepository) bind ScheduleRepository::class
+    singleOf(::DefaultParticipationRepository) bind ParticipationRepository::class
 }
