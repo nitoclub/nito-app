@@ -2,12 +2,12 @@ package club.nito.core.data.di
 
 import club.nito.core.data.AuthRepository
 import club.nito.core.data.DefaultAuthRepository
-import club.nito.core.data.DefaultParticipationRepository
+import club.nito.core.data.DefaultParticipantRepository
 import club.nito.core.data.OfflineFirstScheduleRepository
-import club.nito.core.data.ParticipationRepository
+import club.nito.core.data.ParticipantRepository
 import club.nito.core.data.ScheduleRepository
 import club.nito.core.network.auth.AuthRemoteDataSource
-import club.nito.core.network.participation.ParticipationRemoteDataSource
+import club.nito.core.network.participation.ParticipantRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import dagger.Module
 import dagger.Provides
@@ -37,8 +37,8 @@ class RepositoryModule {
     @Provides
     @Singleton
     fun provideParticipationRepository(
-        remoteDataSource: ParticipationRemoteDataSource,
-    ): ParticipationRepository = DefaultParticipationRepository(
+        remoteDataSource: ParticipantRemoteDataSource,
+    ): ParticipantRepository = DefaultParticipantRepository(
         remoteDataSource = remoteDataSource,
     )
 }

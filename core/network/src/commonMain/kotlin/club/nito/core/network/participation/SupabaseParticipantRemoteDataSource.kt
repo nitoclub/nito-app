@@ -1,17 +1,17 @@
 package club.nito.core.network.participation
 
-import club.nito.core.model.participation.ParticipationDeclaration
+import club.nito.core.model.participation.ParticipantDeclaration
 import club.nito.core.network.participation.model.toNetworkModel
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Returning
 
-class SupabaseParticipationRemoteDataSource(
+class SupabaseParticipantRemoteDataSource(
     private val client: SupabaseClient,
-) : ParticipationRemoteDataSource {
-    private val postgrest = client.postgrest["participation"]
+) : ParticipantRemoteDataSource {
+    private val postgrest = client.postgrest["participants"]
 
-    override suspend fun participate(declaration: ParticipationDeclaration): Long {
+    override suspend fun participate(declaration: ParticipantDeclaration): Long {
         val result = postgrest.insert(
             value = declaration.toNetworkModel(),
             upsert = true,

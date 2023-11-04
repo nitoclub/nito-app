@@ -2,8 +2,8 @@ package club.nito.core.network
 
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.auth.SupabaseAuthRemoteDataSource
-import club.nito.core.network.participation.ParticipationRemoteDataSource
-import club.nito.core.network.participation.SupabaseParticipationRemoteDataSource
+import club.nito.core.network.participation.ParticipantRemoteDataSource
+import club.nito.core.network.participation.SupabaseParticipantRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import club.nito.core.network.schedule.SupabaseScheduleRemoteDataSource
 import org.koin.core.module.Module
@@ -20,8 +20,8 @@ val remoteDataSourceModule: Module = module {
             client = get(),
         )
     }
-    single<ParticipationRemoteDataSource> {
-        SupabaseParticipationRemoteDataSource(
+    single<ParticipantRemoteDataSource> {
+        SupabaseParticipantRemoteDataSource(
             client = get(),
         )
     }

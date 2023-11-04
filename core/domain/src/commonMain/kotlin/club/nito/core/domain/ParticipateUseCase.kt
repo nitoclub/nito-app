@@ -1,6 +1,6 @@
 package club.nito.core.domain
 
-import club.nito.core.data.ParticipationRepository
+import club.nito.core.data.ParticipantRepository
 import club.nito.core.model.ExecuteResult
 
 /**
@@ -11,7 +11,7 @@ sealed interface ParticipateUseCase {
 }
 
 class ParticipateExecutor(
-    private val participationRepository: ParticipationRepository,
+    private val participantRepository: ParticipantRepository,
 ) : ParticipateUseCase {
     override suspend fun invoke(scheduleId: String, comment: String): ExecuteResult<Unit> {
         TODO("Not yet implemented")
