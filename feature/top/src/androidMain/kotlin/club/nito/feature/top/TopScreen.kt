@@ -23,7 +23,7 @@ import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
 import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.top.component.ConfirmParticipateDialog
-import club.nito.feature.top.component.ScheduleSection
+import club.nito.feature.top.component.ParticipantScheduleSection
 
 @Composable
 fun TopRoute(
@@ -101,7 +101,7 @@ private fun TopScreen(
                     .padding(16.dp),
                 verticalArrangement = Arrangement.spacedBy(32.dp),
             ) {
-                ScheduleSection(
+                ParticipantScheduleSection(
                     recentSchedule = recentSchedule,
                     dateTimeFormatter = uiState.dateTimeFormatter,
                     onRecentScheduleClick = { dispatch(TopIntent.ClickShowConfirmParticipateDialog(it)) },

@@ -19,10 +19,10 @@ import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.NitoError
-import club.nito.core.ui.ScheduleItem
+import club.nito.core.ui.ParticipantScheduleItem
 
 @Composable
-internal fun ScheduleSection(
+internal fun ParticipantScheduleSection(
     recentSchedule: FetchSingleContentResult<ParticipantSchedule>,
     dateTimeFormatter: NitoDateTimeFormatter,
     modifier: Modifier = Modifier,
@@ -45,15 +45,15 @@ internal fun ScheduleSection(
             )
 
             when (recentSchedule) {
-                FetchSingleContentResult.Loading -> LoadingSchedule()
-                FetchSingleContentResult.NoContent -> NoSchedule()
-                is FetchSingleContentResult.Success -> ScheduleItem(
+                FetchSingleContentResult.Loading -> LoadingParticipantSchedule()
+                FetchSingleContentResult.NoContent -> NoParticipantSchedule()
+                is FetchSingleContentResult.Success -> ParticipantScheduleItem(
                     schedule = recentSchedule.data,
                     dateTimeFormatter = dateTimeFormatter,
                     onScheduleClick = onRecentScheduleClick,
                 )
 
-                is FetchSingleContentResult.Failure -> FailureSchedule(
+                is FetchSingleContentResult.Failure -> FailureParticipantSchedule(
                     error = recentSchedule.error,
                 )
             }
@@ -73,7 +73,7 @@ internal fun ScheduleSection(
 }
 
 @Composable
-private fun LoadingSchedule(
+private fun LoadingParticipantSchedule(
     modifier: Modifier = Modifier,
 ) = Row(
     modifier = modifier
@@ -87,7 +87,7 @@ private fun LoadingSchedule(
 }
 
 @Composable
-private fun NoSchedule(
+private fun NoParticipantSchedule(
     modifier: Modifier = Modifier,
 ) = Column(
     modifier = modifier
@@ -100,7 +100,7 @@ private fun NoSchedule(
 }
 
 @Composable
-private fun FailureSchedule(
+private fun FailureParticipantSchedule(
     error: NitoError?,
     modifier: Modifier = Modifier,
 ) = Column(

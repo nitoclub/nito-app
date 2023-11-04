@@ -2,6 +2,7 @@ package club.nito.core.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -18,29 +19,42 @@ import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
 
 @Composable
-fun ScheduleItem(
+fun ParticipantScheduleItem(
     schedule: ParticipantSchedule,
     dateTimeFormatter: NitoDateTimeFormatter,
     modifier: Modifier = Modifier,
     onScheduleClick: (schedule: ParticipantSchedule) -> Unit = {},
 ) {
-    Row(
+    Column(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 48.dp)
             .clickable {
                 onScheduleClick(schedule)
             }
             .padding(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
-        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Icon(
-            imageVector = Icons.Default.DateRange,
-            contentDescription = "Date",
-        )
-        Text(
-            text = dateTimeFormatter.formatDateTimeString(schedule.scheduledAt),
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 48.dp)
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                imageVector = Icons.Default.DateRange,
+                contentDescription = "Date",
+            )
+            Text(
+                text = dateTimeFormatter.formatDateTimeString(schedule.scheduledAt),
+            )
+        }
+
+        ProfileImagesRow(
+            profiles = schedule.participants,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
         )
     }
 }

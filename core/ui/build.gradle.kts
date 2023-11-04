@@ -20,5 +20,10 @@ kotlin {
                 implementation(projects.core.data)
             }
         }
+        androidMain {
+            dependencies {
+                implementation(libs.composeCoil)
+            }
+        }
     }
 }
