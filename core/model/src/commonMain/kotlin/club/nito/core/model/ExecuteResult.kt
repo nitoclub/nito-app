@@ -14,3 +14,9 @@ sealed interface ExecuteResult<out T> {
      */
     data class Failure(val error: NitoError?) : ExecuteResult<Nothing>
 }
+
+suspend fun <T> runExecuting(block: suspend () -> T): ExecuteResult<T> = try {
+    ExecuteResult.Success(block())
+} catch (e: Throwable) {
+    ExecuteResult.Failure(e.toNitoError())
+}

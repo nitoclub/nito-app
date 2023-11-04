@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.SignInUseCase
 import club.nito.core.model.AuthStatus
+import club.nito.core.model.ExecuteResult
 import club.nito.core.model.FetchSingleResult
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
@@ -65,7 +66,13 @@ class SignInViewModel @Inject constructor(
             when (intent) {
                 is SignInIntent.ChangeInputEmail -> email.emit(intent.email)
                 is SignInIntent.ChangeInputPassword -> password.emit(intent.password)
-                SignInIntent.ClickSignIn -> signInUseCase(email.value, password.value)
+                SignInIntent.ClickSignIn -> {
+                    val result = signInUseCase(email.value, password.value)
+                    if (result is ExecuteResult.Failure) {
+                        userMessageStateHolder.showMessage("ログインに失敗しました")
+                    }
+                }
+
                 SignInIntent.ClickRegister -> {}
             }
         }
