@@ -15,7 +15,7 @@ data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
 
         return (1..limit).map {
             createFakeNetworkSchedule(
-                id = it.toLong(),
+                id = it.toString(),
                 scheduledAt = instant.plus(1, DateTimeUnit.DAY, timeZone),
             )
         }.map(NetworkSchedule::toSchedule)
@@ -23,7 +23,7 @@ data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
 
     override suspend fun getSchedule(id: String): Schedule {
         return createFakeNetworkSchedule(
-            id = id.toLong(),
+            id = id,
             scheduledAt = Clock.System.now(),
         ).toSchedule()
     }

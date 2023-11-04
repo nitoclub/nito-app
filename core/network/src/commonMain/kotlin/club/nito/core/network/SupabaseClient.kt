@@ -15,8 +15,8 @@ import kotlinx.serialization.modules.contextual
 internal fun createNitoSupabaseClient(
     json: Json,
 ): SupabaseClient = createSupabaseClient(
-    supabaseUrl = "https://hwxxihvcszfhaxlguajv.supabase.co",
-    supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh3eHhpaHZjc3pmaGF4bGd1YWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDcwODc3MjYsImV4cCI6MTk2MjY2MzcyNn0.ieij2I1mYfKsS70tv5h8Kzudcrv0YeCVG38ld9AwlSQ",
+    supabaseUrl = "https://gtfjukrauyhrbglrzlva.supabase.co",
+    supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd0Zmp1a3JhdXlocmJnbHJ6bHZhIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTkwMDQ3NTgsImV4cCI6MjAxNDU4MDc1OH0.zRjlzXVyz4vBM8Tb8GcpyPyTkCmOwdV-Xs18Agw2w-E",
 ) {
     install(Postgrest)
     install(GoTrue)
