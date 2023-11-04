@@ -25,6 +25,18 @@ class SupabaseParticipantRemoteDataSource(
         .decodeList<NetworkParticipant>()
         .map(NetworkParticipant::toParticipant)
 
+    override suspend fun getParticipants(scheduleIds: List<String>): List<Participant> = postgrest
+        .select(
+            filter = {
+                and {
+                    isIn("schedule_id", scheduleIds)
+                    exact("deleted_at", null)
+                }
+            },
+        )
+        .decodeList<NetworkParticipant>()
+        .map(NetworkParticipant::toParticipant)
+
     override suspend fun participate(declaration: ParticipantDeclaration): Long {
         val result = postgrest.insert(
             value = declaration.toNetworkModel(),

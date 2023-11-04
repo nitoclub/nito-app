@@ -15,6 +15,13 @@ sealed interface ParticipantRepository {
     suspend fun getParticipants(scheduleId: String): List<Participant>
 
     /**
+     * 該当の予定の参加情報を取得する
+     *
+     * @param scheduleIds 参加情報を取得するスケジュールID配列
+     */
+    suspend fun getParticipants(scheduleIds: List<String>): List<Participant>
+
+    /**
      * 該当のスケジュールに参加する
      *
      * @param declaration 参加表明データ

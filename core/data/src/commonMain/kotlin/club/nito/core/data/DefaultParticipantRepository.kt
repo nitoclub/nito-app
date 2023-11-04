@@ -10,6 +10,9 @@ class DefaultParticipantRepository(
     override suspend fun getParticipants(scheduleId: String): List<Participant> =
         remoteDataSource.getParticipants(scheduleId = scheduleId)
 
+    override suspend fun getParticipants(scheduleIds: List<String>): List<Participant> =
+        remoteDataSource.getParticipants(scheduleIds = scheduleIds)
+
     override suspend fun participate(declaration: ParticipantDeclaration): Long =
         remoteDataSource.participate(declaration = declaration)
 }

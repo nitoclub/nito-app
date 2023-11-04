@@ -2,6 +2,7 @@ package club.nito.ios.combined
 
 import club.nito.core.data.AuthRepository
 import club.nito.core.data.ScheduleRepository
+import club.nito.core.domain.GetParticipantScheduleListUseCase
 import club.nito.core.domain.GetRecentScheduleUseCase
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.ParticipateUseCase
@@ -37,6 +38,7 @@ class EntryPointTest {
         assertNotNull(kmpEntryPoint.get<SignInUseCase>())
         assertNotNull(kmpEntryPoint.get<SignOutUseCase>())
         assertNotNull(kmpEntryPoint.get<GetRecentScheduleUseCase>())
+        assertNotNull(kmpEntryPoint.get<GetParticipantScheduleListUseCase>())
         assertNotNull(kmpEntryPoint.get<ParticipateUseCase>())
     }
 }
