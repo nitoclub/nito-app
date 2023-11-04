@@ -1,8 +1,6 @@
 package club.nito.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -18,9 +16,7 @@ fun ProfileImagesRow(
     modifier: Modifier = Modifier,
 ) {
     LazyRow(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp),
+        modifier = modifier,
         horizontalArrangement = Arrangement.spacedBy((-24).dp, Alignment.End),
         reverseLayout = true,
         verticalAlignment = Alignment.CenterVertically,

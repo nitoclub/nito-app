@@ -21,8 +21,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
+import club.nito.core.ui.ConfirmParticipateDialog
 import club.nito.core.ui.message.SnackbarMessageEffect
-import club.nito.feature.top.component.ConfirmParticipateDialog
 import club.nito.feature.top.component.ParticipantScheduleSection
 
 @Composable

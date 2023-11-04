@@ -18,6 +18,15 @@ data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource {
         }.map(NetworkParticipant::toParticipant)
     }
 
+    override suspend fun getParticipants(scheduleIds: List<String>): List<Participant> {
+        delay(1000)
+        return (1..10).map {
+            createFakeNetworkParticipant(
+                userId = it.toString(),
+            )
+        }.map(NetworkParticipant::toParticipant)
+    }
+
     override suspend fun participate(declaration: ParticipantDeclaration): Long {
         delay(1000)
         return DEFAULT_CHANGED_COUNT

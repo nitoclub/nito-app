@@ -1,4 +1,4 @@
-package club.nito.feature.top.component
+package club.nito.core.ui
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -10,7 +10,7 @@ import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
 
 @Composable
-internal fun ConfirmParticipateDialog(
+fun ConfirmParticipateDialog(
     schedule: ParticipantSchedule,
     dateTimeFormatter: NitoDateTimeFormatter,
     onParticipateRequest: (schedule: ParticipantSchedule) -> Unit,
