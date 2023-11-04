@@ -91,7 +91,12 @@ class SettingsViewModel @Inject constructor(
                 }
 
                 SettingsIntent.ClickDismissModifyPasswordDialog -> showModifyPasswordDialog.emit(false)
-                SettingsIntent.ClickSignOut -> signOutUseCase()
+                SettingsIntent.ClickSignOut -> {
+                    val result = signOutUseCase()
+                    if (result is ExecuteResult.Failure) {
+                        userMessageStateHolder.showMessage("サインアウトに失敗しました")
+                    }
+                }
             }
         }
     }
