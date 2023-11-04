@@ -1,4 +1,4 @@
-package club.nito.android
+package club.nito.app
 
 import club.nito.core.model.AuthStatus
 

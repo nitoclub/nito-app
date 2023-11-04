@@ -1,4 +1,4 @@
-package club.nito.android
+package club.nito.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

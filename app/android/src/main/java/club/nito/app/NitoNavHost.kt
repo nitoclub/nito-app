@@ -1,4 +1,4 @@
-package club.nito.android
+package club.nito.app
 
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable

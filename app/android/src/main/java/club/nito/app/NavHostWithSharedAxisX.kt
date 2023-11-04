@@ -1,4 +1,4 @@
-package club.nito.android
+package club.nito.app
 
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition

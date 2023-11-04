@@ -1,4 +1,4 @@
-package club.nito.android.di
+package club.nito.app.di
 
 import club.nito.core.common.DefaultNitoDateTimeFormatter
 import club.nito.core.common.NitoDateTimeFormatter

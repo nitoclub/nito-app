@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "club.nito.android"
+    namespace = "club.nito.app"
     compileSdk = 34
     defaultConfig {
         minSdk = 31
