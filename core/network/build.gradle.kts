@@ -21,7 +21,7 @@ kotlin {
                 implementation(libs.okIo)
                 implementation(libs.ktorClientCore)
                 implementation(libs.ktorKotlinxSerialization)
-                implementation(libs.ktorContentNegotiation)
+                implementation(libs.ktorClientContentNegotiation)
 
                 implementation(libs.supabaseGotrue)
                 implementation(libs.supabasePostgrest)

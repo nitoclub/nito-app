@@ -42,6 +42,8 @@ lottie = "6.1.0"
 kover = "0.7.3"
 androidxLifecycleProcess = "2.6.2"
 supabase = "1.4.5"
+logback = "1.4.11"
+graphqlKotlin = "7.0.2"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -116,7 +118,17 @@ ktorClientCore = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktorClientOkHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktorClientDarwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktorKotlinxSerialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktorContentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktorClientContentNegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+
+ktorServerCore = { group = "io.ktor", name = "ktor-server-core", version.ref = "ktor" }
+ktorServerWebsockets = { group = "io.ktor", name = "ktor-server-websockets", version.ref = "ktor" }
+ktorServerCors = { group = "io.ktor", name = "ktor-server-cors", version.ref = "ktor" }
+ktorServerCio = { group = "io.ktor", name = "ktor-server-cio", version.ref = "ktor" }
+ktorServerNetty = { group = "io.ktor", name = "ktor-server-netty", version.ref = "ktor" }
+ktorServerContentNegotiation = { group = "io.ktor", name = "ktor-server-content-negotiation", version.ref = "ktor" }
+ktorServerTestHost = { group = "io.ktor", name = "ktor-server-test-host", version.ref = "ktor" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+graphqlKotlinKtorServer = { module = "com.expediagroup:graphql-kotlin-ktor-server", version.ref = "graphqlKotlin" }
 
 supabaseGotrue = { module = "io.github.jan-tennert.supabase:gotrue-kt", version.ref = "supabase" }
 supabaseRealtime = { module = "io.github.jan-tennert.supabase:realtime-kt", version.ref = "supabase" }

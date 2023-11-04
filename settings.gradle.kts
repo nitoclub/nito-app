@@ -24,6 +24,7 @@ include(
     ":app:android",
     ":app:ios-combined",
     ":app:web",
+    ":bff",
     ":core:common",
     ":core:database",
     ":core:network",
