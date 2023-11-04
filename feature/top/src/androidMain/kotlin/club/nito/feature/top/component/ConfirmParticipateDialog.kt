@@ -7,13 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
 import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.designsystem.component.Text
-import club.nito.core.model.Schedule
+import club.nito.core.domain.model.ParticipantSchedule
 
 @Composable
 internal fun ConfirmParticipateDialog(
-    schedule: Schedule,
+    schedule: ParticipantSchedule,
     dateTimeFormatter: NitoDateTimeFormatter,
-    onParticipateRequest: (schedule: Schedule) -> Unit,
+    onParticipateRequest: (schedule: ParticipantSchedule) -> Unit,
     onDismissRequest: () -> Unit,
 ) {
     AlertDialog(

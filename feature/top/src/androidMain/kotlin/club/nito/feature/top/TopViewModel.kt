@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.domain.GetRecentScheduleUseCase
+import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
-import club.nito.core.model.Schedule
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +25,7 @@ class TopViewModel @Inject constructor(
     private val dateTimeFormatter: NitoDateTimeFormatter,
 ) : ViewModel(),
     UserMessageStateHolder by userMessageStateHolder {
-    private val showConfirmParticipateSchedule = MutableStateFlow<Schedule?>(null)
+    private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
 
     private val recentSchedule = getRecentScheduleUseCase().stateIn(
         scope = viewModelScope,

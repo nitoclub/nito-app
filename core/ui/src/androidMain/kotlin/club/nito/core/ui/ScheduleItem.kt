@@ -15,14 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.designsystem.component.Text
-import club.nito.core.model.Schedule
+import club.nito.core.domain.model.ParticipantSchedule
 
 @Composable
 fun ScheduleItem(
-    schedule: Schedule,
+    schedule: ParticipantSchedule,
     dateTimeFormatter: NitoDateTimeFormatter,
     modifier: Modifier = Modifier,
-    onScheduleClick: (schedule: Schedule) -> Unit = {},
+    onScheduleClick: (schedule: ParticipantSchedule) -> Unit = {},
 ) {
     Row(
         modifier = modifier

@@ -7,6 +7,8 @@ import club.nito.core.network.participation.ParticipantRemoteDataSource
 import club.nito.core.network.participation.SupabaseParticipantRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import club.nito.core.network.schedule.SupabaseScheduleRemoteDataSource
+import club.nito.core.network.user.SupabaseUserRemoteDataSource
+import club.nito.core.network.user.UserRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,6 +43,14 @@ class RemoteDataSourceModule {
     fun provideParticipantRemoteDataSource(
         client: SupabaseClient,
     ): ParticipantRemoteDataSource = SupabaseParticipantRemoteDataSource(
+        client = client,
+    )
+
+    @Provides
+    @Singleton
+    fun provideUserRemoteDataSource(
+        client: SupabaseClient,
+    ): UserRemoteDataSource = SupabaseUserRemoteDataSource(
         client = client,
     )
 }

@@ -1,4 +1,4 @@
-package club.nito.core.model.participation
+package club.nito.core.model.participant
 
 /**
  * 参加表明

@@ -16,17 +16,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.designsystem.component.Text
+import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.NitoError
-import club.nito.core.model.Schedule
 import club.nito.core.ui.ScheduleItem
 
 @Composable
 internal fun ScheduleSection(
-    recentSchedule: FetchSingleContentResult<Schedule>,
+    recentSchedule: FetchSingleContentResult<ParticipantSchedule>,
     dateTimeFormatter: NitoDateTimeFormatter,
     modifier: Modifier = Modifier,
-    onRecentScheduleClick: (schedule: Schedule) -> Unit = {},
+    onRecentScheduleClick: (schedule: ParticipantSchedule) -> Unit = {},
     onScheduleListClick: () -> Unit = {},
 ) {
     Card(
