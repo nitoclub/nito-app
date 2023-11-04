@@ -8,6 +8,8 @@ import club.nito.core.domain.GetParticipantScheduleListExecutor
 import club.nito.core.domain.GetParticipantScheduleListUseCase
 import club.nito.core.domain.GetRecentScheduleExecutor
 import club.nito.core.domain.GetRecentScheduleUseCase
+import club.nito.core.domain.ModifyPasswordExecutor
+import club.nito.core.domain.ModifyPasswordUseCase
 import club.nito.core.domain.ObserveAuthStatusExecutor
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.ParticipateExecutor
@@ -35,6 +37,13 @@ class UseCaseModule {
     fun provideSignInUseCase(
         authRepository: AuthRepository,
     ): SignInUseCase = SignInExecutor(
+        authRepository = authRepository,
+    )
+
+    @Provides
+    fun provideModifyPasswordUseCase(
+        authRepository: AuthRepository,
+    ): ModifyPasswordUseCase = ModifyPasswordExecutor(
         authRepository = authRepository,
     )
 

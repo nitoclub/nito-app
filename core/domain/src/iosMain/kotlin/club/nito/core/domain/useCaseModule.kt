@@ -8,6 +8,7 @@ import org.koin.dsl.module
 val useCaseModule: Module = module {
     singleOf(::ObserveAuthStatusExecutor) bind ObserveAuthStatusUseCase::class
     singleOf(::SignInExecutor) bind SignInUseCase::class
+    singleOf(::ModifyPasswordExecutor) bind ModifyPasswordUseCase::class
     singleOf(::SignOutExecutor) bind SignOutUseCase::class
     singleOf(::GetRecentScheduleExecutor) bind GetRecentScheduleUseCase::class
     singleOf(::GetParticipantScheduleListExecutor) bind GetParticipantScheduleListUseCase::class

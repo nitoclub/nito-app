@@ -2,6 +2,7 @@ package club.nito.core.data
 
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.FetchSingleResult
+import club.nito.core.model.UserInfo
 import club.nito.core.network.auth.AuthRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 
@@ -16,4 +17,9 @@ class DefaultAuthRepository(
     )
 
     override suspend fun signOut() = remoteDataSource.signOut()
+
+    override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo = remoteDataSource.modifyAuthUser(
+        email = email,
+        password = password,
+    )
 }
