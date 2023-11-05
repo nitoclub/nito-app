@@ -1,6 +1,8 @@
 # built application files
 *.apk
+*.aar
 *.ap_
+*.aab
 
 # files for the dex VM
 *.dex
@@ -60,7 +62,7 @@ DerivedData
 # Android Key
 app/android/src/prod/google-services.json
 app/android/keystore.properties
-app/android/nito.keystore
+app/android/prod.keystore
 
 # Web
 *yarn.lock

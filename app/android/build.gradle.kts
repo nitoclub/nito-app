@@ -1,9 +1,15 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("nito.primitive.androidapplication")
     id("nito.primitive.android.kotlin")
     id("nito.primitive.android.compose")
     id("nito.primitive.android.hilt")
 }
+
+val keystorePropertiesFile = project.file("keystore.properties")
+val keystoreExits = keystorePropertiesFile.exists()
 
 android {
     namespace = "club.nito.app"
@@ -12,16 +18,63 @@ android {
         minSdk = 31
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.1.0"
+    }
+    signingConfigs {
+        create("dev") {
+            storeFile = project.file("dev.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+
+        if (keystoreExits) {
+            val keystoreProperties = Properties()
+            keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            create("prod") {
+                keyAlias = keystoreProperties["keyAlias"] as String?
+                keyPassword = keystoreProperties["keyPassword"] as String?
+                storeFile = project.file("prod.keystore")
+                storePassword = keystoreProperties["storePassword"] as String?
+            }
+        }
+    }
+
+    flavorDimensions += "network"
+    productFlavors {
+        create("dev") {
+            signingConfig = signingConfigs.getByName("dev")
+            isDefault = true
+            applicationIdSuffix = ".dev"
+            dimension = "network"
+        }
+        create("prod") {
+            dimension = "network"
+            signingConfig = if (keystoreExits) {
+                signingConfigs.getByName("prod")
+            } else {
+                signingConfigs.getByName("dev")
+            }
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig = null
+        }
+        release {
+            isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
+        }
+    }
+    buildFeatures {
+        buildConfig = true
     }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
         }
     }
 }
