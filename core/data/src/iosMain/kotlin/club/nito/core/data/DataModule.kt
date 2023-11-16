@@ -9,4 +9,5 @@ val dataModule: Module = module {
     singleOf(::DefaultAuthRepository) bind AuthRepository::class
     singleOf(::OfflineFirstScheduleRepository) bind ScheduleRepository::class
     singleOf(::DefaultParticipantRepository) bind ParticipantRepository::class
+    singleOf(::DefaultUserRepository) bind UserRepository::class
 }
