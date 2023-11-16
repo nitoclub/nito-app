@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "699928546170",
+    "project_id": "club-nito-dev",
+    "storage_bucket": "club-nito-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:699928546170:android:dc1049d2d9b1ad054324c3",
+        "android_client_info": {
+          "package_name": "club.nito.app.dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgfq_BX7p7rA_mIquA4_SxVe1_hv_oQpQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -54,6 +54,10 @@ gradlePlugin {
             id = "nito.primitive.android.crashlytics"
             implementationClass = "club.nito.primitive.AndroidCrashlyticsPlugin"
         }
+        register("androidFirebase") {
+            id = "nito.primitive.android.firebase"
+            implementationClass = "club.nito.primitive.AndroidFirebasePlugin"
+        }
         register("kmp") {
             id = "nito.primitive.kmp"
             implementationClass = "club.nito.primitive.KmpPlugin"
