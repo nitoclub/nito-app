@@ -8,8 +8,7 @@ import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.Schedule
 import club.nito.core.model.UserProfile
 import club.nito.core.model.toNitoError
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -25,6 +24,8 @@ class GetRecentScheduleExecutor(
     private val participantRepository: ParticipantRepository,
     private val userRepository: UserRepository,
 ) : GetRecentScheduleUseCase {
+    private val log = Logger.withTag("GetRecentScheduleExecutor")
+
     override fun invoke(): Flow<FetchSingleContentResult<ParticipantSchedule>> = flow {
         val data = try {
             scheduleRepository.getScheduleList(limit = 1)
@@ -40,17 +41,14 @@ class GetRecentScheduleExecutor(
 
         val schedule = data.first()
 
-        val asyncUserProfiles = coroutineScope {
-            async {
-                val participants = participantRepository.getParticipants(scheduleId = schedule.id)
-                userRepository.getProfiles(userIds = participants.map { it.userId })
-            }
-        }
+        val participants = participantRepository.getParticipants(scheduleId = schedule.id)
+        val userProfiles = userRepository.getProfiles(userIds = participants.map { it.userId })
 
         val participantSchedule = transformToParticipantSchedule(
             schedule = schedule,
-            userProfiles = asyncUserProfiles.await(),
+            userProfiles = userProfiles,
         )
+        log.i { "participantSchedule: $participantSchedule" }
 
         emit(FetchSingleContentResult.Success(participantSchedule))
     }
