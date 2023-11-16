@@ -4,6 +4,8 @@ import club.nito.core.data.dataModule
 import club.nito.core.domain.useCaseModule
 import club.nito.core.network.remoteDataSourceModule
 import club.nito.core.network.supabaseClientModule
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.koin.KermitKoinLogger
 import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import kotlin.reflect.KClass
@@ -20,6 +22,9 @@ class KmpEntryPoint {
                 dataModule,
                 useCaseModule,
             )
+
+            val kermit = Logger.withTag("koin")
+            logger(KermitKoinLogger(kermit))
         }
     }
 

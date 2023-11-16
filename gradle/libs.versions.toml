@@ -31,7 +31,7 @@ showkase = "1.0.0-beta18"
 ksp = "1.9.10-1.0.13"
 firebaseBom = "32.2.3"
 multiplatformFirebase = "1.8.1"
-kermit = "1.2.2"
+kermit = "2.0.2"
 okHttp = "4.11.0"
 ktorfit = "1.6.0"
 ossLicensesPlugin = "0.10.6"
@@ -74,6 +74,7 @@ koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 
 kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
+kermitKoin = { module = "co.touchlab:kermit-koin", version.ref = "kermit" }
 kotlinxCollectionsImmutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version = "0.3.5" }
 kotlinxDatetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
 kotlinxAtomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version = "0.22.0" }

@@ -39,6 +39,8 @@ kotlin {
                 api(projects.core.domain)
                 api(projects.core.data)
                 api(projects.core.ui)
+
+                implementation(libs.kermitKoin)
             }
         }
         commonTest {

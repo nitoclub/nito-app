@@ -18,6 +18,7 @@ kotlin {
                 implementation(projects.core.network)
 
                 implementation(libs.kotlinxCoroutinesCore)
+                implementation(libs.kermit)
             }
         }
         iosMain {

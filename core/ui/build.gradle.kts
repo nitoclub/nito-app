@@ -18,6 +18,8 @@ kotlin {
                 implementation(projects.core.model)
                 implementation(projects.core.domain)
                 implementation(projects.core.data)
+
+                implementation(libs.kermit)
             }
         }
         androidMain {
