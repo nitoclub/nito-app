@@ -9,7 +9,7 @@ struct TopViewUIState: UIState {
 }
 
 struct RecentScheduleUIState: UIState {
-    var data: Schedule
+    var data: ParticipantSchedule
     var formatter: DateFormatter
 }
 
@@ -20,7 +20,7 @@ final class TopStateMachine: ObservableObject {
 
     @Published var state: TopViewUIState = .init()
 
-    private var cachedRecentSchedule: Schedule? {
+    private var cachedRecentSchedule: FetchSingleContentResult? {
         didSet {
             applyRecentScheduleToState()
         }
@@ -34,15 +34,14 @@ final class TopStateMachine: ObservableObject {
     func load() async {
         state.recentScheduleUIState = .loading
 
-        loadTask = Task {
+        loadTask = Task.detached { @MainActor in
             do {
-                for try await case let recentSchedule as FetchSingleContentResultSuccess<Schedule>
-                    in getRecentScheduleUseCase.execute()
-                {
-                    cachedRecentSchedule = recentSchedule.data
+                for try await recentSchedule in self.getRecentScheduleUseCase.execute() {
+                    print("recentSchedule: \(recentSchedule)")
+                    self.cachedRecentSchedule = recentSchedule
                 }
             } catch let error {
-                state.recentScheduleUIState = .failed(error)
+                self.state.recentScheduleUIState = .failed(error)
             }
         }
     }
@@ -51,11 +50,27 @@ final class TopStateMachine: ObservableObject {
         guard let cachedRecentSchedule = cachedRecentSchedule else {
             return
         }
-        state.recentScheduleUIState = .loaded(
-            RecentScheduleUIState(
-                data: cachedRecentSchedule,
-                formatter: dateTimeFormatterProvider.dateTimeFormatter
+
+        switch cachedRecentSchedule {
+        case is FetchSingleContentResultLoading, is FetchSingleContentResultNoContent:
+            state.recentScheduleUIState = .loading
+        case let result as FetchSingleContentResultSuccess<ParticipantSchedule>:
+            state.recentScheduleUIState = .loaded(
+                RecentScheduleUIState(
+                    data: result.data!,
+                    formatter: dateTimeFormatterProvider.dateTimeFormatter
+                )
             )
-        )
+        case let result as FetchSingleContentResultFailure:
+            state.recentScheduleUIState = .failed(
+
+                iOSNitoError.error(result.error)
+            )
+        default: break
+        }
     }
+}
+
+enum iOSNitoError: Error {
+    case error(NitoError?)
 }

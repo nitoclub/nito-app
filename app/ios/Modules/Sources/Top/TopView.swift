@@ -43,29 +43,26 @@ public struct TopView<ScheduleListView: View, SettingsView: View>: View {
                                 from: recentSchedule.data.scheduledAt.toDate()
                             )
                         )
-                    case .failed:
-                        EmptyView()
+                    case .failed(let error):
+                        Text(error.localizedDescription)
                     }
                 }
+                .padding(.vertical, 16)
 
                 NavigationLink(value: TopRouting.scheduleList) {
                     Text("スケジュール一覧を見る")
                 }
-                NavigationLink(value: TopRouting.settings) {
-                    HStack(spacing: 16) {
-                        Image(systemName: "wrench")
-                            .renderingMode(.template)
-                            .imageScale(.large)
-                            .foregroundStyle(.tint)
-                        Text("設定")
-                    }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 24)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
             }
             .padding()
             .navigationTitle("トップ")
+            .toolbar {
+                NavigationLink(value: TopRouting.settings) {
+                    Image(systemName: "gear")
+                        .renderingMode(.template)
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                }
+            }
             .navigationDestination(for: TopRouting.self) { routing in
                 switch routing {
                 case .scheduleList:
