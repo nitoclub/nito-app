@@ -6,6 +6,8 @@ plugins {
     id("nito.primitive.android.kotlin")
     id("nito.primitive.android.compose")
     id("nito.primitive.android.hilt")
+    id("nito.primitive.android.firebase")
+    id("nito.primitive.android.crashlytics")
 }
 
 val keystorePropertiesFile = project.file("keystore.properties")
