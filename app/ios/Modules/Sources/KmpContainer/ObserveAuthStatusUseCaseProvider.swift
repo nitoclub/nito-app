@@ -6,7 +6,7 @@ public struct ObserveAuthStatusUseCaseProvider {
         Container.shared.get(type: ObserveAuthStatusUseCase.self)
     }
 
-    public let execute: () -> AsyncThrowingStream<FetchSingleContentResult, Error>
+    public let execute: () -> AsyncThrowingStream<FetchSingleResult, Error>
 }
 
 extension ObserveAuthStatusUseCaseProvider: DependencyKey {

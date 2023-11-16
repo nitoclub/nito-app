@@ -33,15 +33,15 @@ final class SignInStateMachine: ObservableObject {
     func load() async {
         state.authStatus = .loading
 
-        loadTask = Task {
+        loadTask = Task.detached { @MainActor in
             do {
-                for try await authStatus in observeAuthStatusUseCase.execute() {
-                    if case let status as FetchSingleContentResultSuccess<AuthStatus> = authStatus {
-                        cachedAuthStatus = status.data
+                for try await authStatus in self.observeAuthStatusUseCase.execute() {
+                    if case let status as FetchSingleResultSuccess<AuthStatus> = authStatus {
+                        self.cachedAuthStatus = status.data
                     }
                 }
             } catch let error {
-                state.authStatus = .failed(error)
+                self.state.authStatus = .failed(error)
             }
         }
     }
