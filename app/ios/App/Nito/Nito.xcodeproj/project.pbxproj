@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0518CBC72AEC05BB003599DC /* NitoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518CBC62AEC05BB003599DC /* NitoApp.swift */; };
+		0518CBC72AEC05BB003599DC /* ProdApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518CBC62AEC05BB003599DC /* ProdApp.swift */; };
 		0518CBCB2AEC05BC003599DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0518CBCA2AEC05BC003599DC /* Assets.xcassets */; };
 		0518CBCE2AEC05BC003599DC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0518CBCD2AEC05BC003599DC /* Preview Assets.xcassets */; };
 		059F5C212AED017D006DF448 /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = 059F5C202AED017D006DF448 /* Navigation */; };
+		05F1F9152B075E75006C5C63 /* DevApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F1F9142B075E75006C5C63 /* DevApp.swift */; };
+		05F1F9192B075E76006C5C63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05F1F9182B075E76006C5C63 /* Assets.xcassets */; };
+		05F1F91C2B075E76006C5C63 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05F1F91B2B075E76006C5C63 /* Preview Assets.xcassets */; };
+		05F1F9212B075EEB006C5C63 /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = 05F1F9202B075EEB006C5C63 /* Navigation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0518CBC32AEC05BB003599DC /* Nito.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nito.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0518CBC62AEC05BB003599DC /* NitoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NitoApp.swift; sourceTree = "<group>"; };
+		0518CBC32AEC05BB003599DC /* Prod.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prod.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0518CBC62AEC05BB003599DC /* ProdApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdApp.swift; sourceTree = "<group>"; };
 		0518CBCA2AEC05BC003599DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0518CBCD2AEC05BC003599DC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		059F5C1B2AEC9107006DF448 /* Modules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Modules; path = ../../Modules; sourceTree = "<group>"; };
+		05F1F9122B075E75006C5C63 /* Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05F1F9142B075E75006C5C63 /* DevApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevApp.swift; sourceTree = "<group>"; };
+		05F1F9182B075E76006C5C63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		05F1F91B2B075E76006C5C63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +38,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05F1F90F2B075E75006C5C63 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F1F9212B075EEB006C5C63 /* Navigation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -37,7 +53,8 @@
 			isa = PBXGroup;
 			children = (
 				059F5C1B2AEC9107006DF448 /* Modules */,
-				0518CBC52AEC05BB003599DC /* Nito */,
+				05F1F9132B075E75006C5C63 /* Dev */,
+				0518CBC52AEC05BB003599DC /* Prod */,
 				0518CBC42AEC05BB003599DC /* Products */,
 				059F5C1D2AECFFD1006DF448 /* Frameworks */,
 			);
@@ -46,19 +63,20 @@
 		0518CBC42AEC05BB003599DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0518CBC32AEC05BB003599DC /* Nito.app */,
+				0518CBC32AEC05BB003599DC /* Prod.app */,
+				05F1F9122B075E75006C5C63 /* Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0518CBC52AEC05BB003599DC /* Nito */ = {
+		0518CBC52AEC05BB003599DC /* Prod */ = {
 			isa = PBXGroup;
 			children = (
-				0518CBC62AEC05BB003599DC /* NitoApp.swift */,
+				0518CBC62AEC05BB003599DC /* ProdApp.swift */,
 				0518CBCA2AEC05BC003599DC /* Assets.xcassets */,
 				0518CBCC2AEC05BC003599DC /* Preview Content */,
 			);
-			path = Nito;
+			path = Prod;
 			sourceTree = "<group>";
 		};
 		0518CBCC2AEC05BC003599DC /* Preview Content */ = {
@@ -76,12 +94,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		05F1F9132B075E75006C5C63 /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				05F1F9142B075E75006C5C63 /* DevApp.swift */,
+				05F1F9182B075E76006C5C63 /* Assets.xcassets */,
+				05F1F91A2B075E76006C5C63 /* Preview Content */,
+			);
+			path = Dev;
+			sourceTree = "<group>";
+		};
+		05F1F91A2B075E76006C5C63 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				05F1F91B2B075E76006C5C63 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0518CBC22AEC05BB003599DC /* Nito */ = {
+		0518CBC22AEC05BB003599DC /* Prod */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0518CBD12AEC05BC003599DC /* Build configuration list for PBXNativeTarget "Nito" */;
+			buildConfigurationList = 0518CBD12AEC05BC003599DC /* Build configuration list for PBXNativeTarget "Prod" */;
 			buildPhases = (
 				0518CBBF2AEC05BB003599DC /* Sources */,
 				0518CBC02AEC05BB003599DC /* Frameworks */,
@@ -91,12 +127,32 @@
 			);
 			dependencies = (
 			);
-			name = Nito;
+			name = Prod;
 			packageProductDependencies = (
 				059F5C202AED017D006DF448 /* Navigation */,
 			);
 			productName = Nito;
-			productReference = 0518CBC32AEC05BB003599DC /* Nito.app */;
+			productReference = 0518CBC32AEC05BB003599DC /* Prod.app */;
+			productType = "com.apple.product-type.application";
+		};
+		05F1F9112B075E75006C5C63 /* Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05F1F91D2B075E76006C5C63 /* Build configuration list for PBXNativeTarget "Dev" */;
+			buildPhases = (
+				05F1F90E2B075E75006C5C63 /* Sources */,
+				05F1F90F2B075E75006C5C63 /* Frameworks */,
+				05F1F9102B075E75006C5C63 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dev;
+			packageProductDependencies = (
+				05F1F9202B075EEB006C5C63 /* Navigation */,
+			);
+			productName = Dev;
+			productReference = 05F1F9122B075E75006C5C63 /* Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -110,6 +166,9 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0518CBC22AEC05BB003599DC = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					05F1F9112B075E75006C5C63 = {
 						CreatedOnToolsVersion = 15.0;
 					};
 				};
@@ -129,7 +188,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0518CBC22AEC05BB003599DC /* Nito */,
+				05F1F9112B075E75006C5C63 /* Dev */,
+				0518CBC22AEC05BB003599DC /* Prod */,
 			);
 		};
 /* End PBXProject section */
@@ -144,6 +204,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05F1F9102B075E75006C5C63 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F1F91C2B075E76006C5C63 /* Preview Assets.xcassets in Resources */,
+				05F1F9192B075E76006C5C63 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -151,7 +220,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0518CBC72AEC05BB003599DC /* NitoApp.swift in Sources */,
+				0518CBC72AEC05BB003599DC /* ProdApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05F1F90E2B075E75006C5C63 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05F1F9152B075E75006C5C63 /* DevApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,12 +361,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Nito/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Prod/Preview Content\"";
 				DEVELOPMENT_TEAM = V3Y8WJSRKA;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = NITO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -317,12 +395,13 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Nito/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Prod/Preview Content\"";
 				DEVELOPMENT_TEAM = V3Y8WJSRKA;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = NITO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -343,6 +422,70 @@
 			};
 			name = Release;
 		};
+		05F1F91E2B075E76006C5C63 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Dev/Preview Content\"";
+				DEVELOPMENT_TEAM = V3Y8WJSRKA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "(dev) NITO";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = club.nito.App.Dev.Debug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		05F1F91F2B075E76006C5C63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Dev/Preview Content\"";
+				DEVELOPMENT_TEAM = V3Y8WJSRKA;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "(dev) NITO";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = club.nito.App.Dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -355,7 +498,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0518CBD12AEC05BC003599DC /* Build configuration list for PBXNativeTarget "Nito" */ = {
+		0518CBD12AEC05BC003599DC /* Build configuration list for PBXNativeTarget "Prod" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0518CBD22AEC05BC003599DC /* Debug */,
@@ -364,10 +507,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		05F1F91D2B075E76006C5C63 /* Build configuration list for PBXNativeTarget "Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05F1F91E2B075E76006C5C63 /* Debug */,
+				05F1F91F2B075E76006C5C63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		059F5C202AED017D006DF448 /* Navigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Navigation;
+		};
+		05F1F9202B075EEB006C5C63 /* Navigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Navigation;
 		};
