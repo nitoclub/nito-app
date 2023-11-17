@@ -2,7 +2,7 @@ import Navigation
 import SwiftUI
 
 @main
-struct NitoApp: App {
+struct DevApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
