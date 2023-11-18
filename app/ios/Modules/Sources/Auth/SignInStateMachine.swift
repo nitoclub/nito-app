@@ -11,12 +11,17 @@ struct SignInViewUIState: UIState {
     var authStatus: LoadingState<AuthStatusAuthenticated> = .initial
 }
 
+enum SignInScreenEvent {
+    case onSignInSuccess
+}
+
 @MainActor
 final class SignInStateMachine: ObservableObject {
     @Dependency(\.signInUseCase) var signInUseCase
     @Dependency(\.observeAuthStatusUseCase) var observeAuthStatusUseCase
 
     @Published var state: SignInViewUIState = .init()
+    @Published var event: SignInScreenEvent? = nil
     @Published var routing: [SignInRouting] = []
 
     private var cachedAuthStatus: AuthStatus? {
@@ -56,7 +61,7 @@ final class SignInStateMachine: ObservableObject {
         guard case let cachedAuthStatus as AuthStatusAuthenticated = cachedAuthStatus else {
             return
         }
-        routing.append(.top)
+        event = .onSignInSuccess
         state.authStatus = .loaded(
             cachedAuthStatus
         )
