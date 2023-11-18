@@ -7,56 +7,56 @@ enum SignInRouting: Hashable {
     case top
 }
 
-public struct SignInView<TopView: View>: View {
+public struct SignInView: View {
     @StateObject var stateMachine: SignInStateMachine = .init()
 
-    private let topViewProvider: ViewProvider<Void, TopView>
+    private let onSignInSuccess: () -> Void
 
     public init(
-        topViewProvider: @escaping ViewProvider<Void, TopView>
+        onSignInSuccess: @escaping () -> Void
     ) {
-        self.topViewProvider = topViewProvider
+        self.onSignInSuccess = onSignInSuccess
     }
 
     public var body: some View {
-        NavigationStack(path: $stateMachine.routing) {
-            VStack {
-                TextField("メールアドレス", text: $stateMachine.state.email)
-                    .textFieldStyle(.roundedBorder)
-                    .textContentType(.emailAddress)
-                    .keyboardType(.emailAddress)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .padding(.vertical, 8)
+        VStack {
+            TextField("メールアドレス", text: $stateMachine.state.email)
+                .textFieldStyle(.roundedBorder)
+                .textContentType(.emailAddress)
+                .keyboardType(.emailAddress)
+                .autocapitalization(.none)
+                .disableAutocorrection(true)
+                .padding(.vertical, 8)
 
-                SecureField("パスワード", text: $stateMachine.state.password)
-                    .textFieldStyle(.roundedBorder)
-                    .textContentType(.password)
-                    .padding(.vertical, 8)
+            SecureField("パスワード", text: $stateMachine.state.password)
+                .textFieldStyle(.roundedBorder)
+                .textContentType(.password)
+                .padding(.vertical, 8)
 
-                Button {
-                    stateMachine.signIn()
-                } label: {
-                    Text("サインイン")
-                }
-            }
-            .padding()
-            .navigationTitle("サインイン")
-            .navigationDestination(for: SignInRouting.self) { routing in
-                switch routing {
-                case .top:
-                    topViewProvider(())
-                }
-            }
-            .onAppear {
-                Task { await stateMachine.load() }
+            Button {
+                stateMachine.signIn()
+            } label: {
+                Text("サインイン")
             }
         }
+        .padding()
+        .navigationTitle("サインイン")
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            Task { await stateMachine.load() }
+        }
+        .onReceive(stateMachine.$event, perform: { event in
+            switch event {
+            case .some(.onSignInSuccess):
+                onSignInSuccess()
+            default: break
+            }
+        })
     }
 }
 
 #Preview {
     SignInView(
-        topViewProvider: { _ in EmptyView() }
+        onSignInSuccess: { }
     )
 }
