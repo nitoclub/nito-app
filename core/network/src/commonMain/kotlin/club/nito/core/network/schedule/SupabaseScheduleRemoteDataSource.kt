@@ -1,11 +1,18 @@
 package club.nito.core.network.schedule
 
+import club.nito.core.model.Order
 import club.nito.core.model.Schedule
 import club.nito.core.network.schedule.model.NetworkSchedule
+import club.nito.core.network.toSupabaseOrder
 import co.touchlab.kermit.Logger
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
-import io.github.jan.supabase.postgrest.query.Order
+import kotlinx.datetime.Instant
+
+private enum class Column(val columnName: String) {
+    DELETED_AT(columnName = "deleted_at"),
+    SCHEDULED_AT(columnName = "scheduled_at"),
+}
 
 class SupabaseScheduleRemoteDataSource(
     private val client: SupabaseClient,
@@ -13,10 +20,16 @@ class SupabaseScheduleRemoteDataSource(
     private val log = Logger.withTag("SupabaseScheduleRemoteDataSource")
     private val postgrest = client.postgrest["schedules"]
 
-    override suspend fun getScheduleList(limit: Int): List<Schedule> = postgrest
+    override suspend fun getScheduleList(
+        limit: Int,
+        order: Order,
+        after: Instant?,
+    ): List<Schedule> = postgrest
         .select(
             filter = {
-                order("scheduled_at", order = Order.DESCENDING)
+                exact(Column.DELETED_AT.columnName, null)
+                after?.let { gte(Column.SCHEDULED_AT.columnName, it) }
+                order(Column.SCHEDULED_AT.columnName, order = order.toSupabaseOrder())
                 limit(count = limit.toLong())
             },
         )
