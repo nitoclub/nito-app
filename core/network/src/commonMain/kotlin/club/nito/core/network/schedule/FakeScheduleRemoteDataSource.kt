@@ -1,15 +1,21 @@
 package club.nito.core.network.schedule
 
+import club.nito.core.model.Order
 import club.nito.core.model.Schedule
 import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.schedule.model.createFakeNetworkSchedule
 import kotlinx.datetime.Clock
 import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.plus
 
 data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
-    override suspend fun getScheduleList(limit: Int): List<Schedule> {
+    override suspend fun getScheduleList(
+        limit: Int,
+        order: Order,
+        after: Instant?,
+    ): List<Schedule> {
         val instant = Clock.System.now()
         val timeZone = TimeZone.currentSystemDefault()
 
