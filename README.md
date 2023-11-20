@@ -1,6 +1,8 @@
+![NITO](docs/images/hero.svg)
+
 # NITO
 
-NITO のユーザーアプリのリポジトリです。
+NITO のユーザーアプリです。
 
 <a href='https://play.google.com/store/apps/details?id=club.nito.app&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Google Play で手に入れよう' src='docs/images/google-play/badge.png' height='100px'/></a>
 
