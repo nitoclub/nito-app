@@ -102,6 +102,8 @@ dependencies {
     implementation(libs.androidxWindow)
     implementation(libs.kermit)
     implementation(libs.androidxSplashScreen)
+
+    implementation(libs.koinCompose)
 //    implementation(libs.firebaseDynamicLinks)
 //    testImplementation(projects.core.testing)
 }

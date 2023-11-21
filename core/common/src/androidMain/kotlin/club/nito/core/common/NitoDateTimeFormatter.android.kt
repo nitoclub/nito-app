@@ -7,13 +7,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
 
-sealed interface NitoDateTimeFormatter {
-    /**
-     * 日時をフォーマットする
-     */
-    fun formatDateTimeString(instant: Instant): String
-}
-
 class DefaultNitoDateTimeFormatter(
     private val dateTimeFormatter: DateTimeFormatter,
 ) : NitoDateTimeFormatter {

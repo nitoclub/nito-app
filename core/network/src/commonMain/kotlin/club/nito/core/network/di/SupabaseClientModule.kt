@@ -1,5 +1,7 @@
-package club.nito.core.network
+package club.nito.core.network.di
 
+import club.nito.core.network.createNitoKtorJsonSettings
+import club.nito.core.network.createNitoSupabaseClient
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.GoTrue
 import io.github.jan.supabase.gotrue.gotrue

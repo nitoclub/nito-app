@@ -1,4 +1,4 @@
-package club.nito.core.network
+package club.nito.core.network.di
 
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.auth.FakeAuthRemoteDataSource

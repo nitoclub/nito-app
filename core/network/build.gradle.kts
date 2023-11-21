@@ -17,6 +17,8 @@ kotlin {
                 implementation(projects.core.model)
 
                 implementation(libs.kotlinxCoroutinesCore)
+
+                implementation(libs.koin)
                 implementation(libs.kermit)
 
                 implementation(libs.okIo)
@@ -43,7 +45,6 @@ kotlin {
 
         iosMain {
             dependencies {
-                implementation(libs.koin)
                 implementation(libs.ktorClientDarwin)
             }
         }

@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.koin.dsl.module
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -21,4 +22,15 @@ class NitoDateTimeFormatterModule {
             .withLocale(Locale.getDefault())
             .withZone(ZoneId.systemDefault()),
     )
+}
+
+val nitoDateTimeFormatterModule = module {
+    single<NitoDateTimeFormatter> {
+        DefaultNitoDateTimeFormatter(
+            dateTimeFormatter = DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
+                .withLocale(Locale.getDefault())
+                .withZone(ZoneId.systemDefault()),
+        )
+    }
 }
