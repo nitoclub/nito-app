@@ -1,6 +1,5 @@
 package club.nito.core.ui
 
-import android.content.Context
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -12,11 +11,12 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 
 @Composable
-fun ProfileImage(
+actual fun ProfileImage(
     profile: UserProfile,
-    modifier: Modifier = Modifier,
-    context: Context = LocalContext.current,
+    modifier: Modifier,
 ) {
+    val context = LocalContext.current
+
     AsyncImage(
         model = ImageRequest.Builder(context)
             .data(profile.avatarUrl)
