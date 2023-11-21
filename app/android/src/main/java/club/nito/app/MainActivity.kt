@@ -8,51 +8,38 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import club.nito.core.model.AuthStatus
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     private val viewModel: MainActivityViewModel by viewModels()
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
-
         super.onCreate(savedInstanceState)
 
-        var uiState: MainActivityUiState by mutableStateOf(MainActivityUiState.Loading)
+        val uiState = mutableStateOf<MainActivityUiState>(MainActivityUiState.Loading)
 
         // Update the uiState
         lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState
-                    .onEach {
-                        uiState = it
-                    }
-                    .collect()
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    uiState.value = it
+                }
             }
         }
 
         splashScreen.setKeepOnScreenCondition {
-            when (uiState) {
-                MainActivityUiState.Loading -> true
-                is MainActivityUiState.Success -> false
-            }
+            uiState.value !is MainActivityUiState.Success
         }
 
         enableEdgeToEdge(
@@ -68,19 +55,17 @@ class MainActivity : ComponentActivity() {
         window.isNavigationBarContrastEnforced = false
 
         setContent {
-            val windowSize = calculateWindowSizeClass(this)
-            NitoApp(
-                windowSize = windowSize,
-                authStatus = shouldAuthStatus(uiState),
-            )
+            when (val state = uiState.value) {
+                MainActivityUiState.Loading -> {}
+
+                is MainActivityUiState.Success -> {
+                    val windowSize = calculateWindowSizeClass(this)
+                    NitoApp(
+                        windowSize = windowSize,
+                        authStatus = state.authStatus,
+                    )
+                }
+            }
         }
     }
-}
-
-@Composable
-private fun shouldAuthStatus(
-    uiState: MainActivityUiState,
-): AuthStatus? = when (uiState) {
-    MainActivityUiState.Loading -> null
-    is MainActivityUiState.Success -> uiState.authStatus
 }
