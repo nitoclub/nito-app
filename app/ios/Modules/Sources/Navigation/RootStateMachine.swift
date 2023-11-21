@@ -63,9 +63,11 @@ class RootStateMachine: ObservableObject {
     private func applyAuthStatusToState() {
         switch cachedAuthStatus {
         case .some(is AuthStatusNotAuthenticated):
-            path = .init([Routing.signIn])
+            path.removeLast(path.count)
+            path.append(Routing.signIn)
         case .some(is AuthStatusAuthenticated):
-            path = .init([Routing.top])
+            path.removeLast(path.count)
+            path.append(Routing.top)
         default: break
         }
     }
