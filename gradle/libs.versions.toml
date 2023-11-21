@@ -44,6 +44,7 @@ androidxLifecycleProcess = "2.6.2"
 supabase = "1.4.5"
 logback = "1.4.11"
 graphqlKotlin = "7.0.2"
+kotest = "5.8.0"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -61,6 +62,7 @@ detektFormatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-forma
 twitterComposeRule = { module = "com.twitter.compose.rules:detekt", version.ref = "twitterComposeRule" }
 ossLicensesPlugin = { group = "com.google.android.gms", name = "oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
 koverPlugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
+kotestMultiplatformPlugin = { module = "io.kotest:kotest-framework-multiplatform-plugin-gradle", version.ref = "kotest" }
 
 androidDesugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
 
@@ -162,6 +164,12 @@ roborazziRule = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule",
 showkaseRuntime = { group = "com.airbnb.android", name = "showkase", version.ref = "showkase" }
 showkaseProcessor = { group = "com.airbnb.android", name = "showkase-processor", version.ref = "showkase" }
 
+kotestBom = { module = "io.kotest:kotest-bom", version.ref = "kotest" }
+kotestAssertionsCore = { module = "io.kotest:kotest-assertions-core" }
+kotestFrameworkEngine = { group = "io.kotest", name = "kotest-framework-engine" }
+kotestFrameworkDatatest = { module = "io.kotest:kotest-framework-datatest" }
+kotestRunnerJunit5 = { module = "io.kotest:kotest-runner-junit5" }
+
 [plugins]
 compose = { id = "org.jetbrains.compose", version.ref = "composeJb" }
 androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -189,5 +197,6 @@ plugins = [
     "detektGradlePlugin",
     "ossLicensesPlugin",
     "koverPlugin",
-    "firebaseCrashlyticsGradlePlugin"
+    "firebaseCrashlyticsGradlePlugin",
+    "kotestMultiplatformPlugin",
 ]

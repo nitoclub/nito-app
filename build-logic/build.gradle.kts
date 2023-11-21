@@ -94,6 +94,10 @@ gradlePlugin {
             id = "nito.primitive.android.osslicenses"
             implementationClass = "club.nito.primitive.OssLicensesPlugin"
         }
+        register("kotest") {
+            id = "nito.primitive.kotest"
+            implementationClass = "club.nito.primitive.KotestPlugin"
+        }
 
         // Conventions
         register("androidFeature") {
