@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
-fun <T1, R> ViewModel.buildUiState(
+public fun <T1, R> ViewModel.buildUiState(
     flow: StateFlow<T1>,
     transform: (T1) -> R,
 ): StateFlow<R> = flow.map(transform = transform)
@@ -20,7 +20,7 @@ fun <T1, R> ViewModel.buildUiState(
         ),
     )
 
-fun <T1, T2, R> ViewModel.buildUiState(
+public fun <T1, T2, R> ViewModel.buildUiState(
     flow: StateFlow<T1>,
     flow2: StateFlow<T2>,
     transform: (T1, T2) -> R,
@@ -37,7 +37,7 @@ fun <T1, T2, R> ViewModel.buildUiState(
     ),
 )
 
-fun <T1, T2, T3, R> ViewModel.buildUiState(
+public fun <T1, T2, T3, R> ViewModel.buildUiState(
     flow: StateFlow<T1>,
     flow2: StateFlow<T2>,
     flow3: StateFlow<T3>,
@@ -57,7 +57,7 @@ fun <T1, T2, T3, R> ViewModel.buildUiState(
     ),
 )
 
-fun <T1, T2, T3, T4, R> ViewModel.buildUiState(
+public fun <T1, T2, T3, T4, R> ViewModel.buildUiState(
     flow: StateFlow<T1>,
     flow2: StateFlow<T2>,
     flow3: StateFlow<T3>,

@@ -9,7 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
  * SnackbarMessageEffect shows a snackbar message when a [UserMessage] is emitted by [userMessageStateHolder].
  */
 @Composable
-fun SnackbarMessageEffect(
+public fun SnackbarMessageEffect(
     snackbarHostState: SnackbarHostState,
     userMessageStateHolder: UserMessageStateHolder,
 ) {

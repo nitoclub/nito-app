@@ -10,7 +10,7 @@ import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
 
 @Composable
-fun ConfirmParticipateDialog(
+public fun ConfirmParticipateDialog(
     schedule: ParticipantSchedule,
     dateTimeFormatter: NitoDateTimeFormatter,
     onParticipateRequest: (schedule: ParticipantSchedule) -> Unit,

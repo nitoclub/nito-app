@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import club.nito.core.model.UserProfile
 
 @Composable
-expect fun ProfileImage(
+public expect fun ProfileImage(
     profile: UserProfile,
     modifier: Modifier = Modifier,
 )

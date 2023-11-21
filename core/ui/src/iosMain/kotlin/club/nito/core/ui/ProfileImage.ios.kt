@@ -6,11 +6,10 @@ import androidx.compose.ui.Modifier
 import club.nito.core.model.UserProfile
 
 @Composable
-actual fun ProfileImage(
+public actual fun ProfileImage(
     profile: UserProfile,
-    modifier: Modifier
+    modifier: Modifier,
 ) {
     // TODO
-    Box {
-    }
+    Box { }
 }

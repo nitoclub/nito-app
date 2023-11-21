@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import club.nito.core.model.UserProfile
 
 @Composable
-fun ProfileImagesRow(
+public fun ProfileImagesRow(
     profiles: List<UserProfile>,
     modifier: Modifier = Modifier,
 ) {
