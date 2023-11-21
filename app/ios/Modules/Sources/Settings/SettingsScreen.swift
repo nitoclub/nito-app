@@ -1,8 +1,8 @@
 import NitoCombined
 import SwiftUI
 
-public struct SettingsView: View {
-    @StateObject var viewModel: SettingsViewModel = .init()
+public struct SettingsScreen: View {
+    @StateObject var stateMachine: SettingsStateMachine = .init()
 
     public init() {}
 
@@ -12,6 +12,12 @@ public struct SettingsView: View {
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text(Greeting().greet())
+
+            Button {
+                stateMachine.signOut()
+            } label: {
+                Text("サインアウト")
+            }
         }
         .padding()
         .navigationTitle("設定")
@@ -19,5 +25,5 @@ public struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsScreen()
 }

@@ -32,7 +32,7 @@ public struct RootView: View {
                     case .scheduleList:
                         EmptyView()
                     case .settings:
-                        SettingsView()
+                        SettingsScreen()
                     }
                 }
         }
