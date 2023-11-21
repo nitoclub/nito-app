@@ -10,6 +10,8 @@ plugins {
 android.namespace = "club.nito.core.ui"
 
 kotlin {
+    explicitApi()
+
     sourceSets {
         commonMain {
             dependencies {

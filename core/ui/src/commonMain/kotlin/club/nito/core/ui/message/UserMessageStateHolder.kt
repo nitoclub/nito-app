@@ -9,28 +9,28 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-data class MessageUiState(
+public data class MessageUiState(
     val userMessages: List<UserMessage> = emptyList(),
 )
 
-enum class UserMessageResult {
+public enum class UserMessageResult {
     Dismissed,
     ActionPerformed,
 }
 
-interface UserMessageStateHolder {
-    val messageUiState: MessageUiState
-    fun messageShown(messageId: Int, userMessageResult: UserMessageResult)
-    suspend fun showMessage(
+public interface UserMessageStateHolder {
+    public val messageUiState: MessageUiState
+    public fun messageShown(messageId: Int, userMessageResult: UserMessageResult)
+    public suspend fun showMessage(
         message: String,
         actionLabel: String? = null,
         duration: SnackbarDuration? = null,
     ): UserMessageResult
 }
 
-class DefaultUserMessageStateHolder : UserMessageStateHolder {
+public class DefaultUserMessageStateHolder : UserMessageStateHolder {
     private var _messageUiState by mutableStateOf(MessageUiState())
-    override val messageUiState get() = _messageUiState
+    override val messageUiState: MessageUiState get() = _messageUiState
     override fun messageShown(messageId: Int, userMessageResult: UserMessageResult) {
         val messages = _messageUiState.userMessages.toMutableList()
         messages.indexOfFirst { it.id == messageId }.let { userMessageIndex ->

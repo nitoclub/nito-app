@@ -19,7 +19,7 @@ import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
 
 @Composable
-fun ParticipantScheduleItem(
+public fun ParticipantScheduleItem(
     schedule: ParticipantSchedule,
     dateTimeFormatter: NitoDateTimeFormatter,
     modifier: Modifier = Modifier,
