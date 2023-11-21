@@ -1,5 +1,13 @@
-package club.nito.core.data
+package club.nito.core.data.di
 
+import club.nito.core.data.AuthRepository
+import club.nito.core.data.DefaultAuthRepository
+import club.nito.core.data.DefaultParticipantRepository
+import club.nito.core.data.DefaultUserRepository
+import club.nito.core.data.OfflineFirstScheduleRepository
+import club.nito.core.data.ParticipantRepository
+import club.nito.core.data.ScheduleRepository
+import club.nito.core.data.UserRepository
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
