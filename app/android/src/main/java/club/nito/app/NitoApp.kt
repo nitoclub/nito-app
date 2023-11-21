@@ -21,7 +21,7 @@ import org.koin.compose.KoinApplication
 @Composable
 fun NitoApp(
     windowSize: WindowSizeClass,
-    authStatus: AuthStatus?,
+    authStatus: AuthStatus,
     modifier: Modifier = Modifier,
 ) {
     KoinApplication(

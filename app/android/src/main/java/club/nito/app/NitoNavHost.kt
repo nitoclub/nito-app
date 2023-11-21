@@ -26,7 +26,7 @@ const val rootNavigationRoute = "root_route"
 @Composable
 fun NitoNavHost(
     windowSize: WindowSizeClass,
-    authStatus: AuthStatus?,
+    authStatus: AuthStatus,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = rootNavigationRoute,
@@ -72,7 +72,7 @@ fun NitoNavHost(
 }
 
 private fun NavGraphBuilder.root(
-    authStatus: AuthStatus?,
+    authStatus: AuthStatus,
     navController: NavHostController,
 ) = composable(rootNavigationRoute) {
     LaunchedEffect(authStatus) {
@@ -92,8 +92,6 @@ private fun NavGraphBuilder.root(
                     }
                 },
             )
-
-            else -> {}
         }
     }
 }
