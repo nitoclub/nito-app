@@ -4,6 +4,7 @@ plugins {
     id("nito.primitive.kmp.android.hilt")
     id("nito.primitive.kmp.ios")
     id("nito.primitive.kmp.compose")
+    id("nito.primitive.kotest")
 }
 
 android.namespace = "club.nito.feature.top"
