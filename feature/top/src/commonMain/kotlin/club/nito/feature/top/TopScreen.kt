@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,51 +20,48 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import club.nito.core.designsystem.component.CenterAlignedTopAppBar
-import club.nito.core.designsystem.component.Scaffold
-import club.nito.core.designsystem.component.Text
 import club.nito.core.ui.ConfirmParticipateDialog
 import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.top.component.ParticipantScheduleSection
+import org.koin.compose.koinInject
 
 @Composable
 fun TopRoute(
-    viewModel: TopViewModel = hiltViewModel(),
+    stateMachine: TopStateMachine = koinInject(),
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
-    viewModel.event.collectAsState(initial = null).value?.let {
+    stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
             when (it) {
-                TopEvent.NavigateToScheduleList -> onScheduleListClick()
-                TopEvent.NavigateToSettings -> onSettingsClick()
+                TopScreenEvent.NavigateToScheduleList -> onScheduleListClick()
+                TopScreenEvent.NavigateToSettings -> onSettingsClick()
             }
-            viewModel.consume(it)
+            stateMachine.consume(it)
         }
     }
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by stateMachine.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
     SnackbarMessageEffect(
         snackbarHostState = snackbarHostState,
-        userMessageStateHolder = viewModel.userMessageStateHolder,
+        userMessageStateHolder = stateMachine.userMessageStateHolder,
     )
 
     TopScreen(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
-        dispatch = viewModel::dispatch,
+        dispatch = stateMachine::dispatch,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun TopScreen(
+internal fun TopScreen(
     uiState: TopScreenUiState,
     snackbarHostState: SnackbarHostState,
-    dispatch: (TopIntent) -> Unit = {},
+    dispatch: (TopScreenIntent) -> Unit = {},
 ) {
     val recentSchedule = uiState.recentSchedule
     val confirmParticipateDialog = uiState.confirmParticipateDialog
@@ -75,7 +75,7 @@ private fun TopScreen(
                     )
                 },
                 actions = {
-                    IconButton(onClick = { dispatch(TopIntent.ClickSettings) }) {
+                    IconButton(onClick = { dispatch(TopScreenIntent.ClickSettings) }) {
                         Icon(
                             imageVector = Icons.Default.Settings,
                             contentDescription = "Settings",
@@ -90,8 +90,8 @@ private fun TopScreen(
                 ConfirmParticipateDialog(
                     schedule = confirmParticipateDialog.schedule,
                     dateTimeFormatter = uiState.dateTimeFormatter,
-                    onParticipateRequest = { dispatch(TopIntent.ClickParticipateSchedule(it)) },
-                    onDismissRequest = { dispatch(TopIntent.ClickDismissConfirmParticipateDialog) },
+                    onParticipateRequest = { dispatch(TopScreenIntent.ClickParticipateSchedule(it)) },
+                    onDismissRequest = { dispatch(TopScreenIntent.ClickDismissConfirmParticipateDialog) },
                 )
             }
 
@@ -104,8 +104,8 @@ private fun TopScreen(
                 ParticipantScheduleSection(
                     recentSchedule = recentSchedule,
                     dateTimeFormatter = uiState.dateTimeFormatter,
-                    onRecentScheduleClick = { dispatch(TopIntent.ClickShowConfirmParticipateDialog(it)) },
-                    onScheduleListClick = { dispatch(TopIntent.ClickScheduleList) },
+                    onRecentScheduleClick = { dispatch(TopScreenIntent.ClickShowConfirmParticipateDialog(it)) },
+                    onScheduleListClick = { dispatch(TopScreenIntent.ClickScheduleList) },
                 )
             }
         },
