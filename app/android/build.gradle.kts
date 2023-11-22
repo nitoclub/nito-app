@@ -95,6 +95,7 @@ dependencies {
     implementation(projects.feature.schedule)
     implementation(projects.feature.settings)
 
+    implementation(libs.precompose)
     implementation(libs.composeNavigation)
     implementation(libs.composeHiltNavigtation)
     implementation(libs.composeMaterialWindowSize)
