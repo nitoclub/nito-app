@@ -46,10 +46,6 @@ gradlePlugin {
             id = "nito.primitive.android.compose"
             implementationClass = "club.nito.primitive.AndroidComposePlugin"
         }
-        register("androidHilt") {
-            id = "nito.primitive.android.hilt"
-            implementationClass = "club.nito.primitive.AndroidHiltPlugin"
-        }
         register("androidCrashlytics") {
             id = "nito.primitive.android.crashlytics"
             implementationClass = "club.nito.primitive.AndroidCrashlyticsPlugin"
@@ -77,10 +73,6 @@ gradlePlugin {
         register("kmpKtorfit") {
             id = "nito.primitive.kmp.ktorfit"
             implementationClass = "club.nito.primitive.KmpKtorfitPlugin"
-        }
-        register("kmpAndroidHilt") {
-            id = "nito.primitive.kmp.android.hilt"
-            implementationClass = "club.nito.primitive.KmpAndroidHiltPlugin"
         }
         register("kmpKotlinSerialization") {
             id = "nito.primitive.kmp.serialization"

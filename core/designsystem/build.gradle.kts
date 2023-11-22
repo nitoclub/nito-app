@@ -3,7 +3,6 @@ plugins {
     id("nito.primitive.kmp.android")
     id("nito.primitive.kmp.ios")
     id("nito.primitive.kmp.compose")
-    id("nito.primitive.kmp.android.hilt")
     id("nito.primitive.detekt")
 }
 
@@ -20,6 +19,4 @@ kotlin {
             }
         }
     }
-}
-dependencies {
 }

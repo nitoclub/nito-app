@@ -2,7 +2,6 @@ plugins {
     id("nito.primitive.kmp")
     id("nito.primitive.kmp.android")
     id("nito.primitive.kmp.ios")
-    id("nito.primitive.kmp.android.hilt")
     id("nito.primitive.detekt")
     id("nito.primitive.kmp.serialization")
 }
@@ -36,7 +35,6 @@ kotlin {
             dependencies {
                 implementation(libs.ktorClientOkHttp)
                 implementation(libs.multiplatformFirebaseAuth)
-                implementation(libs.okHttpLoggingInterceptor)
                 implementation(libs.okHttpLoggingInterceptor)
                 implementation(libs.firebaseRemoteConfig)
                 implementation(libs.androidxLifecycleProcess)

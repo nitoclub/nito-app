@@ -5,7 +5,6 @@ plugins {
     id("nito.primitive.androidapplication")
     id("nito.primitive.android.kotlin")
     id("nito.primitive.android.compose")
-    id("nito.primitive.android.hilt")
     id("nito.primitive.android.firebase")
     id("nito.primitive.android.crashlytics")
 }
