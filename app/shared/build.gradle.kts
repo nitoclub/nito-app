@@ -14,9 +14,16 @@ kotlin {
             dependencies {
                 implementation(projects.core.common)
                 implementation(projects.core.model)
+                implementation(projects.core.data)
+                implementation(projects.core.network)
                 implementation(projects.core.domain)
-                implementation(projects.core.ui)
                 implementation(projects.core.designsystem)
+                implementation(projects.core.ui)
+
+                implementation(projects.feature.top)
+                implementation(projects.feature.auth)
+                implementation(projects.feature.schedule)
+                implementation(projects.feature.settings)
 
                 implementation(libs.kotlinxCoroutinesCore)
 
