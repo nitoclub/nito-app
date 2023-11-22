@@ -1,14 +1,12 @@
 package club.nito.feature.schedule
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import club.nito.core.common.NitoDateTimeFormatter
 import club.nito.core.domain.GetParticipantScheduleListUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchMultipleContentResult
+import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,14 +14,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import moe.tlaster.precompose.viewmodel.viewModelScope
 
-@HiltViewModel
-class ScheduleListViewModel @Inject constructor(
+class ScheduleListViewModel internal constructor(
     getParticipantScheduleListUseCase: GetParticipantScheduleListUseCase,
     val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateTimeFormatter,
-) : ViewModel(),
+) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
 

@@ -12,23 +12,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.hilt.navigation.compose.hiltViewModel
-import club.nito.core.common.previewNitoDateTimeFormatter
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
-import club.nito.core.designsystem.theme.NitoTheme
-import club.nito.core.model.FetchMultipleContentResult
 import club.nito.core.ui.ConfirmParticipateDialog
+import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.schedule.component.ScheduleListSection
 
 @Composable
 fun ScheduleRoute(
-    viewModel: ScheduleListViewModel = hiltViewModel(),
+    viewModel: ScheduleListViewModel = koinStateMachine(),
 ) {
     viewModel.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
@@ -96,29 +90,4 @@ private fun ScheduleScreen(
             }
         },
     )
-}
-
-private class ScheduleListScreenUiStatePreviewParameterProvider :
-    PreviewParameterProvider<ScheduleListScreenUiState> {
-    private val dateTimeFormatter = previewNitoDateTimeFormatter
-    override val values: Sequence<ScheduleListScreenUiState> = sequenceOf(
-        ScheduleListScreenUiState(
-            dateTimeFormatter = dateTimeFormatter,
-            scheduleList = FetchMultipleContentResult.Loading,
-            confirmParticipateDialog = ConfirmParticipateDialogUiState.Hide,
-        ),
-    )
-}
-
-@Preview
-@Composable
-fun PreviewScheduleScreen(
-    @PreviewParameter(ScheduleListScreenUiStatePreviewParameterProvider::class) uiState: ScheduleListScreenUiState,
-) {
-    NitoTheme {
-        ScheduleScreen(
-            uiState = uiState,
-            snackbarHostState = SnackbarHostState(),
-        )
-    }
 }
