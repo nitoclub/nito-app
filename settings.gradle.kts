@@ -21,6 +21,7 @@ dependencyResolutionManagement {
 rootProject.name = "nito"
 
 include(
+    ":app:shared",
     ":app:android",
     ":app:ios-combined",
     ":app:web",
