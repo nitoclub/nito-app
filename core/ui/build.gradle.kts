@@ -21,7 +21,12 @@ kotlin {
                 implementation(projects.core.domain)
                 implementation(projects.core.data)
 
+                implementation(libs.precompose)
                 api(libs.precomposeViewmodel)
+                implementation(libs.precomposeKoin)
+
+                implementation(libs.koin)
+                implementation(libs.koinCompose)
 
                 implementation(libs.kermit)
             }
