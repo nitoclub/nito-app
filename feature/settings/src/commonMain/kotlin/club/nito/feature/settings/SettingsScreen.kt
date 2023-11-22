@@ -22,39 +22,39 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
+import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.settings.component.ModifyPasswordDialog
 
 @Composable
 fun SettingsRoute(
-    viewModel: SettingsViewModel = hiltViewModel(),
+    stateMachine: SettingsScreenStateMachine = koinStateMachine(),
     onSignedOut: () -> Unit = {},
 ) {
-    viewModel.event.collectAsState(initial = null).value?.let {
+    stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
             when (it) {
-                SettingsEvent.SignedOut -> onSignedOut()
+                SettingsScreenEvent.SignedOut -> onSignedOut()
             }
-            viewModel.consume(it)
+            stateMachine.consume(it)
         }
     }
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by stateMachine.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
     SnackbarMessageEffect(
         snackbarHostState = snackbarHostState,
-        userMessageStateHolder = viewModel.userMessageStateHolder,
+        userMessageStateHolder = stateMachine.userMessageStateHolder,
     )
 
     SettingsScreen(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
-        dispatch = viewModel::dispatch,
+        dispatch = stateMachine::dispatch,
     )
 }
 
@@ -63,7 +63,7 @@ fun SettingsRoute(
 private fun SettingsScreen(
     uiState: SettingsScreenUiState,
     snackbarHostState: SnackbarHostState,
-    dispatch: (SettingsIntent) -> Unit = {},
+    dispatch: (SettingsScreenIntent) -> Unit = {},
 ) {
     val modifyPassword = uiState.modifyPassword
 
@@ -82,9 +82,9 @@ private fun SettingsScreen(
             if (modifyPassword is ModifyPasswordUiState.Show) {
                 ModifyPasswordDialog(
                     newPassword = modifyPassword.newPassword,
-                    onNewPasswordChanged = { dispatch(SettingsIntent.ChangeNewPasswordValue(it)) },
-                    onModifyRequest = { dispatch(SettingsIntent.ClickModifyPassword) },
-                    onDismissRequest = { dispatch(SettingsIntent.ClickDismissModifyPasswordDialog) },
+                    onNewPasswordChanged = { dispatch(SettingsScreenIntent.ChangeNewPasswordValue(it)) },
+                    onModifyRequest = { dispatch(SettingsScreenIntent.ClickModifyPassword) },
+                    onDismissRequest = { dispatch(SettingsScreenIntent.ClickDismissModifyPasswordDialog) },
                 )
 
                 if (modifyPassword is ModifyPasswordUiState.Show.Modifying) {
@@ -110,7 +110,7 @@ private fun SettingsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .heightIn(min = 48.dp)
-                            .clickable { dispatch(SettingsIntent.ClickShowModifyPasswordDialog) }
+                            .clickable { dispatch(SettingsScreenIntent.ClickShowModifyPasswordDialog) }
                             .padding(horizontal = 16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
@@ -125,7 +125,7 @@ private fun SettingsScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    onClick = { dispatch(SettingsIntent.ClickSignOut) },
+                    onClick = { dispatch(SettingsScreenIntent.ClickSignOut) },
                     enabled = uiState.isSignOutButtonEnabled,
                 ) {
                     Text(

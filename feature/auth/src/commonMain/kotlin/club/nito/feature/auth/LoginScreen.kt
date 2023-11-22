@@ -20,23 +20,23 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
+import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
 
 @Composable
-fun SignInRoute(
-    viewModel: SignInViewModel = hiltViewModel(),
-    onSignedIn: () -> Unit = {},
+fun LoginRoute(
+    viewModel: LoginScreenStateMachine = koinStateMachine(),
+    onLoggedIn: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
 ) {
     viewModel.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
             when (it) {
-                SignInEvent.NavigateToRegister -> onRegisterClick()
-                SignInEvent.SignedIn -> onSignedIn()
+                LoginScreenEvent.NavigateToRegister -> onRegisterClick()
+                LoginScreenEvent.LoggedIn -> onLoggedIn()
             }
             viewModel.consume(it)
         }
@@ -50,7 +50,7 @@ fun SignInRoute(
         userMessageStateHolder = viewModel.userMessageStateHolder,
     )
 
-    SignInScreen(
+    LoginScreen(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
         dispatch = viewModel::dispatch,
@@ -59,10 +59,10 @@ fun SignInRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SignInScreen(
-    uiState: SignInScreenUiState,
+private fun LoginScreen(
+    uiState: LoginScreenUiState,
     snackbarHostState: SnackbarHostState,
-    dispatch: (SignInIntent) -> Unit = {},
+    dispatch: (LoginScreenIntent) -> Unit = {},
 ) {
     Scaffold(
         topBar = {
@@ -85,7 +85,7 @@ private fun SignInScreen(
             ) {
                 OutlinedTextField(
                     value = uiState.email,
-                    onValueChange = { dispatch(SignInIntent.ChangeInputEmail(it)) },
+                    onValueChange = { dispatch(LoginScreenIntent.ChangeInputEmail(it)) },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = "Email") },
                     placeholder = { Text(text = "xxxxxx@nito.club") },
@@ -97,7 +97,7 @@ private fun SignInScreen(
                 )
                 OutlinedTextField(
                     value = uiState.password,
-                    onValueChange = { dispatch(SignInIntent.ChangeInputPassword(it)) },
+                    onValueChange = { dispatch(LoginScreenIntent.ChangeInputPassword(it)) },
                     modifier = Modifier.fillMaxWidth(),
                     label = { Text(text = "Password") },
                     placeholder = { Text(text = "password") },
@@ -111,7 +111,7 @@ private fun SignInScreen(
                 Button(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    onClick = { dispatch(SignInIntent.ClickSignIn) },
+                    onClick = { dispatch(LoginScreenIntent.ClickSignIn) },
                     enabled = uiState.isSignInButtonEnabled,
                 ) {
                     Text(

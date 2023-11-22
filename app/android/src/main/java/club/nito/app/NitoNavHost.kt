@@ -10,9 +10,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import club.nito.core.model.AuthStatus
-import club.nito.feature.auth.navigateToSignIn
-import club.nito.feature.auth.signInNavigationRoute
-import club.nito.feature.auth.signInScreen
+import club.nito.feature.auth.loginNavigationRoute
+import club.nito.feature.auth.loginScreen
+import club.nito.feature.auth.navigateToLogin
 import club.nito.feature.schedule.navigateToSchedule
 import club.nito.feature.schedule.scheduleScreen
 import club.nito.feature.settings.navigateToSettings
@@ -45,11 +45,11 @@ fun NitoNavHost(
             onScheduleListClick = navController::navigateToSchedule,
             onSettingsClick = navController::navigateToSettings,
         )
-        signInScreen(
-            onSignedIn = {
+        loginScreen(
+            onLoggedIn = {
                 navController.navigateToTop(
                     navOptions = navOptions {
-                        popUpTo(signInNavigationRoute) {
+                        popUpTo(loginNavigationRoute) {
                             inclusive = true
                         }
                     },
@@ -59,7 +59,7 @@ fun NitoNavHost(
         scheduleScreen()
         settingsScreen(
             onSignedOut = {
-                navController.navigateToSignIn(
+                navController.navigateToLogin(
                     navOptions = navOptions {
                         popUpTo(topNavigationRoute) {
                             inclusive = true
@@ -77,7 +77,7 @@ private fun NavGraphBuilder.root(
 ) = composable(rootNavigationRoute) {
     LaunchedEffect(authStatus) {
         when (authStatus) {
-            AuthStatus.NotAuthenticated -> navController.navigateToSignIn(
+            AuthStatus.NotAuthenticated -> navController.navigateToLogin(
                 navOptions = navOptions {
                     popUpTo(rootNavigationRoute) {
                         inclusive = true

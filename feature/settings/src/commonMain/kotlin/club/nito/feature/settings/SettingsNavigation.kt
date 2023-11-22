@@ -1,20 +1,19 @@
 package club.nito.feature.settings
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
+import moe.tlaster.precompose.navigation.NavOptions
+import moe.tlaster.precompose.navigation.Navigator
+import moe.tlaster.precompose.navigation.RouteBuilder
 
 const val settingsNavigationRoute = "settings_route"
 
-fun NavController.navigateToSettings(navOptions: NavOptions? = null) {
+fun Navigator.navigateToSettings(navOptions: NavOptions? = null) {
     this.navigate(settingsNavigationRoute, navOptions)
 }
 
-fun NavGraphBuilder.settingsScreen(
+fun RouteBuilder.settingsScreen(
     onSignedOut: () -> Unit = {},
 ) {
-    composable(
+    scene(
         route = settingsNavigationRoute,
     ) {
         SettingsRoute(onSignedOut = onSignedOut)

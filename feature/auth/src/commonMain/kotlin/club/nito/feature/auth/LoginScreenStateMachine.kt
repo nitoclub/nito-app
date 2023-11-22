@@ -1,15 +1,13 @@
 package club.nito.feature.auth
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.SignInUseCase
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.ExecuteResult
 import club.nito.core.model.FetchSingleResult
+import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,68 +16,66 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class SignInViewModel @Inject constructor(
+class LoginScreenStateMachine internal constructor(
     observeAuthStatusUseCase: ObserveAuthStatusUseCase,
     private val signInUseCase: SignInUseCase,
     val userMessageStateHolder: UserMessageStateHolder,
-) : ViewModel(),
+) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
 
     private val email = MutableStateFlow("")
     private val password = MutableStateFlow("")
     private val authStatus = observeAuthStatusUseCase().stateIn(
-        scope = viewModelScope,
+        scope = stateMachineScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = FetchSingleResult.Loading,
     )
 
-    val uiState: StateFlow<SignInScreenUiState> = buildUiState(
+    val uiState: StateFlow<LoginScreenUiState> = buildUiState(
         email,
         password,
         authStatus,
     ) { email, password, authStatus ->
-        SignInScreenUiState(
+        LoginScreenUiState(
             email = email,
             password = password,
             isSignInning = authStatus is FetchSingleResult.Loading,
         )
     }
 
-    private val _events = MutableStateFlow<List<SignInEvent>>(emptyList())
-    val event: Flow<SignInEvent?> = _events.map { it.firstOrNull() }
+    private val _events = MutableStateFlow<List<LoginScreenEvent>>(emptyList())
+    val event: Flow<LoginScreenEvent?> = _events.map { it.firstOrNull() }
 
     init {
-        viewModelScope.launch {
+        stateMachineScope.launch {
             authStatus.collectLatest {
                 if (it is FetchSingleResult.Success && it.data is AuthStatus.Authenticated) {
-                    _events.emit(listOf(SignInEvent.SignedIn))
+                    _events.emit(listOf(LoginScreenEvent.LoggedIn))
                 }
             }
         }
     }
 
-    fun dispatch(intent: SignInIntent) {
-        viewModelScope.launch {
+    fun dispatch(intent: LoginScreenIntent) {
+        stateMachineScope.launch {
             when (intent) {
-                is SignInIntent.ChangeInputEmail -> email.emit(intent.email)
-                is SignInIntent.ChangeInputPassword -> password.emit(intent.password)
-                SignInIntent.ClickSignIn -> {
+                is LoginScreenIntent.ChangeInputEmail -> email.emit(intent.email)
+                is LoginScreenIntent.ChangeInputPassword -> password.emit(intent.password)
+                LoginScreenIntent.ClickSignIn -> {
                     val result = signInUseCase(email.value, password.value)
                     if (result is ExecuteResult.Failure) {
                         userMessageStateHolder.showMessage("ログインに失敗しました")
                     }
                 }
 
-                SignInIntent.ClickRegister -> {}
+                LoginScreenIntent.ClickRegister -> {}
             }
         }
     }
 
-    fun consume(event: SignInEvent) {
-        viewModelScope.launch {
+    fun consume(event: LoginScreenEvent) {
+        stateMachineScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }
     }
