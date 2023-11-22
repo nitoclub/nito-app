@@ -21,6 +21,8 @@ kotlin {
                 implementation(projects.core.domain)
                 implementation(projects.core.data)
 
+                api(libs.precomposeViewmodel)
+
                 implementation(libs.kermit)
             }
         }
