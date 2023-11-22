@@ -1,0 +1,96 @@
+labels:
+  # Type labels
+  - label: "@type/feature"
+    title:
+      - '^:sparkles:'
+      - '^:tada:'
+      - '^:art:'
+  - label: "@type/improve"
+    title:
+      - '^:+1:'
+      - '^:recycle:'
+      - '^:rocket:'
+  - label: "@type/fix"
+    title: '^:bug:'
+  - label: "@type/docs"
+    title: '^:books:'
+    files:
+      - "docs/.+"
+  - label: "@type/build"
+    title:
+      - '^:wrench:'
+      - '^:up:'
+    files:
+      - "settings.gradle.kts"
+      - "**/build.gradle.kts"
+      - "gradle/.+"
+      - "tools/.+"
+  - label: "@type/ci"
+    title: '^:green_heart:'
+    files:
+      - '\.github/.+'
+
+  # App module labels
+  - label: "@app/android"
+    files:
+      - "app/android/.+"
+      - '**/androidMain/**/.+'
+  - label: "@app/backend"
+    files:
+      - "app/backend/.+"
+  - label: "@app/ios"
+    files:
+      - "app/ios/.+"
+      - "app/ios-combined/.+"
+      - '**/iosMain/**/.+'
+  - label: "@app/frontend"
+    files:
+      - "app/web/.+"
+      - '**/jsMain/**/.+'
+
+  # Core module labels
+  - label: "@core/common"
+    files:
+      - "core/common/.+"
+  - label: "@core/data"
+    files:
+      - "core/data/.+"
+  - label: "@core/database"
+    files:
+      - "core/database/.+"
+  - label: "@core/designsystem"
+    files:
+      - "core/designsystem/.+"
+  - label: "@core/domain"
+    files:
+      - "core/domain/.+"
+  - label: "@core/model"
+    files:
+      - "core/model/.+"
+  - label: "@core/network"
+    files:
+      - "core/network/.+"
+  - label: "@core/testing"
+    files:
+      - "core/testing/.+"
+  - label: "@core/ui"
+    files:
+      - "core/ui/.+"
+
+  # Feature module labels
+  - label: "@feature/auth"
+    files:
+      - "feature/auth/.+"
+      - "app/ios/Modules/Sources/Auth/.+"
+  - label: "@feature/schedule"
+    files:
+      - "feature/schedule/.+"
+      - "app/ios/Modules/Sources/Schedule/.+"
+  - label: "@feature/settings"
+    files:
+      - "feature/settings/.+"
+      - "app/ios/Modules/Sources/Settings/.+"
+  - label: "@feature/top"
+    files:
+      - "feature/top/.+"
+      - "app/ios/Modules/Sources/Top/.+"
