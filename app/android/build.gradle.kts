@@ -98,8 +98,6 @@ dependencies {
     implementation(projects.feature.settings)
 
     implementation(libs.precompose)
-    implementation(libs.composeNavigation)
-    implementation(libs.composeHiltNavigtation)
     implementation(libs.composeMaterialWindowSize)
     implementation(libs.androidxBrowser)
     implementation(libs.androidxWindow)

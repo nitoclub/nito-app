@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import club.nito.app.shared.di.featureModules
 import club.nito.app.shared.di.nitoDateTimeFormatterModule
@@ -11,15 +12,17 @@ import club.nito.app.shared.di.userMessageStateHolderModule
 import club.nito.core.data.di.dataModule
 import club.nito.core.designsystem.theme.NitoTheme
 import club.nito.core.domain.di.useCaseModule
-import club.nito.core.model.AuthStatus
 import club.nito.core.network.di.remoteDataSourceModule
 import club.nito.core.network.di.supabaseClientModule
+import club.nito.core.ui.koinStateMachine
 import moe.tlaster.precompose.PreComposeApp
+import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import org.koin.compose.KoinApplication
+import org.koin.dsl.module
 
 @Composable
 fun NitoApp(
-    authStatus: AuthStatus,
+    initialized: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     PreComposeApp {
@@ -36,20 +39,39 @@ fun NitoApp(
                     useCaseModule,
                 )
 
+                modules(
+                    module {
+                        factory {
+                            NitoAppStateMachine(
+                                observeAuthStatus = get(),
+                            )
+                        }
+                    },
+                )
+
                 modules(featureModules)
 
 //            val kermit = Logger.withTag("koin")
 //            logger(KermitKoinLogger(kermit))
             },
         ) {
-            NitoTheme {
-                Surface(
-                    modifier = modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    NitoNavHost(
-                        authStatus = authStatus,
-                    )
+            val stateMachine = koinStateMachine<NitoAppStateMachine>()
+            val uiState = stateMachine.uiState.collectAsStateWithLifecycle()
+            LaunchedEffect(uiState.value) {
+                initialized(uiState.value is NitoAppUiState.Success)
+            }
+
+            when (val state = uiState.value) {
+                NitoAppUiState.Loading -> {}
+                is NitoAppUiState.Success -> NitoTheme {
+                    Surface(
+                        modifier = modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background,
+                    ) {
+                        NitoNavHost(
+                            authStatus = state.authStatus,
+                        )
+                    }
                 }
             }
         }
