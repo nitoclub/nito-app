@@ -1,16 +1,14 @@
 package club.nito.feature.settings
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import club.nito.core.domain.ModifyPasswordUseCase
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.SignOutUseCase
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.ExecuteResult
 import club.nito.core.model.FetchSingleResult
+import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,18 +18,17 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
+import moe.tlaster.precompose.viewmodel.viewModelScope
 
-@HiltViewModel
-class SettingsViewModel @Inject constructor(
-    observeAuthStatusUseCase: ObserveAuthStatusUseCase,
-    private val modifyPasswordUseCase: ModifyPasswordUseCase,
-    private val signOutUseCase: SignOutUseCase,
+class SettingsScreenStateMachine(
+    observeAuthStatus: ObserveAuthStatusUseCase,
+    private val modifyPassword: ModifyPasswordUseCase,
+    private val signOut: SignOutUseCase,
     val userMessageStateHolder: UserMessageStateHolder,
-) : ViewModel(),
+) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
 
-    private val authStatus = observeAuthStatusUseCase().stateIn(
+    private val authStatus = observeAuthStatus().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = FetchSingleResult.Loading,
@@ -59,26 +56,26 @@ class SettingsViewModel @Inject constructor(
         )
     }
 
-    private val _events = MutableStateFlow<List<SettingsEvent>>(emptyList())
-    val event: Flow<SettingsEvent?> = _events.map { it.firstOrNull() }
+    private val _events = MutableStateFlow<List<SettingsScreenEvent>>(emptyList())
+    val event: Flow<SettingsScreenEvent?> = _events.map { it.firstOrNull() }
 
     init {
         viewModelScope.launch {
             authStatus.collectLatest {
                 if (it is FetchSingleResult.Success && it.data is AuthStatus.NotAuthenticated) {
-                    _events.emit(listOf(SettingsEvent.SignedOut))
+                    _events.emit(listOf(SettingsScreenEvent.SignedOut))
                 }
             }
         }
     }
 
-    fun dispatch(intent: SettingsIntent) {
+    fun dispatch(intent: SettingsScreenIntent) {
         viewModelScope.launch {
             when (intent) {
-                SettingsIntent.ClickShowModifyPasswordDialog -> showModifyPasswordDialog.emit(true)
-                is SettingsIntent.ChangeNewPasswordValue -> newPassword.emit(intent.newValue)
-                SettingsIntent.ClickModifyPassword -> {
-                    when (modifyPasswordUseCase(newPassword.value)) {
+                SettingsScreenIntent.ClickShowModifyPasswordDialog -> showModifyPasswordDialog.emit(true)
+                is SettingsScreenIntent.ChangeNewPasswordValue -> newPassword.emit(intent.newValue)
+                SettingsScreenIntent.ClickModifyPassword -> {
+                    when (modifyPassword(newPassword.value)) {
                         is ExecuteResult.Success -> {
                             val showMessage = async { userMessageStateHolder.showMessage("パスワードを変更しました") }
                             newPassword.emit("")
@@ -90,9 +87,9 @@ class SettingsViewModel @Inject constructor(
                     }
                 }
 
-                SettingsIntent.ClickDismissModifyPasswordDialog -> showModifyPasswordDialog.emit(false)
-                SettingsIntent.ClickSignOut -> {
-                    val result = signOutUseCase()
+                SettingsScreenIntent.ClickDismissModifyPasswordDialog -> showModifyPasswordDialog.emit(false)
+                SettingsScreenIntent.ClickSignOut -> {
+                    val result = signOut()
                     if (result is ExecuteResult.Failure) {
                         userMessageStateHolder.showMessage("サインアウトに失敗しました")
                     }
@@ -101,7 +98,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun consume(event: SettingsEvent) {
+    fun consume(event: SettingsScreenEvent) {
         viewModelScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }
