@@ -2,7 +2,6 @@ package club.nito.core.designsystem.theme
 
 import android.app.Activity
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -16,11 +15,11 @@ import androidx.core.view.WindowCompat
 // Generated code from https://m3.material.io/theme-builder#/custom
 
 @Composable
-fun NitoTheme(
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
+actual fun NitoTheme(
+    useDarkTheme: Boolean,
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable() () -> Unit,
+    dynamicColor: Boolean,
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
