@@ -3,40 +3,32 @@ version: 1
 labels:
   # Type labels
   - label: "@type/feature"
-    title:
-      - '^:sparkles:'
-      - '^:tada:'
-      - '^:art:'
+    title: '^(:sparkles:|:tada:|:art:).*'
   - label: "@type/improve"
-    title:
-      - '^:+1:'
-      - '^:recycle:'
-      - '^:rocket:'
+    title: '^(:+1:|:recycle:|:rocket:).*'
   - label: "@type/fix"
-    title: '^:bug:'
+    title: '^:bug:.*'
   - label: "@type/docs"
-    title: '^:books:'
+    title: '^:books:.*'
     files:
       - "docs/.+"
   - label: "@type/build"
-    title:
-      - '^:wrench:'
-      - '^:up:'
+    title: '^(:wrench:|:up:).*'
     files:
       - "settings.gradle.kts"
       - "**/build.gradle.kts"
       - "gradle/.+"
       - "tools/.+"
   - label: "@type/ci"
-    title: '^:green_heart:'
+    title: '^:green_heart:.*'
     files:
-      - '\.github/.+'
+      - "\.github/.+"
 
   # App module labels
   - label: "@app/android"
     files:
       - "app/android/.+"
-      - '**/androidMain/**/.+'
+      - "**/androidMain/**/.+"
   - label: "@app/backend"
     files:
       - "app/backend/.+"
@@ -44,11 +36,11 @@ labels:
     files:
       - "app/ios/.+"
       - "app/ios-combined/.+"
-      - '**/iosMain/**/.+'
+      - "**/iosMain/**/.+"
   - label: "@app/frontend"
     files:
       - "app/web/.+"
-      - '**/jsMain/**/.+'
+      - "**/jsMain/**/.+"
 
   # Core module labels
   - label: "@core/common"
