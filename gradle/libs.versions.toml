@@ -46,6 +46,7 @@ supabase = "1.4.5"
 logback = "1.4.11"
 graphqlKotlin = "7.0.2"
 kotest = "5.8.0"
+precompose = "1.5.7"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -155,6 +156,10 @@ ktorfitLib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = 
 ktorfitKsp = { module = "de.jensklingenberg.ktorfit:ktorfit-ksp", version.ref = "ktorfit" }
 
 ossLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "ossLicenses" }
+
+precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
+precomposeViewmodel = { module = "moe.tlaster:precompose-viewmodel", version.ref = "precompose" }
+precomposeKoin = { module = "moe.tlaster:precompose-koin", version.ref = "precompose" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 androidxTestExtJunit = { module = "androidx.test.ext:junit", version.ref = "androidxTestExt" }

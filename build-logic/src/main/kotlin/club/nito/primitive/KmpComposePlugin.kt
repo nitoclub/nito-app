@@ -27,6 +27,8 @@ class KmpComposePlugin : Plugin<Project> {
                             implementation(compose.dependencies.material3)
                             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                             implementation(compose.dependencies.components.resources)
+
+                            implementation(libs.library("precompose"))
                         }
                     }
                     getByName("androidMain").apply {
