@@ -22,7 +22,7 @@ labels:
   - label: "@type/ci"
     title: '^:green_heart:.*'
     files:
-      - "\.github/.+"
+      - '\.github/.+'
 
   # App module labels
   - label: "@app/android"
