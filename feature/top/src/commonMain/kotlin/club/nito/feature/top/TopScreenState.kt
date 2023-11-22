@@ -7,6 +7,7 @@ import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
+import club.nito.core.ui.stateMachineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
