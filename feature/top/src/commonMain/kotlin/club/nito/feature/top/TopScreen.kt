@@ -21,13 +21,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import club.nito.core.ui.ConfirmParticipateDialog
+import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.top.component.ParticipantScheduleSection
-import org.koin.compose.koinInject
 
 @Composable
 fun TopRoute(
-    stateMachine: TopStateMachine = koinInject(),
+    stateMachine: TopStateMachine = koinStateMachine(),
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
