@@ -3,6 +3,8 @@ package club.nito.app.shared
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import club.nito.core.model.AuthStatus
+import club.nito.feature.schedule.navigateToSchedule
+import club.nito.feature.schedule.scheduleScreen
 import club.nito.feature.top.topNavigationRoute
 import club.nito.feature.top.topScreen
 import moe.tlaster.precompose.navigation.NavHost
@@ -23,8 +25,9 @@ fun NitoNavHost(
         initialRoute = topNavigationRoute,
     ) {
         topScreen(
-            onScheduleListClick = {},
+            onScheduleListClick = navigator::navigateToSchedule,
             onSettingsClick = {},
         )
+        scheduleScreen()
     }
 }

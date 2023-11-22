@@ -19,6 +19,8 @@ kotlin {
                 implementation(projects.core.designsystem)
 
                 implementation(libs.kotlinxCoroutinesCore)
+
+                implementation(libs.koin)
             }
         }
         androidMain {
