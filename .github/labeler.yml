@@ -5,7 +5,7 @@ labels:
   - label: "@type/feature"
     title: '^(:sparkles:|:tada:|:art:).*'
   - label: "@type/improve"
-    title: '^(:+1:|:recycle:|:rocket:).*'
+    title: '^(:\+1:|:recycle:|:rocket:).*'
   - label: "@type/fix"
     title: '^:bug:.*'
   - label: "@type/docs"
