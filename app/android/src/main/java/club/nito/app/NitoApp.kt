@@ -15,7 +15,6 @@ import club.nito.core.domain.di.useCaseModule
 import club.nito.core.model.AuthStatus
 import club.nito.core.network.di.remoteDataSourceModule
 import club.nito.core.network.di.supabaseClientModule
-import club.nito.feature.top.di.topFeatureModule
 import org.koin.compose.KoinApplication
 
 @Composable
@@ -35,7 +34,6 @@ fun NitoApp(
 //                fakeRemoteDataSourceModule,
                 dataModule,
                 useCaseModule,
-                topFeatureModule,
             )
 
             modules(featureModules)
