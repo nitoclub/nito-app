@@ -15,6 +15,7 @@ import club.nito.core.domain.di.useCaseModule
 import club.nito.core.model.AuthStatus
 import club.nito.core.network.di.remoteDataSourceModule
 import club.nito.core.network.di.supabaseClientModule
+import moe.tlaster.precompose.PreComposeApp
 import org.koin.compose.KoinApplication
 
 @Composable
@@ -23,34 +24,36 @@ fun NitoApp(
     authStatus: AuthStatus,
     modifier: Modifier = Modifier,
 ) {
-    KoinApplication(
-        application = {
-            modules(
-                nitoDateTimeFormatterModule,
-                userMessageStateHolderModule,
+    PreComposeApp {
+        KoinApplication(
+            application = {
+                modules(
+                    nitoDateTimeFormatterModule,
+                    userMessageStateHolderModule,
 
-                supabaseClientModule,
-                remoteDataSourceModule,
+                    supabaseClientModule,
+                    remoteDataSourceModule,
 //                fakeRemoteDataSourceModule,
-                dataModule,
-                useCaseModule,
-            )
+                    dataModule,
+                    useCaseModule,
+                )
 
-            modules(featureModules)
+                modules(featureModules)
 
 //            val kermit = Logger.withTag("koin")
 //            logger(KermitKoinLogger(kermit))
-        },
-    ) {
-        NitoTheme {
-            Surface(
-                modifier = modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background,
-            ) {
-                NitoNavHost(
-                    windowSize = windowSize,
-                    authStatus = authStatus,
-                )
+            },
+        ) {
+            NitoTheme {
+                Surface(
+                    modifier = modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                ) {
+                    NitoNavHost(
+                        windowSize = windowSize,
+                        authStatus = authStatus,
+                    )
+                }
             }
         }
     }
