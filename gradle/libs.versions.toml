@@ -1,16 +1,14 @@
 [versions]
-androidGradlePlugin = "8.1.2"
+androidGradlePlugin = "8.1.4"
 # For updating Kotlin and Compose Compiler version, see:
 # https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?#pre-release_kotlin_compatibility
-kotlin = "1.9.0"
+kotlin = "1.9.20"
 
 androidxCore = "1.10.1"
 androidDesugarJdkLibs = "2.0.3"
-compose = "2023.10.01"
 composeCompiler = "1.5.2"
-composeJb = "1.5.1"
-composeMaterial3 = "1.2.0-alpha10"
+compose = "1.5.10"
 androidxLifecycle = "2.6.2"
 androidxActivity = "1.8.0"
 androidxSplashScreen = "1.0.1"
@@ -47,7 +45,7 @@ precompose = "1.5.7"
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-composeJbGradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "composeJb" }
+composeGradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose" }
 roborazziGradlePlugin = { group = "io.github.takahirom.roborazzi", name = "roborazzi-gradle-plugin", version.ref = "roborazzi" }
 kspGradlePlugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 firebaseGradlePlugin = { module = "com.google.gms:google-services", version = "4.3.15" }
@@ -76,9 +74,6 @@ kotlinxCollectionsImmutable = { module = "org.jetbrains.kotlinx:kotlinx-collecti
 kotlinxDatetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.4.0" }
 kotlinxAtomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version = "0.22.0" }
 
-composeBom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
-composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
-composeMaterialWindowSize = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "composeMaterial3" }
 composeCoil = { module = "io.coil-kt:coil-compose", version = "2.4.0" }
 
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -151,7 +146,7 @@ kotestFrameworkDatatest = { module = "io.kotest:kotest-framework-datatest" }
 kotestRunnerJunit5 = { module = "io.kotest:kotest-runner-junit5" }
 
 [plugins]
-compose = { id = "org.jetbrains.compose", version.ref = "composeJb" }
+composeGradlePlugin = { id = "org.jetbrains.compose", version.ref = "compose" }
 androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 androidGradleLibraryPlugin = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 kotlinGradlePlugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -165,7 +160,7 @@ ossLicensesPlugin = { id = "com.google.android.gms.oss-licenses-plugin", version
 plugins = [
     "androidGradlePlugin",
     "kotlinGradlePlugin",
-    "composeJbGradlePlugin",
+    "composeGradlePlugin",
     "roborazziGradlePlugin",
     "kspGradlePlugin",
     "firebaseGradlePlugin",
