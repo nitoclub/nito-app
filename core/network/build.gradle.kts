@@ -36,7 +36,6 @@ kotlin {
         androidMain {
             dependencies {
                 implementation(libs.ktorClientOkHttp)
-                implementation(libs.multiplatformFirebaseAuth)
                 implementation(libs.okHttpLoggingInterceptor)
                 implementation(libs.firebaseRemoteConfig)
                 implementation(libs.androidxLifecycleProcess)
