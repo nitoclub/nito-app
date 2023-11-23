@@ -16,9 +16,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
-class ScheduleListViewModel internal constructor(
+public class ScheduleListViewModel internal constructor(
     getParticipantScheduleListUseCase: GetParticipantScheduleListUseCase,
-    val userMessageStateHolder: UserMessageStateHolder,
+    public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateTimeFormatter,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
@@ -30,7 +30,7 @@ class ScheduleListViewModel internal constructor(
         initialValue = FetchMultipleContentResult.Loading,
     )
 
-    val uiState: StateFlow<ScheduleListScreenUiState> = buildUiState(
+    public val uiState: StateFlow<ScheduleListScreenUiState> = buildUiState(
         showConfirmParticipateSchedule,
         scheduleList,
     ) { showConfirmParticipateSchedule, scheduleList ->
@@ -44,12 +44,15 @@ class ScheduleListViewModel internal constructor(
     }
 
     private val _events = MutableStateFlow<List<ScheduleListEvent>>(emptyList())
-    val event: Flow<ScheduleListEvent?> = _events.map { it.firstOrNull() }
+    public val event: Flow<ScheduleListEvent?> = _events.map { it.firstOrNull() }
 
-    fun dispatch(intent: ScheduleListIntent) {
+    public fun dispatch(intent: ScheduleListIntent) {
         viewModelScope.launch {
             when (intent) {
-                is ScheduleListIntent.ClickShowConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(intent.schedule)
+                is ScheduleListIntent.ClickShowConfirmParticipateDialog -> {
+                    showConfirmParticipateSchedule.emit(intent.schedule)
+                }
+
                 is ScheduleListIntent.ClickParticipateSchedule -> {
                     showConfirmParticipateSchedule.emit(null)
 
@@ -57,12 +60,14 @@ class ScheduleListViewModel internal constructor(
                     userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
                 }
 
-                ScheduleListIntent.ClickDismissConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(null)
+                ScheduleListIntent.ClickDismissConfirmParticipateDialog -> {
+                    showConfirmParticipateSchedule.emit(null)
+                }
             }
         }
     }
 
-    fun consume(event: ScheduleListEvent) {
+    public fun consume(event: ScheduleListEvent) {
         viewModelScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }

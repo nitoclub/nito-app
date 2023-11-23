@@ -1,5 +1,5 @@
 package club.nito.feature.schedule
 
-sealed class ScheduleListEvent {
-    data class NavigateToScheduleDetail(val scheduleId: String) : ScheduleListEvent()
+public sealed class ScheduleListEvent {
+    public data class NavigateToScheduleDetail(val scheduleId: String) : ScheduleListEvent()
 }
