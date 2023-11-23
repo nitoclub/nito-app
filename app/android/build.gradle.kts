@@ -82,6 +82,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.app.shared)
+
     implementation(projects.core.common)
     implementation(projects.core.model)
     implementation(projects.core.data)
