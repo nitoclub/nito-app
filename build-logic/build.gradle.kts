@@ -12,13 +12,13 @@ repositories {
     gradlePluginPortal()
 }
 
-// If we use jvmToolchain, we need to install JDK 11
+// If we use jvmToolchain, we need to install JDK 17
 val compileKotlin: KotlinCompile by tasks
-compileKotlin.kotlinOptions.jvmTarget = "11"
+compileKotlin.kotlinOptions.jvmTarget = "17"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
