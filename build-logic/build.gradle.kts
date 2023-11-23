@@ -92,10 +92,9 @@ gradlePlugin {
         }
 
         // Conventions
-        register("androidFeature") {
-            id = "nito.convention.androidfeature"
-            implementationClass =
-                "club.nito.convention.AndroidFeaturePlugin"
+        register("feature") {
+            id = "nito.convention.feature"
+            implementationClass = "club.nito.convention.FeaturePlugin"
         }
     }
 }
