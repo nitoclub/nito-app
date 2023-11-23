@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun Scaffold(
+public fun Scaffold(
     modifier: Modifier = Modifier,
     topBar: @Composable () -> Unit = {},
     bottomBar: @Composable () -> Unit = {},
@@ -22,7 +22,7 @@ fun Scaffold(
     contentColor: Color = contentColorFor(containerColor),
     contentWindowInsets: WindowInsets = ScaffoldDefaults.contentWindowInsets,
     content: @Composable (PaddingValues) -> Unit
-) = androidx.compose.material3.Scaffold(
+): Unit = androidx.compose.material3.Scaffold(
     modifier = modifier,
     topBar = topBar,
     bottomBar = bottomBar,

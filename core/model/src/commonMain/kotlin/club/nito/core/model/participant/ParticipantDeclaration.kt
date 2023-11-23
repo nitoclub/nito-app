@@ -6,7 +6,7 @@ package club.nito.core.model.participant
  * @param memberId メンバーID
  * @param comment コメント
  */
-data class ParticipantDeclaration(
+public data class ParticipantDeclaration(
     val scheduleId: String,
     val memberId: String,
     val comment: String,

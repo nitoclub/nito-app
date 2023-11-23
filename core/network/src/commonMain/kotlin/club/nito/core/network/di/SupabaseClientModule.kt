@@ -9,7 +9,7 @@ import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val supabaseClientModule: Module = module {
+public val supabaseClientModule: Module = module {
     single<SupabaseClient> {
         createNitoSupabaseClient(
             json = get(),

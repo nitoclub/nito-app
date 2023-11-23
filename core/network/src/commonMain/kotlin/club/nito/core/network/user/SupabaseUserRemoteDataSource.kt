@@ -5,7 +5,7 @@ import club.nito.core.network.user.model.NetworkUserProfile
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
 
-class SupabaseUserRemoteDataSource(
+public class SupabaseUserRemoteDataSource(
     private val client: SupabaseClient,
 ) : UserRemoteDataSource {
     private val postgrest = client.postgrest["profiles"]

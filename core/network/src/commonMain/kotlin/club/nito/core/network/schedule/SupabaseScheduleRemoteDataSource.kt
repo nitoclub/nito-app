@@ -14,7 +14,7 @@ private enum class Column(val columnName: String) {
     SCHEDULED_AT(columnName = "scheduled_at"),
 }
 
-class SupabaseScheduleRemoteDataSource(
+public class SupabaseScheduleRemoteDataSource(
     private val client: SupabaseClient,
 ) : ScheduleRemoteDataSource {
     private val log = Logger.withTag("SupabaseScheduleRemoteDataSource")

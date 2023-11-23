@@ -8,14 +8,14 @@ import club.nito.core.model.runExecuting
 /**
  * 直近のスケジュールを取得するユースケース
  */
-sealed interface ModifyPasswordUseCase {
-    suspend operator fun invoke(password: String): ExecuteResult<UserInfo>
+public sealed interface ModifyPasswordUseCase {
+    public suspend operator fun invoke(password: String): ExecuteResult<UserInfo>
 }
 
-class ModifyPasswordExecutor(
+public class ModifyPasswordExecutor(
     private val authRepository: AuthRepository,
 ) : ModifyPasswordUseCase {
-    override suspend fun invoke(password: String) = runExecuting {
+    override suspend fun invoke(password: String): ExecuteResult<UserInfo> = runExecuting {
         authRepository.modifyAuthUser(
             email = null,
             password = password,

@@ -11,7 +11,7 @@ import kotlinx.datetime.Instant
  * @param meetId 集合場所ID
  * @param description 説明文
  */
-data class Schedule(
+public data class Schedule(
     val id: String,
     val scheduledAt: Instant,
     val metAt: Instant,

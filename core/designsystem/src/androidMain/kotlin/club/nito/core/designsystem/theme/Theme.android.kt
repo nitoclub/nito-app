@@ -15,7 +15,7 @@ import androidx.core.view.WindowCompat
 // Generated code from https://m3.material.io/theme-builder#/custom
 
 @Composable
-actual fun NitoTheme(
+public actual fun NitoTheme(
     useDarkTheme: Boolean,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean,

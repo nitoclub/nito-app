@@ -10,7 +10,7 @@ import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.plus
 
-data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
+public data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
     override suspend fun getScheduleList(
         limit: Int,
         order: Order,

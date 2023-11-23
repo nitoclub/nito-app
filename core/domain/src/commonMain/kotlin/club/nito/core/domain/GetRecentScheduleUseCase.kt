@@ -17,11 +17,11 @@ import kotlinx.datetime.Clock
 /**
  * 直近のスケジュールを取得するユースケース
  */
-sealed interface GetRecentScheduleUseCase {
-    operator fun invoke(): Flow<FetchSingleContentResult<ParticipantSchedule>>
+public sealed interface GetRecentScheduleUseCase {
+    public operator fun invoke(): Flow<FetchSingleContentResult<ParticipantSchedule>>
 }
 
-class GetRecentScheduleExecutor(
+public class GetRecentScheduleExecutor(
     private val scheduleRepository: ScheduleRepository,
     private val participantRepository: ParticipantRepository,
     private val userRepository: UserRepository,

@@ -10,7 +10,7 @@ import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SupabaseAuthRemoteDataSource(
+public class SupabaseAuthRemoteDataSource(
     private val goTrue: GoTrue,
 ) : AuthRemoteDataSource {
     override val authStatus: Flow<FetchSingleResult<AuthStatus>> = goTrue.sessionStatus.map {
@@ -37,12 +37,12 @@ class SupabaseAuthRemoteDataSource(
         }
     }
 
-    override suspend fun signIn(email: String, password: String) = goTrue.loginWith(Email) {
+    override suspend fun signIn(email: String, password: String): Unit = goTrue.loginWith(Email) {
         this.email = email
         this.password = password
     }
 
-    override suspend fun signOut() = goTrue.logout()
+    override suspend fun signOut(): Unit = goTrue.logout()
 
     override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo = goTrue.modifyUser {
         this.email = email

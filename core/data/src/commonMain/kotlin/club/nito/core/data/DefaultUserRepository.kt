@@ -4,7 +4,7 @@ import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.UserProfile
 import club.nito.core.network.user.UserRemoteDataSource
 
-class DefaultUserRepository(
+public class DefaultUserRepository(
     private val remoteDataSource: UserRemoteDataSource,
 ) : UserRepository {
     override suspend fun getProfile(userId: String): FetchSingleContentResult<UserProfile> {

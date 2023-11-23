@@ -9,6 +9,8 @@ plugins {
 android.namespace = "club.nito.core.network"
 
 kotlin {
+    explicitApi()
+
     sourceSets {
         commonMain {
             dependencies {

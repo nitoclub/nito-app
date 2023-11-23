@@ -4,12 +4,12 @@ import club.nito.core.model.Order
 import club.nito.core.model.Schedule
 import kotlinx.datetime.Instant
 
-sealed interface ScheduleRemoteDataSource {
-    suspend fun getScheduleList(
+public sealed interface ScheduleRemoteDataSource {
+    public suspend fun getScheduleList(
         limit: Int,
         order: Order = Order.DESCENDING,
         after: Instant? = null,
     ): List<Schedule>
 
-    suspend fun getSchedule(id: String): Schedule
+    public suspend fun getSchedule(id: String): Schedule
 }

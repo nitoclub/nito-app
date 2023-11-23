@@ -8,13 +8,13 @@ import kotlinx.datetime.Instant
 /**
  * スケジュールに関するリポジトリ
  */
-sealed interface ScheduleRepository {
-    val scheduleListFlow: Flow<List<Schedule>>
-    suspend fun getScheduleList(
+public sealed interface ScheduleRepository {
+    public val scheduleListFlow: Flow<List<Schedule>>
+    public suspend fun getScheduleList(
         limit: Int,
         order: Order = Order.DESCENDING,
         after: Instant? = null,
     ): List<Schedule>
 
-    fun scheduleFlow(id: String): Flow<Schedule>
+    public fun scheduleFlow(id: String): Flow<Schedule>
 }
