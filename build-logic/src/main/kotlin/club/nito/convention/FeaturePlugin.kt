@@ -12,6 +12,7 @@ class FeaturePlugin : Plugin<Project> {
                 apply("nito.primitive.kmp")
                 apply("nito.primitive.kmp.android")
                 apply("nito.primitive.kmp.ios")
+                apply("nito.primitive.kmp.js")
                 apply("nito.primitive.kmp.compose")
                 apply("nito.primitive.detekt")
                 apply("nito.primitive.kotest")

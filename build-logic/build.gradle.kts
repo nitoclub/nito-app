@@ -54,6 +54,10 @@ gradlePlugin {
             id = "nito.primitive.kmp.android"
             implementationClass = "club.nito.primitive.KmpAndroidPlugin"
         }
+        register("kmpJs") {
+            id = "nito.primitive.kmp.js"
+            implementationClass = "club.nito.primitive.KmpJsPlugin"
+        }
         register("kmpCompose") {
             id = "nito.primitive.kmp.compose"
             implementationClass = "club.nito.primitive.KmpComposePlugin"

@@ -103,7 +103,7 @@ private fun LoginScreen(
                     placeholder = { Text(text = "password") },
                     visualTransformation = PasswordVisualTransformation(),
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Email,
+                        keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Done,
                     ),
                     singleLine = true,

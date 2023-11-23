@@ -24,7 +24,7 @@ import org.koin.dsl.module
 
 @Composable
 fun NitoApp(
-    shouldKeepOnScreen: (Boolean) -> Unit,
+    shouldKeepOnScreen: (Boolean) -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     PreComposeApp {
