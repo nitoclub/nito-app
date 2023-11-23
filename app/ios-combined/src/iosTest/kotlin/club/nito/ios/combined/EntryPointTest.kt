@@ -8,7 +8,7 @@ import club.nito.core.domain.ModifyPasswordUseCase
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.domain.LoginUseCase
-import club.nito.core.domain.SignOutUseCase
+import club.nito.core.domain.LogoutUseCase
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.participation.ParticipantRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
@@ -38,7 +38,7 @@ class EntryPointTest {
         assertNotNull(kmpEntryPoint.get<ObserveAuthStatusUseCase>())
         assertNotNull(kmpEntryPoint.get<LoginUseCase>())
         assertNotNull(kmpEntryPoint.get<ModifyPasswordUseCase>())
-        assertNotNull(kmpEntryPoint.get<SignOutUseCase>())
+        assertNotNull(kmpEntryPoint.get<LogoutUseCase>())
         assertNotNull(kmpEntryPoint.get<GetRecentScheduleUseCase>())
         assertNotNull(kmpEntryPoint.get<GetParticipantScheduleListUseCase>())
         assertNotNull(kmpEntryPoint.get<ParticipateUseCase>())

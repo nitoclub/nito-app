@@ -9,7 +9,7 @@ public val settingsFeatureModule: Module = module {
         SettingsScreenStateMachine(
             observeAuthStatus = get(),
             modifyPassword = get(),
-            signOut = get(),
+            logout = get(),
             userMessageStateHolder = get(),
         )
     }

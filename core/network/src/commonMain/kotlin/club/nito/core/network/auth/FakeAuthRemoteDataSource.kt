@@ -67,7 +67,7 @@ public class FakeAuthRemoteDataSource(
         ),
     )
 
-    override suspend fun signOut(): Unit = _authStatus.emit(
+    override suspend fun logout(): Unit = _authStatus.emit(
         FetchSingleResult.Success(AuthStatus.NotAuthenticated),
     )
 

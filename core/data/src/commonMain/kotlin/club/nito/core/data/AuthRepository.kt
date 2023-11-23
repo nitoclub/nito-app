@@ -20,9 +20,9 @@ public sealed interface AuthRepository {
     public suspend fun login(email: String, password: String)
 
     /**
-     * サインアウトする
+     * ログアウトする
      */
-    public suspend fun signOut()
+    public suspend fun logout()
 
     /**
      * 認証ユーザー情報を更新する

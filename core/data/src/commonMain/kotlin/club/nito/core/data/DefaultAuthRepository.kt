@@ -16,7 +16,7 @@ public class DefaultAuthRepository(
         password = password,
     )
 
-    override suspend fun signOut(): Unit = remoteDataSource.signOut()
+    override suspend fun logout(): Unit = remoteDataSource.logout()
 
     override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo = remoteDataSource.modifyAuthUser(
         email = email,
