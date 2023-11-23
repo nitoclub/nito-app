@@ -38,10 +38,6 @@ gradlePlugin {
             id = "nito.primitive.android.kotlin"
             implementationClass = "club.nito.primitive.AndroidKotlinPlugin"
         }
-        register("androidCompose") {
-            id = "nito.primitive.android.compose"
-            implementationClass = "club.nito.primitive.AndroidComposePlugin"
-        }
         register("androidCrashlytics") {
             id = "nito.primitive.android.crashlytics"
             implementationClass = "club.nito.primitive.AndroidCrashlyticsPlugin"
