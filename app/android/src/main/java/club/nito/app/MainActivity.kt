@@ -18,8 +18,8 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
-        var initialized by mutableStateOf(false)
-        splashScreen.setKeepOnScreenCondition { initialized }
+        var shouldKeep by mutableStateOf(true)
+        splashScreen.setKeepOnScreenCondition { shouldKeep }
 
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             NitoApp(
-                initialized = { initialized = it },
+                shouldKeepOnScreen = { shouldKeep = it },
             )
         }
     }
