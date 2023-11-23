@@ -15,6 +15,8 @@ import club.nito.core.domain.di.useCaseModule
 import club.nito.core.network.di.remoteDataSourceModule
 import club.nito.core.network.di.supabaseClientModule
 import club.nito.core.ui.koinStateMachine
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.koin.KermitKoinLogger
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import org.koin.compose.KoinApplication
@@ -28,6 +30,10 @@ fun NitoApp(
     PreComposeApp {
         KoinApplication(
             application = {
+                logger(
+                    KermitKoinLogger(Logger.withTag("koin")),
+                )
+
                 modules(
                     nitoDateTimeFormatterModule,
                     userMessageStateHolderModule,
