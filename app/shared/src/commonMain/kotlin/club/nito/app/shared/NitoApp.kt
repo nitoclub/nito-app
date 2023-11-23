@@ -22,7 +22,7 @@ import org.koin.dsl.module
 
 @Composable
 fun NitoApp(
-    initialized: (Boolean) -> Unit,
+    shouldKeepOnScreen: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     PreComposeApp {
@@ -58,7 +58,7 @@ fun NitoApp(
             val stateMachine = koinStateMachine<NitoAppStateMachine>()
             val uiState = stateMachine.uiState.collectAsStateWithLifecycle()
             LaunchedEffect(uiState.value) {
-                initialized(uiState.value is NitoAppUiState.Success)
+                shouldKeepOnScreen((uiState.value is NitoAppUiState.Success).not())
             }
 
             when (val state = uiState.value) {
