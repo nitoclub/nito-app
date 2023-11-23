@@ -1,7 +1,7 @@
 package club.nito.core.model
 
-sealed interface AuthStatus {
-    data object NotAuthenticated : AuthStatus
+public sealed interface AuthStatus {
+    public data object NotAuthenticated : AuthStatus
 
-    data class Authenticated(val session: UserSession) : AuthStatus
+    public data class Authenticated(val session: UserSession) : AuthStatus
 }

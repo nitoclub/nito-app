@@ -4,7 +4,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlin.time.Duration.Companion.seconds
 
-data class UserSession(
+public data class UserSession(
     val accessToken: String,
     val refreshToken: String,
     val providerRefreshToken: String? = null,
@@ -16,7 +16,7 @@ data class UserSession(
     val expiresAt: Instant = Clock.System.now() + (expiresIn.seconds),
 )
 
-data class UserInfo(
+public data class UserInfo(
     val aud: String,
     val confirmationSentAt: Instant? = null,
     val confirmedAt: Instant? = null,
@@ -37,7 +37,7 @@ data class UserInfo(
     val actionLink: String? = null,
 )
 
-data class UserMfaFactor(
+public data class UserMfaFactor(
     val id: String,
     val createdAt: Instant,
     val updatedAt: Instant,
