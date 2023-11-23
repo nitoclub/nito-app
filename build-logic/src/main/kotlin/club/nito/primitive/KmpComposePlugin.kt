@@ -25,7 +25,7 @@ class KmpComposePlugin : Plugin<Project> {
                             implementation(libs.library("precompose"))
                         }
                     }
-                    getByName("androidMain").apply {
+                    findByName("androidMain")?.apply {
                         dependencies {
                             implementation(libs.library("androidxActivityActivityCompose"))
                         }
