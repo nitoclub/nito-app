@@ -1,8 +1,5 @@
 plugins {
-    id("nito.primitive.kmp")
-    id("nito.primitive.kmp.android")
-    id("nito.primitive.kmp.ios")
-    id("nito.primitive.kmp.compose")
+    id("nito.convention.feature")
 }
 
 android.namespace = "club.nito.feature.auth"

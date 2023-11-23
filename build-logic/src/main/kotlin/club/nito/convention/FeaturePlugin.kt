@@ -5,15 +5,16 @@ import org.gradle.api.Project
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-class AndroidFeaturePlugin : Plugin<Project> {
+class FeaturePlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("nito.primitive.android")
-                apply("nito.primitive.android.kotlin")
-                apply("nito.primitive.android.compose")
-                apply("nito.primitive.android.hilt")
+                apply("nito.primitive.kmp")
+                apply("nito.primitive.kmp.android")
+                apply("nito.primitive.kmp.ios")
+                apply("nito.primitive.kmp.compose")
                 apply("nito.primitive.detekt")
+                apply("nito.primitive.kotest")
             }
 
             tasks.withType<KotlinCompile>().configureEach {
@@ -35,7 +36,7 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
         val metricsFolder = rootProject.buildDir.resolve("compose-metrics").resolve(relativePath)
         metricParameters.add("-P")
         metricParameters.add(
-            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" + metricsFolder.absolutePath
+            "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=" + metricsFolder.absolutePath,
         )
     }
 
@@ -45,7 +46,7 @@ private fun Project.buildComposeMetricsParameters(): List<String> {
         val reportsFolder = rootProject.buildDir.resolve("compose-reports").resolve(relativePath)
         metricParameters.add("-P")
         metricParameters.add(
-            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" + reportsFolder.absolutePath
+            "plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=" + reportsFolder.absolutePath,
         )
     }
     return metricParameters.toList()
