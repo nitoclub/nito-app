@@ -4,13 +4,13 @@ import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
-const val topNavigationRoute = "top_route"
+public const val topNavigationRoute: String = "top_route"
 
-fun Navigator.navigateToTop(navOptions: NavOptions? = null) {
+public fun Navigator.navigateToTop(navOptions: NavOptions? = null) {
     this.navigate(topNavigationRoute, navOptions)
 }
 
-fun RouteBuilder.topScreen(
+public fun RouteBuilder.topScreen(
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {

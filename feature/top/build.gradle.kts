@@ -9,6 +9,8 @@ plugins {
 android.namespace = "club.nito.feature.top"
 
 kotlin {
+    explicitApi()
+
     sourceSets {
         commonMain {
             dependencies {
