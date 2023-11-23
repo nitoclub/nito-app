@@ -30,10 +30,6 @@ dependencies {
 gradlePlugin {
     plugins {
         // Primitives
-        register("androidApplication") {
-            id = "nito.primitive.androidapplication"
-            implementationClass = "club.nito.primitive.AndroidApplicationPlugin"
-        }
         register("android") {
             id = "nito.primitive.android"
             implementationClass = "club.nito.primitive.AndroidPlugin"
@@ -61,6 +57,10 @@ gradlePlugin {
         register("kmpIos") {
             id = "nito.primitive.kmp.ios"
             implementationClass = "club.nito.primitive.KmpIosPlugin"
+        }
+        register("kmpAndroidApplication") {
+            id = "nito.primitive.kmp.androidapplication"
+            implementationClass = "club.nito.primitive.KmpAndroidApplicationPlugin"
         }
         register("kmpAndroid") {
             id = "nito.primitive.kmp.android"
