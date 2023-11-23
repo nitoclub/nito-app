@@ -27,7 +27,7 @@ import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
 
 @Composable
-fun LoginRoute(
+public fun LoginRoute(
     viewModel: LoginScreenStateMachine = koinStateMachine(),
     onLoggedIn: () -> Unit = {},
     onRegisterClick: () -> Unit = {},

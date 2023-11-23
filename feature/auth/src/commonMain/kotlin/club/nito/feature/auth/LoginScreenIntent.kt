@@ -1,8 +1,8 @@
 package club.nito.feature.auth
 
-sealed class LoginScreenIntent {
-    data class ChangeInputEmail(val email: String) : LoginScreenIntent()
-    data class ChangeInputPassword(val password: String) : LoginScreenIntent()
-    data object ClickSignIn : LoginScreenIntent()
-    data object ClickRegister : LoginScreenIntent()
+public sealed class LoginScreenIntent {
+    public data class ChangeInputEmail(val email: String) : LoginScreenIntent()
+    public data class ChangeInputPassword(val password: String) : LoginScreenIntent()
+    public data object ClickSignIn : LoginScreenIntent()
+    public data object ClickRegister : LoginScreenIntent()
 }

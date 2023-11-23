@@ -4,13 +4,13 @@ import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
-const val loginNavigationRoute = "login_route"
+public const val loginNavigationRoute: String = "login_route"
 
-fun Navigator.navigateToLogin(navOptions: NavOptions? = null) {
+public fun Navigator.navigateToLogin(navOptions: NavOptions? = null) {
     this.navigate(loginNavigationRoute, navOptions)
 }
 
-fun RouteBuilder.loginScreen(
+public fun RouteBuilder.loginScreen(
     onLoggedIn: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
 ) {

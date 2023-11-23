@@ -1,6 +1,6 @@
 package club.nito.feature.auth
 
-data class LoginScreenUiState(
+public data class LoginScreenUiState(
     val email: String,
     val password: String,
     val isSignInning: Boolean,

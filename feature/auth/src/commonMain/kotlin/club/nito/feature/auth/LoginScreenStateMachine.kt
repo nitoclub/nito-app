@@ -18,10 +18,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class LoginScreenStateMachine internal constructor(
+public class LoginScreenStateMachine internal constructor(
     observeAuthStatusUseCase: ObserveAuthStatusUseCase,
     private val signInUseCase: SignInUseCase,
-    val userMessageStateHolder: UserMessageStateHolder,
+    public val userMessageStateHolder: UserMessageStateHolder,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
 
@@ -33,7 +33,7 @@ class LoginScreenStateMachine internal constructor(
         initialValue = FetchSingleResult.Loading,
     )
 
-    val uiState: StateFlow<LoginScreenUiState> = buildUiState(
+    public val uiState: StateFlow<LoginScreenUiState> = buildUiState(
         email,
         password,
         authStatus,
@@ -46,7 +46,7 @@ class LoginScreenStateMachine internal constructor(
     }
 
     private val _events = MutableStateFlow<List<LoginScreenEvent>>(emptyList())
-    val event: Flow<LoginScreenEvent?> = _events.map { it.firstOrNull() }
+    public val event: Flow<LoginScreenEvent?> = _events.map { it.firstOrNull() }
 
     init {
         stateMachineScope.launch {
@@ -58,7 +58,7 @@ class LoginScreenStateMachine internal constructor(
         }
     }
 
-    fun dispatch(intent: LoginScreenIntent) {
+    public fun dispatch(intent: LoginScreenIntent) {
         stateMachineScope.launch {
             when (intent) {
                 is LoginScreenIntent.ChangeInputEmail -> email.emit(intent.email)
@@ -75,7 +75,7 @@ class LoginScreenStateMachine internal constructor(
         }
     }
 
-    fun consume(event: LoginScreenEvent) {
+    public fun consume(event: LoginScreenEvent) {
         stateMachineScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }
