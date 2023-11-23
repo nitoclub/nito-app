@@ -14,7 +14,7 @@ class KmpPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.multiplatform")
             }
             tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java) {
-                kotlinOptions.jvmTarget = "11"
+                kotlinOptions.jvmTarget = "17"
             }
             tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink>().configureEach {
                 notCompatibleWithConfigurationCache("Configuration chache not supported for a system property read at configuration time")
