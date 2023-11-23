@@ -1,4 +1,4 @@
-package club.nito.app.di
+package club.nito.app.shared.di
 
 import club.nito.feature.auth.di.authFeatureModule
 import club.nito.feature.schedule.di.scheduleFeatureModule

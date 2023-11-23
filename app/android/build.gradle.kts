@@ -5,7 +5,6 @@ plugins {
     id("nito.primitive.androidapplication")
     id("nito.primitive.android.kotlin")
     id("nito.primitive.android.compose")
-    id("nito.primitive.android.hilt")
     id("nito.primitive.android.firebase")
     id("nito.primitive.android.crashlytics")
 }
@@ -82,6 +81,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.app.shared)
+
     implementation(projects.core.common)
     implementation(projects.core.model)
     implementation(projects.core.data)
@@ -96,8 +97,6 @@ dependencies {
     implementation(projects.feature.settings)
 
     implementation(libs.precompose)
-    implementation(libs.composeNavigation)
-    implementation(libs.composeHiltNavigtation)
     implementation(libs.composeMaterialWindowSize)
     implementation(libs.androidxBrowser)
     implementation(libs.androidxWindow)

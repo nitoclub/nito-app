@@ -1,7 +1,6 @@
 plugins {
     id("nito.primitive.kmp")
     id("nito.primitive.kmp.android")
-    id("nito.primitive.kmp.android.hilt")
     id("nito.primitive.kmp.ios")
     id("nito.primitive.kmp.compose")
     id("nito.primitive.kotest")
@@ -23,11 +22,6 @@ kotlin {
 
                 implementation(libs.koin)
                 implementation(libs.koinCompose)
-            }
-        }
-        androidMain {
-            dependencies {
-                implementation(libs.composeHiltNavigtation)
             }
         }
     }
