@@ -3,7 +3,7 @@ package club.nito.core.domain.model
 import club.nito.core.model.UserProfile
 import kotlinx.datetime.Instant
 
-data class ParticipantSchedule(
+public data class ParticipantSchedule(
     val id: String,
     val scheduledAt: Instant,
     val metAt: Instant,

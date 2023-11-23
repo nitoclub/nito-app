@@ -15,11 +15,11 @@ import kotlinx.coroutines.flow.flow
 /**
  * スケジュール一覧を取得するユースケース
  */
-sealed interface GetParticipantScheduleListUseCase {
-    operator fun invoke(): Flow<FetchMultipleContentResult<ParticipantSchedule>>
+public sealed interface GetParticipantScheduleListUseCase {
+    public operator fun invoke(): Flow<FetchMultipleContentResult<ParticipantSchedule>>
 }
 
-class GetParticipantScheduleListExecutor(
+public class GetParticipantScheduleListExecutor(
     private val scheduleRepository: ScheduleRepository,
     private val participantRepository: ParticipantRepository,
     private val userRepository: UserRepository,

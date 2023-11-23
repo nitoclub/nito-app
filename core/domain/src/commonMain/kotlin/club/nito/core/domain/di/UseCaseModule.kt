@@ -19,7 +19,7 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
-val useCaseModule: Module = module {
+public val useCaseModule: Module = module {
     singleOf(::ObserveAuthStatusExecutor) bind ObserveAuthStatusUseCase::class
     singleOf(::SignInExecutor) bind SignInUseCase::class
     singleOf(::ModifyPasswordExecutor) bind ModifyPasswordUseCase::class

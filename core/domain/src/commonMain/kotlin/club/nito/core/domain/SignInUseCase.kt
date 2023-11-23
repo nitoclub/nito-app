@@ -7,11 +7,11 @@ import club.nito.core.model.runExecuting
 /**
  * 直近のスケジュールを取得するユースケース
  */
-sealed interface SignInUseCase {
-    suspend operator fun invoke(email: String, password: String): ExecuteResult<Unit>
+public sealed interface SignInUseCase {
+    public suspend operator fun invoke(email: String, password: String): ExecuteResult<Unit>
 }
 
-class SignInExecutor(
+public class SignInExecutor(
     private val authRepository: AuthRepository,
 ) : SignInUseCase {
     override suspend fun invoke(email: String, password: String): ExecuteResult<Unit> = runExecuting {
