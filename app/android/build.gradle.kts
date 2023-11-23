@@ -2,11 +2,13 @@ import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id("nito.primitive.androidapplication")
-    id("nito.primitive.android.kotlin")
-    id("nito.primitive.android.compose")
+    id("nito.primitive.kmp")
+    id("nito.primitive.kmp.androidapplication")
+    id("nito.primitive.kmp.compose")
     id("nito.primitive.android.firebase")
     id("nito.primitive.android.crashlytics")
+    id("nito.primitive.detekt")
+    id("nito.primitive.kotest")
 }
 
 val keystorePropertiesFile = project.file("keystore.properties")
@@ -14,10 +16,7 @@ val keystoreExits = keystorePropertiesFile.exists()
 
 android {
     namespace = "club.nito.app"
-    compileSdk = 34
     defaultConfig {
-        minSdk = 31
-        targetSdk = 34
         versionCode = 3
         versionName = "0.2.1"
     }
