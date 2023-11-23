@@ -27,7 +27,7 @@ import club.nito.feature.top.component.ParticipantScheduleSection
 
 @Composable
 public fun TopRoute(
-    stateMachine: TopScreenStateMachine = koinStateMachine(),
+    stateMachine: TopScreenStateMachine = koinStateMachine(TopScreenStateMachine::class),
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {

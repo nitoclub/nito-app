@@ -61,7 +61,7 @@ fun NitoApp(
 //            logger(KermitKoinLogger(kermit))
             },
         ) {
-            val stateMachine = koinStateMachine<NitoAppStateMachine>()
+            val stateMachine = koinStateMachine(NitoAppStateMachine::class)
             val uiState = stateMachine.uiState.collectAsStateWithLifecycle()
             LaunchedEffect(uiState.value) {
                 shouldKeepOnScreen((uiState.value is NitoAppUiState.Success).not())
