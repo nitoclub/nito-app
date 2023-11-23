@@ -30,14 +30,6 @@ dependencies {
 gradlePlugin {
     plugins {
         // Primitives
-        register("android") {
-            id = "nito.primitive.android"
-            implementationClass = "club.nito.primitive.AndroidPlugin"
-        }
-        register("androidKotlin") {
-            id = "nito.primitive.android.kotlin"
-            implementationClass = "club.nito.primitive.AndroidKotlinPlugin"
-        }
         register("androidCrashlytics") {
             id = "nito.primitive.android.crashlytics"
             implementationClass = "club.nito.primitive.AndroidCrashlyticsPlugin"
