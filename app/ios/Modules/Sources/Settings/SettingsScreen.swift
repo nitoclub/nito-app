@@ -11,12 +11,11 @@ public struct SettingsScreen: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text(Greeting().greet())
 
             Button {
-                stateMachine.signOut()
+                stateMachine.logout()
             } label: {
-                Text("サインアウト")
+                Text("ログアウト")
             }
         }
         .padding()

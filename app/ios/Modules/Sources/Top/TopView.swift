@@ -22,7 +22,6 @@ public struct TopView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text(Greeting().greet())
 
             Group {
                 switch stateMachine.state.recentScheduleUIState {

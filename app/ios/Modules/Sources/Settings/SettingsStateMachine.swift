@@ -6,11 +6,11 @@ import NitoCombined
 
 @MainActor
 final class SettingsStateMachine: ObservableObject {
-    @Dependency(\.signOutUseCase) var signOutUseCase
+    @Dependency(\.logoutUseCase) var logoutUseCase
 
-    func signOut() {
+    func logout() {
         Task {
-            try await signOutUseCase.execute()
+            try await logoutUseCase.execute()
         }
     }
 }

@@ -14,7 +14,7 @@ enum RootViewIntent {
 }
 
 enum Routing: Hashable {
-    case signIn
+    case login
     case top
     case scheduleList
     case settings
@@ -64,7 +64,7 @@ class RootStateMachine: ObservableObject {
         switch cachedAuthStatus {
         case .some(is AuthStatusNotAuthenticated):
             path.removeLast(path.count)
-            path.append(Routing.signIn)
+            path.append(Routing.login)
         case .some(is AuthStatusAuthenticated):
             path.removeLast(path.count)
             path.append(Routing.top)

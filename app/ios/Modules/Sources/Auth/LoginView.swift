@@ -3,19 +3,19 @@ import Dependencies
 import NitoCombined
 import SwiftUI
 
-enum SignInRouting: Hashable {
+enum LoginRouting: Hashable {
     case top
 }
 
-public struct SignInView: View {
-    @StateObject var stateMachine: SignInStateMachine = .init()
+public struct LoginView: View {
+    @StateObject var stateMachine: LoginStateMachine = .init()
 
-    private let onSignInSuccess: () -> Void
+    private let onLoginSuccess: () -> Void
 
     public init(
-        onSignInSuccess: @escaping () -> Void
+        onLoginSuccess: @escaping () -> Void
     ) {
-        self.onSignInSuccess = onSignInSuccess
+        self.onLoginSuccess = onLoginSuccess
     }
 
     public var body: some View {
@@ -34,21 +34,21 @@ public struct SignInView: View {
                 .padding(.vertical, 8)
 
             Button {
-                stateMachine.signIn()
+                stateMachine.login()
             } label: {
-                Text("サインイン")
+                Text("ログイン")
             }
         }
         .padding()
-        .navigationTitle("サインイン")
+        .navigationTitle("ログイン")
         .navigationBarBackButtonHidden(true)
         .onAppear {
             Task { await stateMachine.load() }
         }
         .onReceive(stateMachine.$event, perform: { event in
             switch event {
-            case .some(.onSignInSuccess):
-                onSignInSuccess()
+            case .some(.onLoginSuccess):
+                onLoginSuccess()
             default: break
             }
         })
@@ -56,7 +56,7 @@ public struct SignInView: View {
 }
 
 #Preview {
-    SignInView(
-        onSignInSuccess: { }
+    LoginView(
+        onLoginSuccess: { }
     )
 }

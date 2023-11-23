@@ -14,9 +14,9 @@ public struct RootView: View {
             ProgressView()
                 .navigationDestination(for: Routing.self) { routing in
                     switch routing {
-                    case .signIn:
-                        SignInView(
-                            onSignInSuccess: {
+                    case .login:
+                        LoginView(
+                            onLoginSuccess: {
                                 stateMachine.dispatch(intent: .routing(.top))
                             }
                         )

@@ -5,24 +5,24 @@ import KmpContainer
 import NitoCombined
 import SwiftUI
 
-struct SignInViewUIState: UIState {
+struct LoginViewUIState: UIState {
     var email: String = ""
     var password: String = ""
     var authStatus: LoadingState<AuthStatusAuthenticated> = .initial
 }
 
-enum SignInScreenEvent {
-    case onSignInSuccess
+enum LoginScreenEvent {
+    case onLoginSuccess
 }
 
 @MainActor
-final class SignInStateMachine: ObservableObject {
-    @Dependency(\.signInUseCase) var signInUseCase
+final class LoginStateMachine: ObservableObject {
+    @Dependency(\.loginUseCase) var loginUseCase
     @Dependency(\.observeAuthStatusUseCase) var observeAuthStatusUseCase
 
-    @Published var state: SignInViewUIState = .init()
-    @Published var event: SignInScreenEvent? = nil
-    @Published var routing: [SignInRouting] = []
+    @Published var state: LoginViewUIState = .init()
+    @Published var event: LoginScreenEvent? = nil
+    @Published var routing: [LoginRouting] = []
 
     private var cachedAuthStatus: AuthStatus? {
         didSet {
@@ -51,9 +51,9 @@ final class SignInStateMachine: ObservableObject {
         }
     }
 
-    func signIn() {
+    func login() {
         Task {
-            try await signInUseCase.execute(state.email, state.password)
+            try await loginUseCase.execute(state.email, state.password)
         }
     }
 
@@ -61,7 +61,7 @@ final class SignInStateMachine: ObservableObject {
         guard case let cachedAuthStatus as AuthStatusAuthenticated = cachedAuthStatus else {
             return
         }
-        event = .onSignInSuccess
+        event = .onLoginSuccess
         state.authStatus = .loaded(
             cachedAuthStatus
         )
