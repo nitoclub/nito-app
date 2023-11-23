@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
 
-class DefaultNitoDateTimeFormatter(
+public class DefaultNitoDateTimeFormatter(
     private val dateTimeFormatter: DateTimeFormatter,
 ) : NitoDateTimeFormatter {
     override fun formatDateTimeString(instant: Instant): String {
@@ -18,7 +18,7 @@ class DefaultNitoDateTimeFormatter(
     private fun DateTimeFormatter.format(instant: Instant): String = format(instant.toJavaInstant())
 }
 
-val previewNitoDateTimeFormatter = DefaultNitoDateTimeFormatter(
+public val previewNitoDateTimeFormatter: NitoDateTimeFormatter = DefaultNitoDateTimeFormatter(
     dateTimeFormatter = DateTimeFormatter
         .ofLocalizedDateTime(FormatStyle.LONG, FormatStyle.SHORT)
         .withLocale(Locale.getDefault())
