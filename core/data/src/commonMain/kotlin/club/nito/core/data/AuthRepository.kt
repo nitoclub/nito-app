@@ -15,9 +15,9 @@ public sealed interface AuthRepository {
     public val authStatus: Flow<FetchSingleResult<AuthStatus>>
 
     /**
-     * サインインする
+     * ログインする
      */
-    public suspend fun signIn(email: String, password: String)
+    public suspend fun login(email: String, password: String)
 
     /**
      * サインアウトする

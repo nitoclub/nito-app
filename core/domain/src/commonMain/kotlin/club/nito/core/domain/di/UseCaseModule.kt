@@ -10,8 +10,8 @@ import club.nito.core.domain.ObserveAuthStatusExecutor
 import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.domain.ParticipateExecutor
 import club.nito.core.domain.ParticipateUseCase
-import club.nito.core.domain.SignInExecutor
-import club.nito.core.domain.SignInUseCase
+import club.nito.core.domain.LoginExecutor
+import club.nito.core.domain.LoginUseCase
 import club.nito.core.domain.SignOutExecutor
 import club.nito.core.domain.SignOutUseCase
 import org.koin.core.module.Module
@@ -21,7 +21,7 @@ import org.koin.dsl.module
 
 public val useCaseModule: Module = module {
     singleOf(::ObserveAuthStatusExecutor) bind ObserveAuthStatusUseCase::class
-    singleOf(::SignInExecutor) bind SignInUseCase::class
+    singleOf(::LoginExecutor) bind LoginUseCase::class
     singleOf(::ModifyPasswordExecutor) bind ModifyPasswordUseCase::class
     singleOf(::SignOutExecutor) bind SignOutUseCase::class
     singleOf(::GetRecentScheduleExecutor) bind GetRecentScheduleUseCase::class

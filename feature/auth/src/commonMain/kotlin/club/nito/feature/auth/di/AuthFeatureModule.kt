@@ -8,7 +8,7 @@ public val authFeatureModule: Module = module {
     factory {
         LoginScreenStateMachine(
             observeAuthStatusUseCase = get(),
-            signInUseCase = get(),
+            login = get(),
             userMessageStateHolder = get(),
         )
     }
