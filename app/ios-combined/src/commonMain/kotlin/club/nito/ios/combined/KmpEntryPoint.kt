@@ -15,6 +15,10 @@ class KmpEntryPoint {
 
     fun init() {
         koinApplication = startKoin {
+            logger(
+                KermitKoinLogger(Logger.withTag("koin")),
+            )
+
             modules(
                 supabaseClientModule,
                 remoteDataSourceModule,
@@ -22,9 +26,6 @@ class KmpEntryPoint {
                 dataModule,
                 useCaseModule,
             )
-
-            val kermit = Logger.withTag("koin")
-            logger(KermitKoinLogger(kermit))
         }
     }
 

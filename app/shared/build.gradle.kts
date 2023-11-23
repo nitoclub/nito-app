@@ -29,11 +29,9 @@ kotlin {
 
                 implementation(libs.koin)
                 implementation(libs.koinCompose)
-            }
-        }
-        iosMain {
-            dependencies {
-                implementation(libs.koin)
+
+                implementation(libs.kermit)
+                implementation(libs.kermitKoin)
             }
         }
     }
