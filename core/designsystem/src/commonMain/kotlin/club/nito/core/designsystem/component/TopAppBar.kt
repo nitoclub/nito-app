@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 
 @ExperimentalMaterial3Api
 @Composable
-fun TopAppBar(
+public fun TopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
@@ -19,7 +19,7 @@ fun TopAppBar(
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
     colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
-) = androidx.compose.material3.TopAppBar(
+): Unit = androidx.compose.material3.TopAppBar(
     title = title,
     modifier = modifier,
     navigationIcon = navigationIcon,
@@ -31,7 +31,7 @@ fun TopAppBar(
 
 @ExperimentalMaterial3Api
 @Composable
-fun CenterAlignedTopAppBar(
+public fun CenterAlignedTopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     navigationIcon: @Composable () -> Unit = {},
@@ -39,7 +39,7 @@ fun CenterAlignedTopAppBar(
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
     colors: TopAppBarColors = TopAppBarDefaults.centerAlignedTopAppBarColors(),
     scrollBehavior: TopAppBarScrollBehavior? = null,
-) = androidx.compose.material3.CenterAlignedTopAppBar(
+): Unit = androidx.compose.material3.CenterAlignedTopAppBar(
     title = title,
     modifier = modifier,
     navigationIcon = navigationIcon,

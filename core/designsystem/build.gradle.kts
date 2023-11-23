@@ -9,6 +9,8 @@ plugins {
 android.namespace = "club.nito.core.designsystem"
 
 kotlin {
+    explicitApi()
+
     js {
         browser()
     }

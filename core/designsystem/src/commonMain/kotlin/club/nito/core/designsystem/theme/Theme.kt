@@ -1,13 +1,14 @@
 package club.nito.core.designsystem.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 // Generated code from https://m3.material.io/theme-builder#/custom
 
-val LightColorScheme = lightColorScheme(
+public val LightColorScheme: ColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
     primaryContainer = md_theme_light_primaryContainer,
@@ -39,7 +40,7 @@ val LightColorScheme = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
-val DarkColorScheme = darkColorScheme(
+public val DarkColorScheme: ColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,
     onPrimary = md_theme_dark_onPrimary,
     primaryContainer = md_theme_dark_primaryContainer,
@@ -72,7 +73,7 @@ val DarkColorScheme = darkColorScheme(
 )
 
 @Composable
-expect fun NitoTheme(
+public expect fun NitoTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

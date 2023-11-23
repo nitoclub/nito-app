@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
-fun Text(
+public fun Text(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Unspecified,
@@ -33,7 +33,7 @@ fun Text(
     minLines: Int = 1,
     onTextLayout: ((TextLayoutResult) -> Unit) = {},
     style: TextStyle = LocalTextStyle.current
-) = androidx.compose.material3.Text(
+): Unit = androidx.compose.material3.Text(
     text = text,
     modifier = modifier,
     color = color,
