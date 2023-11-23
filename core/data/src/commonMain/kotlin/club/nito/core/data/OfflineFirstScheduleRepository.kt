@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.Instant
 
-class OfflineFirstScheduleRepository(
+public class OfflineFirstScheduleRepository(
     private val remoteDataSource: ScheduleRemoteDataSource,
 ) : ScheduleRepository {
     private val log = Logger.withTag("OfflineFirstScheduleRepository")

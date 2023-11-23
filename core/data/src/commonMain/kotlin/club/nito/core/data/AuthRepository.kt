@@ -8,24 +8,24 @@ import kotlinx.coroutines.flow.Flow
 /**
  * 認証に関するリポジトリ
  */
-sealed interface AuthRepository {
+public sealed interface AuthRepository {
     /**
      * 認証情報の状態
      */
-    val authStatus: Flow<FetchSingleResult<AuthStatus>>
+    public val authStatus: Flow<FetchSingleResult<AuthStatus>>
 
     /**
      * サインインする
      */
-    suspend fun signIn(email: String, password: String)
+    public suspend fun signIn(email: String, password: String)
 
     /**
      * サインアウトする
      */
-    suspend fun signOut()
+    public suspend fun signOut()
 
     /**
      * 認証ユーザー情報を更新する
      */
-    suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
+    public suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
 }
