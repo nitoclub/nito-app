@@ -5,7 +5,7 @@ import club.nito.core.network.user.model.NetworkUserProfile
 import club.nito.core.network.user.model.createFakeNetworkUserProfile
 import kotlinx.coroutines.delay
 
-data object FakeUserRemoteDataSource : UserRemoteDataSource {
+public data object FakeUserRemoteDataSource : UserRemoteDataSource {
     private const val DEFAULT_CHANGED_COUNT = 1L
 
     override suspend fun getProfile(userId: String): UserProfile? {

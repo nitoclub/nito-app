@@ -6,7 +6,7 @@ import club.nito.core.network.participation.model.NetworkParticipant
 import club.nito.core.network.participation.model.createFakeNetworkParticipant
 import kotlinx.coroutines.delay
 
-data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource {
+public data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource {
     private const val DEFAULT_CHANGED_COUNT = 1L
 
     override suspend fun getParticipants(scheduleId: String): List<Participant> {

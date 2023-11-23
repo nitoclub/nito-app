@@ -8,7 +8,7 @@ import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.postgrest.query.Returning
 
-class SupabaseParticipantRemoteDataSource(
+public class SupabaseParticipantRemoteDataSource(
     private val client: SupabaseClient,
 ) : ParticipantRemoteDataSource {
     private val postgrest = client.postgrest["participants"]

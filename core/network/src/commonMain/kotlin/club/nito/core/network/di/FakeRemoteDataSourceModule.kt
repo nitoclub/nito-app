@@ -14,7 +14,7 @@ import kotlinx.coroutines.SupervisorJob
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val fakeRemoteDataSourceModule: Module = module {
+public val fakeRemoteDataSourceModule: Module = module {
     single<AuthRemoteDataSource> {
         FakeAuthRemoteDataSource(
             coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),

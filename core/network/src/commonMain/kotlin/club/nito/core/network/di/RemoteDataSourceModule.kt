@@ -11,7 +11,7 @@ import club.nito.core.network.user.UserRemoteDataSource
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val remoteDataSourceModule: Module = module {
+public val remoteDataSourceModule: Module = module {
     single<AuthRemoteDataSource> {
         SupabaseAuthRemoteDataSource(
             goTrue = get(),

@@ -5,10 +5,10 @@ import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 
-sealed interface AuthRemoteDataSource {
-    val authStatus: Flow<FetchSingleResult<AuthStatus>>
+public sealed interface AuthRemoteDataSource {
+    public val authStatus: Flow<FetchSingleResult<AuthStatus>>
 
-    suspend fun signIn(email: String, password: String)
-    suspend fun signOut()
-    suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
+    public suspend fun signIn(email: String, password: String)
+    public suspend fun signOut()
+    public suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
 }

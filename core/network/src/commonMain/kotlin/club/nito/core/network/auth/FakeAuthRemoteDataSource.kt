@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 
-class FakeAuthRemoteDataSource(
+public class FakeAuthRemoteDataSource(
     coroutineScope: CoroutineScope,
 ) : AuthRemoteDataSource {
 
@@ -61,13 +61,13 @@ class FakeAuthRemoteDataSource(
         type = "type",
     )
 
-    override suspend fun signIn(email: String, password: String) = _authStatus.emit(
+    override suspend fun signIn(email: String, password: String): Unit = _authStatus.emit(
         FetchSingleResult.Success(
             AuthStatus.Authenticated(session = authenticatedUserSession),
         ),
     )
 
-    override suspend fun signOut() = _authStatus.emit(
+    override suspend fun signOut(): Unit = _authStatus.emit(
         FetchSingleResult.Success(AuthStatus.NotAuthenticated),
     )
 
