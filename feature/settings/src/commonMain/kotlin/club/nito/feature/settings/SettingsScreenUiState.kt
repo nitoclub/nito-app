@@ -1,6 +1,6 @@
 package club.nito.feature.settings
 
-data class SettingsScreenUiState(
+public data class SettingsScreenUiState(
     val isSignOuting: Boolean,
     val modifyPassword: ModifyPasswordUiState,
 ) {
@@ -8,12 +8,12 @@ data class SettingsScreenUiState(
         get() = !isSignOuting
 }
 
-sealed class ModifyPasswordUiState {
-    data object Idle : ModifyPasswordUiState()
-    sealed class Show : ModifyPasswordUiState() {
-        abstract val newPassword: String
+public sealed class ModifyPasswordUiState {
+    public data object Idle : ModifyPasswordUiState()
+    public sealed class Show : ModifyPasswordUiState() {
+        public abstract val newPassword: String
 
-        data class Input(override val newPassword: String) : Show()
-        data class Modifying(override val newPassword: String) : Show()
+        public data class Input(override val newPassword: String) : Show()
+        public data class Modifying(override val newPassword: String) : Show()
     }
 }

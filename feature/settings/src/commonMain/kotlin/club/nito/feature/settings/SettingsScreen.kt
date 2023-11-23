@@ -30,7 +30,7 @@ import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.settings.component.ModifyPasswordDialog
 
 @Composable
-fun SettingsRoute(
+public fun SettingsRoute(
     stateMachine: SettingsScreenStateMachine = koinStateMachine(),
     onSignedOut: () -> Unit = {},
 ) {

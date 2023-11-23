@@ -4,7 +4,7 @@ import club.nito.feature.settings.SettingsScreenStateMachine
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-val settingsFeatureModule: Module = module {
+public val settingsFeatureModule: Module = module {
     factory {
         SettingsScreenStateMachine(
             observeAuthStatus = get(),

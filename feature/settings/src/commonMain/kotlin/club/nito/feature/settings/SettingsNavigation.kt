@@ -4,13 +4,13 @@ import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
-const val settingsNavigationRoute = "settings_route"
+public const val settingsNavigationRoute: String = "settings_route"
 
-fun Navigator.navigateToSettings(navOptions: NavOptions? = null) {
+public fun Navigator.navigateToSettings(navOptions: NavOptions? = null) {
     this.navigate(settingsNavigationRoute, navOptions)
 }
 
-fun RouteBuilder.settingsScreen(
+public fun RouteBuilder.settingsScreen(
     onSignedOut: () -> Unit = {},
 ) {
     scene(
