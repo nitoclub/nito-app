@@ -16,9 +16,9 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class TopStateMachine internal constructor(
+public class TopScreenStateMachine internal constructor(
     getRecentSchedule: GetRecentScheduleUseCase,
-    val userMessageStateHolder: UserMessageStateHolder,
+    public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateTimeFormatter,
 ) : StateMachine(), UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
@@ -29,7 +29,7 @@ class TopStateMachine internal constructor(
         initialValue = FetchSingleContentResult.Loading,
     )
 
-    val uiState: StateFlow<TopScreenUiState> = buildUiState(
+    public val uiState: StateFlow<TopScreenUiState> = buildUiState(
         showConfirmParticipateSchedule,
         recentSchedule,
     ) { showConfirmParticipateSchedule, recentSchedule ->
@@ -43,9 +43,9 @@ class TopStateMachine internal constructor(
     }
 
     private val _events = MutableStateFlow<List<TopScreenEvent>>(emptyList())
-    val event: Flow<TopScreenEvent?> = _events.map { it.firstOrNull() }
+    public val event: Flow<TopScreenEvent?> = _events.map { it.firstOrNull() }
 
-    fun dispatch(intent: TopScreenIntent) {
+    public fun dispatch(intent: TopScreenIntent) {
         stateMachineScope.launch {
             when (intent) {
                 is TopScreenIntent.ClickShowConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(intent.schedule)
@@ -63,7 +63,7 @@ class TopStateMachine internal constructor(
         }
     }
 
-    fun consume(event: TopScreenEvent) {
+    public fun consume(event: TopScreenEvent) {
         stateMachineScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }

@@ -10,7 +10,7 @@ import club.nito.core.model.FetchSingleContentResult
  * @param recentSchedule Recent schedule
  * @param confirmParticipateDialog Confirm participate dialog
  */
-data class TopScreenUiState internal constructor(
+public data class TopScreenUiState internal constructor(
     val dateTimeFormatter: NitoDateTimeFormatter,
     val recentSchedule: FetchSingleContentResult<ParticipantSchedule>,
     val confirmParticipateDialog: ConfirmParticipateDialogUiState,
@@ -19,15 +19,15 @@ data class TopScreenUiState internal constructor(
 /**
  * Confirm participate dialog ui state
  */
-sealed class ConfirmParticipateDialogUiState {
+public sealed class ConfirmParticipateDialogUiState {
     /**
      * Show confirm participate dialog
      * @param schedule Schedule
      */
-    data class Show internal constructor(val schedule: ParticipantSchedule) : ConfirmParticipateDialogUiState()
+    public data class Show internal constructor(val schedule: ParticipantSchedule) : ConfirmParticipateDialogUiState()
 
     /**
      * Hide confirm participate dialog
      */
-    data object Hide : ConfirmParticipateDialogUiState()
+    public data object Hide : ConfirmParticipateDialogUiState()
 }

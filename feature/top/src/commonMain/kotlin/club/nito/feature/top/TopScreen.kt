@@ -26,8 +26,8 @@ import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.top.component.ParticipantScheduleSection
 
 @Composable
-fun TopRoute(
-    stateMachine: TopStateMachine = koinStateMachine(),
+public fun TopRoute(
+    stateMachine: TopScreenStateMachine = koinStateMachine(),
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
