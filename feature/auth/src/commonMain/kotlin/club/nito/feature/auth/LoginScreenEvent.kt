@@ -1,6 +1,6 @@
 package club.nito.feature.auth
 
-sealed class LoginScreenEvent {
-    data object LoggedIn : LoginScreenEvent()
-    data object NavigateToRegister : LoginScreenEvent()
+public sealed class LoginScreenEvent {
+    public data object LoggedIn : LoginScreenEvent()
+    public data object NavigateToRegister : LoginScreenEvent()
 }

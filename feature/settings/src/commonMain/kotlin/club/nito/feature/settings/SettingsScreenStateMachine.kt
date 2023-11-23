@@ -20,11 +20,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
-class SettingsScreenStateMachine(
+public class SettingsScreenStateMachine(
     observeAuthStatus: ObserveAuthStatusUseCase,
     private val modifyPassword: ModifyPasswordUseCase,
     private val signOut: SignOutUseCase,
-    val userMessageStateHolder: UserMessageStateHolder,
+    public val userMessageStateHolder: UserMessageStateHolder,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
 
@@ -38,7 +38,7 @@ class SettingsScreenStateMachine(
     private val newPassword = MutableStateFlow("")
     private val isPasswordModifying = MutableStateFlow(false)
 
-    val uiState: StateFlow<SettingsScreenUiState> = buildUiState(
+    public val uiState: StateFlow<SettingsScreenUiState> = buildUiState(
         authStatus,
         showModifyPasswordDialog,
         newPassword,
@@ -57,7 +57,7 @@ class SettingsScreenStateMachine(
     }
 
     private val _events = MutableStateFlow<List<SettingsScreenEvent>>(emptyList())
-    val event: Flow<SettingsScreenEvent?> = _events.map { it.firstOrNull() }
+    public val event: Flow<SettingsScreenEvent?> = _events.map { it.firstOrNull() }
 
     init {
         viewModelScope.launch {
@@ -69,7 +69,7 @@ class SettingsScreenStateMachine(
         }
     }
 
-    fun dispatch(intent: SettingsScreenIntent) {
+    public fun dispatch(intent: SettingsScreenIntent) {
         viewModelScope.launch {
             when (intent) {
                 SettingsScreenIntent.ClickShowModifyPasswordDialog -> showModifyPasswordDialog.emit(true)
@@ -98,7 +98,7 @@ class SettingsScreenStateMachine(
         }
     }
 
-    fun consume(event: SettingsScreenEvent) {
+    public fun consume(event: SettingsScreenEvent) {
         viewModelScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }

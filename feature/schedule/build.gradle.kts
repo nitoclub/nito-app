@@ -8,6 +8,8 @@ plugins {
 android.namespace = "club.nito.feature.schedule"
 
 kotlin {
+    explicitApi()
+
     sourceSets {
         commonMain {
             dependencies {

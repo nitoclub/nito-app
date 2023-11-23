@@ -4,13 +4,13 @@ import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
 
-const val scheduleNavigationRoute = "schedule_route"
+public const val scheduleNavigationRoute: String = "schedule_route"
 
-fun Navigator.navigateToSchedule(navOptions: NavOptions? = null) {
+public fun Navigator.navigateToSchedule(navOptions: NavOptions? = null) {
     this.navigate(scheduleNavigationRoute, navOptions)
 }
 
-fun RouteBuilder.scheduleScreen() {
+public fun RouteBuilder.scheduleScreen() {
     scene(
         route = scheduleNavigationRoute,
     ) {

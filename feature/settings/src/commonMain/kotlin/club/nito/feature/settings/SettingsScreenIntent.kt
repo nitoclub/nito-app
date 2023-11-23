@@ -1,9 +1,9 @@
 package club.nito.feature.settings
 
-sealed class SettingsScreenIntent {
-    data object ClickShowModifyPasswordDialog : SettingsScreenIntent()
-    data class ChangeNewPasswordValue(val newValue: String) : SettingsScreenIntent()
-    data object ClickModifyPassword : SettingsScreenIntent()
-    data object ClickDismissModifyPasswordDialog : SettingsScreenIntent()
-    data object ClickSignOut : SettingsScreenIntent()
+public sealed class SettingsScreenIntent {
+    public data object ClickShowModifyPasswordDialog : SettingsScreenIntent()
+    public data class ChangeNewPasswordValue(val newValue: String) : SettingsScreenIntent()
+    public data object ClickModifyPassword : SettingsScreenIntent()
+    public data object ClickDismissModifyPasswordDialog : SettingsScreenIntent()
+    public data object ClickSignOut : SettingsScreenIntent()
 }

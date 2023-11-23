@@ -2,8 +2,8 @@ package club.nito.feature.schedule
 
 import club.nito.core.domain.model.ParticipantSchedule
 
-sealed class ScheduleListIntent {
-    data class ClickShowConfirmParticipateDialog(val schedule: ParticipantSchedule) : ScheduleListIntent()
-    data class ClickParticipateSchedule(val schedule: ParticipantSchedule) : ScheduleListIntent()
-    data object ClickDismissConfirmParticipateDialog : ScheduleListIntent()
+public sealed class ScheduleListIntent {
+    public data class ClickShowConfirmParticipateDialog(val schedule: ParticipantSchedule) : ScheduleListIntent()
+    public data class ClickParticipateSchedule(val schedule: ParticipantSchedule) : ScheduleListIntent()
+    public data object ClickDismissConfirmParticipateDialog : ScheduleListIntent()
 }

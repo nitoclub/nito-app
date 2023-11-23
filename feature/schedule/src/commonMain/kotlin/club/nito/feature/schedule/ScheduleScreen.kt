@@ -21,7 +21,7 @@ import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.schedule.component.ScheduleListSection
 
 @Composable
-fun ScheduleRoute(
+public fun ScheduleRoute(
     viewModel: ScheduleListViewModel = koinStateMachine(),
 ) {
     viewModel.event.collectAsState(initial = null).value?.let {

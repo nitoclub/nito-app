@@ -1,5 +1,5 @@
 package club.nito.feature.settings
 
-sealed class SettingsScreenEvent {
-    data object SignedOut : SettingsScreenEvent()
+public sealed class SettingsScreenEvent {
+    public data object SignedOut : SettingsScreenEvent()
 }
