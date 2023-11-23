@@ -13,7 +13,6 @@ composeJb = "1.5.1"
 composeMaterial3 = "1.2.0-alpha10"
 androidxLifecycle = "2.6.2"
 androidxActivity = "1.8.0"
-androidxFragment = "1.6.1"
 androidxSplashScreen = "1.0.1"
 kotlinxCoroutines = "1.7.3"
 accompanist = "0.30.1"
@@ -37,7 +36,6 @@ ossLicensesPlugin = "0.10.6"
 ossLicenses = "17.0.1"
 detekt = "1.23.1"
 twitterComposeRule = "0.0.26"
-lottie = "6.1.0"
 kover = "0.7.3"
 androidxLifecycleProcess = "2.6.2"
 supabase = "1.4.5"
@@ -83,7 +81,6 @@ composeUiToolingPreview = { module = "androidx.compose.ui:ui-tooling-preview" }
 composeMaterialWindowSize = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "composeMaterial3" }
 composeCoil = { module = "io.coil-kt:coil-compose", version = "2.4.0" }
 
-androidxFragment = { module = "androidx.fragment:fragment", version.ref = "androidxFragment" }
 androidxCoreKtx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
 androidxAppCompat = { module = "androidx.appcompat:appcompat", version = "1.7.0-alpha03" }
 androidxLifecycleLifecycleRuntimeKtx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
