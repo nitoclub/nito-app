@@ -1,7 +1,7 @@
 package club.nito.feature.auth
 
+import club.nito.core.domain.LoginUseCase
 import club.nito.core.domain.ObserveAuthStatusUseCase
-import club.nito.core.domain.SignInUseCase
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.ExecuteResult
 import club.nito.core.model.FetchSingleResult
@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 
 public class LoginScreenStateMachine internal constructor(
     observeAuthStatusUseCase: ObserveAuthStatusUseCase,
-    private val signInUseCase: SignInUseCase,
+    private val login: LoginUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
@@ -64,7 +64,7 @@ public class LoginScreenStateMachine internal constructor(
                 is LoginScreenIntent.ChangeInputEmail -> email.emit(intent.email)
                 is LoginScreenIntent.ChangeInputPassword -> password.emit(intent.password)
                 LoginScreenIntent.ClickSignIn -> {
-                    val result = signInUseCase(email.value, password.value)
+                    val result = login(email.value, password.value)
                     if (result is ExecuteResult.Failure) {
                         userMessageStateHolder.showMessage("ログインに失敗しました")
                     }

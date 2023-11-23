@@ -5,17 +5,17 @@ import club.nito.core.model.ExecuteResult
 import club.nito.core.model.runExecuting
 
 /**
- * 直近のスケジュールを取得するユースケース
+ * ログインするユースケース
  */
-public sealed interface SignInUseCase {
+public sealed interface LoginUseCase {
     public suspend operator fun invoke(email: String, password: String): ExecuteResult<Unit>
 }
 
-public class SignInExecutor(
+public class LoginExecutor(
     private val authRepository: AuthRepository,
-) : SignInUseCase {
+) : LoginUseCase {
     override suspend fun invoke(email: String, password: String): ExecuteResult<Unit> = runExecuting {
-        authRepository.signIn(
+        authRepository.login(
             email = email,
             password = password,
         )

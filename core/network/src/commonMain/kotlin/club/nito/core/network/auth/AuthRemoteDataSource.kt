@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 public sealed interface AuthRemoteDataSource {
     public val authStatus: Flow<FetchSingleResult<AuthStatus>>
 
-    public suspend fun signIn(email: String, password: String)
-    public suspend fun signOut()
+    public suspend fun login(email: String, password: String)
+    public suspend fun logout()
     public suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
 }

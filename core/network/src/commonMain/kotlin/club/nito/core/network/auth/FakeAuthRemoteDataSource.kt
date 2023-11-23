@@ -61,13 +61,13 @@ public class FakeAuthRemoteDataSource(
         type = "type",
     )
 
-    override suspend fun signIn(email: String, password: String): Unit = _authStatus.emit(
+    override suspend fun login(email: String, password: String): Unit = _authStatus.emit(
         FetchSingleResult.Success(
             AuthStatus.Authenticated(session = authenticatedUserSession),
         ),
     )
 
-    override suspend fun signOut(): Unit = _authStatus.emit(
+    override suspend fun logout(): Unit = _authStatus.emit(
         FetchSingleResult.Success(AuthStatus.NotAuthenticated),
     )
 

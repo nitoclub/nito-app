@@ -11,12 +11,12 @@ public class DefaultAuthRepository(
 ) : AuthRepository {
     override val authStatus: Flow<FetchSingleResult<AuthStatus>> = remoteDataSource.authStatus
 
-    override suspend fun signIn(email: String, password: String): Unit = remoteDataSource.signIn(
+    override suspend fun login(email: String, password: String): Unit = remoteDataSource.login(
         email = email,
         password = password,
     )
 
-    override suspend fun signOut(): Unit = remoteDataSource.signOut()
+    override suspend fun logout(): Unit = remoteDataSource.logout()
 
     override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo = remoteDataSource.modifyAuthUser(
         email = email,

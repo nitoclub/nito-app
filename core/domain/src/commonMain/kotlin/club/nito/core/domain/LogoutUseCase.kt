@@ -5,16 +5,16 @@ import club.nito.core.model.ExecuteResult
 import club.nito.core.model.runExecuting
 
 /**
- * 直近のスケジュールを取得するユースケース
+ * ログアウトするユースケース
  */
-public sealed interface SignOutUseCase {
+public sealed interface LogoutUseCase {
     public suspend operator fun invoke(): ExecuteResult<Unit>
 }
 
-public class SignOutExecutor(
+public class LogoutExecutor(
     private val authRepository: AuthRepository,
-) : SignOutUseCase {
+) : LogoutUseCase {
     override suspend fun invoke(): ExecuteResult<Unit> = runExecuting {
-        authRepository.signOut()
+        authRepository.logout()
     }
 }

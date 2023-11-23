@@ -37,12 +37,12 @@ public class SupabaseAuthRemoteDataSource(
         }
     }
 
-    override suspend fun signIn(email: String, password: String): Unit = goTrue.loginWith(Email) {
+    override suspend fun login(email: String, password: String): Unit = goTrue.loginWith(Email) {
         this.email = email
         this.password = password
     }
 
-    override suspend fun signOut(): Unit = goTrue.logout()
+    override suspend fun logout(): Unit = goTrue.logout()
 
     override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo = goTrue.modifyUser {
         this.email = email

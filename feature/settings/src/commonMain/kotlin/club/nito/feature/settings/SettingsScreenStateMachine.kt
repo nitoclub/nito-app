@@ -1,8 +1,8 @@
 package club.nito.feature.settings
 
+import club.nito.core.domain.LogoutUseCase
 import club.nito.core.domain.ModifyPasswordUseCase
 import club.nito.core.domain.ObserveAuthStatusUseCase
-import club.nito.core.domain.SignOutUseCase
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.ExecuteResult
 import club.nito.core.model.FetchSingleResult
@@ -23,7 +23,7 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 public class SettingsScreenStateMachine(
     observeAuthStatus: ObserveAuthStatusUseCase,
     private val modifyPassword: ModifyPasswordUseCase,
-    private val signOut: SignOutUseCase,
+    private val logout: LogoutUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
@@ -89,7 +89,7 @@ public class SettingsScreenStateMachine(
 
                 SettingsScreenIntent.ClickDismissModifyPasswordDialog -> showModifyPasswordDialog.emit(false)
                 SettingsScreenIntent.ClickSignOut -> {
-                    val result = signOut()
+                    val result = logout()
                     if (result is ExecuteResult.Failure) {
                         userMessageStateHolder.showMessage("サインアウトに失敗しました")
                     }
