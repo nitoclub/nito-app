@@ -1,6 +1,6 @@
 plugins {
     id("nito.primitive.kmp")
-    alias(libs.plugins.compose)
+    alias(libs.plugins.composeGradlePlugin)
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)

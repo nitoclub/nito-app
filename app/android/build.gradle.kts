@@ -96,7 +96,6 @@ dependencies {
     implementation(projects.feature.settings)
 
     implementation(libs.precompose)
-    implementation(libs.composeMaterialWindowSize)
     implementation(libs.androidxBrowser)
     implementation(libs.androidxWindow)
     implementation(libs.kermit)

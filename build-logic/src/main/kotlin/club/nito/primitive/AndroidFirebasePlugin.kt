@@ -21,9 +21,7 @@ class AndroidFirebasePlugin : Plugin<Project> {
             }
             dependencies {
                 implementationPlatform(libs.library("firebaseBom"))
-                implementation(libs.library("firebaseAuth"))
                 implementation(libs.library("firebaseCommon"))
-                implementation(libs.library("multiplatformFirebaseAuth"))
             }
         }
     }

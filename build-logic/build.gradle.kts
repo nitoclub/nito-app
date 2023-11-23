@@ -30,18 +30,6 @@ dependencies {
 gradlePlugin {
     plugins {
         // Primitives
-        register("android") {
-            id = "nito.primitive.android"
-            implementationClass = "club.nito.primitive.AndroidPlugin"
-        }
-        register("androidKotlin") {
-            id = "nito.primitive.android.kotlin"
-            implementationClass = "club.nito.primitive.AndroidKotlinPlugin"
-        }
-        register("androidCompose") {
-            id = "nito.primitive.android.compose"
-            implementationClass = "club.nito.primitive.AndroidComposePlugin"
-        }
         register("androidCrashlytics") {
             id = "nito.primitive.android.crashlytics"
             implementationClass = "club.nito.primitive.AndroidCrashlyticsPlugin"
@@ -69,10 +57,6 @@ gradlePlugin {
         register("kmpCompose") {
             id = "nito.primitive.kmp.compose"
             implementationClass = "club.nito.primitive.KmpComposePlugin"
-        }
-        register("kmpKtorfit") {
-            id = "nito.primitive.kmp.ktorfit"
-            implementationClass = "club.nito.primitive.KmpKtorfitPlugin"
         }
         register("kmpKotlinSerialization") {
             id = "nito.primitive.kmp.serialization"
