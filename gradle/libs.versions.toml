@@ -20,7 +20,6 @@ firebaseBom = "32.2.3"
 multiplatformFirebase = "1.8.1"
 kermit = "2.0.2"
 okHttp = "4.11.0"
-ktorfit = "1.6.0"
 ossLicensesPlugin = "0.10.6"
 ossLicenses = "17.0.1"
 detekt = "1.23.1"
@@ -38,7 +37,6 @@ kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plu
 composeGradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose" }
 kspGradlePlugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 firebaseGradlePlugin = { module = "com.google.gms:google-services", version = "4.3.15" }
-ktorfitGradlePlugin = { module = "de.jensklingenberg.ktorfit:gradle-plugin", version = "1.0.0" }
 kotlinxSerializationGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 completeKotlinPlugin = { module = "com.louiscad.complete-kotlin:plugin", version = "1.1.0" }
 detektGradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
@@ -102,9 +100,6 @@ firebaseRemoteConfig = { module = "dev.gitlive:firebase-config", version.ref = "
 firebaseCrashlyticsGradlePlugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "2.9.9" }
 firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "18.4.1" }
 
-ktorfitLib = { module = "de.jensklingenberg.ktorfit:ktorfit-lib", version.ref = "ktorfit" }
-ktorfitKsp = { module = "de.jensklingenberg.ktorfit:ktorfit-ksp", version.ref = "ktorfit" }
-
 ossLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "ossLicenses" }
 
 precompose = { module = "moe.tlaster:precompose", version.ref = "precompose" }
@@ -134,7 +129,6 @@ plugins = [
     "composeGradlePlugin",
     "kspGradlePlugin",
     "firebaseGradlePlugin",
-    "ktorfitGradlePlugin",
     "kotlinxSerializationGradlePlugin",
     "completeKotlinPlugin",
     "detektGradlePlugin",
