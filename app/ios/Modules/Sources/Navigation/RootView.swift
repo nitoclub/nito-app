@@ -1,8 +1,10 @@
 import Auth
 import Common
+import Schedule
 import Settings
 import SwiftUI
 import Top
+import NitoCombined
 
 public struct RootView: View {
     @StateObject var stateMachine: RootStateMachine = .init()
@@ -15,13 +17,15 @@ public struct RootView: View {
                 .navigationDestination(for: Routing.self) { routing in
                     switch routing {
                     case .login:
-                        LoginView(
+                         ComposeLoginScreen(
                             onLoginSuccess: {
                                 stateMachine.dispatch(intent: .routing(.top))
                             }
                         )
+                         .navigationBarBackButtonHidden(true)
+                         .ignoresSafeArea(.keyboard)
                     case .top:
-                        TopView(
+                         ComposeTopScreen(
                             onScheduleListButtonClick: {
                                 stateMachine.dispatch(intent: .routing(.scheduleList))
                             },
@@ -29,10 +33,11 @@ public struct RootView: View {
                                 stateMachine.dispatch(intent: .routing(.settings))
                             }
                         )
+                         .navigationBarBackButtonHidden(true)
                     case .scheduleList:
-                        EmptyView()
+                         ComposeScheduleListScreen()
                     case .settings:
-                        SettingsScreen()
+                        ComposeSettingsScreen()
                     }
                 }
         }
