@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-public class TopScreenStateMachine internal constructor(
+public class TopScreenStateMachine(
     getRecentSchedule: GetRecentScheduleUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateTimeFormatter,

@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
-public class ScheduleListViewModel internal constructor(
+public class ScheduleListViewModel(
     getParticipantScheduleListUseCase: GetParticipantScheduleListUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateTimeFormatter,

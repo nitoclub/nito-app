@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-public class LoginScreenStateMachine internal constructor(
+public class LoginScreenStateMachine(
     observeAuthStatusUseCase: ObserveAuthStatusUseCase,
     private val login: LoginUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
