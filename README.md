@@ -1,6 +1,6 @@
 ![NITO](docs/images/hero.svg)
 
-<a href='https://play.google.com/store/apps/details?id=club.nito.app&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Google Play で手に入れよう' src='docs/images/google-play/badge.png' height='80px'/></a>
+<a href='https://play.google.com/store/apps/details?id=club.nito.app&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='docs/images/google-play-badge.png' height='56px'/></a>
 
 # NITO
 
