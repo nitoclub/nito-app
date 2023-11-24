@@ -31,7 +31,7 @@ import club.nito.feature.settings.component.ModifyPasswordDialog
 
 @Composable
 public fun SettingsRoute(
-    stateMachine: SettingsScreenStateMachine = koinStateMachine(),
+    stateMachine: SettingsScreenStateMachine = koinStateMachine(SettingsScreenStateMachine::class),
     onSignedOut: () -> Unit = {},
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {

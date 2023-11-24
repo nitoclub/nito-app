@@ -22,7 +22,7 @@ import club.nito.feature.schedule.component.ScheduleListSection
 
 @Composable
 public fun ScheduleRoute(
-    viewModel: ScheduleListViewModel = koinStateMachine(),
+    viewModel: ScheduleListViewModel = koinStateMachine(ScheduleListViewModel::class),
 ) {
     viewModel.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
