@@ -1,5 +1,6 @@
 ![NITO](docs/images/hero.svg)
 
+<a href='https://apps.apple.com/jp/app/nito/id6472990576?itsct=apps_box_badge&amp;itscg=30200'><img alt='Download on the App Store' src='docs/images/app-store-badge.svg' height='56px'/></a>
 <a href='https://play.google.com/store/apps/details?id=club.nito.app&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='docs/images/google-play-badge.png' height='56px'/></a>
 
 # NITO
