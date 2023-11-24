@@ -6,6 +6,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import club.nito.app.shared.di.appModule
 import club.nito.app.shared.di.featureModules
 import club.nito.app.shared.di.nitoDateTimeFormatterModule
 import club.nito.app.shared.di.userMessageStateHolderModule
@@ -20,7 +21,6 @@ import co.touchlab.kermit.koin.KermitKoinLogger
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import org.koin.compose.KoinApplication
-import org.koin.dsl.module
 
 @Composable
 fun NitoApp(
@@ -43,22 +43,10 @@ fun NitoApp(
 //                fakeRemoteDataSourceModule,
                     dataModule,
                     useCaseModule,
+
+                    appModule,
+                    *featureModules.toTypedArray(),
                 )
-
-                modules(
-                    module {
-                        factory {
-                            NitoAppStateMachine(
-                                observeAuthStatus = get(),
-                            )
-                        }
-                    },
-                )
-
-                modules(featureModules)
-
-//            val kermit = Logger.withTag("koin")
-//            logger(KermitKoinLogger(kermit))
             },
         ) {
             val stateMachine = koinStateMachine(NitoAppStateMachine::class)
