@@ -1,5 +1,5 @@
 import KmpContainer
-import NitoCombined
+import NitoKmp
 import SwiftUI
 import UIKit
 

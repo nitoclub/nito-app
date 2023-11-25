@@ -1,6 +1,6 @@
 import Auth
 import Common
-import NitoCombined
+import NitoKmp
 import Schedule
 import Settings
 import SwiftUI

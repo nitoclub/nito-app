@@ -1,5 +1,5 @@
 import Dependencies
-import NitoCombined
+import NitoKmp
 
 public struct GetRecentScheduleUseCaseProvider {
     private static var getRecentScheduleUseCase: GetRecentScheduleUseCase {

@@ -1,4 +1,4 @@
-import NitoCombined
+import NitoKmp
 import SwiftUI
 
 public struct SettingsScreen: View {

@@ -20,7 +20,7 @@ jobs:
           java-version: 17
 
       - name: Build iOS framework
-        run: ./gradlew :app:ios-combined:assembleNitoCombinedReleaseXCFramework
+        run: ./gradlew :app:ios-combined:assembleNitoKmpReleaseXCFramework
 
       - name: Build iOS app
         run: xcodebuild -project ios/App/Nito/Nito.xcodeproj -configuration Debug -scheme Dev -sdk iphoneos -destination name='iPhone 8' build

@@ -10,7 +10,7 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    val frameworkName = "NitoCombined"
+    val frameworkName = "NitoKmp"
     val xcf = XCFramework(frameworkName)
 
     targets.filterIsInstance<KotlinNativeTarget>()
@@ -21,7 +21,7 @@ kotlin {
                     // compose for iOS(skiko) needs to be static library
                     isStatic = true
                     embedBitcode(BitcodeEmbeddingMode.DISABLE)
-                    binaryOption("bundleId", "club.nito.ios.combined")
+                    binaryOption("bundleId", "club.nito.Kmp")
                     binaryOption("bundleVersion", version.toString())
                     binaryOption("bundleShortVersionString", version.toString())
                     xcf.add(this)

@@ -43,7 +43,7 @@ let package = Package(
         .target(
             name: "Common",
             dependencies: [
-                "NitoCombined",
+                "NitoKmp",
                 .product(name: "Dependencies", package: "swift-dependencies"),
             ]
         ),
@@ -51,14 +51,14 @@ let package = Package(
             name: "Model",
             dependencies: [
                 "Common",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
         .target(
             name: "About",
             dependencies: [
                 "KmpContainer",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
         .target(
@@ -67,7 +67,7 @@ let package = Package(
                 "Common",
                 "Model",
                 "KmpContainer",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
         .target(
@@ -80,7 +80,7 @@ let package = Package(
                 "Settings",
                 "Top",
                 "KmpContainer",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
         .target(
@@ -88,7 +88,7 @@ let package = Package(
             dependencies: [
                 "Common",
                 "KmpContainer",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
         .target(
@@ -96,7 +96,7 @@ let package = Package(
             dependencies: [
                 "Common",
                 "KmpContainer",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
         .target(
@@ -104,7 +104,7 @@ let package = Package(
             dependencies: [
                 "Common",
                 "KmpContainer",
-                "NitoCombined",
+                "NitoKmp",
             ]
         ),
 
@@ -116,13 +116,13 @@ let package = Package(
         .target(
             name: "KmpContainer",
             dependencies: [
-                "NitoCombined",
+                "NitoKmp",
                 .product(name: "Dependencies", package: "swift-dependencies"),
             ]
         ),
         .binaryTarget(
-            name: "NitoCombined",
-            path: "../../ios-combined/build/XCFrameworks/release/NitoCombined.xcframework"
+            name: "NitoKmp",
+            path: "../../ios-combined/build/XCFrameworks/release/NitoKmp.xcframework"
         ),
     ]
 )

@@ -2,7 +2,7 @@ import Common
 import Dependencies
 import Foundation
 import KmpContainer
-import NitoCombined
+import NitoKmp
 
 struct TopViewUIState: UIState {
     var recentScheduleUIState: LoadingState<RecentScheduleUIState> = .initial

@@ -1,6 +1,6 @@
 import Common
 import Dependencies
-import NitoCombined
+import NitoKmp
 import SwiftUI
 
 enum LoginRouting: Hashable {
