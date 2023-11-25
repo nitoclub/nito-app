@@ -1,6 +1,6 @@
 package club.nito.feature.top
 
-import club.nito.core.common.NitoDateTimeFormatter
+import club.nito.core.common.NitoDateFormatter
 import club.nito.core.domain.GetRecentScheduleUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 public class TopScreenStateMachine(
     getRecentSchedule: GetRecentScheduleUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
-    private val dateTimeFormatter: NitoDateTimeFormatter,
+    private val dateTimeFormatter: NitoDateFormatter,
 ) : StateMachine(), UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
 

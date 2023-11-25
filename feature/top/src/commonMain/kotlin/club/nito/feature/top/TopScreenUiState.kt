@@ -1,6 +1,6 @@
 package club.nito.feature.top
 
-import club.nito.core.common.NitoDateTimeFormatter
+import club.nito.core.common.NitoDateFormatter
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 
@@ -11,7 +11,7 @@ import club.nito.core.model.FetchSingleContentResult
  * @param confirmParticipateDialog Confirm participate dialog
  */
 public data class TopScreenUiState internal constructor(
-    val dateTimeFormatter: NitoDateTimeFormatter,
+    val dateTimeFormatter: NitoDateFormatter,
     val recentSchedule: FetchSingleContentResult<ParticipantSchedule>,
     val confirmParticipateDialog: ConfirmParticipateDialogUiState,
 )

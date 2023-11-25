@@ -2,7 +2,7 @@ package club.nito.core.common
 
 import kotlinx.datetime.Instant
 
-public interface NitoDateTimeFormatter {
+public interface NitoDateFormatter {
     /**
      * 日時をフォーマットする
      */

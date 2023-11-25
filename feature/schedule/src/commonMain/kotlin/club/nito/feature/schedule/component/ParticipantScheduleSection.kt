@@ -14,7 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import club.nito.core.common.NitoDateTimeFormatter
+import club.nito.core.common.NitoDateFormatter
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchMultipleContentResult
@@ -24,7 +24,7 @@ import club.nito.core.ui.ParticipantScheduleItem
 @Composable
 internal fun ScheduleListSection(
     scheduleList: FetchMultipleContentResult<ParticipantSchedule>,
-    dateTimeFormatter: NitoDateTimeFormatter,
+    dateTimeFormatter: NitoDateFormatter,
     modifier: Modifier = Modifier,
     onScheduleClick: (schedule: ParticipantSchedule) -> Unit = {},
 ) {
@@ -69,7 +69,7 @@ private fun NoParticipantSchedule(
 @Composable
 private fun ParticipantScheduleList(
     schedules: List<ParticipantSchedule>,
-    dateTimeFormatter: NitoDateTimeFormatter,
+    dateTimeFormatter: NitoDateFormatter,
     modifier: Modifier = Modifier,
     onScheduleClick: (schedule: ParticipantSchedule) -> Unit = {},
 ) {
