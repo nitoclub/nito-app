@@ -1,12 +1,12 @@
-import UIKit
-import SwiftUI
 import KmpContainer
 import NitoCombined
+import SwiftUI
+import UIKit
 
 public struct ComposeTopScreen: UIViewControllerRepresentable {
     private let onScheduleListButtonClick: () -> Void
     private let onSettingsButtonClick: () -> Void
-    
+
     public init(
         onScheduleListButtonClick: @escaping () -> Void,
         onSettingsButtonClick: @escaping () -> Void

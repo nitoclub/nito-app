@@ -45,18 +45,20 @@ public struct LoginView: View {
         .onAppear {
             Task { await stateMachine.load() }
         }
-        .onReceive(stateMachine.$event, perform: { event in
-            switch event {
-            case .some(.onLoginSuccess):
-                onLoginSuccess()
-            default: break
-            }
-        })
+        .onReceive(
+            stateMachine.$event,
+            perform: { event in
+                switch event {
+                case .some(.onLoginSuccess):
+                    onLoginSuccess()
+                default: break
+                }
+            })
     }
 }
 
 #Preview {
     LoginView(
-        onLoginSuccess: { }
+        onLoginSuccess: {}
     )
 }

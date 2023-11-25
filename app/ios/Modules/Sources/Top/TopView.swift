@@ -8,7 +8,7 @@ public struct TopView: View {
 
     private let onScheduleListButtonClick: () -> Void
     private let onSettingsButtonClick: () -> Void
-    
+
     public init(
         onScheduleListButtonClick: @escaping () -> Void,
         onSettingsButtonClick: @escaping () -> Void
@@ -66,7 +66,7 @@ public struct TopView: View {
 
 #Preview {
     TopView(
-        onScheduleListButtonClick: { },
-        onSettingsButtonClick: { }
+        onScheduleListButtonClick: {},
+        onSettingsButtonClick: {}
     )
 }
