@@ -43,7 +43,7 @@ class RootStateMachine: ObservableObject {
             path.append(routing)
         }
     }
-    
+
     func load() async {
         state.authStatus = .loading
 

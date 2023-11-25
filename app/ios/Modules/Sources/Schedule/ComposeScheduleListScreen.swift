@@ -1,7 +1,7 @@
-import UIKit
-import SwiftUI
 import KmpContainer
 import NitoCombined
+import SwiftUI
+import UIKit
 
 public struct ComposeScheduleListScreen: UIViewControllerRepresentable {
     public init() {}
@@ -9,7 +9,8 @@ public struct ComposeScheduleListScreen: UIViewControllerRepresentable {
     public func makeUIViewController(context: Context) -> UIViewController {
         return ScheduleListScreen_iosKt.ScheduleListRouteViewController(
             viewModel: ScheduleListViewModel(
-                getParticipantScheduleListUseCase: Container.shared.get(type: GetParticipantScheduleListUseCase.self),
+                getParticipantScheduleListUseCase: Container.shared.get(
+                    type: GetParticipantScheduleListUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
                 dateTimeFormatter: Container.shared.get(type: CommonNitoDateTimeFormatter.self)
             )
