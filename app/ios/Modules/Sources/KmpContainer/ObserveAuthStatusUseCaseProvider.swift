@@ -1,5 +1,5 @@
 import Dependencies
-import NitoCombined
+import NitoKmp
 
 public struct ObserveAuthStatusUseCaseProvider {
     private static var observeAuthStatusUseCase: ObserveAuthStatusUseCase {

@@ -10,7 +10,7 @@ NITO の iOS アプリのディレクトリです。
 # リポジトリルートディレクトリに移動
 cd ../../
 # KMP の iOS 用フレームワークをビルド
-./gradlew :app:ios-combined:assembleNitoCombinedReleaseXCFramework
+./gradlew :app:ios-combined:assembleNitoKmpReleaseXCFramework
 ```
 
 ## Xcode プロジェクトを開く

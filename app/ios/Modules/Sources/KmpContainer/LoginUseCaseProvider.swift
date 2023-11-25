@@ -1,5 +1,5 @@
 import Dependencies
-import NitoCombined
+import NitoKmp
 
 public struct LoginUseCaseProvider {
     private static var loginUseCase: LoginUseCase {

@@ -1,4 +1,4 @@
-import NitoCombined
+import NitoKmp
 
 extension Kotlinx_datetimeInstant {
     public func toDate() -> Date {

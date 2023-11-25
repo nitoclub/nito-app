@@ -2,7 +2,7 @@ import Common
 import Dependencies
 import Foundation
 import KmpContainer
-import NitoCombined
+import NitoKmp
 
 @MainActor
 final class SettingsStateMachine: ObservableObject {

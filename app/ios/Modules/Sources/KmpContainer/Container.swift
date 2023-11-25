@@ -1,4 +1,4 @@
-import NitoCombined
+import NitoKmp
 
 public struct Container {
     public static let shared: Container = .init()

@@ -1,4 +1,4 @@
-import NitoCombined
+import NitoKmp
 
 class FlowCollector<T>: Kotlinx_coroutines_coreFlowCollector {
     let callback: (T) -> Void

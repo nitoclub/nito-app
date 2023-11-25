@@ -1,5 +1,5 @@
 import Dependencies
-import NitoCombined
+import NitoKmp
 
 public struct DateTimeFormatterProvider {
     private static var dateTimeFormatter: DateFormatter {

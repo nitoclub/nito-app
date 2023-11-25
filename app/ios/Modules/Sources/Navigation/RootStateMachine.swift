@@ -1,7 +1,7 @@
 import Common
 import Dependencies
 import Foundation
-import NitoCombined
+import NitoKmp
 import SwiftUI
 
 struct RootViewUIState: UIState {
