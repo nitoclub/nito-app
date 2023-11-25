@@ -10,7 +10,7 @@ import java.util.Locale
 public class DefaultNitoDateFormatter(
     private val dateTimeFormatter: DateTimeFormatter,
 ) : NitoDateFormatter {
-    override fun formatDateTimeString(instant: Instant): String {
+    override fun formatDateTime(instant: Instant): String {
         val string = dateTimeFormatter.format(instant)
         return string
     }

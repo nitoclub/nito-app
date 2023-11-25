@@ -5,7 +5,7 @@ import kotlinx.datetime.Instant
 
 actual fun createNitoDateTimeFormatter(): NitoDateFormatter {
     return object : NitoDateFormatter {
-        override fun formatDateTimeString(instant: Instant): String {
+        override fun formatDateTime(instant: Instant): String {
             return instant.toString()
         }
     }

@@ -27,7 +27,7 @@ public fun ConfirmParticipateDialog(
         },
         text = {
             Text(
-                text = "${dateTimeFormatter.formatDateTimeString(schedule.scheduledAt)} 集合のトランポリンに参加しますか？",
+                text = "${dateTimeFormatter.formatDateTime(schedule.scheduledAt)} 集合のトランポリンに参加しますか？",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

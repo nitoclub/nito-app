@@ -46,7 +46,7 @@ public fun ParticipantScheduleItem(
                 contentDescription = "Date",
             )
             Text(
-                text = dateTimeFormatter.formatDateTimeString(schedule.scheduledAt),
+                text = dateTimeFormatter.formatDateTime(schedule.scheduledAt),
             )
         }
 

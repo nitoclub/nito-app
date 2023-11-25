@@ -6,5 +6,5 @@ public interface NitoDateFormatter {
     /**
      * 日時をフォーマットする
      */
-    public fun formatDateTimeString(instant: Instant): String
+    public fun formatDateTime(instant: Instant): String
 }

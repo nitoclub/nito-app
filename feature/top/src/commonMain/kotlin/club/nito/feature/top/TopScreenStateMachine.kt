@@ -52,7 +52,7 @@ public class TopScreenStateMachine(
                 is TopScreenIntent.ClickParticipateSchedule -> {
                     showConfirmParticipateSchedule.emit(null)
 
-                    val scheduledAt = dateTimeFormatter.formatDateTimeString(intent.schedule.scheduledAt)
+                    val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
                     userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
                 }
 
