@@ -1,6 +1,6 @@
 package club.nito.feature.schedule
 
-import club.nito.core.common.NitoDateTimeFormatter
+import club.nito.core.common.NitoDateFormatter
 import club.nito.core.domain.GetParticipantScheduleListUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchMultipleContentResult
@@ -19,7 +19,7 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 public class ScheduleListViewModel(
     getParticipantScheduleListUseCase: GetParticipantScheduleListUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
-    private val dateTimeFormatter: NitoDateTimeFormatter,
+    private val dateTimeFormatter: NitoDateFormatter,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
@@ -56,7 +56,7 @@ public class ScheduleListViewModel(
                 is ScheduleListIntent.ClickParticipateSchedule -> {
                     showConfirmParticipateSchedule.emit(null)
 
-                    val scheduledAt = dateTimeFormatter.formatDateTimeString(intent.schedule.scheduledAt)
+                    val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
                     userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
                 }
 

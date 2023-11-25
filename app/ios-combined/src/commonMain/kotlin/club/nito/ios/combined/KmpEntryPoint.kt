@@ -2,7 +2,7 @@ package club.nito.ios.combined
 
 import club.nito.app.shared.di.appModule
 import club.nito.app.shared.di.featureModules
-import club.nito.app.shared.di.nitoDateTimeFormatterModule
+import club.nito.app.shared.di.nitoDateFormatterModule
 import club.nito.app.shared.di.userMessageStateHolderModule
 import club.nito.core.data.di.dataModule
 import club.nito.core.domain.di.useCaseModule
@@ -24,7 +24,7 @@ class KmpEntryPoint {
             )
 
             modules(
-                nitoDateTimeFormatterModule,
+                nitoDateFormatterModule,
                 userMessageStateHolderModule,
 
                 supabaseClientModule,

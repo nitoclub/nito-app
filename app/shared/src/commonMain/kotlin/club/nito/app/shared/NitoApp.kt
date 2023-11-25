@@ -8,7 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import club.nito.app.shared.di.appModule
 import club.nito.app.shared.di.featureModules
-import club.nito.app.shared.di.nitoDateTimeFormatterModule
+import club.nito.app.shared.di.nitoDateFormatterModule
 import club.nito.app.shared.di.userMessageStateHolderModule
 import club.nito.core.data.di.dataModule
 import club.nito.core.designsystem.theme.NitoTheme
@@ -35,7 +35,7 @@ fun NitoApp(
                 )
 
                 modules(
-                    nitoDateTimeFormatterModule,
+                    nitoDateFormatterModule,
                     userMessageStateHolderModule,
 
                     supabaseClientModule,
