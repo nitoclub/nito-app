@@ -3,6 +3,11 @@ package club.nito.core.model.schedule
 import kotlinx.datetime.Instant
 
 /**
+ * スケジュールID
+ */
+public typealias ScheduleId = String
+
+/**
  * スケジュール
  * @param id ID
  * @param scheduledAt 予定日時
@@ -12,7 +17,7 @@ import kotlinx.datetime.Instant
  * @param description 説明文
  */
 public data class Schedule(
-    val id: String,
+    val id: ScheduleId,
     val scheduledAt: Instant,
     val metAt: Instant,
     val venueId: String,
