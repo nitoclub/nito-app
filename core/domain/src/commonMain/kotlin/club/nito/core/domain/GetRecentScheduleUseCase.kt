@@ -6,7 +6,7 @@ import club.nito.core.data.UserRepository
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.Order
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import club.nito.core.model.UserProfile
 import club.nito.core.model.toNitoError
 import co.touchlab.kermit.Logger

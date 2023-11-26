@@ -1,4 +1,4 @@
-package club.nito.core.model
+package club.nito.core.model.schedule
 
 import kotlinx.datetime.Instant
 

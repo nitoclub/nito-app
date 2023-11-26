@@ -1,6 +1,6 @@
 package club.nito.core.network.schedule.model
 
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable

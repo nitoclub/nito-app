@@ -1,7 +1,7 @@
 package club.nito.core.network.schedule
 
 import club.nito.core.model.Order
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.toSupabaseOrder
 import co.touchlab.kermit.Logger

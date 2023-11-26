@@ -5,7 +5,7 @@ import club.nito.core.data.ScheduleRepository
 import club.nito.core.data.UserRepository
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchMultipleContentResult
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import club.nito.core.model.UserProfile
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.toNitoError
