@@ -20,7 +20,7 @@ public struct ComposeTopScreen: UIViewControllerRepresentable {
             stateMachine: TopScreenStateMachine(
                 getRecentSchedule: Container.shared.get(type: GetRecentScheduleUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
-                dateTimeFormatter: Container.shared.get(type: CommonNitoDateTimeFormatter.self)
+                dateTimeFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)
             ),
             onScheduleListClick: onScheduleListButtonClick,
             onSettingsClick: onSettingsButtonClick
