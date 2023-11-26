@@ -12,7 +12,7 @@ public struct ComposeScheduleListScreen: UIViewControllerRepresentable {
                 getParticipantScheduleListUseCase: Container.shared.get(
                     type: GetParticipantScheduleListUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
-                dateTimeFormatter: Container.shared.get(type: CommonNitoDateTimeFormatter.self)
+                dateTimeFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)
             )
         )
     }
