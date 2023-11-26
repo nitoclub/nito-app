@@ -1,7 +1,7 @@
 package club.nito.core.data
 
 import club.nito.core.model.Order
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import kotlinx.coroutines.flow.Flow
 import kotlinx.datetime.Instant
 

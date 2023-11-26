@@ -1,7 +1,7 @@
 package club.nito.core.network.schedule
 
 import club.nito.core.model.Order
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import kotlinx.datetime.Instant
 
 public sealed interface ScheduleRemoteDataSource {

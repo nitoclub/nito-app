@@ -1,7 +1,7 @@
 package club.nito.core.data
 
 import club.nito.core.model.Order
-import club.nito.core.model.Schedule
+import club.nito.core.model.schedule.Schedule
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.Flow
