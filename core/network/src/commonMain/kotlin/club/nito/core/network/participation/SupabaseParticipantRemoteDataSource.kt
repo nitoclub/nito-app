@@ -6,7 +6,7 @@ import club.nito.core.network.participation.model.NetworkParticipant
 import club.nito.core.network.participation.model.toNetworkModel
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
-import io.github.jan.supabase.postgrest.query.Returning
+import io.github.jan.supabase.postgrest.query.Count
 
 public class SupabaseParticipantRemoteDataSource(
     private val client: SupabaseClient,
@@ -14,36 +14,35 @@ public class SupabaseParticipantRemoteDataSource(
     private val postgrest = client.postgrest["participants"]
 
     override suspend fun getParticipants(scheduleId: String): List<Participant> = postgrest
-        .select(
-            filter = {
+        .select {
+            filter {
                 and {
                     eq("schedule_id", scheduleId)
                     exact("deleted_at", null)
                 }
-            },
-        )
+            }
+        }
         .decodeList<NetworkParticipant>()
         .map(NetworkParticipant::toParticipant)
 
     override suspend fun getParticipants(scheduleIds: List<String>): List<Participant> = postgrest
-        .select(
-            filter = {
+        .select {
+            filter {
                 and {
                     isIn("schedule_id", scheduleIds)
                     exact("deleted_at", null)
                 }
-            },
-        )
+            }
+        }
         .decodeList<NetworkParticipant>()
         .map(NetworkParticipant::toParticipant)
 
     override suspend fun participate(declaration: ParticipantDeclaration): Long {
         val result = postgrest.insert(
             value = declaration.toNetworkModel(),
-            upsert = true,
-            returning = Returning.MINIMAL,
-            filter = {},
-        )
-        return result.count() ?: 0
+        ) {
+            count(Count.EXACT)
+        }
+        return result.countOrNull() ?: 0
     }
 }

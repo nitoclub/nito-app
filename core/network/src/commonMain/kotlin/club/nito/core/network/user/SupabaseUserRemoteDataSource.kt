@@ -12,22 +12,23 @@ public class SupabaseUserRemoteDataSource(
 
     override suspend fun getProfile(userId: String): UserProfile? {
         return postgrest
-            .select(
-                filter = {
+            .select {
+                single()
+                filter {
                     eq("id", userId)
-                },
-            )
+                }
+            }
             .decodeSingleOrNull<NetworkUserProfile>()
             ?.let(NetworkUserProfile::toUserProfile)
     }
 
     override suspend fun getProfiles(userIds: List<String>): List<UserProfile> {
         return postgrest
-            .select(
-                filter = {
+            .select {
+                filter {
                     isIn("id", userIds)
-                },
-            )
+                }
+            }
             .decodeList<NetworkUserProfile>()
             .map(NetworkUserProfile::toUserProfile)
     }

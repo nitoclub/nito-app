@@ -4,14 +4,14 @@ import club.nito.core.model.AuthStatus
 import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.UserInfo
 import club.nito.core.model.UserSession
-import io.github.jan.supabase.gotrue.GoTrue
+import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.gotrue.SessionStatus
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 public class SupabaseAuthRemoteDataSource(
-    private val goTrue: GoTrue,
+    private val goTrue: Auth,
 ) : AuthRemoteDataSource {
     override val authStatus: Flow<FetchSingleResult<AuthStatus>> = goTrue.sessionStatus.map {
         when (it) {
@@ -37,12 +37,12 @@ public class SupabaseAuthRemoteDataSource(
         }
     }
 
-    override suspend fun login(email: String, password: String): Unit = goTrue.loginWith(Email) {
+    override suspend fun login(email: String, password: String): Unit = goTrue.signInWith(Email) {
         this.email = email
         this.password = password
     }
 
-    override suspend fun logout(): Unit = goTrue.logout()
+    override suspend fun logout(): Unit = goTrue.signOut()
 
     override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo = goTrue.modifyUser {
         this.email = email
