@@ -25,24 +25,26 @@ public class SupabaseScheduleRemoteDataSource(
         order: Order,
         after: Instant?,
     ): List<Schedule> = postgrest
-        .select(
-            filter = {
+        .select {
+            filter {
                 exact(Column.DELETED_AT.columnName, null)
                 after?.let { gte(Column.SCHEDULED_AT.columnName, it) }
-                order(Column.SCHEDULED_AT.columnName, order = order.toSupabaseOrder())
-                limit(count = limit.toLong())
-            },
-        )
+            }
+            order(Column.SCHEDULED_AT.columnName, order = order.toSupabaseOrder())
+            limit(count = limit.toLong())
+        }
         .decodeList<NetworkSchedule>()
         .map(NetworkSchedule::toSchedule)
         .also { log.d { "getScheduleList: $it" } }
 
     override suspend fun getSchedule(id: String): Schedule {
         return postgrest
-            .select(
-                single = true,
-                filter = { eq("id", id) },
-            )
+            .select {
+                single()
+                filter {
+                    exact(Column.DELETED_AT.columnName, null)
+                }
+            }
             .decodeSingle<NetworkSchedule>()
             .toSchedule()
     }
