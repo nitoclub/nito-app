@@ -2,6 +2,7 @@ package club.nito.core.network.schedule
 
 import club.nito.core.model.Order
 import club.nito.core.model.schedule.Schedule
+import club.nito.core.network.NetworkService
 import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.toSupabaseOrder
 import co.touchlab.kermit.Logger
@@ -15,6 +16,7 @@ private enum class Column(val columnName: String) {
 }
 
 public class SupabaseScheduleRemoteDataSource(
+    private val networkService: NetworkService,
     private val client: SupabaseClient,
 ) : ScheduleRemoteDataSource {
     private val log = Logger.withTag("SupabaseScheduleRemoteDataSource")
@@ -24,21 +26,23 @@ public class SupabaseScheduleRemoteDataSource(
         limit: Int,
         order: Order,
         after: Instant?,
-    ): List<Schedule> = postgrest
-        .select {
-            filter {
-                exact(Column.DELETED_AT.columnName, null)
-                after?.let { gte(Column.SCHEDULED_AT.columnName, it) }
+    ): List<Schedule> = networkService {
+        postgrest
+            .select {
+                filter {
+                    exact(Column.DELETED_AT.columnName, null)
+                    after?.let { gte(Column.SCHEDULED_AT.columnName, it) }
+                }
+                order(Column.SCHEDULED_AT.columnName, order = order.toSupabaseOrder())
+                limit(count = limit.toLong())
             }
-            order(Column.SCHEDULED_AT.columnName, order = order.toSupabaseOrder())
-            limit(count = limit.toLong())
-        }
-        .decodeList<NetworkSchedule>()
-        .map(NetworkSchedule::toSchedule)
-        .also { log.d { "getScheduleList: $it" } }
+            .decodeList<NetworkSchedule>()
+            .map(NetworkSchedule::toSchedule)
+            .also { log.d { "getScheduleList: $it" } }
+    }
 
-    override suspend fun getSchedule(id: String): Schedule {
-        return postgrest
+    override suspend fun getSchedule(id: String): Schedule = networkService {
+        postgrest
             .select {
                 single()
                 filter {

@@ -1,7 +1,6 @@
 package club.nito.core.network.auth
 
 import club.nito.core.model.AuthStatus
-import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.UserInfo
 import club.nito.core.model.UserMfaFactor
 import club.nito.core.model.UserSession
@@ -16,17 +15,15 @@ public class FakeAuthRemoteDataSource(
     coroutineScope: CoroutineScope,
 ) : AuthRemoteDataSource {
 
-    private val _authStatus = MutableStateFlow<FetchSingleResult<AuthStatus>>(FetchSingleResult.Loading)
-    override val authStatus: Flow<FetchSingleResult<AuthStatus>> = _authStatus
+    private val _authStatus = MutableStateFlow<AuthStatus>(AuthStatus.Loading)
+    override val authStatus: Flow<AuthStatus> = _authStatus
 
     init {
         coroutineScope.launch {
             delay(1000)
 
-            _authStatus.value = FetchSingleResult.Success(
-                AuthStatus.Authenticated(
-                    session = authenticatedUserSession,
-                ),
+            _authStatus.value = AuthStatus.Authenticated(
+                session = authenticatedUserSession,
             )
         }
     }
@@ -62,19 +59,21 @@ public class FakeAuthRemoteDataSource(
     )
 
     override suspend fun login(email: String, password: String): Unit = _authStatus.emit(
-        FetchSingleResult.Success(
-            AuthStatus.Authenticated(session = authenticatedUserSession),
-        ),
+        AuthStatus.Authenticated(session = authenticatedUserSession),
     )
 
     override suspend fun logout(): Unit = _authStatus.emit(
-        FetchSingleResult.Success(AuthStatus.NotAuthenticated),
+        AuthStatus.NotAuthenticated,
     )
 
     override suspend fun modifyAuthUser(email: String?, password: String?): UserInfo {
         return createFakeUserInfo(
             email = email,
         )
+    }
+
+    override suspend fun authIfNeeded() {
+        // Do nothing
     }
 
     private fun createFakeUserInfo(

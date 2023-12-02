@@ -1,10 +1,9 @@
 package club.nito.feature.auth
 
+import club.nito.core.domain.AuthStatusStreamUseCase
 import club.nito.core.domain.LoginUseCase
-import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.ExecuteResult
-import club.nito.core.model.FetchSingleResult
 import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
@@ -19,7 +18,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 public class LoginScreenStateMachine(
-    observeAuthStatusUseCase: ObserveAuthStatusUseCase,
+    authStatusStream: AuthStatusStreamUseCase,
     private val login: LoginUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
 ) : StateMachine(),
@@ -27,10 +26,10 @@ public class LoginScreenStateMachine(
 
     private val email = MutableStateFlow("")
     private val password = MutableStateFlow("")
-    private val authStatus = observeAuthStatusUseCase().stateIn(
+    private val authStatus = authStatusStream().stateIn(
         scope = stateMachineScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = FetchSingleResult.Loading,
+        initialValue = AuthStatus.Loading,
     )
 
     public val uiState: StateFlow<LoginScreenUiState> = buildUiState(
@@ -41,7 +40,7 @@ public class LoginScreenStateMachine(
         LoginScreenUiState(
             email = email,
             password = password,
-            isSignInning = authStatus is FetchSingleResult.Loading,
+            isSignInning = authStatus is AuthStatus.Loading,
         )
     }
 
@@ -51,7 +50,7 @@ public class LoginScreenStateMachine(
     init {
         stateMachineScope.launch {
             authStatus.collectLatest {
-                if (it is FetchSingleResult.Success && it.data is AuthStatus.Authenticated) {
+                if (it is AuthStatus.Authenticated) {
                     _events.emit(listOf(LoginScreenEvent.LoggedIn))
                 }
             }

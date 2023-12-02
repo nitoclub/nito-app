@@ -1,7 +1,6 @@
 package club.nito.core.data
 
 import club.nito.core.model.AuthStatus
-import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.UserInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -12,7 +11,7 @@ public sealed interface AuthRepository {
     /**
      * 認証情報の状態
      */
-    public val authStatus: Flow<FetchSingleResult<AuthStatus>>
+    public val authStatus: Flow<AuthStatus>
 
     /**
      * ログインする

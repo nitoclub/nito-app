@@ -15,7 +15,7 @@ public struct ComposeLoginScreen: UIViewControllerRepresentable {
     public func makeUIViewController(context: Context) -> UIViewController {
         return LoginScreen_iosKt.LoginRouteViewController(
             viewModel: LoginScreenStateMachine(
-                observeAuthStatusUseCase: Container.shared.get(type: ObserveAuthStatusUseCase.self),
+                authStatusStream: Container.shared.get(type: AuthStatusStreamUseCase.self),
                 login: Container.shared.get(type: LoginUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self)
             ),

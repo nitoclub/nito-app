@@ -1,7 +1,6 @@
 package club.nito.core.data
 
 import club.nito.core.model.AuthStatus
-import club.nito.core.model.FetchSingleResult
 import club.nito.core.model.UserInfo
 import club.nito.core.network.auth.AuthRemoteDataSource
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 public class DefaultAuthRepository(
     private val remoteDataSource: AuthRemoteDataSource,
 ) : AuthRepository {
-    override val authStatus: Flow<FetchSingleResult<AuthStatus>> = remoteDataSource.authStatus
+    override val authStatus: Flow<AuthStatus> = remoteDataSource.authStatus
 
     override suspend fun login(email: String, password: String): Unit = remoteDataSource.login(
         email = email,

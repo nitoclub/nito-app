@@ -24,7 +24,7 @@ enum Routing: Hashable {
 class RootStateMachine: ObservableObject {
     @Published var state: RootViewUIState = .init()
     @Published var path: NavigationPath = .init()
-    @Dependency(\.observeAuthStatusUseCase) var observeAuthStatusUseCase
+    @Dependency(\.authStatusStreamUseCase) var authStatusStream
 
     private var cachedAuthStatus: AuthStatus? {
         didSet {
@@ -49,10 +49,9 @@ class RootStateMachine: ObservableObject {
 
         loadTask = Task.detached { @MainActor in
             do {
-                for try await authStatus in self.observeAuthStatusUseCase.execute() {
-                    if case let status as FetchSingleResultSuccess<AuthStatus> = authStatus {
-                        self.cachedAuthStatus = status.data
-                    }
+                for try await authStatus in self.authStatusStream.execute() {
+                    self.cachedAuthStatus = authStatus
+                    print(authStatus)
                 }
             } catch let error {
                 self.state.authStatus = .failed(error)

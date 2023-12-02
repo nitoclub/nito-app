@@ -11,7 +11,7 @@ public struct ComposeSettingsScreen: UIViewControllerRepresentable {
     public func makeUIViewController(context: Context) -> UIViewController {
         return SettingsScreen_iosKt.SettingsScreenUIViewController(
             stateMachine: SettingsScreenStateMachine(
-                observeAuthStatus: Container.shared.get(type: ObserveAuthStatusUseCase.self),
+                authStatusStream: Container.shared.get(type: AuthStatusStreamUseCase.self),
                 modifyPassword: Container.shared.get(type: ModifyPasswordUseCase.self),
                 logout: Container.shared.get(type: LogoutUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self)
