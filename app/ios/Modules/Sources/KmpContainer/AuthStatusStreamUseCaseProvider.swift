@@ -2,7 +2,7 @@ import Dependencies
 import NitoKmp
 
 public struct AuthStatusStreamUseCaseProvider {
-    private static var observeAuthStatusUseCase: AuthStatusStreamUseCase {
+    private static var authStatusStreamUseCase: AuthStatusStreamUseCase {
         Container.shared.get(type: AuthStatusStreamUseCase.self)
     }
 
@@ -14,7 +14,7 @@ extension AuthStatusStreamUseCaseProvider: DependencyKey {
     static public var liveValue: AuthStatusStreamUseCaseProvider =
         AuthStatusStreamUseCaseProvider(
             execute: {
-                observeAuthStatusUseCase.invoke().stream()
+                authStatusStreamUseCase.invoke().stream()
             }
         )
 }
