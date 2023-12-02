@@ -95,6 +95,8 @@ private fun RouteBuilder.root(
                     ),
                 ),
             )
+
+            else -> {}
         }
     }
 }

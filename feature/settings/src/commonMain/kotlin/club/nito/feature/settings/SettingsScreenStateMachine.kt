@@ -1,11 +1,10 @@
 package club.nito.feature.settings
 
+import club.nito.core.domain.AuthStatusStreamUseCase
 import club.nito.core.domain.LogoutUseCase
 import club.nito.core.domain.ModifyPasswordUseCase
-import club.nito.core.domain.ObserveAuthStatusUseCase
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.ExecuteResult
-import club.nito.core.model.FetchSingleResult
 import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
@@ -21,17 +20,17 @@ import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
 public class SettingsScreenStateMachine(
-    observeAuthStatus: ObserveAuthStatusUseCase,
+    authStatusStream: AuthStatusStreamUseCase,
     private val modifyPassword: ModifyPasswordUseCase,
     private val logout: LogoutUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
 
-    private val authStatus = observeAuthStatus().stateIn(
+    private val authStatus = authStatusStream().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = FetchSingleResult.Loading,
+        initialValue = AuthStatus.Loading,
     )
 
     private val showModifyPasswordDialog = MutableStateFlow(false)
@@ -51,7 +50,7 @@ public class SettingsScreenStateMachine(
         }
 
         SettingsScreenUiState(
-            isSignOuting = authStatus is FetchSingleResult.Loading,
+            isSignOuting = authStatus is AuthStatus.Loading,
             modifyPassword = modifyPassword,
         )
     }
@@ -62,7 +61,7 @@ public class SettingsScreenStateMachine(
     init {
         viewModelScope.launch {
             authStatus.collectLatest {
-                if (it is FetchSingleResult.Success && it.data is AuthStatus.NotAuthenticated) {
+                if (it is AuthStatus.NotAuthenticated) {
                     _events.emit(listOf(SettingsScreenEvent.SignedOut))
                 }
             }

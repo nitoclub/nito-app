@@ -7,7 +7,7 @@ import org.koin.dsl.module
 public val settingsFeatureModule: Module = module {
     factory {
         SettingsScreenStateMachine(
-            observeAuthStatus = get(),
+            authStatusStream = get(),
             modifyPassword = get(),
             logout = get(),
             userMessageStateHolder = get(),

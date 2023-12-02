@@ -7,7 +7,7 @@ import org.koin.dsl.module
 public val authFeatureModule: Module = module {
     factory {
         LoginScreenStateMachine(
-            observeAuthStatusUseCase = get(),
+            authStatusStream = get(),
             login = get(),
             userMessageStateHolder = get(),
         )

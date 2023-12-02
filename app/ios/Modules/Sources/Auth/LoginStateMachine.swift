@@ -18,7 +18,7 @@ enum LoginScreenEvent {
 @MainActor
 final class LoginStateMachine: ObservableObject {
     @Dependency(\.loginUseCase) var loginUseCase
-    @Dependency(\.observeAuthStatusUseCase) var observeAuthStatusUseCase
+    @Dependency(\.authStatusStreamUseCase) var authStatusStream
 
     @Published var state: LoginViewUIState = .init()
     @Published var event: LoginScreenEvent? = nil
@@ -40,7 +40,7 @@ final class LoginStateMachine: ObservableObject {
 
         loadTask = Task.detached { @MainActor in
             do {
-                for try await authStatus in self.observeAuthStatusUseCase.execute() {
+                for try await authStatus in self.authStatusStream.execute() {
                     if case let status as FetchSingleResultSuccess<AuthStatus> = authStatus {
                         self.cachedAuthStatus = status.data
                     }

@@ -1,7 +1,7 @@
 package club.nito.app.shared
 
-import club.nito.core.domain.ObserveAuthStatusUseCase
-import club.nito.core.model.FetchSingleResult
+import club.nito.core.domain.AuthStatusStreamUseCase
+import club.nito.core.model.AuthStatus
 import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.stateMachineScope
@@ -10,19 +10,24 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 
 class NitoAppStateMachine(
-    observeAuthStatus: ObserveAuthStatusUseCase,
+    authStatusStream: AuthStatusStreamUseCase,
 ) : StateMachine() {
-    private val authStatus = observeAuthStatus().stateIn(
+    private val authStatus = authStatusStream().stateIn(
         scope = stateMachineScope,
         started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = FetchSingleResult.Loading,
+        initialValue = AuthStatus.Loading,
     )
 
     val uiState: StateFlow<NitoAppUiState> = buildUiState(authStatus) {
-        if (it !is FetchSingleResult.Success) {
-            return@buildUiState NitoAppUiState.Loading
-        }
+        when (it) {
+            AuthStatus.Loading -> NitoAppUiState.Loading
 
-        NitoAppUiState.Success(it.data)
+            AuthStatus.NotAuthenticated,
+            is AuthStatus.Authenticated,
+            -> NitoAppUiState.Success(it)
+
+            // TODO: 適切なハンドリングを行う
+            AuthStatus.NetworkError -> NitoAppUiState.Loading
+        }
     }
 }
