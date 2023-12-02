@@ -25,7 +25,6 @@ internal fun createNitoSupabaseClient(
     defaultSerializer = KotlinXSerializer(json)
 }
 
-@OptIn(ExperimentalSerializationApi::class)
 internal fun createNitoKtorJsonSettings(): Json = Json {
     encodeDefaults = true
     isLenient = true
@@ -37,6 +36,7 @@ internal fun createNitoKtorJsonSettings(): Json = Json {
     coerceInputValues = true
     useAlternativeNames = false
 
+    @OptIn(ExperimentalSerializationApi::class)
     namingStrategy = JsonNamingStrategy.SnakeCase
 
     serializersModule = SerializersModule {
