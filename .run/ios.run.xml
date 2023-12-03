@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="ios" type="KmmRunConfiguration" factoryName="iOS Application" CONFIG_VERSION="1" EXEC_TARGET_ID="18D77A77-BA5C-4C19-A1FF-C4CE63906EA6" XCODE_PROJECT="$PROJECT_DIR$/app/ios/App/Nito/Nito.xcodeproj" XCODE_CONFIGURATION="Debug" XCODE_SCHEME="Dev">
+    <method v="2">
+      <option name="com.jetbrains.kmm.ios.BuildIOSAppTask" enabled="true" />
+    </method>
+  </configuration>
+</component>
