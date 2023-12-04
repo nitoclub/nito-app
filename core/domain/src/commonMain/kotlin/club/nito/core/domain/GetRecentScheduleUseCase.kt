@@ -9,7 +9,6 @@ import club.nito.core.model.Order
 import club.nito.core.model.schedule.Schedule
 import club.nito.core.model.UserProfile
 import club.nito.core.model.toNitoError
-import co.touchlab.kermit.Logger
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.datetime.Clock
@@ -26,8 +25,6 @@ public class GetRecentScheduleExecutor(
     private val participantRepository: ParticipantRepository,
     private val userRepository: UserRepository,
 ) : GetRecentScheduleUseCase {
-    private val log = Logger.withTag("GetRecentScheduleExecutor")
-
     override fun invoke(): Flow<FetchSingleContentResult<ParticipantSchedule>> = flow {
         val data = try {
             scheduleRepository.getScheduleList(
@@ -54,7 +51,6 @@ public class GetRecentScheduleExecutor(
             schedule = schedule,
             userProfiles = userProfiles,
         )
-        log.i { "participantSchedule: $participantSchedule" }
 
         emit(FetchSingleContentResult.Success(participantSchedule))
     }
