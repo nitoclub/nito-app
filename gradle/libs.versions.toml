@@ -30,7 +30,7 @@ supabase = "2.0.0-alpha-2"
 logback = "1.4.14"
 graphqlKotlin = "7.0.2"
 kotest = "5.8.0"
-precompose = "1.5.7"
+precompose = "1.5.8"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
