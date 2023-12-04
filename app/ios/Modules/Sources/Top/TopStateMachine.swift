@@ -37,7 +37,6 @@ final class TopStateMachine: ObservableObject {
         loadTask = Task.detached { @MainActor in
             do {
                 for try await recentSchedule in self.getRecentScheduleUseCase.execute() {
-                    print("recentSchedule: \(recentSchedule)")
                     self.cachedRecentSchedule = recentSchedule
                 }
             } catch let error {
