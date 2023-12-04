@@ -6,7 +6,7 @@ plugins {
     id("nito.primitive.detekt")
 }
 
-android.namespace = "club.nito.core.data"
+android.namespace = "club.nito.core.datastore"
 
 kotlin {
     explicitApi()
@@ -16,11 +16,9 @@ kotlin {
             dependencies {
                 implementation(projects.core.common)
                 implementation(projects.core.model)
-                implementation(projects.core.database)
-                implementation(projects.core.datastore)
-                implementation(projects.core.network)
 
                 implementation(libs.kotlinxCoroutinesCore)
+                implementation(libs.kotlinSerializationJson)
 
                 implementation(libs.koin)
                 implementation(libs.kermit)

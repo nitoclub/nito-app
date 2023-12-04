@@ -28,6 +28,7 @@ include(
     ":app:backend",
     ":core:common",
     ":core:database",
+    ":core:datastore",
     ":core:network",
     ":core:data",
     ":core:model",
