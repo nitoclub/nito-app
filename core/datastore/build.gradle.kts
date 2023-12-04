@@ -22,6 +22,9 @@ kotlin {
 
                 implementation(libs.koin)
                 implementation(libs.kermit)
+
+                implementation(libs.multiplatformSettingsNoArg)
+                implementation(libs.multiplatformSettingsCoroutines)
             }
         }
     }
