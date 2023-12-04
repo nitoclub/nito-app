@@ -1,6 +1,6 @@
 package club.nito.core.network.di
 
-import club.nito.core.network.createNitoKtorJsonSettings
+import club.nito.core.common.nitoJsonSettings
 import club.nito.core.network.createNitoSupabaseClient
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.gotrue.Auth
@@ -16,7 +16,7 @@ public val supabaseClientModule: Module = module {
         )
     }
     single<Json> {
-        createNitoKtorJsonSettings()
+        nitoJsonSettings
     }
     single<Auth> {
         get<SupabaseClient>().auth
