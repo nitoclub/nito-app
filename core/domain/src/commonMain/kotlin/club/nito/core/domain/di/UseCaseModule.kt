@@ -2,6 +2,8 @@ package club.nito.core.domain.di
 
 import club.nito.core.domain.AuthStatusStreamExecutor
 import club.nito.core.domain.AuthStatusStreamUseCase
+import club.nito.core.domain.FetchParticipantScheduleByIdExecutor
+import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
 import club.nito.core.domain.GetParticipantScheduleListExecutor
 import club.nito.core.domain.GetParticipantScheduleListUseCase
 import club.nito.core.domain.GetRecentScheduleExecutor
@@ -24,6 +26,7 @@ public val useCaseModule: Module = module {
     singleOf(::LoginExecutor) bind LoginUseCase::class
     singleOf(::ModifyPasswordExecutor) bind ModifyPasswordUseCase::class
     singleOf(::LogoutExecutor) bind LogoutUseCase::class
+    singleOf(::FetchParticipantScheduleByIdExecutor) bind FetchParticipantScheduleByIdUseCase::class
     singleOf(::GetRecentScheduleExecutor) bind GetRecentScheduleUseCase::class
     singleOf(::GetParticipantScheduleListExecutor) bind GetParticipantScheduleListUseCase::class
     singleOf(::ParticipateExecutor) bind ParticipateUseCase::class

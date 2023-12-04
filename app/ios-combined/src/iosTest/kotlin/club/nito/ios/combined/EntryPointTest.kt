@@ -2,13 +2,14 @@ package club.nito.ios.combined
 
 import club.nito.core.data.AuthRepository
 import club.nito.core.data.ScheduleRepository
+import club.nito.core.domain.AuthStatusStreamUseCase
+import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
 import club.nito.core.domain.GetParticipantScheduleListUseCase
 import club.nito.core.domain.GetRecentScheduleUseCase
-import club.nito.core.domain.ModifyPasswordUseCase
-import club.nito.core.domain.AuthStatusStreamUseCase
-import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.domain.LoginUseCase
 import club.nito.core.domain.LogoutUseCase
+import club.nito.core.domain.ModifyPasswordUseCase
+import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.participation.ParticipantRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
@@ -39,6 +40,7 @@ class EntryPointTest {
         assertNotNull(kmpEntryPoint.get<LoginUseCase>())
         assertNotNull(kmpEntryPoint.get<ModifyPasswordUseCase>())
         assertNotNull(kmpEntryPoint.get<LogoutUseCase>())
+        assertNotNull(kmpEntryPoint.get<FetchParticipantScheduleByIdUseCase>())
         assertNotNull(kmpEntryPoint.get<GetRecentScheduleUseCase>())
         assertNotNull(kmpEntryPoint.get<GetParticipantScheduleListUseCase>())
         assertNotNull(kmpEntryPoint.get<ParticipateUseCase>())
