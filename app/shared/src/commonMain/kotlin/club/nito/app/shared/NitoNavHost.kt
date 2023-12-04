@@ -7,8 +7,8 @@ import club.nito.core.model.AuthStatus
 import club.nito.feature.auth.loginNavigationRoute
 import club.nito.feature.auth.loginScreen
 import club.nito.feature.auth.navigateToLogin
-import club.nito.feature.schedule.navigateToSchedule
-import club.nito.feature.schedule.scheduleScreen
+import club.nito.feature.schedule.list.navigateToSchedule
+import club.nito.feature.schedule.list.scheduleScreen
 import club.nito.feature.settings.navigateToSettings
 import club.nito.feature.settings.settingsScreen
 import club.nito.feature.top.navigateToTop

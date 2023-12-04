@@ -1,4 +1,4 @@
-package club.nito.feature.schedule
+package club.nito.feature.schedule.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

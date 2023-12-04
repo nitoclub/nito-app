@@ -1,4 +1,4 @@
-package club.nito.feature.schedule
+package club.nito.feature.schedule.list
 
 import club.nito.core.common.NitoDateFormatter
 import club.nito.core.domain.GetParticipantScheduleListUseCase

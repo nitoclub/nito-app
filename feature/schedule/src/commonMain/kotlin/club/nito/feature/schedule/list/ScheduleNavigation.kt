@@ -1,4 +1,4 @@
-package club.nito.feature.schedule
+package club.nito.feature.schedule.list
 
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
