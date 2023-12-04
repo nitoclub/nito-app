@@ -16,15 +16,15 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
-public class ScheduleListViewModel(
-    getParticipantScheduleListUseCase: GetParticipantScheduleListUseCase,
+public class ScheduleListStateMachine(
+    getParticipantScheduleList: GetParticipantScheduleListUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateFormatter,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
     private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
 
-    private val scheduleList = getParticipantScheduleListUseCase().stateIn(
+    private val scheduleList = getParticipantScheduleList().stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = FetchMultipleContentResult.Loading,
