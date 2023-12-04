@@ -31,6 +31,9 @@ kotlin {
                 implementation(libs.supabaseGotrue)
                 implementation(libs.supabasePostgrest)
                 implementation(libs.supabaseRealtime)
+
+                implementation(libs.multiplatformSettingsNoArg)
+                implementation(libs.multiplatformSettingsCoroutines)
             }
         }
 
