@@ -6,11 +6,7 @@ import io.github.jan.supabase.gotrue.Auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.serializer.KotlinXSerializer
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonNamingStrategy
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.contextual
 
 internal fun createNitoSupabaseClient(
     json: Json,
@@ -23,23 +19,4 @@ internal fun createNitoSupabaseClient(
     install(Realtime)
 
     defaultSerializer = KotlinXSerializer(json)
-}
-
-internal fun createNitoKtorJsonSettings(): Json = Json {
-    encodeDefaults = true
-    isLenient = true
-    allowSpecialFloatingPointValues = true
-    allowStructuredMapKeys = true
-    prettyPrint = false
-    useArrayPolymorphism = false
-    ignoreUnknownKeys = true
-    coerceInputValues = true
-    useAlternativeNames = false
-
-    @OptIn(ExperimentalSerializationApi::class)
-    namingStrategy = JsonNamingStrategy.SnakeCase
-
-    serializersModule = SerializersModule {
-        contextual(InstantSerializer)
-    }
 }

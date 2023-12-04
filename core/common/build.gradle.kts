@@ -16,6 +16,7 @@ kotlin {
             dependencies {
                 implementation(libs.kotlinxCoroutinesCore)
                 implementation(libs.kotlinxDatetime)
+                implementation(libs.kotlinSerializationJson)
             }
         }
         iosMain {

@@ -11,6 +11,7 @@ import club.nito.app.shared.di.featureModules
 import club.nito.app.shared.di.nitoDateFormatterModule
 import club.nito.app.shared.di.userMessageStateHolderModule
 import club.nito.core.data.di.dataModule
+import club.nito.core.datastore.di.dataStoreModule
 import club.nito.core.designsystem.theme.NitoTheme
 import club.nito.core.domain.di.useCaseModule
 import club.nito.core.network.di.remoteDataSourceModule
@@ -41,6 +42,7 @@ fun NitoApp(
                     supabaseClientModule,
                     remoteDataSourceModule,
 //                fakeRemoteDataSourceModule,
+                    dataStoreModule,
                     dataModule,
                     useCaseModule,
 
