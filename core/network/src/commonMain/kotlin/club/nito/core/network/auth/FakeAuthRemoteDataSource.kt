@@ -80,6 +80,8 @@ public class FakeAuthRemoteDataSource(
         // Do nothing
     }
 
+    override suspend fun currentUserOrNull(): UserInfo = createFakeUserInfo()
+
     private fun createFakeUserInfo(
         aud: String = "aud",
         confirmationSentAt: Instant? = null,
