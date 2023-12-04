@@ -57,4 +57,8 @@ public class SupabaseAuthRemoteDataSource(
     }
 
     override suspend fun refreshCurrentSession(): Unit = goTrue.refreshCurrentSession()
+
+    override suspend fun currentUserOrNull(): UserInfo? {
+        return goTrue.currentUserOrNull()?.let(SupabaseAuthRemoteDataSourceMapper::transformToUserInfo)
+    }
 }
