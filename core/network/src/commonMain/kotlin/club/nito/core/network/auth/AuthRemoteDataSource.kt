@@ -12,4 +12,9 @@ public sealed interface AuthRemoteDataSource {
     public suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
     public suspend fun authIfNeeded()
     public suspend fun refreshCurrentSession()
+
+    /**
+     * 現在ログイン中のユーザー情報を取得する
+     */
+    public suspend fun currentUserOrNull(): UserInfo?
 }

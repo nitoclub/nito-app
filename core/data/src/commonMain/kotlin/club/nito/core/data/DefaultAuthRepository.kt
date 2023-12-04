@@ -1,6 +1,7 @@
 package club.nito.core.data
 
 import club.nito.core.datastore.DataStore
+import club.nito.core.model.ApiException
 import club.nito.core.model.AuthStatus
 import club.nito.core.model.UserInfo
 import club.nito.core.network.auth.AuthRemoteDataSource
@@ -31,4 +32,7 @@ public class DefaultAuthRepository(
         email = email,
         password = password,
     )
+
+    override suspend fun currentUser(): UserInfo = remoteDataSource.currentUserOrNull()
+        ?: throw ApiException.SessionNotFoundException(cause = null)
 }
