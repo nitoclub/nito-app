@@ -55,4 +55,6 @@ public class SupabaseAuthRemoteDataSource(
             goTrue.refreshCurrentSession()
         }
     }
+
+    override suspend fun refreshCurrentSession(): Unit = goTrue.refreshCurrentSession()
 }
