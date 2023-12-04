@@ -5,7 +5,6 @@ import club.nito.core.model.schedule.Schedule
 import club.nito.core.network.NetworkService
 import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.toSupabaseOrder
-import co.touchlab.kermit.Logger
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.datetime.Instant
@@ -19,7 +18,6 @@ public class SupabaseScheduleRemoteDataSource(
     private val networkService: NetworkService,
     private val client: SupabaseClient,
 ) : ScheduleRemoteDataSource {
-    private val log = Logger.withTag("SupabaseScheduleRemoteDataSource")
     private val postgrest = client.postgrest["schedules"]
 
     override suspend fun getScheduleList(
@@ -38,7 +36,6 @@ public class SupabaseScheduleRemoteDataSource(
             }
             .decodeList<NetworkSchedule>()
             .map(NetworkSchedule::toSchedule)
-            .also { log.d { "getScheduleList: $it" } }
     }
 
     override suspend fun getSchedule(id: String): Schedule = networkService {
