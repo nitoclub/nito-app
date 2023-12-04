@@ -51,7 +51,6 @@ class RootStateMachine: ObservableObject {
             do {
                 for try await authStatus in self.authStatusStream.execute() {
                     self.cachedAuthStatus = authStatus
-                    print(authStatus)
                 }
             } catch let error {
                 self.state.authStatus = .failed(error)
