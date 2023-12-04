@@ -1,10 +1,11 @@
 package club.nito.core.domain.model
 
 import club.nito.core.model.UserProfile
+import club.nito.core.model.schedule.ScheduleId
 import kotlinx.datetime.Instant
 
 public data class ParticipantSchedule(
-    val id: String,
+    val id: ScheduleId,
     val scheduledAt: Instant,
     val metAt: Instant,
     val venueId: String,
