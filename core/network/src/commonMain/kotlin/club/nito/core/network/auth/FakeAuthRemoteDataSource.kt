@@ -76,6 +76,10 @@ public class FakeAuthRemoteDataSource(
         // Do nothing
     }
 
+    override suspend fun refreshCurrentSession() {
+        // Do nothing
+    }
+
     private fun createFakeUserInfo(
         aud: String = "aud",
         confirmationSentAt: Instant? = null,

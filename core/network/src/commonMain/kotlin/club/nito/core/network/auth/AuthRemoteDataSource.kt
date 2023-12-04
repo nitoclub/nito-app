@@ -11,4 +11,5 @@ public sealed interface AuthRemoteDataSource {
     public suspend fun logout()
     public suspend fun modifyAuthUser(email: String?, password: String?): UserInfo
     public suspend fun authIfNeeded()
+    public suspend fun refreshCurrentSession()
 }
