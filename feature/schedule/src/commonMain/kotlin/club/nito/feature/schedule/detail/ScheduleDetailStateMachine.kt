@@ -4,6 +4,7 @@ import club.nito.core.common.NitoDateFormatter
 import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
 import club.nito.core.ui.message.UserMessageStateHolder
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import moe.tlaster.precompose.viewmodel.viewModelScope
 
 public class ScheduleDetailStateMachine(
+    id: ScheduleId,
     fetchParticipantScheduleById: FetchParticipantScheduleByIdUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateFormatter,
@@ -42,7 +44,7 @@ public class ScheduleDetailStateMachine(
 
     init {
         viewModelScope.launch {
-            participantSchedule.value = fetchParticipantScheduleById(id = "")
+            participantSchedule.value = fetchParticipantScheduleById(id = id)
         }
     }
 

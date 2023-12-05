@@ -14,13 +14,18 @@ import androidx.compose.ui.Modifier
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ConfirmParticipateDialog
 import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
+import org.koin.core.parameter.parametersOf
 
 @Composable
 public fun ScheduleDetailRoute(
-    stateMachine: ScheduleDetailStateMachine = koinStateMachine(ScheduleDetailStateMachine::class),
+    id: ScheduleId,
+    stateMachine: ScheduleDetailStateMachine = koinStateMachine(ScheduleDetailStateMachine::class) {
+        parametersOf(id)
+    },
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
