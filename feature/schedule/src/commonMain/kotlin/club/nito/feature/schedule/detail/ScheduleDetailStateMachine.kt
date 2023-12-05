@@ -32,7 +32,7 @@ public class ScheduleDetailStateMachine(
     ) { showConfirmParticipateSchedule, participantSchedule ->
         ScheduleDetailScreenUiState(
             dateFormatter = dateTimeFormatter,
-            scheduleList = participantSchedule,
+            schedule = participantSchedule,
             confirmParticipateDialog = showConfirmParticipateSchedule
                 ?.let(ConfirmParticipateDialogUiState::Show)
                 ?: ConfirmParticipateDialogUiState.Hide,
@@ -51,7 +51,7 @@ public class ScheduleDetailStateMachine(
     public fun dispatch(intent: ScheduleDetailIntent) {
         viewModelScope.launch {
             when (intent) {
-                is ScheduleDetailIntent.ClickShowConfirmParticipateDialog -> {
+                is ScheduleDetailIntent.ClickParticipate -> {
                     showConfirmParticipateSchedule.emit(intent.schedule)
                 }
 
