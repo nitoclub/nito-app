@@ -20,6 +20,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ConfirmParticipateDialog
 import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
@@ -28,12 +29,14 @@ import club.nito.feature.top.component.ParticipantScheduleSection
 @Composable
 public fun TopRoute(
     stateMachine: TopScreenStateMachine = koinStateMachine(TopScreenStateMachine::class),
+    onRecentScheduleClicked: (ScheduleId) -> Unit = {},
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
             when (it) {
+                is TopScreenEvent.OnRecentScheduleClicked -> onRecentScheduleClicked(it.scheduleId)
                 TopScreenEvent.NavigateToScheduleList -> onScheduleListClick()
                 TopScreenEvent.NavigateToSettings -> onSettingsClick()
             }

@@ -48,7 +48,11 @@ public class TopScreenStateMachine(
     public fun dispatch(intent: TopScreenIntent) {
         stateMachineScope.launch {
             when (intent) {
-                is TopScreenIntent.ClickShowConfirmParticipateDialog -> showConfirmParticipateSchedule.emit(intent.schedule)
+                is TopScreenIntent.ClickShowConfirmParticipateDialog -> {
+                    _events.emit(_events.value + TopScreenEvent.OnRecentScheduleClicked(intent.schedule.id))
+//                    showConfirmParticipateSchedule.emit(intent.schedule)
+                }
+
                 is TopScreenIntent.ClickParticipateSchedule -> {
                     showConfirmParticipateSchedule.emit(null)
 

@@ -1,5 +1,6 @@
 package club.nito.feature.top
 
+import club.nito.core.model.schedule.ScheduleId
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator
 import moe.tlaster.precompose.navigation.RouteBuilder
@@ -11,6 +12,7 @@ public fun Navigator.navigateToTop(navOptions: NavOptions? = null) {
 }
 
 public fun RouteBuilder.topScreen(
+    onRecentScheduleClicked: (ScheduleId) -> Unit = {},
     onScheduleListClick: () -> Unit = {},
     onSettingsClick: () -> Unit = {},
 ) {
@@ -18,6 +20,7 @@ public fun RouteBuilder.topScreen(
         route = topNavigationRoute,
     ) {
         TopRoute(
+            onRecentScheduleClicked = onRecentScheduleClicked,
             onScheduleListClick = onScheduleListClick,
             onSettingsClick = onSettingsClick,
         )
