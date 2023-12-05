@@ -31,6 +31,7 @@ public fun LoginRoute(
     viewModel: LoginScreenStateMachine = koinStateMachine(LoginScreenStateMachine::class),
     onLoggedIn: () -> Unit = {},
     onRegisterClick: () -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     viewModel.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
@@ -63,16 +64,19 @@ private fun LoginScreen(
     uiState: LoginScreenUiState,
     snackbarHostState: SnackbarHostState,
     dispatch: (LoginScreenIntent) -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "サインイン",
-                    )
-                },
-            )
+            if (hideTopAppBar.not()) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "サインイン",
+                        )
+                    },
+                )
+            }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { padding ->

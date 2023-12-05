@@ -33,6 +33,7 @@ import club.nito.feature.settings.component.ModifyPasswordDialog
 public fun SettingsRoute(
     stateMachine: SettingsScreenStateMachine = koinStateMachine(SettingsScreenStateMachine::class),
     onSignedOut: () -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
@@ -55,6 +56,7 @@ public fun SettingsRoute(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
         dispatch = stateMachine::dispatch,
+        hideTopAppBar = hideTopAppBar,
     )
 }
 
@@ -64,18 +66,21 @@ private fun SettingsScreen(
     uiState: SettingsScreenUiState,
     snackbarHostState: SnackbarHostState,
     dispatch: (SettingsScreenIntent) -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     val modifyPassword = uiState.modifyPassword
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "設定",
-                    )
-                },
-            )
+            if (hideTopAppBar.not()) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "設定",
+                        )
+                    },
+                )
+            }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { padding ->

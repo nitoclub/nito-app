@@ -14,6 +14,7 @@ public fun ScheduleDetailRouteViewController(
         ScheduleDetailRoute(
             id = id,
             stateMachine = stateMachine,
+            hideTopAppBar = true,
         )
     }
 }

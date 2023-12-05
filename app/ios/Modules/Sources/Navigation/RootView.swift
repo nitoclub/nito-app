@@ -22,6 +22,7 @@ public struct RootView: View {
                                 stateMachine.dispatch(intent: .routing(.top))
                             }
                         )
+                        .navigationTitle("ログイン")
                         .navigationBarBackButtonHidden(true)
                         .ignoresSafeArea(.keyboard)
                     case .top:
@@ -43,10 +44,13 @@ public struct RootView: View {
                                 stateMachine.dispatch(intent: .routing(.scheduleDetail(scheduleId: scheduleId)))
                             }
                         )
+                        .navigationTitle("スケジュール一覧")
                     case .scheduleDetail(let scheduleId):
                         ComposeScheduleDetailScreen(scheduleId: scheduleId)
+                            .navigationTitle("スケジュール詳細")
                     case .settings:
                         ComposeSettingsScreen()
+                            .navigationTitle("設定")
                     }
                 }
         }

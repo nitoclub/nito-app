@@ -74,6 +74,7 @@ public fun ScheduleDetailRoute(
     stateMachine: ScheduleDetailStateMachine = koinStateMachine(ScheduleDetailStateMachine::class) {
         parametersOf(id)
     },
+    hideTopAppBar: Boolean = false,
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
@@ -96,6 +97,7 @@ public fun ScheduleDetailRoute(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
         dispatch = stateMachine::dispatch,
+        hideTopAppBar = hideTopAppBar,
     )
 }
 
@@ -105,6 +107,7 @@ private fun ScheduleDetailScreen(
     uiState: ScheduleDetailScreenUiState,
     snackbarHostState: SnackbarHostState,
     dispatch: (ScheduleDetailIntent) -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val localDensity = LocalDensity.current
@@ -116,13 +119,15 @@ private fun ScheduleDetailScreen(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "スケジュール詳細",
-                    )
-                },
-            )
+            if (hideTopAppBar.not()) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "スケジュール詳細",
+                        )
+                    },
+                )
+            }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { innerPadding ->

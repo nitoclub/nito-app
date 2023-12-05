@@ -25,6 +25,7 @@ import club.nito.feature.schedule.component.ScheduleListSection
 public fun ScheduleListRoute(
     stateMachine: ScheduleListStateMachine = koinStateMachine(ScheduleListStateMachine::class),
     onScheduleItemClick: (ScheduleId) -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
@@ -47,6 +48,7 @@ public fun ScheduleListRoute(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
         dispatch = stateMachine::dispatch,
+        hideTopAppBar = hideTopAppBar,
     )
 }
 
@@ -56,18 +58,21 @@ private fun ScheduleListScreen(
     uiState: ScheduleListScreenUiState,
     snackbarHostState: SnackbarHostState,
     dispatch: (ScheduleListIntent) -> Unit = {},
+    hideTopAppBar: Boolean = false,
 ) {
     val confirmParticipateDialog = uiState.confirmParticipateDialog
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        text = "スケジュール一覧",
-                    )
-                },
-            )
+            if (hideTopAppBar.not()) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            text = "スケジュール一覧",
+                        )
+                    },
+                )
+            }
         },
         snackbarHost = { SnackbarHost(snackbarHostState) },
         content = { innerPadding ->
