@@ -26,6 +26,9 @@ public struct RootView: View {
                         .ignoresSafeArea(.keyboard)
                     case .top:
                         ComposeTopScreen(
+                            onRecentScheduleClicked: { scheduleId in
+                                stateMachine.dispatch(intent: .routing(.scheduleDetail(scheduleId: scheduleId)))
+                            },
                             onScheduleListButtonClick: {
                                 stateMachine.dispatch(intent: .routing(.scheduleList))
                             },
@@ -36,6 +39,8 @@ public struct RootView: View {
                         .navigationBarBackButtonHidden(true)
                     case .scheduleList:
                         ComposeScheduleListScreen()
+                    case .scheduleDetail(let scheduleId):
+                        ComposeScheduleDetailScreen(scheduleId: scheduleId)
                     case .settings:
                         ComposeSettingsScreen()
                     }
