@@ -49,7 +49,7 @@ public class SupabaseScheduleRemoteDataSource(
                     exact(Column.DELETED_AT.columnName, null)
                 }
             }
-            .decodeSingle<NetworkSchedule>()
+            .decodeAs<NetworkSchedule>()
             .let(NetworkSchedule::toSchedule)
     }
 }

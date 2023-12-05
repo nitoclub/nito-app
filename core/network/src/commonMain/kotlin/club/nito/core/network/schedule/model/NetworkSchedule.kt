@@ -20,7 +20,7 @@ internal data class NetworkSchedule(
         metAt = metAt,
         venueId = venueId,
         meetId = meetId,
-        description = description,
+        description = description.replace("\\n", "\n"),
     )
 }
 
