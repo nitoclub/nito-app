@@ -36,6 +36,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             NitoApp(
                 shouldKeepOnScreen = { shouldKeep = it },
+                initKoin = {
+                    modules(appModule)
+                },
             )
         }
     }

@@ -22,11 +22,13 @@ import co.touchlab.kermit.koin.KermitKoinLogger
 import moe.tlaster.precompose.PreComposeApp
 import moe.tlaster.precompose.flow.collectAsStateWithLifecycle
 import org.koin.compose.KoinApplication
+import org.koin.dsl.KoinAppDeclaration
 
 @Composable
 fun NitoApp(
-    shouldKeepOnScreen: (Boolean) -> Unit = {},
     modifier: Modifier = Modifier,
+    shouldKeepOnScreen: (Boolean) -> Unit = {},
+    initKoin: KoinAppDeclaration = {},
 ) {
     PreComposeApp {
         KoinApplication(
@@ -49,6 +51,8 @@ fun NitoApp(
                     appModule,
                     *featureModules.toTypedArray(),
                 )
+
+                initKoin(this)
             },
         ) {
             val stateMachine = koinStateMachine(NitoAppStateMachine::class)

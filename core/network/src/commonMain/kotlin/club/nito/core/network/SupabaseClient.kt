@@ -1,6 +1,7 @@
 package club.nito.core.network
 
 import club.nito.core.common.nitoJsonSettings
+import club.nito.core.model.BuildConfig
 import co.touchlab.kermit.Logger
 import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
@@ -13,10 +14,12 @@ import io.github.jan.supabase.gotrue.user.UserSession
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.serializer.KotlinXSerializer
+import io.ktor.client.engine.HttpClientEngine
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 internal fun createNitoSupabaseClient(
+    httpClientEngine: HttpClientEngine?,
     json: Json,
 ): SupabaseClient = createSupabaseClient(
     supabaseUrl = "https://gtfjukrauyhrbglrzlva.supabase.co",
@@ -28,8 +31,14 @@ internal fun createNitoSupabaseClient(
     }
     install(Realtime)
 
+    httpEngine = httpClientEngine
     defaultSerializer = KotlinXSerializer(json)
 }
+
+/**
+ * [SupabaseClient] に渡す [HttpClientEngine] を生成する
+ */
+internal expect fun createHttpEngine(buildConfig: BuildConfig): HttpClientEngine?
 
 /**
  * Supabase の [SessionManager] を [Settings] で実装したもの
