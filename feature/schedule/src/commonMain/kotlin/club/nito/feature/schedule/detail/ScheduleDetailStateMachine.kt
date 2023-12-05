@@ -2,6 +2,7 @@ package club.nito.feature.schedule.detail
 
 import club.nito.core.common.NitoDateFormatter
 import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
+import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.schedule.ScheduleId
@@ -18,6 +19,7 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 public class ScheduleDetailStateMachine(
     id: ScheduleId,
     fetchParticipantScheduleById: FetchParticipantScheduleByIdUseCase,
+    private val participate: ParticipateUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateFormatter,
 ) : StateMachine(),
@@ -52,7 +54,9 @@ public class ScheduleDetailStateMachine(
         viewModelScope.launch {
             when (intent) {
                 is ScheduleDetailIntent.ClickParticipate -> {
-                    showConfirmParticipateSchedule.emit(intent.schedule)
+                    participate(intent.schedule.id, "")
+                    val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
+                    userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
                 }
 
                 is ScheduleDetailIntent.ClickParticipateSchedule -> {

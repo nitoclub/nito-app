@@ -5,14 +5,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class NetworkParticipantDeclaration(
-    val scheduleId: Long,
-    val memberId: Long,
+    val scheduleId: String,
+    val userId: String,
     val comment: String,
 )
 
 internal fun ParticipantDeclaration.toNetworkModel(): NetworkParticipantDeclaration =
     NetworkParticipantDeclaration(
-        scheduleId = scheduleId.toLong(),
-        memberId = memberId.toLong(),
+        scheduleId = scheduleId,
+        userId = memberId,
         comment = comment,
     )
