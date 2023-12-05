@@ -9,7 +9,7 @@ public val scheduleFeatureModule: Module = module {
         ScheduleListStateMachine(
             getParticipantScheduleList = get(),
             userMessageStateHolder = get(),
-            dateTimeFormatter = get(),
+            dateFormatter = get(),
         )
     }
 }

@@ -72,7 +72,7 @@ private fun ScheduleListScreen(
             if (confirmParticipateDialog is ConfirmParticipateDialogUiState.Show) {
                 ConfirmParticipateDialog(
                     schedule = confirmParticipateDialog.schedule,
-                    dateTimeFormatter = uiState.dateTimeFormatter,
+                    dateTimeFormatter = uiState.dateFormatter,
                     onParticipateRequest = { dispatch(ScheduleListIntent.ClickParticipateSchedule(it)) },
                     onDismissRequest = { dispatch(ScheduleListIntent.ClickDismissConfirmParticipateDialog) },
                 )
@@ -83,7 +83,7 @@ private fun ScheduleListScreen(
             ) {
                 ScheduleListSection(
                     scheduleList = uiState.scheduleList,
-                    dateTimeFormatter = uiState.dateTimeFormatter,
+                    dateTimeFormatter = uiState.dateFormatter,
                     modifier = Modifier.fillMaxSize(),
                     onScheduleClick = { dispatch(ScheduleListIntent.ClickShowConfirmParticipateDialog(it)) },
                 )

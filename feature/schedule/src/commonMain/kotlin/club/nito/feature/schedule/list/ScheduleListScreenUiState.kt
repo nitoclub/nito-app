@@ -5,7 +5,7 @@ import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchMultipleContentResult
 
 public data class ScheduleListScreenUiState(
-    val dateTimeFormatter: NitoDateFormatter,
+    val dateFormatter: NitoDateFormatter,
     val scheduleList: FetchMultipleContentResult<ParticipantSchedule>,
     val confirmParticipateDialog: ConfirmParticipateDialogUiState,
 )

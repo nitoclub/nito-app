@@ -6,11 +6,11 @@ import platform.UIKit.UIViewController
 
 @Suppress("FunctionName")
 public fun ScheduleListRouteViewController(
-    viewModel: ScheduleListStateMachine,
+    stateMachine: ScheduleListStateMachine,
 ): UIViewController = ComposeUIViewController {
     NitoTheme {
         ScheduleListRoute(
-            stateMachine = viewModel,
+            stateMachine = stateMachine,
         )
     }
 }
