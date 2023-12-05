@@ -38,7 +38,11 @@ public struct RootView: View {
                         )
                         .navigationBarBackButtonHidden(true)
                     case .scheduleList:
-                        ComposeScheduleListScreen()
+                        ComposeScheduleListScreen(
+                            onScheduleItemClick: { scheduleId in
+                                stateMachine.dispatch(intent: .routing(.scheduleDetail(scheduleId: scheduleId)))
+                            }
+                        )
                     case .scheduleDetail(let scheduleId):
                         ComposeScheduleDetailScreen(scheduleId: scheduleId)
                     case .settings:

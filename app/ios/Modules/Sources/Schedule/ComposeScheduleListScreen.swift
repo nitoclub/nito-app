@@ -4,7 +4,13 @@ import SwiftUI
 import UIKit
 
 public struct ComposeScheduleListScreen: UIViewControllerRepresentable {
-    public init() {}
+    private let onScheduleItemClick: (String) -> Void
+
+    public init(
+        onScheduleItemClick: @escaping (String) -> Void
+    ) {
+        self.onScheduleItemClick = onScheduleItemClick
+    }
 
     public func makeUIViewController(context: Context) -> UIViewController {
         return ScheduleListScreen_iosKt.ScheduleListRouteViewController(
@@ -13,7 +19,8 @@ public struct ComposeScheduleListScreen: UIViewControllerRepresentable {
                     type: GetParticipantScheduleListUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
                 dateFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)
-            )
+            ),
+            onScheduleItemClick: onScheduleItemClick
         )
     }
 
