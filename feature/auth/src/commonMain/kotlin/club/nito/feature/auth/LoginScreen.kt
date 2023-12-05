@@ -55,6 +55,7 @@ public fun LoginRoute(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
         dispatch = viewModel::dispatch,
+        hideTopAppBar = hideTopAppBar,
     )
 }
 
