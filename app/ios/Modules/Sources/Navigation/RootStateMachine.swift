@@ -17,6 +17,7 @@ enum Routing: Hashable {
     case login
     case top
     case scheduleList
+    case scheduleDetail(scheduleId: String)
     case settings
 }
 
