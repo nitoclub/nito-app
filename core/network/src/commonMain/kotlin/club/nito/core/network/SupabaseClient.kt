@@ -13,6 +13,7 @@ import io.github.jan.supabase.gotrue.user.UserSession
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.realtime.Realtime
 import io.github.jan.supabase.serializer.KotlinXSerializer
+import io.ktor.client.engine.HttpClientEngine
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
@@ -28,8 +29,11 @@ internal fun createNitoSupabaseClient(
     }
     install(Realtime)
 
+    httpEngine = createHttpEngine()
     defaultSerializer = KotlinXSerializer(json)
 }
+
+internal expect fun createHttpEngine(): HttpClientEngine?
 
 /**
  * Supabase の [SessionManager] を [Settings] で実装したもの
