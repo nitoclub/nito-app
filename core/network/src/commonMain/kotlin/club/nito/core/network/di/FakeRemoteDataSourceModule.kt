@@ -4,6 +4,8 @@ import club.nito.core.network.auth.AuthRemoteDataSource
 import club.nito.core.network.auth.FakeAuthRemoteDataSource
 import club.nito.core.network.participation.FakeParticipantRemoteDataSource
 import club.nito.core.network.participation.ParticipantRemoteDataSource
+import club.nito.core.network.place.FakePlaceRemoteDataSource
+import club.nito.core.network.place.PlaceRemoteDataSource
 import club.nito.core.network.schedule.FakeScheduleRemoteDataSource
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import club.nito.core.network.user.FakeUserRemoteDataSource
@@ -23,4 +25,5 @@ public val fakeRemoteDataSourceModule: Module = module {
     single<ScheduleRemoteDataSource> { FakeScheduleRemoteDataSource }
     single<ParticipantRemoteDataSource> { FakeParticipantRemoteDataSource }
     single<UserRemoteDataSource> { FakeUserRemoteDataSource }
+    single<PlaceRemoteDataSource> { FakePlaceRemoteDataSource }
 }
