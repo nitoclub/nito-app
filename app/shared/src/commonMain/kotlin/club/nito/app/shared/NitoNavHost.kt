@@ -7,6 +7,7 @@ import club.nito.core.model.AuthStatus
 import club.nito.feature.auth.loginNavigationRoute
 import club.nito.feature.auth.loginScreen
 import club.nito.feature.auth.navigateToLogin
+import club.nito.feature.schedule.detail.scheduleDetailScreen
 import club.nito.feature.schedule.list.navigateToScheduleList
 import club.nito.feature.schedule.list.scheduleListScreen
 import club.nito.feature.settings.navigateToSettings
@@ -57,6 +58,7 @@ fun NitoNavHost(
             },
         )
         scheduleListScreen()
+        scheduleDetailScreen()
         settingsScreen(
             onSignedOut = {
                 navigator.navigateToLogin(
