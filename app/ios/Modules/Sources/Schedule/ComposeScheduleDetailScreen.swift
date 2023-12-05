@@ -17,6 +17,7 @@ public struct ComposeScheduleDetailScreen: UIViewControllerRepresentable {
                 id: scheduleId,
                 fetchParticipantScheduleById: Container.shared.get(
                     type: FetchParticipantScheduleByIdUseCase.self),
+                participate: Container.shared.get(type: ParticipateUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
                 dateTimeFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)
             )

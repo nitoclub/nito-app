@@ -50,7 +50,7 @@ public class ScheduleListStateMachine(
         viewModelScope.launch {
             when (intent) {
                 is ScheduleListIntent.ClickShowConfirmParticipateDialog -> {
-                    showConfirmParticipateSchedule.emit(intent.schedule)
+                    _events.emit(_events.value + ScheduleListEvent.OnScheduleItemClick(intent.schedule.id))
                 }
 
                 is ScheduleListIntent.ClickParticipateSchedule -> {

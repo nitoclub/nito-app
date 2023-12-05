@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ConfirmParticipateDialog
 import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
@@ -23,11 +24,12 @@ import club.nito.feature.schedule.component.ScheduleListSection
 @Composable
 public fun ScheduleListRoute(
     stateMachine: ScheduleListStateMachine = koinStateMachine(ScheduleListStateMachine::class),
+    onScheduleItemClick: (ScheduleId) -> Unit = {},
 ) {
     stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
             when (it) {
-                is ScheduleListEvent.NavigateToScheduleDetail -> {}
+                is ScheduleListEvent.OnScheduleItemClick -> onScheduleItemClick(it.scheduleId)
             }
             stateMachine.consume(it)
         }

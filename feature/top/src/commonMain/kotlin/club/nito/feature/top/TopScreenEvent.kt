@@ -4,7 +4,7 @@ import club.nito.core.model.schedule.ScheduleId
 
 public sealed class TopScreenEvent {
     /**
-     * Navigate to schedule list screen
+     * Navigate to schedule detail screen
      */
     public data class OnRecentScheduleClicked(val scheduleId: ScheduleId) : TopScreenEvent()
 

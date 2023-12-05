@@ -59,7 +59,9 @@ fun NitoNavHost(
                 )
             },
         )
-        scheduleListScreen()
+        scheduleListScreen(
+            onScheduleItemClick = navigator::navigateToScheduleDetail,
+        )
         scheduleDetailScreen()
         settingsScreen(
             onSignedOut = {
