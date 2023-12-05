@@ -2,6 +2,7 @@ package club.nito.core.data
 
 import club.nito.core.model.Order
 import club.nito.core.model.schedule.Schedule
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.schedule.ScheduleRemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -25,8 +26,5 @@ public class OfflineFirstScheduleRepository(
         after = after,
     )
 
-    override fun scheduleFlow(id: String): Flow<Schedule> = flow {
-        // TODO: LocalDataSource
-        emit(remoteDataSource.getSchedule(id = id))
-    }
+    override suspend fun fetchSchedule(id: ScheduleId): Schedule = remoteDataSource.fetchSchedule(id = id)
 }

@@ -8,11 +8,11 @@ public struct ComposeScheduleListScreen: UIViewControllerRepresentable {
 
     public func makeUIViewController(context: Context) -> UIViewController {
         return ScheduleListScreen_iosKt.ScheduleListRouteViewController(
-            viewModel: ScheduleListViewModel(
-                getParticipantScheduleListUseCase: Container.shared.get(
+            stateMachine: ScheduleListStateMachine(
+                getParticipantScheduleList: Container.shared.get(
                     type: GetParticipantScheduleListUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
-                dateTimeFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)
+                dateFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)
             )
         )
     }

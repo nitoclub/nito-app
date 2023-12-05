@@ -1,4 +1,4 @@
-package club.nito.feature.schedule
+package club.nito.feature.schedule.list
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,36 +21,36 @@ import club.nito.core.ui.message.SnackbarMessageEffect
 import club.nito.feature.schedule.component.ScheduleListSection
 
 @Composable
-public fun ScheduleRoute(
-    viewModel: ScheduleListViewModel = koinStateMachine(ScheduleListViewModel::class),
+public fun ScheduleListRoute(
+    stateMachine: ScheduleListStateMachine = koinStateMachine(ScheduleListStateMachine::class),
 ) {
-    viewModel.event.collectAsState(initial = null).value?.let {
+    stateMachine.event.collectAsState(initial = null).value?.let {
         LaunchedEffect(it.hashCode()) {
             when (it) {
                 is ScheduleListEvent.NavigateToScheduleDetail -> {}
             }
-            viewModel.consume(it)
+            stateMachine.consume(it)
         }
     }
 
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by stateMachine.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
 
     SnackbarMessageEffect(
         snackbarHostState = snackbarHostState,
-        userMessageStateHolder = viewModel.userMessageStateHolder,
+        userMessageStateHolder = stateMachine.userMessageStateHolder,
     )
 
-    ScheduleScreen(
+    ScheduleListScreen(
         uiState = uiState,
         snackbarHostState = snackbarHostState,
-        dispatch = viewModel::dispatch,
+        dispatch = stateMachine::dispatch,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ScheduleScreen(
+private fun ScheduleListScreen(
     uiState: ScheduleListScreenUiState,
     snackbarHostState: SnackbarHostState,
     dispatch: (ScheduleListIntent) -> Unit = {},
@@ -72,7 +72,7 @@ private fun ScheduleScreen(
             if (confirmParticipateDialog is ConfirmParticipateDialogUiState.Show) {
                 ConfirmParticipateDialog(
                     schedule = confirmParticipateDialog.schedule,
-                    dateTimeFormatter = uiState.dateTimeFormatter,
+                    dateTimeFormatter = uiState.dateFormatter,
                     onParticipateRequest = { dispatch(ScheduleListIntent.ClickParticipateSchedule(it)) },
                     onDismissRequest = { dispatch(ScheduleListIntent.ClickDismissConfirmParticipateDialog) },
                 )
@@ -83,7 +83,7 @@ private fun ScheduleScreen(
             ) {
                 ScheduleListSection(
                     scheduleList = uiState.scheduleList,
-                    dateTimeFormatter = uiState.dateTimeFormatter,
+                    dateTimeFormatter = uiState.dateFormatter,
                     modifier = Modifier.fillMaxSize(),
                     onScheduleClick = { dispatch(ScheduleListIntent.ClickShowConfirmParticipateDialog(it)) },
                 )

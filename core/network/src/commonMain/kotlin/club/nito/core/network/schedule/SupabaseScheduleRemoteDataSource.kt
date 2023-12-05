@@ -2,6 +2,7 @@ package club.nito.core.network.schedule
 
 import club.nito.core.model.Order
 import club.nito.core.model.schedule.Schedule
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.NetworkService
 import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.toSupabaseOrder
@@ -10,6 +11,7 @@ import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.datetime.Instant
 
 private enum class Column(val columnName: String) {
+    ID(columnName = "id"),
     DELETED_AT(columnName = "deleted_at"),
     SCHEDULED_AT(columnName = "scheduled_at"),
 }
@@ -38,15 +40,16 @@ public class SupabaseScheduleRemoteDataSource(
             .map(NetworkSchedule::toSchedule)
     }
 
-    override suspend fun getSchedule(id: String): Schedule = networkService {
+    override suspend fun fetchSchedule(id: ScheduleId): Schedule = networkService {
         postgrest
             .select {
                 single()
                 filter {
+                    eq(Column.ID.columnName, id)
                     exact(Column.DELETED_AT.columnName, null)
                 }
             }
             .decodeSingle<NetworkSchedule>()
-            .toSchedule()
+            .let(NetworkSchedule::toSchedule)
     }
 }

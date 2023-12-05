@@ -2,6 +2,7 @@ package club.nito.core.network.schedule
 
 import club.nito.core.model.Order
 import club.nito.core.model.schedule.Schedule
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.schedule.model.NetworkSchedule
 import club.nito.core.network.schedule.model.createFakeNetworkSchedule
 import kotlinx.datetime.Clock
@@ -27,10 +28,10 @@ public data object FakeScheduleRemoteDataSource : ScheduleRemoteDataSource {
         }.map(NetworkSchedule::toSchedule)
     }
 
-    override suspend fun getSchedule(id: String): Schedule {
+    override suspend fun fetchSchedule(id: ScheduleId): Schedule {
         return createFakeNetworkSchedule(
             id = id,
             scheduledAt = Clock.System.now(),
-        ).toSchedule()
+        ).let(NetworkSchedule::toSchedule)
     }
 }
