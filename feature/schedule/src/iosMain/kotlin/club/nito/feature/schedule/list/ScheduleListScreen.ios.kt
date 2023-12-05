@@ -14,6 +14,7 @@ public fun ScheduleListRouteViewController(
         ScheduleListRoute(
             stateMachine = stateMachine,
             onScheduleItemClick = onScheduleItemClick,
+            hideTopAppBar = true,
         )
     }
 }

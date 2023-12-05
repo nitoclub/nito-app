@@ -13,6 +13,7 @@ public fun SettingsScreenUIViewController(
         SettingsRoute(
             stateMachine = stateMachine,
             onSignedOut = onLoggedOut,
+            hideTopAppBar = true,
         )
     }
 }

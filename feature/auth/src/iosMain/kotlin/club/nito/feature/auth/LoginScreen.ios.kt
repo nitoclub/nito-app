@@ -15,6 +15,7 @@ public fun LoginRouteViewController(
             viewModel = viewModel,
             onLoggedIn = onLoggedIn,
             onRegisterClick = onRegisterClick,
+            hideTopAppBar = true,
         )
     }
 }
