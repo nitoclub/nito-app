@@ -31,10 +31,5 @@ kotlin {
                 implementation(libs.kermit)
             }
         }
-        androidMain {
-            dependencies {
-                implementation(libs.composeCoil)
-            }
-        }
     }
 }
