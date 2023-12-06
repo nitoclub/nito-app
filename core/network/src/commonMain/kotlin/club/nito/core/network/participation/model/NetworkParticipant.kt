@@ -7,21 +7,21 @@ import kotlinx.serialization.Serializable
 internal data class NetworkParticipant(
     val scheduleId: String,
     val userId: String,
-    val comment: String,
+    val status: NetworkParticipantStatus,
 ) {
     fun toParticipant() = Participant(
         scheduleId = scheduleId,
         userId = userId,
-        comment = comment,
+        status = status.toParticipantStatus(),
     )
 }
 
 internal fun createFakeNetworkParticipant(
     scheduleId: String = "bbe00d24-d840-460d-a127-f23f9e472cc6",
     userId: String = "bbe00d24-d840-460d-a127-f23f9e472cc6",
-    comment: String = "コメント",
+    status: NetworkParticipantStatus = NetworkParticipantStatus.ATTENDANCE,
 ) = NetworkParticipant(
     scheduleId = scheduleId,
     userId = userId,
-    comment = comment,
+    status = status,
 )
