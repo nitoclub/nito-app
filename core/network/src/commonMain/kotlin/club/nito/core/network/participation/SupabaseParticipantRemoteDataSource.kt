@@ -21,7 +21,6 @@ public class SupabaseParticipantRemoteDataSource(
                 filter {
                     and {
                         eq("schedule_id", scheduleId)
-                        exact("deleted_at", null)
                     }
                 }
             }
@@ -35,7 +34,6 @@ public class SupabaseParticipantRemoteDataSource(
                 filter {
                     and {
                         isIn("schedule_id", scheduleIds)
-                        exact("deleted_at", null)
                     }
                 }
             }
