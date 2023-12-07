@@ -20,3 +20,13 @@ public suspend fun <T> runExecuting(block: suspend () -> T): ExecuteResult<T> = 
 } catch (e: Throwable) {
     ExecuteResult.Failure(e.toNitoError())
 }
+
+public suspend inline fun <T> ExecuteResult<T>.handleResult(
+    noinline onSuccess: suspend (T) -> Unit = {},
+    noinline onFailure: suspend (NitoError?) -> Unit = {},
+) {
+    when (this) {
+        is ExecuteResult.Success -> onSuccess(data)
+        is ExecuteResult.Failure -> onFailure(error)
+    }
+}

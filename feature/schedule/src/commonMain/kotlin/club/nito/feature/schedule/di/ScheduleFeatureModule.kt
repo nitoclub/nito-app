@@ -18,6 +18,7 @@ public val scheduleFeatureModule: Module = module {
         ScheduleDetailStateMachine(
             id = id,
             fetchParticipantScheduleById = get(),
+            fetchMyParticipantStatus = get(),
             participate = get(),
             userMessageStateHolder = get(),
             dateTimeFormatter = get(),

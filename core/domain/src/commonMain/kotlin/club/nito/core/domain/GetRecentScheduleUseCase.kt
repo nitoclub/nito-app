@@ -4,10 +4,12 @@ import club.nito.core.data.ParticipantRepository
 import club.nito.core.data.PlaceRepository
 import club.nito.core.data.ScheduleRepository
 import club.nito.core.data.UserRepository
+import club.nito.core.domain.extension.toParticipantUserList
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.Order
 import club.nito.core.model.UserProfile
+import club.nito.core.model.participant.Participant
 import club.nito.core.model.place.Place
 import club.nito.core.model.schedule.Schedule
 import club.nito.core.model.toNitoError
@@ -53,6 +55,7 @@ public class GetRecentScheduleExecutor(
 
         val participantSchedule = transformToParticipantSchedule(
             schedule = schedule,
+            participants = participants,
             userProfiles = userProfiles,
             places = places,
         )
@@ -62,6 +65,7 @@ public class GetRecentScheduleExecutor(
 
     private fun transformToParticipantSchedule(
         schedule: Schedule,
+        participants: List<Participant>,
         userProfiles: List<UserProfile>,
         places: List<Place>,
     ): ParticipantSchedule {
@@ -72,7 +76,7 @@ public class GetRecentScheduleExecutor(
             venue = places.first { it.id == schedule.venueId },
             meet = places.first { it.id == schedule.meetId },
             description = schedule.description,
-            participants = userProfiles,
+            users = userProfiles.toParticipantUserList(participants),
         )
     }
 }

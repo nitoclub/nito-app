@@ -2,8 +2,11 @@ package club.nito.core.network.participation
 
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
+import club.nito.core.model.participant.ParticipantStatus
+import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.participation.model.NetworkParticipant
 import club.nito.core.network.participation.model.createFakeNetworkParticipant
+import club.nito.core.network.participation.model.toNetworkModel
 import kotlinx.coroutines.delay
 
 public data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource {
@@ -27,8 +30,27 @@ public data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource
         }.map(NetworkParticipant::toParticipant)
     }
 
-    override suspend fun participate(declaration: ParticipantDeclaration): Long {
+    override suspend fun existParticipantByUserId(scheduleId: ScheduleId, userId: String): Boolean = true
+
+    override suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus {
+        return ParticipantStatus.ATTENDANCE
+    }
+
+    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant {
         delay(1000)
-        return DEFAULT_CHANGED_COUNT
+        return createFakeNetworkParticipant(
+            scheduleId = declaration.scheduleId,
+            userId = declaration.userId,
+            status = declaration.status.toNetworkModel(),
+        ).toParticipant()
+    }
+
+    override suspend fun updateParticipate(declaration: ParticipantDeclaration): Participant {
+        delay(1000)
+        return createFakeNetworkParticipant(
+            scheduleId = declaration.scheduleId,
+            userId = declaration.userId,
+            status = declaration.status.toNetworkModel(),
+        ).toParticipant()
     }
 }

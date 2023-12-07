@@ -4,6 +4,7 @@ import club.nito.core.data.ParticipantRepository
 import club.nito.core.data.PlaceRepository
 import club.nito.core.data.ScheduleRepository
 import club.nito.core.data.UserRepository
+import club.nito.core.domain.extension.toParticipantUserList
 import club.nito.core.domain.extension.toUserIdList
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
@@ -34,7 +35,7 @@ public class FetchParticipantScheduleByIdExecutor(
             return FetchSingleContentResult.Failure(error = e.toNitoError())
         }
 
-        val participants = participantRepository.getParticipants(id)
+        val participants = participantRepository.getParticipants(scheduleId = id)
         val profiles = userRepository.getProfiles(userIds = participants.toUserIdList())
         val places = placeRepository.fetchPlaceList(schedule.venueId, schedule.meetId)
         val participantSchedule = transformToParticipantSchedule(
@@ -53,11 +54,6 @@ public class FetchParticipantScheduleByIdExecutor(
         userProfiles: List<UserProfile>,
         places: List<Place>,
     ): ParticipantSchedule {
-        val scheduleParticipants = participants.filter { it.scheduleId == schedule.id }
-        val scheduleParticipantProfiles = userProfiles.filter { profile ->
-            scheduleParticipants.any { it.userId == profile.id }
-        }
-
         return ParticipantSchedule(
             id = schedule.id,
             scheduledAt = schedule.scheduledAt,
@@ -65,7 +61,7 @@ public class FetchParticipantScheduleByIdExecutor(
             venue = places.first { it.id == schedule.venueId },
             meet = places.first { it.id == schedule.meetId },
             description = schedule.description,
-            participants = scheduleParticipantProfiles,
+            users = userProfiles.toParticipantUserList(participants),
         )
     }
 }

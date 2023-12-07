@@ -5,7 +5,7 @@ import UIKit
 
 public struct ComposeScheduleDetailScreen: UIViewControllerRepresentable {
     private let scheduleId: String
-    
+
     public init(scheduleId: String) {
         self.scheduleId = scheduleId
     }
@@ -16,7 +16,11 @@ public struct ComposeScheduleDetailScreen: UIViewControllerRepresentable {
             stateMachine: ScheduleDetailStateMachine(
                 id: scheduleId,
                 fetchParticipantScheduleById: Container.shared.get(
-                    type: FetchParticipantScheduleByIdUseCase.self),
+                    type: FetchParticipantScheduleByIdUseCase.self
+                ),
+                fetchMyParticipantStatus: Container.shared.get(
+                    type: FetchMyParticipantStatusUseCase.self
+                ),
                 participate: Container.shared.get(type: ParticipateUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
                 dateTimeFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)

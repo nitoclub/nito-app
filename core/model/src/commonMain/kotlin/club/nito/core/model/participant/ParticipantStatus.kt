@@ -5,6 +5,11 @@ package club.nito.core.model.participant
  */
 public enum class ParticipantStatus {
     /**
+     * なし
+     */
+    NONE,
+
+    /**
      * 未定
      */
     PENDING,

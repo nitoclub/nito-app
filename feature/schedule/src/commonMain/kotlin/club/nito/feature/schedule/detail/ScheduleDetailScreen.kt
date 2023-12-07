@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,18 +20,11 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -46,12 +38,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,7 +51,10 @@ import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
+import club.nito.core.domain.model.filterIsAttendance
+import club.nito.core.domain.model.toUserProfileList
 import club.nito.core.model.FetchSingleContentResult
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ProfileImage
 import club.nito.core.ui.koinStateMachine
@@ -113,7 +107,7 @@ private fun ScheduleDetailScreen(
     val localDensity = LocalDensity.current
 
     val schedule = uiState.schedule
-    var sendMessageContainerHeightDp by remember {
+    var bottomParticipateBarHeightDp by remember {
         mutableStateOf(0.dp)
     }
 
@@ -160,7 +154,7 @@ private fun ScheduleDetailScreen(
                                     top = innerPadding.calculateTopPadding(),
                                     bottom = innerPadding.calculateBottomPadding(),
                                 )
-                                .padding(bottom = sendMessageContainerHeightDp)
+                                .padding(bottom = bottomParticipateBarHeightDp)
                                 .padding(vertical = 16.dp),
                             verticalArrangement = Arrangement.spacedBy(40.dp),
                         ) {
@@ -178,10 +172,29 @@ private fun ScheduleDetailScreen(
 
                             ParticipantSection(
                                 schedule = schedule.data,
-                                onParticipateClick = { dispatch(ScheduleDetailIntent.ClickParticipate(it)) },
                                 modifier = containerModifier,
                             )
                         }
+
+                        BottomParticipateBar(
+                            myParticipantStatus = uiState.myParticipantStatus,
+                            onClickParticipateChip = {
+                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Participate(schedule.data))
+                            },
+                            onClickAbsentChip = {
+                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Absent(schedule.data))
+                            },
+                            onClickHoldChip = {
+                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Hold(schedule.data))
+                            },
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .fillMaxWidth()
+                                .onGloballyPositioned { coordinates ->
+                                    bottomParticipateBarHeightDp = with(localDensity) { coordinates.size.height.toDp() }
+                                },
+                            innerPadding = innerPadding,
+                        )
                     }
 
                     is FetchSingleContentResult.Failure -> Text(
@@ -189,16 +202,6 @@ private fun ScheduleDetailScreen(
                         modifier = Modifier.align(Alignment.Center),
                     )
                 }
-
-                SendMessageContainer(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .onGloballyPositioned { coordinates ->
-                            sendMessageContainerHeightDp = with(localDensity) { coordinates.size.height.toDp() }
-                        },
-                    innerPadding = innerPadding,
-                )
             }
         },
     )
@@ -332,7 +335,6 @@ private fun MeetSection(
 @Composable
 private fun ParticipantSection(
     schedule: ParticipantSchedule,
-    onParticipateClick: (ParticipantSchedule) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -340,7 +342,7 @@ private fun ParticipantSection(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = "参加情報",
+            text = "参加者",
         )
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -348,7 +350,7 @@ private fun ParticipantSection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             items(
-                items = schedule.participants,
+                items = schedule.users.filterIsAttendance().toUserProfileList(),
                 key = { profile -> profile.id },
             ) { profile ->
                 ProfileImage(
@@ -357,29 +359,22 @@ private fun ParticipantSection(
                 )
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End,
-        ) {
-            OutlinedButton(
-                onClick = { onParticipateClick(schedule) },
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(text = "参加する")
-            }
-        }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SendMessageContainer(
+private fun BottomParticipateBar(
+    myParticipantStatus: FetchSingleContentResult<ParticipantStatus>,
+    onClickParticipateChip: () -> Unit,
+    onClickAbsentChip: () -> Unit,
+    onClickHoldChip: () -> Unit,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+    backgroundColor: Color = lerp(
+        start = MaterialTheme.colorScheme.secondaryContainer,
+        stop = MaterialTheme.colorScheme.background,
+        fraction = 0.7f,
+    ),
     innerPadding: PaddingValues = PaddingValues(),
     layoutDirection: LayoutDirection = LocalLayoutDirection.current,
 ) {
@@ -407,28 +402,65 @@ private fun SendMessageContainer(
                 top = 16.dp,
                 bottom = 8.dp,
             ),
-        horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.Start),
+        horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.End),
     ) {
-        OutlinedTextField(
-            value = "",
-            onValueChange = { },
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .weight(1f),
-            enabled = false,
-            placeholder = { Text(text = "Coming Soon.") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done,
-            ),
-        )
+        when (myParticipantStatus) {
+            FetchSingleContentResult.Loading -> CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.CenterVertically),
+            )
 
-        IconButton(
-            onClick = { },
-            Modifier.align(Alignment.CenterVertically),
-            enabled = false,
-        ) {
-            Icon(Icons.Default.Send, contentDescription = "Send")
+            is FetchSingleContentResult.Success -> {
+                val status = myParticipantStatus.data
+
+                val chipModifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(all = 8.dp)
+
+                InputChip(
+                    selected = status == ParticipantStatus.ATTENDANCE,
+                    onClick = onClickParticipateChip,
+                    label = {
+                        Text(
+                            text = "参加",
+                            modifier = chipModifier,
+                        )
+                    },
+                    shape = CircleShape,
+                )
+
+                InputChip(
+                    selected = status == ParticipantStatus.ABSENCE,
+                    onClick = onClickAbsentChip,
+                    label = {
+                        Text(
+                            text = "欠席",
+                            modifier = chipModifier,
+                        )
+                    },
+                    shape = CircleShape,
+                )
+
+                InputChip(
+                    selected = status == ParticipantStatus.PENDING,
+                    onClick = onClickHoldChip,
+                    label = {
+                        Text(
+                            text = "未定",
+                            modifier = chipModifier,
+                        )
+                    },
+                    shape = CircleShape,
+                )
+            }
+
+            is FetchSingleContentResult.Failure -> {
+                Text(
+                    text = myParticipantStatus.error?.message ?: "エラーが発生しました",
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                )
+            }
+
+            else -> {}
         }
     }
 }
