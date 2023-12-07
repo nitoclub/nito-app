@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Allows us to override night specific attributes in the values-night folder. -->
+    <style name="NightAdjusted.Theme.Nito" parent="android:Theme.Material.Light.NoActionBar" />
 
-    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- The final theme we use -->
+    <style name="Theme.Nito" parent="NightAdjusted.Theme.Nito" />
+
+    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="Theme.Nito.Splash" parent="NightAdjusted.Theme.Splash">
+        <item name="postSplashScreenTheme">@style/Theme.Nito</item>
+    </style>
 </resources>
