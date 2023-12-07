@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,14 +21,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -174,10 +169,28 @@ private fun ScheduleDetailScreen(
 
                             ParticipantSection(
                                 schedule = schedule.data,
-                                onParticipateClick = { dispatch(ScheduleDetailIntent.ClickParticipate(it)) },
                                 modifier = containerModifier,
                             )
                         }
+
+                        SendMessageContainer(
+                            onClickParticipateChip = {
+                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Participate(schedule.data))
+                            },
+                            onClickAbsentChip = {
+                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Absent(schedule.data))
+                            },
+                            onClickHoldChip = {
+                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Hold(schedule.data))
+                            },
+                            modifier = Modifier
+                                .align(Alignment.BottomCenter)
+                                .fillMaxWidth()
+                                .onGloballyPositioned { coordinates ->
+                                    sendMessageContainerHeightDp = with(localDensity) { coordinates.size.height.toDp() }
+                                },
+                            innerPadding = innerPadding,
+                        )
                     }
 
                     is FetchSingleContentResult.Failure -> Text(
@@ -185,16 +198,6 @@ private fun ScheduleDetailScreen(
                         modifier = Modifier.align(Alignment.Center),
                     )
                 }
-
-                SendMessageContainer(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .onGloballyPositioned { coordinates ->
-                            sendMessageContainerHeightDp = with(localDensity) { coordinates.size.height.toDp() }
-                        },
-                    innerPadding = innerPadding,
-                )
             }
         },
     )
@@ -328,7 +331,6 @@ private fun MeetSection(
 @Composable
 private fun ParticipantSection(
     schedule: ParticipantSchedule,
-    onParticipateClick: (ParticipantSchedule) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -353,28 +355,15 @@ private fun ParticipantSection(
                 )
             }
         }
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End,
-        ) {
-            OutlinedButton(
-                onClick = { onParticipateClick(schedule) },
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp),
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(text = "参加する")
-            }
-        }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SendMessageContainer(
+    onClickParticipateChip: () -> Unit,
+    onClickAbsentChip: () -> Unit,
+    onClickHoldChip: () -> Unit,
     modifier: Modifier = Modifier,
     backgroundColor: Color = lerp(
         start = MaterialTheme.colorScheme.secondaryContainer,
@@ -416,7 +405,7 @@ private fun SendMessageContainer(
 
         InputChip(
             selected = true,
-            onClick = { },
+            onClick = onClickParticipateChip,
             label = {
                 Text(
                     text = "参加",
@@ -428,7 +417,7 @@ private fun SendMessageContainer(
 
         InputChip(
             selected = false,
-            onClick = { },
+            onClick = onClickAbsentChip,
             label = {
                 Text(
                     text = "欠席",
@@ -440,7 +429,7 @@ private fun SendMessageContainer(
 
         InputChip(
             selected = false,
-            onClick = { },
+            onClick = onClickHoldChip,
             label = {
                 Text(
                     text = "未定",

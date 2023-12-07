@@ -2,6 +2,7 @@ package club.nito.core.network.participation
 
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
+import club.nito.core.model.schedule.ScheduleId
 
 /**
  * 参加情報を扱うリモートデータソース
@@ -22,9 +23,24 @@ public sealed interface ParticipantRemoteDataSource {
     public suspend fun getParticipants(scheduleIds: List<String>): List<Participant>
 
     /**
-     * 該当のスケジュールに参加する
+     * 該当の予定に対象のユーザーが参加しているかどうかを取得する
+     *
+     * @param scheduleId 参加情報を取得するスケジュールID
+     * @param userId 対象のユーザーID
+     */
+    public suspend fun existParticipantByUserId(scheduleId: ScheduleId, userId: String): Boolean
+
+    /**
+     * 該当スケジュールへの参加状況を追加する
      *
      * @param declaration 参加表明データ
      */
-    public suspend fun participate(declaration: ParticipantDeclaration): Long
+    public suspend fun insertParticipate(declaration: ParticipantDeclaration): Long
+
+    /**
+     * 該当スケジュールへの参加状況を更新する
+     *
+     * @param declaration 参加表明データ
+     */
+    public suspend fun updateParticipate(declaration: ParticipantDeclaration): Long
 }

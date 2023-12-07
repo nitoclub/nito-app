@@ -5,6 +5,7 @@ import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
 import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.StateMachine
 import club.nito.core.ui.buildUiState
@@ -53,21 +54,23 @@ public class ScheduleDetailStateMachine(
     public fun dispatch(intent: ScheduleDetailIntent) {
         viewModelScope.launch {
             when (intent) {
-                is ScheduleDetailIntent.ClickParticipate -> {
-                    participate(intent.schedule.id, "")
-                    val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
-                    userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
-                }
-
-                is ScheduleDetailIntent.ClickParticipateSchedule -> {
-                    showConfirmParticipateSchedule.emit(null)
+                is ScheduleDetailIntent.ClickParticipantStatusChip -> {
+                    participate(intent.schedule.id, intent.status)
 
                     val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
-                    userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
-                }
+                    when (intent.status) {
+                        ParticipantStatus.ATTENDANCE -> {
+                            userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
+                        }
+                        ParticipantStatus.ABSENCE -> {
+                            userMessageStateHolder.showMessage("$scheduledAt を欠席にしました")
+                        }
+                        ParticipantStatus.PENDING -> {
+                            userMessageStateHolder.showMessage("$scheduledAt を未定にしました")
+                        }
 
-                ScheduleDetailIntent.ClickDismissConfirmParticipateDialog -> {
-                    showConfirmParticipateSchedule.emit(null)
+                        ParticipantStatus.NONE -> {}
+                    }
                 }
             }
         }
