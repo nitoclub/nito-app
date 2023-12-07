@@ -2,6 +2,7 @@ package club.nito.core.network.participation
 
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.participation.model.NetworkParticipant
 import club.nito.core.network.participation.model.createFakeNetworkParticipant
@@ -29,6 +30,10 @@ public data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource
     }
 
     override suspend fun existParticipantByUserId(scheduleId: ScheduleId, userId: String): Boolean = true
+
+    override suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus {
+        return ParticipantStatus.ATTENDANCE
+    }
 
     override suspend fun insertParticipate(declaration: ParticipantDeclaration): Long {
         delay(1000)

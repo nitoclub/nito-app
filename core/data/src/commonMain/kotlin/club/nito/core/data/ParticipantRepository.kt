@@ -2,6 +2,7 @@ package club.nito.core.data
 
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 
 /**
@@ -29,6 +30,15 @@ public sealed interface ParticipantRepository {
      * @param userId 対象のユーザーID
      */
     public suspend fun existParticipantByUserId(scheduleId: ScheduleId, userId: String): Boolean
+
+    /**
+     * 該当の予定の対象のユーザーの参加情報を取得する
+     *
+     * @param scheduleId 参加情報を取得するスケジュールID
+     * @param userId 対象のユーザーID
+     * @return 参加情報
+     */
+    public suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus
 
     /**
      * 該当スケジュールへの参加状況を追加する

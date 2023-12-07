@@ -2,12 +2,16 @@ package club.nito.core.network.participation
 
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.NetworkService
 import club.nito.core.network.participation.model.NetworkParticipant
+import club.nito.core.network.participation.model.NetworkParticipantStatus
 import club.nito.core.network.participation.model.toNetworkModel
+import club.nito.core.network.participation.model.toParticipantStatus
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.query.Columns
 import io.github.jan.supabase.postgrest.query.Count
 
 public class SupabaseParticipantRemoteDataSource(
@@ -57,6 +61,21 @@ public class SupabaseParticipantRemoteDataSource(
 
         return count > 0
     }
+
+    override suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus =
+        networkService {
+            postgrest
+                .select(Columns.raw("status")) {
+                    filter {
+                        and {
+                            eq("schedule_id", scheduleId)
+                            eq("user_id", userId)
+                        }
+                    }
+                }
+                .decodeAsOrNull<NetworkParticipantStatus>()
+                .toParticipantStatus()
+        }
 
     override suspend fun insertParticipate(declaration: ParticipantDeclaration): Long = networkService {
         val result = postgrest.insert(

@@ -2,6 +2,7 @@ package club.nito.core.data
 
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.network.participation.ParticipantRemoteDataSource
 
@@ -16,6 +17,9 @@ public class DefaultParticipantRepository(
 
     override suspend fun existParticipantByUserId(scheduleId: ScheduleId, userId: String): Boolean =
         remoteDataSource.existParticipantByUserId(scheduleId = scheduleId, userId = userId)
+
+    override suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus =
+        remoteDataSource.fetchParticipantStatus(scheduleId = scheduleId, userId = userId)
 
     override suspend fun insertParticipate(declaration: ParticipantDeclaration): Long =
         remoteDataSource.insertParticipate(declaration = declaration)

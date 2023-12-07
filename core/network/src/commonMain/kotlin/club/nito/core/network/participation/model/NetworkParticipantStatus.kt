@@ -27,14 +27,18 @@ internal enum class NetworkParticipantStatus {
      */
     @SerialName(value = "absence")
     ABSENCE;
-
-    fun toParticipantStatus(): ParticipantStatus =
-        when (this) {
-            PENDING -> ParticipantStatus.PENDING
-            ATTENDANCE -> ParticipantStatus.ATTENDANCE
-            ABSENCE -> ParticipantStatus.ABSENCE
-        }
 }
+
+/**
+ * リモートの参加情報からモデルの参加情報に変換する
+ */
+internal fun NetworkParticipantStatus?.toParticipantStatus(): ParticipantStatus =
+    when (this) {
+        NetworkParticipantStatus.PENDING -> ParticipantStatus.PENDING
+        NetworkParticipantStatus.ATTENDANCE -> ParticipantStatus.ATTENDANCE
+        NetworkParticipantStatus.ABSENCE -> ParticipantStatus.ABSENCE
+        null -> ParticipantStatus.NONE
+    }
 
 internal fun ParticipantStatus.toNetworkModel(): NetworkParticipantStatus = when (this) {
     ParticipantStatus.PENDING -> NetworkParticipantStatus.PENDING
