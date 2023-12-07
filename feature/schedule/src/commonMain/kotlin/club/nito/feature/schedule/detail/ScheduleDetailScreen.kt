@@ -51,8 +51,9 @@ import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
+import club.nito.core.domain.model.filterIsAttendance
+import club.nito.core.domain.model.toUserProfileList
 import club.nito.core.model.FetchSingleContentResult
-import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ProfileImage
 import club.nito.core.ui.koinStateMachine
@@ -339,7 +340,7 @@ private fun ParticipantSection(
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         Text(
-            text = "参加情報",
+            text = "参加者",
         )
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -347,7 +348,7 @@ private fun ParticipantSection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             items(
-                items = schedule.participants.filterValues { it == ParticipantStatus.ATTENDANCE }.keys.toList(),
+                items = schedule.users.filterIsAttendance().toUserProfileList(),
                 key = { profile -> profile.id },
             ) { profile ->
                 ProfileImage(

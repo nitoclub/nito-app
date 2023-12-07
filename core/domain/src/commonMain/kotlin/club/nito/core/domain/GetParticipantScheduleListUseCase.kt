@@ -4,6 +4,7 @@ import club.nito.core.data.ParticipantRepository
 import club.nito.core.data.PlaceRepository
 import club.nito.core.data.ScheduleRepository
 import club.nito.core.data.UserRepository
+import club.nito.core.domain.extension.toParticipantUserList
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchMultipleContentResult
 import club.nito.core.model.UserProfile
@@ -63,11 +64,6 @@ public class GetParticipantScheduleListExecutor(
         places: List<Place>,
     ): List<ParticipantSchedule> = schedules.map { schedule ->
         val scheduleParticipants = participants.filter { it.scheduleId == schedule.id }
-        val scheduleParticipantProfiles = userProfiles.filter { profile ->
-            scheduleParticipants.any { it.userId == profile.id }
-        }.associateWith { profile ->
-            scheduleParticipants.first { it.userId == profile.id }.status
-        }
 
         ParticipantSchedule(
             id = schedule.id,
@@ -76,7 +72,7 @@ public class GetParticipantScheduleListExecutor(
             venue = places.first { it.id == schedule.venueId },
             meet = places.first { it.id == schedule.meetId },
             description = schedule.description,
-            participants = scheduleParticipantProfiles,
+            users = userProfiles.toParticipantUserList(scheduleParticipants),
         )
     }
 }

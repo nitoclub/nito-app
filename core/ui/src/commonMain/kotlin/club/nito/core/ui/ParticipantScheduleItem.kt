@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 import club.nito.core.common.NitoDateFormatter
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
-import club.nito.core.model.participant.ParticipantStatus
+import club.nito.core.domain.model.filterIsAttendance
+import club.nito.core.domain.model.toUserProfileList
 
 @Composable
 public fun ParticipantScheduleItem(
@@ -52,7 +53,7 @@ public fun ParticipantScheduleItem(
         }
 
         ProfileImagesRow(
-            profiles = schedule.participants.filterValues { it == ParticipantStatus.ATTENDANCE }.keys.toList(),
+            profiles = schedule.users.filterIsAttendance().toUserProfileList(),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),

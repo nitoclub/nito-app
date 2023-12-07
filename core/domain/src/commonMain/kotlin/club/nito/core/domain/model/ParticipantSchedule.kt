@@ -1,7 +1,5 @@
 package club.nito.core.domain.model
 
-import club.nito.core.model.UserProfile
-import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.place.Place
 import club.nito.core.model.schedule.ScheduleId
 import kotlinx.datetime.Instant
@@ -13,5 +11,5 @@ public data class ParticipantSchedule(
     val venue: Place,
     val meet: Place,
     val description: String,
-    val participants: Map<UserProfile, ParticipantStatus>,
+    val users: List<ParticipantUser>,
 )

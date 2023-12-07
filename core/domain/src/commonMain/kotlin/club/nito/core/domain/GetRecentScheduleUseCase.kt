@@ -4,6 +4,7 @@ import club.nito.core.data.ParticipantRepository
 import club.nito.core.data.PlaceRepository
 import club.nito.core.data.ScheduleRepository
 import club.nito.core.data.UserRepository
+import club.nito.core.domain.extension.toParticipantUserList
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.Order
@@ -75,9 +76,7 @@ public class GetRecentScheduleExecutor(
             venue = places.first { it.id == schedule.venueId },
             meet = places.first { it.id == schedule.meetId },
             description = schedule.description,
-            participants = userProfiles.associateWith { profile ->
-                participants.first { it.userId == profile.id }.status
-            },
+            users = userProfiles.toParticipantUserList(participants),
         )
     }
 }
