@@ -54,6 +54,7 @@ import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.domain.model.filterIsAttendance
 import club.nito.core.domain.model.toUserProfileList
 import club.nito.core.model.FetchSingleContentResult
+import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ProfileImage
 import club.nito.core.ui.koinStateMachine
@@ -176,6 +177,7 @@ private fun ScheduleDetailScreen(
                         }
 
                         BottomParticipateBar(
+                            myParticipantStatus = uiState.myParticipantStatus,
                             onClickParticipateChip = {
                                 dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Participate(schedule.data))
                             },
@@ -363,6 +365,7 @@ private fun ParticipantSection(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BottomParticipateBar(
+    myParticipantStatus: FetchSingleContentResult<ParticipantStatus>,
     onClickParticipateChip: () -> Unit,
     onClickAbsentChip: () -> Unit,
     onClickHoldChip: () -> Unit,
@@ -401,44 +404,63 @@ private fun BottomParticipateBar(
             ),
         horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.End),
     ) {
-        val chipModifier = Modifier
-            .align(Alignment.CenterVertically)
-            .padding(all = 8.dp)
+        when (myParticipantStatus) {
+            FetchSingleContentResult.Loading -> CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.CenterVertically),
+            )
 
-        InputChip(
-            selected = true,
-            onClick = onClickParticipateChip,
-            label = {
-                Text(
-                    text = "参加",
-                    modifier = chipModifier,
-                )
-            },
-            shape = CircleShape,
-        )
+            is FetchSingleContentResult.Success -> {
+                val status = myParticipantStatus.data
 
-        InputChip(
-            selected = false,
-            onClick = onClickAbsentChip,
-            label = {
-                Text(
-                    text = "欠席",
-                    modifier = chipModifier,
-                )
-            },
-            shape = CircleShape,
-        )
+                val chipModifier = Modifier
+                    .align(Alignment.CenterVertically)
+                    .padding(all = 8.dp)
 
-        InputChip(
-            selected = false,
-            onClick = onClickHoldChip,
-            label = {
-                Text(
-                    text = "未定",
-                    modifier = chipModifier,
+                InputChip(
+                    selected = status == ParticipantStatus.ATTENDANCE,
+                    onClick = onClickParticipateChip,
+                    label = {
+                        Text(
+                            text = "参加",
+                            modifier = chipModifier,
+                        )
+                    },
+                    shape = CircleShape,
                 )
-            },
-            shape = CircleShape,
-        )
+
+                InputChip(
+                    selected = status == ParticipantStatus.ABSENCE,
+                    onClick = onClickAbsentChip,
+                    label = {
+                        Text(
+                            text = "欠席",
+                            modifier = chipModifier,
+                        )
+                    },
+                    shape = CircleShape,
+                )
+
+                InputChip(
+                    selected = status == ParticipantStatus.PENDING,
+                    onClick = onClickHoldChip,
+                    label = {
+                        Text(
+                            text = "未定",
+                            modifier = chipModifier,
+                        )
+                    },
+                    shape = CircleShape,
+                )
+            }
+
+            is FetchSingleContentResult.Failure -> {
+                Text(
+                    text = myParticipantStatus.error?.message ?: "エラーが発生しました",
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                )
+            }
+
+            else -> {}
+        }
     }
 }
