@@ -1,10 +1,12 @@
 package club.nito.feature.schedule.detail
 
 import club.nito.core.common.NitoDateFormatter
+import club.nito.core.domain.FetchMyParticipantStatusUseCase
 import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
 import club.nito.core.domain.ParticipateUseCase
 import club.nito.core.domain.model.ParticipantSchedule
 import club.nito.core.model.FetchSingleContentResult
+import club.nito.core.model.handleResult
 import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.StateMachine
@@ -20,6 +22,7 @@ import moe.tlaster.precompose.viewmodel.viewModelScope
 public class ScheduleDetailStateMachine(
     id: ScheduleId,
     fetchParticipantScheduleById: FetchParticipantScheduleByIdUseCase,
+    private val fetchMyParticipantStatus: FetchMyParticipantStatusUseCase,
     private val participate: ParticipateUseCase,
     public val userMessageStateHolder: UserMessageStateHolder,
     private val dateTimeFormatter: NitoDateFormatter,
@@ -28,14 +31,18 @@ public class ScheduleDetailStateMachine(
     private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
     private val participantSchedule: MutableStateFlow<FetchSingleContentResult<ParticipantSchedule>> =
         MutableStateFlow(FetchSingleContentResult.Loading)
+    private val myParticipantStatus: MutableStateFlow<FetchSingleContentResult<ParticipantStatus>> =
+        MutableStateFlow(FetchSingleContentResult.Loading)
 
     public val uiState: StateFlow<ScheduleDetailScreenUiState> = buildUiState(
         showConfirmParticipateSchedule,
         participantSchedule,
-    ) { showConfirmParticipateSchedule, participantSchedule ->
+        myParticipantStatus,
+    ) { showConfirmParticipateSchedule, participantSchedule, myParticipantStatus ->
         ScheduleDetailScreenUiState(
             dateFormatter = dateTimeFormatter,
             schedule = participantSchedule,
+            myParticipantStatus = myParticipantStatus,
             confirmParticipateDialog = showConfirmParticipateSchedule
                 ?.let(ConfirmParticipateDialogUiState::Show)
                 ?: ConfirmParticipateDialogUiState.Hide,
@@ -47,7 +54,12 @@ public class ScheduleDetailStateMachine(
 
     init {
         viewModelScope.launch {
-            participantSchedule.value = fetchParticipantScheduleById(id = id)
+            launch {
+                participantSchedule.value = fetchParticipantScheduleById(id = id)
+            }
+            launch {
+                myParticipantStatus.value = fetchMyParticipantStatus(id = id)
+            }
         }
     }
 
@@ -55,22 +67,29 @@ public class ScheduleDetailStateMachine(
         viewModelScope.launch {
             when (intent) {
                 is ScheduleDetailIntent.ClickParticipantStatusChip -> {
-                    participate(intent.schedule.id, intent.status)
+                    // NOTE: 失敗時の復元用キャッシュ
+                    val cachedParticipantStatus = myParticipantStatus.value
+                    // NOTE: 成功可否に関わらず一旦選択した状態を反映する
+                    myParticipantStatus.value = FetchSingleContentResult.Success(intent.status)
 
-                    val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
-                    when (intent.status) {
-                        ParticipantStatus.ATTENDANCE -> {
-                            userMessageStateHolder.showMessage("$scheduledAt に参加登録しました 🎉")
-                        }
-                        ParticipantStatus.ABSENCE -> {
-                            userMessageStateHolder.showMessage("$scheduledAt を欠席にしました")
-                        }
-                        ParticipantStatus.PENDING -> {
-                            userMessageStateHolder.showMessage("$scheduledAt を未定にしました")
-                        }
+                    participate(intent.schedule.id, intent.status).handleResult(
+                        onSuccess = { participant ->
+                            myParticipantStatus.value = FetchSingleContentResult.Success(participant.status)
 
-                        ParticipantStatus.NONE -> {}
-                    }
+                            val scheduledAt = dateTimeFormatter.formatDateTime(intent.schedule.scheduledAt)
+                            val message = when (participant.status) {
+                                ParticipantStatus.NONE -> return@handleResult
+                                ParticipantStatus.PENDING -> "$scheduledAt を未定にしました"
+                                ParticipantStatus.ATTENDANCE -> "$scheduledAt に参加登録しました 🎉"
+                                ParticipantStatus.ABSENCE -> "$scheduledAt を欠席にしました"
+                            }
+                            userMessageStateHolder.showMessage(message)
+                        },
+                        onFailure = {
+                            // NOTE: 失敗した場合はキャッシュを復元する
+                            myParticipantStatus.value = cachedParticipantStatus
+                        },
+                    )
                 }
             }
         }
