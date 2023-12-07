@@ -28,24 +28,19 @@ public class ScheduleDetailStateMachine(
     private val dateTimeFormatter: NitoDateFormatter,
 ) : StateMachine(),
     UserMessageStateHolder by userMessageStateHolder {
-    private val showConfirmParticipateSchedule = MutableStateFlow<ParticipantSchedule?>(null)
     private val participantSchedule: MutableStateFlow<FetchSingleContentResult<ParticipantSchedule>> =
         MutableStateFlow(FetchSingleContentResult.Loading)
     private val myParticipantStatus: MutableStateFlow<FetchSingleContentResult<ParticipantStatus>> =
         MutableStateFlow(FetchSingleContentResult.Loading)
 
     public val uiState: StateFlow<ScheduleDetailScreenUiState> = buildUiState(
-        showConfirmParticipateSchedule,
         participantSchedule,
         myParticipantStatus,
-    ) { showConfirmParticipateSchedule, participantSchedule, myParticipantStatus ->
+    ) { participantSchedule, myParticipantStatus ->
         ScheduleDetailScreenUiState(
             dateFormatter = dateTimeFormatter,
             schedule = participantSchedule,
             myParticipantStatus = myParticipantStatus,
-            confirmParticipateDialog = showConfirmParticipateSchedule
-                ?.let(ConfirmParticipateDialogUiState::Show)
-                ?: ConfirmParticipateDialogUiState.Hide,
         )
     }
 

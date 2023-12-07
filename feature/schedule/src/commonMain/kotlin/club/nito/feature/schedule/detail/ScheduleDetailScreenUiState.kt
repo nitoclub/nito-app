@@ -9,10 +9,4 @@ public data class ScheduleDetailScreenUiState(
     val dateFormatter: NitoDateFormatter,
     val schedule: FetchSingleContentResult<ParticipantSchedule>,
     val myParticipantStatus: FetchSingleContentResult<ParticipantStatus>,
-    val confirmParticipateDialog: ConfirmParticipateDialogUiState,
 )
-
-public sealed class ConfirmParticipateDialogUiState {
-    public data class Show(val schedule: ParticipantSchedule) : ConfirmParticipateDialogUiState()
-    public data object Hide : ConfirmParticipateDialogUiState()
-}
