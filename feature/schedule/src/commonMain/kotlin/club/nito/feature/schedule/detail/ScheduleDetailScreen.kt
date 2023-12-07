@@ -21,18 +21,15 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -46,12 +43,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -376,10 +372,15 @@ private fun ParticipantSection(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SendMessageContainer(
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colorScheme.secondaryContainer,
+    backgroundColor: Color = lerp(
+        start = MaterialTheme.colorScheme.secondaryContainer,
+        stop = MaterialTheme.colorScheme.background,
+        fraction = 0.7f,
+    ),
     innerPadding: PaddingValues = PaddingValues(),
     layoutDirection: LayoutDirection = LocalLayoutDirection.current,
 ) {
@@ -407,28 +408,46 @@ private fun SendMessageContainer(
                 top = 16.dp,
                 bottom = 8.dp,
             ),
-        horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.Start),
+        horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.End),
     ) {
-        OutlinedTextField(
-            value = "",
-            onValueChange = { },
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .weight(1f),
-            enabled = false,
-            placeholder = { Text(text = "Coming Soon.") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Text,
-                imeAction = ImeAction.Done,
-            ),
+        val chipModifier = Modifier
+            .align(Alignment.CenterVertically)
+            .padding(all = 8.dp)
+
+        InputChip(
+            selected = true,
+            onClick = { },
+            label = {
+                Text(
+                    text = "参加",
+                    modifier = chipModifier,
+                )
+            },
+            shape = CircleShape,
         )
 
-        IconButton(
+        InputChip(
+            selected = false,
             onClick = { },
-            Modifier.align(Alignment.CenterVertically),
-            enabled = false,
-        ) {
-            Icon(Icons.Default.Send, contentDescription = "Send")
-        }
+            label = {
+                Text(
+                    text = "欠席",
+                    modifier = chipModifier,
+                )
+            },
+            shape = CircleShape,
+        )
+
+        InputChip(
+            selected = false,
+            onClick = { },
+            label = {
+                Text(
+                    text = "未定",
+                    modifier = chipModifier,
+                )
+            },
+            shape = CircleShape,
+        )
     }
 }
