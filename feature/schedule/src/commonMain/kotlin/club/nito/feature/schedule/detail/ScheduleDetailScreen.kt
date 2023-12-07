@@ -106,7 +106,7 @@ private fun ScheduleDetailScreen(
     val localDensity = LocalDensity.current
 
     val schedule = uiState.schedule
-    var sendMessageContainerHeightDp by remember {
+    var bottomParticipateBarHeightDp by remember {
         mutableStateOf(0.dp)
     }
 
@@ -153,7 +153,7 @@ private fun ScheduleDetailScreen(
                                     top = innerPadding.calculateTopPadding(),
                                     bottom = innerPadding.calculateBottomPadding(),
                                 )
-                                .padding(bottom = sendMessageContainerHeightDp)
+                                .padding(bottom = bottomParticipateBarHeightDp)
                                 .padding(vertical = 16.dp),
                             verticalArrangement = Arrangement.spacedBy(40.dp),
                         ) {
@@ -189,7 +189,7 @@ private fun ScheduleDetailScreen(
                                 .align(Alignment.BottomCenter)
                                 .fillMaxWidth()
                                 .onGloballyPositioned { coordinates ->
-                                    sendMessageContainerHeightDp = with(localDensity) { coordinates.size.height.toDp() }
+                                    bottomParticipateBarHeightDp = with(localDensity) { coordinates.size.height.toDp() }
                                 },
                             innerPadding = innerPadding,
                         )
