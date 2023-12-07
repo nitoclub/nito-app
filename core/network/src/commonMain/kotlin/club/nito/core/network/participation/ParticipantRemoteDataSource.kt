@@ -45,12 +45,12 @@ public sealed interface ParticipantRemoteDataSource {
      *
      * @param declaration 参加表明データ
      */
-    public suspend fun insertParticipate(declaration: ParticipantDeclaration): Long
+    public suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant
 
     /**
      * 該当スケジュールへの参加状況を更新する
      *
      * @param declaration 参加表明データ
      */
-    public suspend fun updateParticipate(declaration: ParticipantDeclaration): Long
+    public suspend fun updateParticipate(declaration: ParticipantDeclaration): Participant
 }

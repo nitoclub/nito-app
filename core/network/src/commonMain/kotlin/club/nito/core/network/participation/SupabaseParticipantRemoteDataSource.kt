@@ -77,22 +77,25 @@ public class SupabaseParticipantRemoteDataSource(
                 .toParticipantStatus()
         }
 
-    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Long = networkService {
-        val result = postgrest.insert(
+    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant = networkService {
+        postgrest.insert(
             value = declaration.toNetworkModel(),
         ) {
-            count(Count.EXACT)
+            select()
+            single()
         }
-        result.countOrNull() ?: 0
+            .decodeAs<NetworkParticipant>()
+            .let(NetworkParticipant::toParticipant)
     }
 
-    override suspend fun updateParticipate(declaration: ParticipantDeclaration): Long = networkService {
-        val result = postgrest.update(
+    override suspend fun updateParticipate(declaration: ParticipantDeclaration): Participant = networkService {
+        postgrest.update(
             update = {
                 set("status", declaration.status.toNetworkModel())
             },
             request = {
-                count(Count.EXACT)
+                select()
+                single()
                 filter {
                     and {
                         eq("schedule_id", declaration.scheduleId)
@@ -101,6 +104,7 @@ public class SupabaseParticipantRemoteDataSource(
                 }
             },
         )
-        result.countOrNull() ?: 0
+            .decodeAs<NetworkParticipant>()
+            .let(NetworkParticipant::toParticipant)
     }
 }

@@ -21,9 +21,9 @@ public class DefaultParticipantRepository(
     override suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus =
         remoteDataSource.fetchParticipantStatus(scheduleId = scheduleId, userId = userId)
 
-    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Long =
+    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant =
         remoteDataSource.insertParticipate(declaration = declaration)
 
-    override suspend fun updateParticipate(declaration: ParticipantDeclaration): Long =
+    override suspend fun updateParticipate(declaration: ParticipantDeclaration): Participant =
         remoteDataSource.updateParticipate(declaration = declaration)
 }
