@@ -54,8 +54,10 @@ public class FetchParticipantScheduleByIdExecutor(
         places: List<Place>,
     ): ParticipantSchedule {
         val scheduleParticipants = participants.filter { it.scheduleId == schedule.id }
-        val scheduleParticipantProfiles = userProfiles.filter { profile ->
+        val scheduleParticipantProfiles = userProfiles.asSequence().filter { profile ->
             scheduleParticipants.any { it.userId == profile.id }
+        }.associateWith { profile ->
+            scheduleParticipants.first { it.userId == profile.id }.status
         }
 
         return ParticipantSchedule(

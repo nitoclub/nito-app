@@ -65,6 +65,8 @@ public class GetParticipantScheduleListExecutor(
         val scheduleParticipants = participants.filter { it.scheduleId == schedule.id }
         val scheduleParticipantProfiles = userProfiles.filter { profile ->
             scheduleParticipants.any { it.userId == profile.id }
+        }.associateWith { profile ->
+            scheduleParticipants.first { it.userId == profile.id }.status
         }
 
         ParticipantSchedule(
