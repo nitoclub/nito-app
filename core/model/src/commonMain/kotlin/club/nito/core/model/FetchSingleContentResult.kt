@@ -25,8 +25,9 @@ public sealed interface FetchSingleContentResult<out T> {
     public data class Failure(val error: NitoError?) : FetchSingleContentResult<Nothing>
 }
 
-public suspend fun <T> runFetchSingleContent(block: suspend () -> T): FetchSingleContentResult<T> = try {
-    FetchSingleContentResult.Success(block())
-} catch (e: Throwable) {
-    FetchSingleContentResult.Failure(e.toNitoError())
-}
+public suspend inline fun <T> runFetchSingleContent(crossinline block: suspend () -> T): FetchSingleContentResult<T> =
+    try {
+        FetchSingleContentResult.Success(block())
+    } catch (e: Throwable) {
+        FetchSingleContentResult.Failure(e.toNitoError())
+    }
