@@ -173,7 +173,7 @@ private fun ScheduleDetailScreen(
                             )
                         }
 
-                        SendMessageContainer(
+                        BottomParticipateBar(
                             onClickParticipateChip = {
                                 dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Participate(schedule.data))
                             },
@@ -360,7 +360,7 @@ private fun ParticipantSection(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SendMessageContainer(
+private fun BottomParticipateBar(
     onClickParticipateChip: () -> Unit,
     onClickAbsentChip: () -> Unit,
     onClickHoldChip: () -> Unit,
