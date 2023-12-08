@@ -3,11 +3,13 @@ package club.nito.feature.schedule.detail
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -51,8 +52,7 @@ import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
-import club.nito.core.domain.model.filterIsAttendance
-import club.nito.core.domain.model.toUserProfileList
+import club.nito.core.domain.model.ParticipantUser
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.schedule.ScheduleId
@@ -172,7 +172,9 @@ private fun ScheduleDetailScreen(
 
                             ParticipantSection(
                                 schedule = schedule.data,
+                                onClickParticipantUser = { dispatch(ScheduleDetailIntent.ClickParticipantUser(it)) },
                                 modifier = containerModifier,
+                                contentPadding = PaddingValues(horizontal = 8.dp),
                             )
                         }
 
@@ -335,28 +337,52 @@ private fun MeetSection(
 @Composable
 private fun ParticipantSection(
     schedule: ParticipantSchedule,
+    onClickParticipantUser: (ParticipantUser) -> Unit,
     modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(),
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         Text(
-            text = "参加者",
+            text = "参加情報",
+            modifier = Modifier.padding(contentPadding),
+            fontSize = 20.sp,
         )
-        LazyRow(
+
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start),
-            verticalAlignment = Alignment.CenterVertically,
         ) {
-            items(
-                items = schedule.users.filterIsAttendance().toUserProfileList(),
-                key = { profile -> profile.id },
-            ) { profile ->
-                ProfileImage(
-                    profile = profile,
-                    modifier = Modifier.size(48.dp),
-                )
+            schedule.users.forEach { user ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onClickParticipantUser(user) }
+                        .padding(contentPadding)
+                        .padding(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    ProfileImage(
+                        profile = user.profile,
+                        modifier = Modifier.size(48.dp),
+                    )
+                    Spacer(Modifier.width(16.dp))
+                    Text(
+                        text = user.profile.displayName,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Spacer(Modifier.width(16.dp))
+                    Text(
+                        text = when (user.status) {
+                            ParticipantStatus.NONE -> ""
+                            ParticipantStatus.PENDING -> "未定"
+                            ParticipantStatus.ATTENDANCE -> "参加"
+                            ParticipantStatus.ABSENCE -> "欠席"
+                        },
+                    )
+                }
             }
         }
     }
