@@ -61,6 +61,10 @@ public class ScheduleDetailStateMachine(
     public fun dispatch(intent: ScheduleDetailIntent) {
         viewModelScope.launch {
             when (intent) {
+                is ScheduleDetailIntent.ClickParticipantUser -> {
+                    // TODO: ユーザー詳細画面へ遷移する
+                }
+
                 is ScheduleDetailIntent.ClickParticipantStatusChip -> {
                     // NOTE: 失敗時の復元用キャッシュ
                     val cachedParticipantStatus = myParticipantStatus.value
