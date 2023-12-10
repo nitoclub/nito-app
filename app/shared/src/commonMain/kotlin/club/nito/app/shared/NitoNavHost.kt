@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import club.nito.core.model.AuthStatus
-import club.nito.feature.auth.loginNavigationRoute
-import club.nito.feature.auth.loginScreen
-import club.nito.feature.auth.navigateToLogin
+import club.nito.feature.auth.login.loginNavigationRoute
+import club.nito.feature.auth.login.loginScreen
+import club.nito.feature.auth.login.navigateToLogin
 import club.nito.feature.schedule.detail.navigateToScheduleDetail
 import club.nito.feature.schedule.detail.scheduleDetailScreen
 import club.nito.feature.schedule.list.navigateToScheduleList

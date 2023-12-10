@@ -1,4 +1,4 @@
-package club.nito.feature.auth
+package club.nito.feature.auth.login
 
 import moe.tlaster.precompose.navigation.NavOptions
 import moe.tlaster.precompose.navigation.Navigator

@@ -1,4 +1,4 @@
-package club.nito.feature.auth
+package club.nito.feature.auth.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
