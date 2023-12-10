@@ -18,13 +18,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
 import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
+import club.nito.feature.auth.component.PasswordTextField
 
 @Composable
 public fun LoginRoute(
@@ -100,18 +100,16 @@ private fun LoginScreen(
                     ),
                     singleLine = true,
                 )
-                OutlinedTextField(
-                    value = uiState.password,
-                    onValueChange = { dispatch(LoginScreenIntent.ChangeInputPassword(it)) },
+                PasswordTextField(
                     modifier = Modifier.fillMaxWidth(),
-                    label = { Text(text = "Password") },
-                    placeholder = { Text(text = "password") },
-                    visualTransformation = PasswordVisualTransformation(),
+                    password = uiState.password,
+                    onPasswordChange = { dispatch(LoginScreenIntent.ChangeInputPassword(it)) },
+                    passwordVisible = uiState.isVisiblePassword,
+                    onPasswordVisibleChange = { dispatch(LoginScreenIntent.ChangePasswordVisible(it)) },
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Password,
                         imeAction = ImeAction.Done,
                     ),
-                    singleLine = true,
                 )
                 Button(
                     modifier = Modifier
