@@ -26,6 +26,7 @@ public class LoginScreenStateMachine(
 
     private val email = MutableStateFlow("")
     private val password = MutableStateFlow("")
+    private val isVisiblePassword = MutableStateFlow(false)
     private val authStatus = authStatusStream().stateIn(
         scope = stateMachineScope,
         started = SharingStarted.WhileSubscribed(5_000),
@@ -35,11 +36,13 @@ public class LoginScreenStateMachine(
     public val uiState: StateFlow<LoginScreenUiState> = buildUiState(
         email,
         password,
+        isVisiblePassword,
         authStatus,
-    ) { email, password, authStatus ->
+    ) { email, password, isVisiblePassword, authStatus ->
         LoginScreenUiState(
             email = email,
             password = password,
+            isVisiblePassword = isVisiblePassword,
             isSignInning = authStatus is AuthStatus.Loading,
         )
     }
@@ -61,7 +64,11 @@ public class LoginScreenStateMachine(
         stateMachineScope.launch {
             when (intent) {
                 is LoginScreenIntent.ChangeInputEmail -> email.emit(intent.email)
-                is LoginScreenIntent.ChangeInputPassword -> password.emit(intent.password)
+                is LoginScreenIntent.ChangeInputPassword -> {
+                    if (intent.password.length > PASSWORD_MAX_LENGTH) return@launch
+                    password.value = intent.password
+                }
+
                 LoginScreenIntent.ClickSignIn -> {
                     val result = login(email.value, password.value)
                     if (result is ExecuteResult.Failure) {
@@ -70,6 +77,8 @@ public class LoginScreenStateMachine(
                 }
 
                 LoginScreenIntent.ClickRegister -> {}
+
+                is LoginScreenIntent.ChangePasswordVisible -> isVisiblePassword.value = intent.isPasswordVisible
             }
         }
     }
@@ -78,5 +87,9 @@ public class LoginScreenStateMachine(
         stateMachineScope.launch {
             _events.emit(_events.value.filterNot { it == event })
         }
+    }
+
+    public companion object {
+        private const val PASSWORD_MAX_LENGTH = 32
     }
 }
