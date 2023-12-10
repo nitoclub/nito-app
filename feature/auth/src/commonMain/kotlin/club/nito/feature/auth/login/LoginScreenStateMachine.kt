@@ -1,4 +1,4 @@
-package club.nito.feature.auth
+package club.nito.feature.auth.login
 
 import club.nito.core.domain.AuthStatusStreamUseCase
 import club.nito.core.domain.LoginUseCase

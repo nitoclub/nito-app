@@ -1,4 +1,4 @@
-package club.nito.feature.auth
+package club.nito.feature.auth.login
 
 import androidx.compose.ui.window.ComposeUIViewController
 import club.nito.core.designsystem.theme.NitoTheme

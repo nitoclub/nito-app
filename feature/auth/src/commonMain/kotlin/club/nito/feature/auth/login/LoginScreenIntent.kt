@@ -1,4 +1,4 @@
-package club.nito.feature.auth
+package club.nito.feature.auth.login
 
 public sealed class LoginScreenIntent {
     public data class ChangeInputEmail(val email: String) : LoginScreenIntent()
