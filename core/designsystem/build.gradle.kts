@@ -19,6 +19,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(compose.materialIconsExtended)
                 api(libs.imageLoader)
             }
         }
