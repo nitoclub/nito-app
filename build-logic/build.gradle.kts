@@ -62,6 +62,10 @@ gradlePlugin {
             id = "nito.primitive.kmp.compose"
             implementationClass = "club.nito.primitive.KmpComposePlugin"
         }
+        register("kmpSqlDelight") {
+            id = "nito.primitive.kmp.sqldelight"
+            implementationClass = "club.nito.primitive.KmpSqlDelightPlugin"
+        }
         register("kmpKotlinSerialization") {
             id = "nito.primitive.kmp.serialization"
             implementationClass = "club.nito.primitive.KotlinSerializationPlugin"
