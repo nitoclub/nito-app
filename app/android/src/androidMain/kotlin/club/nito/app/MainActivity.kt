@@ -1,5 +1,6 @@
 package club.nito.app
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
@@ -12,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import club.nito.app.shared.NitoApp
+import org.koin.dsl.module
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +39,10 @@ class MainActivity : ComponentActivity() {
             NitoApp(
                 shouldKeepOnScreen = { shouldKeep = it },
                 initKoin = {
-                    modules(appModule)
+                    modules(
+                        appModule,
+                        module { single<Context> { this@MainActivity.applicationContext } },
+                    )
                 },
             )
         }

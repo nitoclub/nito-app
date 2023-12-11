@@ -5,6 +5,7 @@ import club.nito.app.shared.di.featureModules
 import club.nito.app.shared.di.nitoDateFormatterModule
 import club.nito.app.shared.di.userMessageStateHolderModule
 import club.nito.core.data.di.dataModule
+import club.nito.core.database.di.databaseModule
 import club.nito.core.datastore.di.dataStoreModule
 import club.nito.core.domain.di.useCaseModule
 import club.nito.core.model.BuildConfig
@@ -35,6 +36,7 @@ class KmpEntryPoint {
                 supabaseClientModule,
                 remoteDataSourceModule,
 //                fakeRemoteDataSourceModule,
+                databaseModule,
                 dataStoreModule,
                 dataModule,
                 useCaseModule,
