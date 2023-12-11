@@ -14,13 +14,10 @@ public struct ComposeScheduleDetailScreen: UIViewControllerRepresentable {
         return ScheduleDetailScreen_iosKt.ScheduleDetailRouteViewController(
             id: scheduleId,
             stateMachine: ScheduleDetailStateMachine(
-                id: scheduleId,
-                fetchParticipantScheduleById: Container.shared.get(
-                    type: FetchParticipantScheduleByIdUseCase.self
-                ),
-                fetchMyParticipantStatus: Container.shared.get(
-                    type: FetchMyParticipantStatusUseCase.self
-                ),
+                scheduleId: scheduleId,
+                scheduleStream: Container.shared.get(type: ScheduleStreamUseCase.self),
+                scheduleParticipantsStream: Container.shared.get(type: ScheduleParticipantsStreamUseCase.self),
+                myParticipantStatusStream: Container.shared.get(type: MyParticipantStatusStreamUseCase.self),
                 participate: Container.shared.get(type: ParticipateUseCase.self),
                 userMessageStateHolder: Container.shared.get(type: UserMessageStateHolder.self),
                 dateTimeFormatter: Container.shared.get(type: CommonNitoDateFormatter.self)

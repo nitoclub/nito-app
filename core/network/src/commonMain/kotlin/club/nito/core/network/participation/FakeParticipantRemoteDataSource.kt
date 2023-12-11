@@ -36,12 +36,12 @@ public data object FakeParticipantRemoteDataSource : ParticipantRemoteDataSource
         return ParticipantStatus.ATTENDANCE
     }
 
-    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant {
+    override suspend fun upsertParticipate(participant: Participant): Participant {
         delay(1000)
         return createFakeNetworkParticipant(
-            scheduleId = declaration.scheduleId,
-            userId = declaration.userId,
-            status = declaration.status.toNetworkModel(),
+            scheduleId = participant.scheduleId,
+            userId = participant.userId,
+            status = participant.status.toNetworkModel(),
         ).toParticipant()
     }
 

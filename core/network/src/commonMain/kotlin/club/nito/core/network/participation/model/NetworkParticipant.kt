@@ -22,6 +22,15 @@ internal data class NetworkParticipant(
  */
 internal fun NetworkParticipant?.toParticipantStatus(): ParticipantStatus = this?.status.toParticipantStatus()
 
+/**
+ * ネットワークモデルに変換する
+ */
+internal fun Participant.toNetworkModel(): NetworkParticipant = NetworkParticipant(
+    scheduleId = scheduleId,
+    userId = userId,
+    status = status.toNetworkModel(),
+)
+
 internal fun createFakeNetworkParticipant(
     scheduleId: String = "bbe00d24-d840-460d-a127-f23f9e472cc6",
     userId: String = "bbe00d24-d840-460d-a127-f23f9e472cc6",

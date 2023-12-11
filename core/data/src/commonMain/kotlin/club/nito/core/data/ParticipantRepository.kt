@@ -50,11 +50,27 @@ public sealed interface ParticipantRepository {
     public suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus
 
     /**
+     * 該当の予定の対象のユーザーの参加情報を取得する
+     *
+     * @param scheduleId 参加情報を取得するスケジュールID
+     * @param userId 対象のユーザーID
+     * @return 参加情報
+     */
+    public fun participantStatusStream(scheduleId: ScheduleId, userId: String): Flow<ParticipantStatus>
+
+    /**
      * 該当スケジュールへの参加状況を追加する
      *
-     * @param declaration 参加表明データ
+     * @param participant 参加表明データ
      */
-    public suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant
+    public suspend fun upsertLocalParticipate(participant: Participant)
+
+    /**
+     * 該当スケジュールへの参加状況を追加する
+     *
+     * @param participant 参加表明データ
+     */
+    public suspend fun upsertParticipate(participant: Participant): Participant
 
     /**
      * 該当スケジュールへの参加状況を更新する

@@ -75,9 +75,9 @@ public class SupabaseParticipantRemoteDataSource(
                 .toParticipantStatus()
         }
 
-    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant = networkService {
-        postgrest.insert(
-            value = declaration.toNetworkModel(),
+    override suspend fun upsertParticipate(participant: Participant): Participant = networkService {
+        postgrest.upsert(
+            value = participant.toNetworkModel(),
         ) {
             select()
             single()

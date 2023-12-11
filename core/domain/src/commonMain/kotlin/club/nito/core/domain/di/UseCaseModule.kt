@@ -3,7 +3,7 @@ package club.nito.core.domain.di
 import club.nito.core.domain.AuthStatusStreamExecutor
 import club.nito.core.domain.AuthStatusStreamUseCase
 import club.nito.core.domain.FetchMyParticipantStatusExecutor
-import club.nito.core.domain.FetchMyParticipantStatusUseCase
+import club.nito.core.domain.MyParticipantStatusStreamUseCase
 import club.nito.core.domain.FetchParticipantScheduleByIdExecutor
 import club.nito.core.domain.FetchParticipantScheduleByIdUseCase
 import club.nito.core.domain.GetParticipantScheduleListExecutor
@@ -18,6 +18,10 @@ import club.nito.core.domain.ModifyPasswordExecutor
 import club.nito.core.domain.ModifyPasswordUseCase
 import club.nito.core.domain.ParticipateExecutor
 import club.nito.core.domain.ParticipateUseCase
+import club.nito.core.domain.ScheduleParticipantsStreamExecutor
+import club.nito.core.domain.ScheduleParticipantsStreamUseCase
+import club.nito.core.domain.ScheduleStreamExecutor
+import club.nito.core.domain.ScheduleStreamUseCase
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -29,8 +33,10 @@ public val useCaseModule: Module = module {
     singleOf(::ModifyPasswordExecutor) bind ModifyPasswordUseCase::class
     singleOf(::LogoutExecutor) bind LogoutUseCase::class
     singleOf(::FetchParticipantScheduleByIdExecutor) bind FetchParticipantScheduleByIdUseCase::class
+    singleOf(::ScheduleParticipantsStreamExecutor) bind ScheduleParticipantsStreamUseCase::class
+    singleOf(::ScheduleStreamExecutor) bind ScheduleStreamUseCase::class
     singleOf(::GetRecentScheduleExecutor) bind GetRecentScheduleUseCase::class
     singleOf(::GetParticipantScheduleListExecutor) bind GetParticipantScheduleListUseCase::class
     singleOf(::ParticipateExecutor) bind ParticipateUseCase::class
-    singleOf(::FetchMyParticipantStatusExecutor) bind FetchMyParticipantStatusUseCase::class
+    singleOf(::FetchMyParticipantStatusExecutor) bind MyParticipantStatusStreamUseCase::class
 }

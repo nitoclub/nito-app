@@ -14,11 +14,12 @@ public val scheduleFeatureModule: Module = module {
             dateFormatter = get(),
         )
     }
-    factory { (id: ScheduleId) ->
+    factory { (scheduleId: ScheduleId) ->
         ScheduleDetailStateMachine(
-            id = id,
-            fetchParticipantScheduleById = get(),
-            fetchMyParticipantStatus = get(),
+            scheduleId = scheduleId,
+            scheduleStream = get(),
+            scheduleParticipantsStream = get(),
+            myParticipantStatusStream = get(),
             participate = get(),
             userMessageStateHolder = get(),
             dateTimeFormatter = get(),

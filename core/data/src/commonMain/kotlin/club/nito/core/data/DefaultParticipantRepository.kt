@@ -32,13 +32,29 @@ public class DefaultParticipantRepository(
     override suspend fun fetchParticipantStatus(scheduleId: ScheduleId, userId: String): ParticipantStatus =
         remoteDataSource.fetchParticipantStatus(scheduleId = scheduleId, userId = userId)
 
-    override suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant {
-        val participant = remoteDataSource.insertParticipate(declaration = declaration)
-        dao.upsert(participant)
-        return participant
-    }
+    override fun participantStatusStream(scheduleId: ScheduleId, userId: String): Flow<ParticipantStatus> =
+        dao.participantStatusStream(
+            scheduleId = scheduleId,
+            userId = userId,
+        )
+
+    override suspend fun upsertLocalParticipate(participant: Participant): Unit = dao.upsert(participant)
+
+    override suspend fun upsertParticipate(participant: Participant): Participant = remoteDataSource
+        .upsertParticipate(participant = participant)
+        .also {
+            dao.upsert(it)
+        }
 
     override suspend fun updateParticipate(declaration: ParticipantDeclaration): Participant {
+        dao.upsert(
+            entity = Participant(
+                scheduleId = declaration.scheduleId,
+                userId = declaration.userId,
+                status = declaration.status,
+            ),
+        )
+
         val participant = remoteDataSource.updateParticipate(declaration = declaration)
         dao.upsert(participant)
         return participant

@@ -43,9 +43,9 @@ public sealed interface ParticipantRemoteDataSource {
     /**
      * 該当スケジュールへの参加状況を追加する
      *
-     * @param declaration 参加表明データ
+     * @param participant 参加表明データ
      */
-    public suspend fun insertParticipate(declaration: ParticipantDeclaration): Participant
+    public suspend fun upsertParticipate(participant: Participant): Participant
 
     /**
      * 該当スケジュールへの参加状況を更新する
