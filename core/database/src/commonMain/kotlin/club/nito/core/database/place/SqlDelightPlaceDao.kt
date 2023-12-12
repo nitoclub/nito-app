@@ -45,18 +45,18 @@ internal class SqlDelightPlaceDao(
     override fun upsert(entities: List<Place>) {
         database.transaction {
             for (entity in entities) {
-                upsertUserProfile(entity)
+                upsertPlace(entity)
             }
         }
     }
 
     override fun upsert(entity: Place) {
         database.transaction {
-            upsertUserProfile(entity)
+            upsertPlace(entity)
         }
     }
 
-    private fun upsertUserProfile(entity: Place) {
+    private fun upsertPlace(entity: Place) {
         database.placesQueries.upsert(
             id = entity.id,
             name = entity.name,

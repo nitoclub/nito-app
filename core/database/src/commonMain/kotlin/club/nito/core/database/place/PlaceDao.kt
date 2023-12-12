@@ -24,12 +24,12 @@ public interface PlaceDao {
     public fun placesStream(placeIds: List<String>): Flow<List<Place>>
 
     /**
-     * スケジュール一覧を登録 / 更新する
+     * 場所一覧を登録 / 更新する
      */
     public fun upsert(entities: List<Place>)
 
     /**
-     * スケジュールを登録 / 更新する
+     * 場所を登録 / 更新する
      */
     public fun upsert(entity: Place)
 }

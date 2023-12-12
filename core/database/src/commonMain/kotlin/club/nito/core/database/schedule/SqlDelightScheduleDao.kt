@@ -55,18 +55,18 @@ internal class SqlDelightScheduleDao(
     override fun upsert(entities: List<Schedule>) {
         database.transaction {
             for (entity in entities) {
-                upsertUserProfile(entity)
+                upsertSchedule(entity)
             }
         }
     }
 
     override fun upsert(entity: Schedule) {
         database.transaction {
-            upsertUserProfile(entity)
+            upsertSchedule(entity)
         }
     }
 
-    private fun upsertUserProfile(entity: Schedule) {
+    private fun upsertSchedule(entity: Schedule) {
         database.schedulesQueries.upsert(
             id = entity.id,
             scheduled_at = entity.scheduledAt,
