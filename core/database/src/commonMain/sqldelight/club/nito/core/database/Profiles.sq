@@ -1,0 +1,46 @@
+CREATE TABLE IF NOT EXISTS `profiles` (
+  `id` TEXT PRIMARY KEY NOT NULL,
+  `username` TEXT NOT NULL,
+  `display_name` TEXT NOT NULL,
+  `avatar_url` TEXT NOT NULL,
+  `website` TEXT NOT NULL
+);
+
+-- indices
+
+CREATE UNIQUE INDEX IF NOT EXISTS `profiles_pkey` ON `profiles` (`id`);
+
+-- queries
+
+profileById:
+SELECT *
+FROM profiles
+WHERE id = ?;
+
+profileByIds:
+SELECT *
+FROM profiles
+WHERE id IN ?;
+
+upsert {
+  UPDATE profiles SET
+    `username` = :username,
+    `display_name` = :display_name,
+    `avatar_url` = :avatar_url,
+    `website` = :website
+  WHERE `id` = :id;
+
+  INSERT OR IGNORE INTO profiles (
+    `id`,
+    `username`,
+    `display_name`,
+    `avatar_url`,
+    `website`
+  ) VALUES (
+    :id,
+    :username,
+    :display_name,
+    :avatar_url,
+    :website
+  );
+}
