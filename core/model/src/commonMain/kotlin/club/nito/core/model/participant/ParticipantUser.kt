@@ -1,7 +1,6 @@
-package club.nito.core.domain.model
+package club.nito.core.model.participant
 
 import club.nito.core.model.UserProfile
-import club.nito.core.model.participant.ParticipantStatus
 
 /**
  * 参加ユーザー

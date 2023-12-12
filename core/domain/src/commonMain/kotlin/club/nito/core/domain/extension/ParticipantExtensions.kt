@@ -1,6 +1,6 @@
 package club.nito.core.domain.extension
 
-import club.nito.core.domain.model.ParticipantUser
+import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.UserProfile
 import club.nito.core.model.participant.Participant
 

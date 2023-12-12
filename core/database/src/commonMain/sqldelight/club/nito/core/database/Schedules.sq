@@ -1,0 +1,76 @@
+import kotlinx.datetime.Instant;
+
+CREATE TABLE IF NOT EXISTS `schedules` (
+  `id` TEXT PRIMARY KEY NOT NULL,
+  `scheduled_at` INTEGER AS Instant NOT NULL,
+  `venue_id` TEXT NOT NULL,
+  `meet_id` TEXT NOT NULL,
+  `met_at` INTEGER AS Instant NOT NULL,
+  `description` TEXT NOT NULL
+);
+
+-- indices
+
+CREATE UNIQUE INDEX IF NOT EXISTS `schedules_pkey` ON `schedules` (`id`);
+
+-- queries
+
+schedules:
+SELECT *
+FROM schedules;
+
+schedulesByIds:
+SELECT *
+FROM schedules
+WHERE id IN ?;
+
+scheduleById:
+SELECT *
+FROM schedules
+WHERE id = ?;
+
+schedulesWithPlace:
+SELECT
+  schedules.*,
+  venue.*,
+  meet.*
+FROM schedules
+INNER JOIN places venue ON schedules.venue_id = venue.id
+INNER JOIN places meet ON schedules.meet_id = meet.id
+WHERE schedules.id IN :schedule_id;
+
+scheduleWithPlace:
+SELECT
+  schedules.*,
+  venue.*,
+  meet.*
+FROM schedules
+INNER JOIN places venue ON schedules.venue_id = venue.id
+INNER JOIN places meet ON schedules.meet_id = meet.id
+WHERE schedules.id = :schedule_id;
+
+upsert {
+  UPDATE schedules SET
+    `scheduled_at` = :scheduled_at,
+    `venue_id` = :venue_id,
+    `meet_id` = :meet_id,
+    `description` = :description,
+    `met_at` = :met_at
+  WHERE `id` = :id;
+
+  INSERT OR IGNORE INTO schedules (
+    `id`,
+    `scheduled_at`,
+    `venue_id`,
+    `meet_id`,
+    `description`,
+    `met_at`
+  ) VALUES (
+    :id,
+    :scheduled_at,
+    :venue_id,
+    :meet_id,
+    :description,
+    :met_at
+  );
+}
