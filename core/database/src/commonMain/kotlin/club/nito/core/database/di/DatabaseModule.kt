@@ -8,6 +8,8 @@ import club.nito.core.database.place.PlaceDao
 import club.nito.core.database.place.SqlDelightPlaceDao
 import club.nito.core.database.profile.ProfileDao
 import club.nito.core.database.profile.SqlDelightProfileDao
+import club.nito.core.database.schedule.ScheduleDao
+import club.nito.core.database.schedule.SqlDelightScheduleDao
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.scope.Scope
@@ -24,6 +26,7 @@ public val databaseModule: Module = module {
     singleOf(::SqlDelightParticipantDao) bind ParticipantDao::class
     singleOf(::SqlDelightPlaceDao) bind PlaceDao::class
     singleOf(::SqlDelightProfileDao) bind ProfileDao::class
+    singleOf(::SqlDelightScheduleDao) bind ScheduleDao::class
 }
 
 internal expect fun Scope.createDriverFactory(): DriverFactory
