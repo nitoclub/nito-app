@@ -1,0 +1,54 @@
+CREATE TABLE IF NOT EXISTS `places` (
+  `id` TEXT PRIMARY KEY NOT NULL,
+  `name` TEXT NOT NULL,
+  `url` TEXT NOT NULL,
+  `map_url` TEXT NOT NULL,
+  `image_url` TEXT NOT NULL,
+  `description` TEXT NOT NULL
+);
+
+-- indices
+
+CREATE UNIQUE INDEX IF NOT EXISTS `places_pkey` ON `places` (`id`);
+
+-- queries
+
+places:
+SELECT *
+FROM places;
+
+placesByIds:
+SELECT *
+FROM places
+WHERE id IN ?;
+
+placeById:
+SELECT *
+FROM places
+WHERE id = ?;
+
+upsert {
+  UPDATE places SET
+    `name` = :name,
+    `url` = :url,
+    `map_url` = :map_url,
+    `image_url` = :image_url,
+    `description` = :description
+  WHERE `id` = :id;
+
+  INSERT OR IGNORE INTO places (
+    `id`,
+    `name`,
+    `url`,
+    `map_url`,
+    `image_url`,
+    `description`
+  ) VALUES (
+    :id,
+    :name,
+    :url,
+    :map_url,
+    :image_url,
+    :description
+  );
+}

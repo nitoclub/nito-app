@@ -4,6 +4,8 @@ import club.nito.core.database.DriverFactory
 import club.nito.core.database.createDatabase
 import club.nito.core.database.participant.ParticipantDao
 import club.nito.core.database.participant.SqlDelightParticipantDao
+import club.nito.core.database.place.PlaceDao
+import club.nito.core.database.place.SqlDelightPlaceDao
 import club.nito.core.database.profile.ProfileDao
 import club.nito.core.database.profile.SqlDelightProfileDao
 import org.koin.core.module.Module
@@ -20,6 +22,7 @@ public val databaseModule: Module = module {
     }
 
     singleOf(::SqlDelightParticipantDao) bind ParticipantDao::class
+    singleOf(::SqlDelightPlaceDao) bind PlaceDao::class
     singleOf(::SqlDelightProfileDao) bind ProfileDao::class
 }
 
