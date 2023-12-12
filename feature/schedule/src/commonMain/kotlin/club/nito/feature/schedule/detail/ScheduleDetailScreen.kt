@@ -52,9 +52,9 @@ import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
-import club.nito.core.domain.model.ParticipantUser
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.participant.ParticipantStatus
+import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.schedule.ScheduleId
 import club.nito.core.ui.ProfileImage
 import club.nito.core.ui.koinStateMachine

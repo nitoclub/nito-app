@@ -17,8 +17,8 @@ import androidx.compose.ui.unit.dp
 import club.nito.core.common.NitoDateFormatter
 import club.nito.core.designsystem.component.Text
 import club.nito.core.domain.model.ParticipantSchedule
-import club.nito.core.domain.model.filterIsAttendance
-import club.nito.core.domain.model.toUserProfileList
+import club.nito.core.model.participant.filterIsAttendance
+import club.nito.core.model.participant.toUserProfileList
 
 @Composable
 public fun ParticipantScheduleItem(

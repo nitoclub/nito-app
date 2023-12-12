@@ -1,5 +1,6 @@
 package club.nito.core.domain.model
 
+import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.place.Place
 import club.nito.core.model.schedule.ScheduleId
 import kotlinx.datetime.Instant

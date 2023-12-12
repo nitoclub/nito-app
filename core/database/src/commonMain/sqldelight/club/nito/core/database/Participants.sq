@@ -1,12 +1,12 @@
 import club.nito.core.model.participant.ParticipantStatus;
 
-CREATE TABLE `participants` (
+CREATE TABLE IF NOT EXISTS `participants` (
   `schedule_id` TEXT NOT NULL,
   `user_id` TEXT NOT NULL,
   `status` TEXT AS ParticipantStatus NOT NULL
 );
 
-CREATE UNIQUE INDEX `participants_pkey` ON `participants` (`schedule_id`, `user_id`);
+CREATE UNIQUE INDEX IF NOT EXISTS `participants_pkey` ON `participants` (`schedule_id`, `user_id`);
 
 participantsByScheduleId:
 SELECT *
@@ -18,10 +18,23 @@ SELECT *
 FROM participants
 WHERE user_id = ?;
 
+participantStatusByUserId:
+SELECT status
+FROM participants
+WHERE schedule_id = :schedule_id AND user_id = :user_id;
+
+participantUsersByScheduleId:
+SELECT participants.status, profiles.* FROM participants
+INNER JOIN profiles ON participants.user_id = profiles.id
+WHERE participants.schedule_id = :schedule_id;
+
+participantUsersByScheduleIds:
+SELECT participants.status, profiles.* FROM participants
+INNER JOIN profiles ON participants.user_id = profiles.id
+WHERE participants.schedule_id IN :schedule_id;
+
 upsert {
   UPDATE participants SET
-    `schedule_id` = :schedule_id,
-    `user_id` = :user_id,
     `status` = :status
   WHERE schedule_id = :schedule_id AND user_id = :user_id;
 

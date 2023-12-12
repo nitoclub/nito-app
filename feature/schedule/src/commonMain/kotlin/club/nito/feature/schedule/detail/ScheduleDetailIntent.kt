@@ -1,7 +1,7 @@
 package club.nito.feature.schedule.detail
 
 import club.nito.core.domain.model.ParticipantSchedule
-import club.nito.core.domain.model.ParticipantUser
+import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.participant.ParticipantStatus
 
 public sealed class ScheduleDetailIntent {

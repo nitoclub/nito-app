@@ -1,4 +1,4 @@
-package club.nito.core.database.adapter
+package club.nito.core.database.participant.adapter
 
 import app.cash.sqldelight.ColumnAdapter
 import club.nito.core.model.participant.ParticipantStatus
