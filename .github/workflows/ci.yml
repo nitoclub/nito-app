@@ -1,0 +1,132 @@
+name: "CI"
+
+on:
+  pull_request:
+    branches:
+      - main
+
+# Cancel any current or previous job from the same PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  filter:
+    runs-on: ubuntu-22.04
+    outputs:
+      check-android: ${{ steps.needs.outputs.check-android }}
+      check-ios: ${{ steps.needs.outputs.check-ios }}
+      check-backend: ${{ steps.needs.outputs.check-backend }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Paths Changes Filter
+        uses: dorny/paths-filter@v2.11.1
+        id: changes
+        with:
+          filters: |
+            check-android:
+              - 'app/android/**/*'
+              - 'app/shared/**/*'
+              - 'build-logic/**/*'
+              - 'core/**/*'
+              - 'feature/**/*'
+              - 'gradle/**/*'
+              - 'build.gradle.kts'
+              - 'gradle.properties'
+              - 'settings.gradle.kts'
+            check-ios:
+              - 'app/ios/**/*'
+              - 'app/ios-combined/**/*'
+              - 'app/shared/**/*'
+              - 'build-logic/**/*'
+              - 'core/**/*'
+              - 'feature/**/*'
+              - 'gradle/**/*'
+              - 'build.gradle.kts'
+              - 'gradle.properties'
+              - 'settings.gradle.kts'
+            check-backend:
+              - 'app/backend/**/*'
+              - 'build-logic/**/*'
+              - 'core/**/*'
+              - 'gradle/**/*'
+              - 'build.gradle.kts'
+              - 'gradle.properties'
+              - 'settings.gradle.kts'
+      - name: Output Needs
+        id: needs
+        run: |
+          echo "check-android=${{ steps.changes.outputs.check-android == 'true' }}" >> $GITHUB_OUTPUT
+          echo "check-ios=${{ steps.changes.outputs.check-ios == 'true' }}" >> $GITHUB_OUTPUT
+          echo "check-backend=${{ steps.changes.outputs.check-backend == 'true' }}" >> $GITHUB_OUTPUT
+
+  android:
+    runs-on: ubuntu-22.04
+    needs: filter
+    if: needs.filter.outputs.check-android == 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: 'true'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2.10.0
+
+      - name: Unit Tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Build
+        run: ./gradlew :app:android:assembleDevDebug
+
+  ios:
+    runs-on: macos-13
+    needs: filter
+    if: needs.filter.outputs.check-ios == 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Build iOS framework
+        run: ./gradlew :app:ios-combined:assembleNitoKmpReleaseXCFramework
+
+      - name: Build iOS app
+        continue-on-error: true # TODO: Fix the certificates
+        run: xcodebuild -project app/ios/App/Nito/Nito.xcodeproj -configuration Debug -scheme Dev -sdk iphoneos -destination name='iPhone 8' build
+
+      - name: Run iOS unit tests
+        continue-on-error: true # TODO: Fix the certificates
+        run: xcodebuild test -project app/ios/App/Nito/Nito.xcodeproj -configuration Debug -scheme Dev -sdk iphoneos -destination name='iPhone 8' build -test-timeouts-enabled YES
+
+  backend:
+    runs-on: ubuntu-22.04
+    needs: filter
+    if: needs.filter.outputs.check-backend == 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: 'true'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Unit Tests
+        run: ./gradlew :app:backend:check
+
+      - name: Build
+        run: ./gradlew :app:backend:buildFatJar
