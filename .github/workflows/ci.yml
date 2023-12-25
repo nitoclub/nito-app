@@ -11,8 +11,61 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  filter:
+    runs-on: ubuntu-22.04
+    outputs:
+      check-android: ${{ steps.needs.outputs.check-android }}
+      check-ios: ${{ steps.needs.outputs.check-ios }}
+      check-backend: ${{ steps.needs.outputs.check-backend }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      - name: Paths Changes Filter
+        uses: dorny/paths-filter@v2.11.1
+        id: changes
+        with:
+          filters: |
+            check-android:
+              - 'app/android/**/*'
+              - 'app/shared/**/*'
+              - 'build-logic/**/*'
+              - 'core/**/*'
+              - 'feature/**/*'
+              - 'gradle/**/*'
+              - 'build.gradle.kts'
+              - 'gradle.properties'
+              - 'settings.gradle.kts'
+            check-ios:
+              - 'app/ios/**/*'
+              - 'app/ios-combined/**/*'
+              - 'app/shared/**/*'
+              - 'build-logic/**/*'
+              - 'core/**/*'
+              - 'feature/**/*'
+              - 'gradle/**/*'
+              - 'build.gradle.kts'
+              - 'gradle.properties'
+              - 'settings.gradle.kts'
+            check-backend:
+              - 'app/backend/**/*'
+              - 'build-logic/**/*'
+              - 'core/**/*'
+              - 'gradle/**/*'
+              - 'build.gradle.kts'
+              - 'gradle.properties'
+              - 'settings.gradle.kts'
+      - name: Output Needs
+        id: needs
+        run: |
+          echo "check-android=${{ steps.changes.outputs.check-android == 'true' }}" >> $GITHUB_OUTPUT
+          echo "check-ios=${{ steps.changes.outputs.check-ios == 'true' }}" >> $GITHUB_OUTPUT
+          echo "check-backend=${{ steps.changes.outputs.check-backend == 'true' }}" >> $GITHUB_OUTPUT
+
   android:
     runs-on: ubuntu-22.04
+    needs: filter
+    if: needs.filter.outputs.check-android == 'true'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,6 +87,8 @@ jobs:
 
   ios:
     runs-on: macos-13
+    needs: filter
+    if: needs.filter.outputs.check-ios == 'true'
     steps:
       - uses: actions/checkout@v4
 
@@ -55,6 +110,8 @@ jobs:
 
   backend:
     runs-on: ubuntu-22.04
+    needs: filter
+    if: needs.filter.outputs.check-backend == 'true'
     steps:
       - uses: actions/checkout@v4
         with:
