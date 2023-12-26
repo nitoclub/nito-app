@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/7144cf7d95ad890dbe19/maintainability)](https://codeclimate.com/github/2rabs/nito-app/maintainability)
+
 ![NITO](docs/images/hero.svg)
 
 <a href='https://apps.apple.com/jp/app/nito/id6472990576?itsct=apps_box_badge&amp;itscg=30200'><img alt='Download on the App Store' src='docs/images/app-store-badge.svg' height='56px'/></a>
