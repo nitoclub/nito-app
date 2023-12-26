@@ -9,5 +9,5 @@ jobs:
     name: Assign author to PR
     runs-on: ubuntu-latest
     steps:
-      - name: Assign author to PR
-        uses: technote-space/assign-author@v1
+      - name: Assign Author
+        uses: technote-space/assign-author@v1.6.2
