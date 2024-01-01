@@ -11,6 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Label manager for PRs and Issues based on configurable conditions
-        uses: srvaroa/labeler@v1.9.0
+        uses: srvaroa/labeler@v1.10.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
