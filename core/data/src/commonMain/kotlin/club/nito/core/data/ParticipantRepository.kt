@@ -3,12 +3,21 @@ package club.nito.core.data
 import club.nito.core.model.participant.Participant
 import club.nito.core.model.participant.ParticipantDeclaration
 import club.nito.core.model.participant.ParticipantStatus
+import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.schedule.ScheduleId
+import kotlinx.coroutines.flow.Flow
 
 /**
  * 参加情報を扱うリポジトリ
  */
 public sealed interface ParticipantRepository {
+    /**
+     * 該当の予定の参加者情報のストリームを取得する
+     *
+     * @param scheduleId 参加者情報を取得するスケジュールID
+     */
+    public fun participantUsersStream(scheduleId: String): Flow<List<ParticipantUser>>
+
     /**
      * 該当の予定の参加情報を取得する
      *
