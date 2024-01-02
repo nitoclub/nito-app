@@ -22,25 +22,17 @@ SELECT *
 FROM profiles
 WHERE id IN ?;
 
-upsert {
-  UPDATE profiles SET
-    `username` = :username,
-    `display_name` = :display_name,
-    `avatar_url` = :avatar_url,
-    `website` = :website
-  WHERE `id` = :id;
-
-  INSERT OR IGNORE INTO profiles (
-    `id`,
-    `username`,
-    `display_name`,
-    `avatar_url`,
-    `website`
-  ) VALUES (
-    :id,
-    :username,
-    :display_name,
-    :avatar_url,
-    :website
-  );
-}
+upsert:
+INSERT OR REPLACE INTO profiles (
+  `id`,
+  `username`,
+  `display_name`,
+  `avatar_url`,
+  `website`
+) VALUES (
+  :id,
+  :username,
+  :display_name,
+  :avatar_url,
+  :website
+);

@@ -27,28 +27,19 @@ SELECT *
 FROM places
 WHERE id = ?;
 
-upsert {
-  UPDATE places SET
-    `name` = :name,
-    `url` = :url,
-    `map_url` = :map_url,
-    `image_url` = :image_url,
-    `description` = :description
-  WHERE `id` = :id;
-
-  INSERT OR IGNORE INTO places (
-    `id`,
-    `name`,
-    `url`,
-    `map_url`,
-    `image_url`,
-    `description`
-  ) VALUES (
-    :id,
-    :name,
-    :url,
-    :map_url,
-    :image_url,
-    :description
-  );
-}
+upsert:
+INSERT OR REPLACE INTO places (
+  `id`,
+  `name`,
+  `url`,
+  `map_url`,
+  `image_url`,
+  `description`
+) VALUES (
+  :id,
+  :name,
+  :url,
+  :map_url,
+  :image_url,
+  :description
+);
