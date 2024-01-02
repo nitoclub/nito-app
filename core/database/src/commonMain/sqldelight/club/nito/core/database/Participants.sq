@@ -33,18 +33,13 @@ SELECT participants.status, profiles.* FROM participants
 INNER JOIN profiles ON participants.user_id = profiles.id
 WHERE participants.schedule_id IN :schedule_id;
 
-upsert {
-  UPDATE participants SET
-    `status` = :status
-  WHERE schedule_id = :schedule_id AND user_id = :user_id;
-
-  INSERT OR IGNORE INTO participants (
-    `schedule_id`,
-    `user_id`,
-    `status`
-  ) VALUES (
-    :schedule_id,
-    :user_id,
-    :status
-  );
-}
+upsert:
+INSERT OR REPLACE INTO participants (
+  `schedule_id`,
+  `user_id`,
+  `status`
+) VALUES (
+  :schedule_id,
+  :user_id,
+  :status
+);

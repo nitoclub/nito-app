@@ -49,28 +49,19 @@ INNER JOIN places venue ON schedules.venue_id = venue.id
 INNER JOIN places meet ON schedules.meet_id = meet.id
 WHERE schedules.id = :schedule_id;
 
-upsert {
-  UPDATE schedules SET
-    `scheduled_at` = :scheduled_at,
-    `venue_id` = :venue_id,
-    `meet_id` = :meet_id,
-    `description` = :description,
-    `met_at` = :met_at
-  WHERE `id` = :id;
-
-  INSERT OR IGNORE INTO schedules (
-    `id`,
-    `scheduled_at`,
-    `venue_id`,
-    `meet_id`,
-    `description`,
-    `met_at`
-  ) VALUES (
-    :id,
-    :scheduled_at,
-    :venue_id,
-    :meet_id,
-    :description,
-    :met_at
-  );
-}
+upsert:
+INSERT OR REPLACE INTO schedules (
+  `id`,
+  `scheduled_at`,
+  `venue_id`,
+  `meet_id`,
+  `description`,
+  `met_at`
+) VALUES (
+  :id,
+  :scheduled_at,
+  :venue_id,
+  :meet_id,
+  :description,
+  :met_at
+);
