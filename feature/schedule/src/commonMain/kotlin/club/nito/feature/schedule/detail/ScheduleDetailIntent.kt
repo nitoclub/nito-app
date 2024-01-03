@@ -1,31 +1,23 @@
 package club.nito.feature.schedule.detail
 
-import club.nito.core.domain.model.ParticipantSchedule
-import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.participant.ParticipantStatus
+import club.nito.core.model.participant.ParticipantUser
 
 public sealed class ScheduleDetailIntent {
     public data class ClickParticipantUser(val user: ParticipantUser) : ScheduleDetailIntent()
 
     public sealed class ClickParticipantStatusChip : ScheduleDetailIntent() {
-        public abstract val schedule: ParticipantSchedule
         public abstract val status: ParticipantStatus
 
-        public data class Participate(
-            override val schedule: ParticipantSchedule,
-        ) : ClickParticipantStatusChip() {
+        public data object Participate : ClickParticipantStatusChip() {
             override val status: ParticipantStatus = ParticipantStatus.ATTENDANCE
         }
 
-        public data class Absent(
-            override val schedule: ParticipantSchedule,
-        ) : ClickParticipantStatusChip() {
+        public data object Absent : ClickParticipantStatusChip() {
             override val status: ParticipantStatus = ParticipantStatus.ABSENCE
         }
 
-        public data class Hold(
-            override val schedule: ParticipantSchedule,
-        ) : ClickParticipantStatusChip() {
+        public data object Hold : ClickParticipantStatusChip() {
             override val status: ParticipantStatus = ParticipantStatus.PENDING
         }
     }

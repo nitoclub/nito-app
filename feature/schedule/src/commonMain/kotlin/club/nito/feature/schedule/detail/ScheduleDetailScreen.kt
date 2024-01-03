@@ -51,11 +51,12 @@ import club.nito.core.common.NitoDateFormatter
 import club.nito.core.designsystem.component.CenterAlignedTopAppBar
 import club.nito.core.designsystem.component.Scaffold
 import club.nito.core.designsystem.component.Text
-import club.nito.core.domain.model.ParticipantSchedule
+import club.nito.core.model.FetchMultipleContentResult
 import club.nito.core.model.FetchSingleContentResult
 import club.nito.core.model.participant.ParticipantStatus
 import club.nito.core.model.participant.ParticipantUser
 import club.nito.core.model.schedule.ScheduleId
+import club.nito.core.model.schedule.ScheduleWithPlace
 import club.nito.core.ui.ProfileImage
 import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
@@ -106,7 +107,7 @@ private fun ScheduleDetailScreen(
     val layoutDirection = LocalLayoutDirection.current
     val localDensity = LocalDensity.current
 
-    val schedule = uiState.schedule
+    val schedule = uiState.scheduleWithPlace
     var bottomParticipateBarHeightDp by remember {
         mutableStateOf(0.dp)
     }
@@ -128,36 +129,44 @@ private fun ScheduleDetailScreen(
             Box(
                 modifier = Modifier.fillMaxSize(),
             ) {
-                when (schedule) {
-                    FetchSingleContentResult.Loading -> CircularProgressIndicator(
-                        modifier = Modifier.align(Alignment.Center),
+                val containerModifier = Modifier
+                    .padding(
+                        start = innerPadding.calculateStartPadding(layoutDirection),
+                        end = innerPadding.calculateEndPadding(layoutDirection),
                     )
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
 
-                    FetchSingleContentResult.NoContent -> Text(
-                        text = "スケジュールが見つかりませんでした",
-                        modifier = Modifier.align(Alignment.Center),
-                    )
-
-                    is FetchSingleContentResult.Success -> {
-                        val containerModifier = Modifier
-                            .padding(
-                                start = innerPadding.calculateStartPadding(layoutDirection),
-                                end = innerPadding.calculateEndPadding(layoutDirection),
-                            )
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-
-                        Column(
-                            modifier = Modifier
-                                .verticalScroll(rememberScrollState())
-                                .padding(
-                                    top = innerPadding.calculateTopPadding(),
-                                    bottom = innerPadding.calculateBottomPadding(),
-                                )
-                                .padding(bottom = bottomParticipateBarHeightDp)
-                                .padding(vertical = 16.dp),
-                            verticalArrangement = Arrangement.spacedBy(40.dp),
+                Column(
+                    modifier = Modifier
+                        .verticalScroll(rememberScrollState())
+                        .padding(
+                            top = innerPadding.calculateTopPadding(),
+                            bottom = innerPadding.calculateBottomPadding(),
+                        )
+                        .padding(bottom = bottomParticipateBarHeightDp)
+                        .padding(vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(40.dp),
+                ) {
+                    when (schedule) {
+                        FetchSingleContentResult.Loading -> Box(
+                            modifier = Modifier.fillMaxSize(),
                         ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.align(Alignment.Center),
+                            )
+                        }
+
+                        FetchSingleContentResult.NoContent -> Box(
+                            modifier = Modifier.fillMaxSize(),
+                        ) {
+                            Text(
+                                text = "スケジュールが見つかりませんでした",
+                                modifier = Modifier.align(Alignment.Center),
+                            )
+                        }
+
+                        is FetchSingleContentResult.Success -> {
                             VenueSection(
                                 schedule = schedule.data,
                                 dateFormatter = uiState.dateFormatter,
@@ -169,41 +178,45 @@ private fun ScheduleDetailScreen(
                                 dateFormatter = uiState.dateFormatter,
                                 modifier = containerModifier,
                             )
-
-                            ParticipantSection(
-                                schedule = schedule.data,
-                                onClickParticipantUser = { dispatch(ScheduleDetailIntent.ClickParticipantUser(it)) },
-                                modifier = containerModifier,
-                                contentPadding = PaddingValues(horizontal = 8.dp),
-                            )
                         }
 
-                        BottomParticipateBar(
-                            myParticipantStatus = uiState.myParticipantStatus,
-                            onClickParticipateChip = {
-                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Participate(schedule.data))
-                            },
-                            onClickAbsentChip = {
-                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Absent(schedule.data))
-                            },
-                            onClickHoldChip = {
-                                dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Hold(schedule.data))
-                            },
-                            modifier = Modifier
-                                .align(Alignment.BottomCenter)
-                                .fillMaxWidth()
-                                .onGloballyPositioned { coordinates ->
-                                    bottomParticipateBarHeightDp = with(localDensity) { coordinates.size.height.toDp() }
-                                },
-                            innerPadding = innerPadding,
-                        )
+                        is FetchSingleContentResult.Failure -> Box(
+                            modifier = Modifier.fillMaxSize(),
+                        ) {
+                            Text(
+                                text = schedule.error?.message ?: "エラーが発生しました",
+                                modifier = Modifier.align(Alignment.Center),
+                            )
+                        }
                     }
 
-                    is FetchSingleContentResult.Failure -> Text(
-                        text = schedule.error?.message ?: "エラーが発生しました",
-                        modifier = Modifier.align(Alignment.Center),
+                    ParticipantSection(
+                        users = uiState.users,
+                        onClickParticipantUser = { dispatch(ScheduleDetailIntent.ClickParticipantUser(it)) },
+                        modifier = containerModifier,
+                        contentPadding = PaddingValues(horizontal = 8.dp),
                     )
                 }
+
+                BottomParticipateBar(
+                    status = uiState.myParticipantStatus,
+                    onClickParticipateChip = {
+                        dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Participate)
+                    },
+                    onClickAbsentChip = {
+                        dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Absent)
+                    },
+                    onClickHoldChip = {
+                        dispatch(ScheduleDetailIntent.ClickParticipantStatusChip.Hold)
+                    },
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .onGloballyPositioned { coordinates ->
+                            bottomParticipateBarHeightDp = with(localDensity) { coordinates.size.height.toDp() }
+                        },
+                    innerPadding = innerPadding,
+                )
             }
         },
     )
@@ -211,7 +224,7 @@ private fun ScheduleDetailScreen(
 
 @Composable
 private fun VenueSection(
-    schedule: ParticipantSchedule,
+    schedule: ScheduleWithPlace,
     dateFormatter: NitoDateFormatter,
     modifier: Modifier = Modifier,
 ) {
@@ -275,7 +288,7 @@ private fun VenueSection(
 
 @Composable
 private fun MeetSection(
-    schedule: ParticipantSchedule,
+    schedule: ScheduleWithPlace,
     dateFormatter: NitoDateFormatter,
     modifier: Modifier = Modifier,
 ) {
@@ -336,7 +349,7 @@ private fun MeetSection(
 
 @Composable
 private fun ParticipantSection(
-    schedule: ParticipantSchedule,
+    users: FetchMultipleContentResult<ParticipantUser>,
     onClickParticipantUser: (ParticipantUser) -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
@@ -351,39 +364,55 @@ private fun ParticipantSection(
             fontSize = 20.sp,
         )
 
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            schedule.users.forEach { user ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { onClickParticipantUser(user) }
-                        .padding(contentPadding)
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    ProfileImage(
-                        profile = user.profile,
-                        modifier = Modifier.size(48.dp),
-                    )
-                    Spacer(Modifier.width(16.dp))
-                    Text(
-                        text = user.profile.displayName,
-                        modifier = Modifier.weight(1f),
-                    )
-                    Spacer(Modifier.width(16.dp))
-                    Text(
-                        text = when (user.status) {
-                            ParticipantStatus.NONE -> ""
-                            ParticipantStatus.PENDING -> "未定"
-                            ParticipantStatus.ATTENDANCE -> "参加"
-                            ParticipantStatus.ABSENCE -> "欠席"
-                        },
-                    )
+        when (users) {
+            FetchMultipleContentResult.Loading -> CircularProgressIndicator(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
+
+            FetchMultipleContentResult.NoContent -> Text(
+                text = "参加者がいません",
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
+
+            is FetchMultipleContentResult.Success -> Column(
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                users.data.forEach { user ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { onClickParticipantUser(user) }
+                            .padding(contentPadding)
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        ProfileImage(
+                            profile = user.profile,
+                            modifier = Modifier.size(48.dp),
+                        )
+                        Spacer(Modifier.width(16.dp))
+                        Text(
+                            text = user.profile.displayName,
+                            modifier = Modifier.weight(1f),
+                        )
+                        Spacer(Modifier.width(16.dp))
+                        Text(
+                            text = when (user.status) {
+                                ParticipantStatus.NONE -> ""
+                                ParticipantStatus.PENDING -> "未定"
+                                ParticipantStatus.ATTENDANCE -> "参加"
+                                ParticipantStatus.ABSENCE -> "欠席"
+                            },
+                        )
+                    }
                 }
             }
+
+            is FetchMultipleContentResult.Failure -> Text(
+                text = users.error?.message ?: "エラーが発生しました",
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
         }
     }
 }
@@ -391,7 +420,7 @@ private fun ParticipantSection(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BottomParticipateBar(
-    myParticipantStatus: FetchSingleContentResult<ParticipantStatus>,
+    status: ParticipantStatus,
     onClickParticipateChip: () -> Unit,
     onClickAbsentChip: () -> Unit,
     onClickHoldChip: () -> Unit,
@@ -430,63 +459,44 @@ private fun BottomParticipateBar(
             ),
         horizontalArrangement = Arrangement.spacedBy(8.dp, alignment = Alignment.End),
     ) {
-        when (myParticipantStatus) {
-            FetchSingleContentResult.Loading -> CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.CenterVertically),
-            )
+        val chipModifier = Modifier
+            .align(Alignment.CenterVertically)
+            .padding(all = 8.dp)
 
-            is FetchSingleContentResult.Success -> {
-                val status = myParticipantStatus.data
-
-                val chipModifier = Modifier
-                    .align(Alignment.CenterVertically)
-                    .padding(all = 8.dp)
-
-                InputChip(
-                    selected = status == ParticipantStatus.ATTENDANCE,
-                    onClick = onClickParticipateChip,
-                    label = {
-                        Text(
-                            text = "参加",
-                            modifier = chipModifier,
-                        )
-                    },
-                    shape = CircleShape,
-                )
-
-                InputChip(
-                    selected = status == ParticipantStatus.ABSENCE,
-                    onClick = onClickAbsentChip,
-                    label = {
-                        Text(
-                            text = "欠席",
-                            modifier = chipModifier,
-                        )
-                    },
-                    shape = CircleShape,
-                )
-
-                InputChip(
-                    selected = status == ParticipantStatus.PENDING,
-                    onClick = onClickHoldChip,
-                    label = {
-                        Text(
-                            text = "未定",
-                            modifier = chipModifier,
-                        )
-                    },
-                    shape = CircleShape,
-                )
-            }
-
-            is FetchSingleContentResult.Failure -> {
+        InputChip(
+            selected = status == ParticipantStatus.ATTENDANCE,
+            onClick = onClickParticipateChip,
+            label = {
                 Text(
-                    text = myParticipantStatus.error?.message ?: "エラーが発生しました",
-                    modifier = Modifier.align(Alignment.CenterVertically),
+                    text = "参加",
+                    modifier = chipModifier,
                 )
-            }
+            },
+            shape = CircleShape,
+        )
 
-            else -> {}
-        }
+        InputChip(
+            selected = status == ParticipantStatus.ABSENCE,
+            onClick = onClickAbsentChip,
+            label = {
+                Text(
+                    text = "欠席",
+                    modifier = chipModifier,
+                )
+            },
+            shape = CircleShape,
+        )
+
+        InputChip(
+            selected = status == ParticipantStatus.PENDING,
+            onClick = onClickHoldChip,
+            label = {
+                Text(
+                    text = "未定",
+                    modifier = chipModifier,
+                )
+            },
+            shape = CircleShape,
+        )
     }
 }
