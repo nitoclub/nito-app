@@ -7,6 +7,7 @@ kotlin = "1.9.22"
 
 androidDesugarJdkLibs = "2.0.3"
 compose = "1.5.11"
+composeCompiler = "1.5.7"
 androidxActivity = "1.8.0"
 androidxSplashScreen = "1.0.1"
 kotlinxCoroutines = "1.7.3"

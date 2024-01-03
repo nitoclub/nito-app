@@ -11,7 +11,9 @@ class KmpComposePlugin : Plugin<Project> {
             with(pluginManager) {
                 apply("org.jetbrains.compose")
             }
-            val compose = extensions["compose"] as org.jetbrains.compose.ComposeExtension
+            val compose = (extensions["compose"] as org.jetbrains.compose.ComposeExtension).apply {
+                kotlinCompilerPlugin.set(libs.version("composeCompiler"))
+            }
             kotlin {
                 with(sourceSets) {
                     getByName("commonMain").apply {
