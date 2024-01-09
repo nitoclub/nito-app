@@ -13,6 +13,6 @@ updates:
       interval: daily
 
   - package-ecosystem: swift
-    directory: "/app/ios"
+    directory: "/app/ios/Modules"
     schedule:
       interval: daily
