@@ -6,13 +6,21 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    labels:
+      - 'dependencies'
+      - 'ignore-for-release'
 
   - package-ecosystem: gradle
     directory: "/"
     schedule:
       interval: daily
+    open-pull-requests-limit: 20
+    labels:
+      - 'dependencies'
 
   - package-ecosystem: swift
     directory: "/app/ios/Modules"
     schedule:
       interval: daily
+    labels:
+      - 'dependencies'
