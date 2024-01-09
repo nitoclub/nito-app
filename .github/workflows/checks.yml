@@ -1,4 +1,4 @@
-name: "CI"
+name: "Checks"
 
 on:
   pull_request:
@@ -7,16 +7,16 @@ on:
 
 # Cancel any current or previous job from the same PR
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: checks-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  filter:
+  changed:
     runs-on: ubuntu-22.04
     outputs:
-      check-android: ${{ steps.needs.outputs.check-android }}
-      check-ios: ${{ steps.needs.outputs.check-ios }}
-      check-backend: ${{ steps.needs.outputs.check-backend }}
+      android: ${{ steps.needs.outputs.android }}
+      ios: ${{ steps.needs.outputs.ios }}
+      backend: ${{ steps.needs.outputs.backend }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -26,7 +26,7 @@ jobs:
         id: changes
         with:
           filters: |
-            check-android:
+            android:
               - 'app/android/**/*'
               - 'app/shared/**/*'
               - 'build-logic/**/*'
@@ -36,7 +36,7 @@ jobs:
               - 'build.gradle.kts'
               - 'gradle.properties'
               - 'settings.gradle.kts'
-            check-ios:
+            ios:
               - 'app/ios/**/*'
               - 'app/ios-combined/**/*'
               - 'app/shared/**/*'
@@ -47,7 +47,7 @@ jobs:
               - 'build.gradle.kts'
               - 'gradle.properties'
               - 'settings.gradle.kts'
-            check-backend:
+            backend:
               - 'app/backend/**/*'
               - 'build-logic/**/*'
               - 'core/**/*'
@@ -58,14 +58,14 @@ jobs:
       - name: Output Needs
         id: needs
         run: |
-          echo "check-android=${{ steps.changes.outputs.check-android == 'true' }}" >> $GITHUB_OUTPUT
-          echo "check-ios=${{ steps.changes.outputs.check-ios == 'true' }}" >> $GITHUB_OUTPUT
-          echo "check-backend=${{ steps.changes.outputs.check-backend == 'true' }}" >> $GITHUB_OUTPUT
+          echo "android=${{ steps.changes.outputs.android == 'true' }}" >> $GITHUB_OUTPUT
+          echo "ios=${{ steps.changes.outputs.ios == 'true' }}" >> $GITHUB_OUTPUT
+          echo "backend=${{ steps.changes.outputs.backend == 'true' }}" >> $GITHUB_OUTPUT
 
-  android:
+  check-android:
     runs-on: ubuntu-22.04
-    needs: filter
-    if: needs.filter.outputs.check-android == 'true'
+    needs: changed
+    if: needs.changed.outputs.android == 'true'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -85,10 +85,10 @@ jobs:
       - name: Build
         run: ./gradlew :app:android:assembleDevDebug
 
-  ios:
+  check-ios:
     runs-on: macos-13
-    needs: filter
-    if: needs.filter.outputs.check-ios == 'true'
+    needs: changed
+    if: needs.changed.outputs.ios == 'true'
     strategy:
       matrix:
         destination: [ 'platform=iOS Simulator,OS=17.2,name=iPhone 15' ]
@@ -116,10 +116,10 @@ jobs:
         env:
           destination: ${{ matrix.destination }}
 
-  backend:
+  check-backend:
     runs-on: ubuntu-22.04
-    needs: filter
-    if: needs.filter.outputs.check-backend == 'true'
+    needs: changed
+    if: needs.changed.outputs.backend == 'true'
     steps:
       - uses: actions/checkout@v4
         with:
