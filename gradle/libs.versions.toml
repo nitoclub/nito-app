@@ -5,7 +5,7 @@ androidGradlePlugin = "8.2.0"
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?#pre-release_kotlin_compatibility
 kotlin = "1.9.22"
 
-androidDesugarJdkLibs = "2.0.3"
+androidDesugarJdkLibs = "2.0.4"
 compose = "1.5.11"
 composeCompiler = "1.5.7"
 androidxActivity = "1.8.0"
