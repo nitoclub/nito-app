@@ -14,9 +14,17 @@ updates:
     directory: "/"
     schedule:
       interval: daily
+    registries: "*"
     open-pull-requests-limit: 20
     labels:
       - 'dependencies'
+    groups:
+      kotlin-ksp-compose:
+        patterns:
+          - "org.jetbrains.kotlin:*"
+          - "org.jetbrains.kotlin.jvm"
+          - "com.google.devtools.ksp"
+          - "androidx.compose.compiler:compiler"
 
   - package-ecosystem: swift
     directory: "/app/ios/Modules"
@@ -24,3 +32,9 @@ updates:
       interval: daily
     labels:
       - 'dependencies'
+
+registries:
+  maven-google:
+    type: "maven-repository"
+    url: "https://maven.google.com"
+    replaces-base: true
