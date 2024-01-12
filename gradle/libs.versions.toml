@@ -69,7 +69,7 @@ imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "image
 androidxActivityActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidxDatastoreDatastorePreferences = { module = "androidx.datastore:datastore-preferences-core", version = "1.1.0-dev01" }
 androidxBrowser = { module = "androidx.browser:browser", version = "1.6.0" }
-androidxWindow = { module = "androidx.window:window", version = "1.1.0" }
+androidxWindow = { module = "androidx.window:window", version = "1.2.0" }
 androidxSplashScreen = { module = "androidx.core:core-splashscreen", version.ref = "androidxSplashScreen" }
 javaPoet = { module = "com.squareup:javapoet", version = "1.13.0" }
 
