@@ -1,0 +1,32 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":automergeMinor",
+    ":prHourlyLimitNone",
+    ":timezone(Asia/Tokyo)",
+  ],
+  "dependencyDashboard": false,
+  "enabledManagers": [
+    "github-actions",
+    "gradle",
+    "gradle-wrapper",
+    "swift",
+  ],
+  "labels": [
+    "dependencies"
+  ],
+  "packageRules": [
+    {
+      "groupName": "kotlin-ksp-compose",
+      "matchPackageNames": [
+        "org.jetbrains.kotlin.jvm",
+        "com.google.devtools.ksp",
+        "androidx.compose.compiler:compiler",
+      ],
+      "matchPackagePrefixes": [
+        "org.jetbrains.kotlin:",
+      ]
+    }
+  ],
+}
