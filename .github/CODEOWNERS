@@ -1,1 +1,6 @@
 * @2rabs/nito-app-maintainers @nito-bot[bot]
+
+/.github/ @tatsutakein
+
+/.github/workflows/ @tatsutakein @renovate-approve[bot]
+/gradle/libs.versions.toml @tatsutakein @renovate-approve[bot]
