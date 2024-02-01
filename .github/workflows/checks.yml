@@ -132,3 +132,14 @@ jobs:
 
       - name: Build
         run: ./gradlew :app:backend:buildFatJar
+
+  status-check:
+    runs-on: ubuntu-22.04
+    needs:
+      - check-android
+      - check-ios
+      - check-backend
+    permissions: { }
+    if: failure()
+    steps:
+      - run: exit 1
