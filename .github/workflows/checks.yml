@@ -14,15 +14,17 @@ jobs:
   changed:
     runs-on: ubuntu-22.04
     outputs:
-      android: ${{ steps.needs.outputs.android }}
-      ios: ${{ steps.needs.outputs.ios }}
-      backend: ${{ steps.needs.outputs.backend }}
+      android: ${{ steps.changes.outputs.android }}
+      ios: ${{ steps.changes.outputs.ios }}
+      backend: ${{ steps.changes.outputs.backend }}
     steps:
+      # https://github.com/marketplace/actions/checkout
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
+      # https://github.com/marketplace/actions/paths-changes-filter
       - name: Paths Changes Filter
-        uses: dorny/paths-filter@v3.0.0
+        uses: dorny/paths-filter@0bc4621a3135347011ad047f9ecf449bf72ce2bd # v3.0.0
         id: changes
         with:
           filters: |
@@ -55,29 +57,28 @@ jobs:
               - 'build.gradle.kts'
               - 'gradle.properties'
               - 'settings.gradle.kts'
-      - name: Output Needs
-        id: needs
-        run: |
-          echo "android=${{ steps.changes.outputs.android == 'true' }}" >> $GITHUB_OUTPUT
-          echo "ios=${{ steps.changes.outputs.ios == 'true' }}" >> $GITHUB_OUTPUT
-          echo "backend=${{ steps.changes.outputs.backend == 'true' }}" >> $GITHUB_OUTPUT
 
   check-android:
     runs-on: ubuntu-22.04
     needs: changed
     if: needs.changed.outputs.android == 'true'
     steps:
-      - uses: actions/checkout@v4
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           lfs: 'true'
 
-      - uses: actions/setup-java@v4
+      # https://github.com/marketplace/actions/setup-java-jdk
+      - name: Setup Java JDK
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
         with:
           distribution: 'zulu'
           java-version: 17
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2.12.0
+      # https://github.com/marketplace/actions/build-with-gradle
+      - name: Build with Gradle
+        uses: gradle/actions@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
 
       - name: Unit Tests
         run: ./gradlew testDebugUnitTest
@@ -93,17 +94,24 @@ jobs:
       matrix:
         destination: [ 'platform=iOS Simulator,OS=17.2,name=iPhone 15' ]
     steps:
+      # https://github.com/marketplace/actions/checkout
       - name: Checkout
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
+      # https://github.com/marketplace/actions/setup-java-jdk
       - name: Setup Java JDK
-        uses: actions/setup-java@v4.0.0
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
         with:
           distribution: 'zulu'
           java-version: 17
 
+      # https://github.com/marketplace/actions/build-with-gradle
+      - name: Build with Gradle
+        uses: gradle/actions@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
+
+      # https://github.com/marketplace/actions/setup-xcode-version
       - name: Setup Xcode version
-        uses: maxim-lobanov/setup-xcode@v1.6.0
+        uses: maxim-lobanov/setup-xcode@60606e260d2fc5762a71e64e74b2174e8ea3c8bd # v1.6.0
         with:
           xcode-version: '15.1.0'
 
@@ -121,20 +129,36 @@ jobs:
     needs: changed
     if: needs.changed.outputs.backend == 'true'
     steps:
-      - uses: actions/checkout@v4
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           lfs: 'true'
 
-      - uses: actions/setup-java@v4
+      # https://github.com/marketplace/actions/setup-java-jdk
+      - name: Setup Java JDK
+        uses: actions/setup-java@387ac29b308b003ca37ba93a6cab5eb57c8f5f93 # v4.0.0
         with:
           distribution: 'zulu'
           java-version: 17
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+      # https://github.com/marketplace/actions/build-with-gradle
+      - name: Build with Gradle
+        uses: gradle/actions@ec92e829475ac0c2315ea8f9eced72db85bb337a # v3.0.0
 
       - name: Unit Tests
         run: ./gradlew :app:backend:check
 
       - name: Build
         run: ./gradlew :app:backend:buildFatJar
+
+  status-check:
+    runs-on: ubuntu-22.04
+    needs:
+      - check-android
+      - check-ios
+      - check-backend
+    permissions: { }
+    if: failure()
+    steps:
+      - run: exit 1
