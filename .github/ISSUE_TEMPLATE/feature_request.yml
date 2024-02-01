@@ -1,42 +1,26 @@
 name: Feature request
-description: 機能要望を出す
-title: "[FR]: "
-labels: [ "enhancement", "triage me" ]
+description: 機能要望を提出する
+title: "[Feature]: "
+labels: [ "enhancement" ]
 body:
   - type: markdown
     attributes:
       value: |
-        この度は機能要望にご協力いただき、ありがとうございます。
+        機能要望をご提出していただき、ありがとうございます。
 
   - type: checkboxes
     attributes:
-      label: 既存の課題がありませんか？
-      description: この機能要求に対してすでに課題が存在するかどうか、検索してください。
+      label: 同様の機能要望はございませんか？
+      description: 既に同様の機能要望が存在していないか、ご検索ください。
       options:
-        - label: 既存の課題を検索してみました
+        - label: 同様の機能要望はありませんでした。
           required: true
 
   - type: textarea
-    id: describe-problem
+    id: what-is-feature
     attributes:
-      label: 問題を説明する
-      description: 機能要望は問題に関連するものですか？説明してください。
-      placeholder: いつも悔しい思いをするのは
-    validations:
-      required: false
-
-  - type: textarea
-    id: solution
-    attributes:
-      label: 解決策を説明する
-      description: ご希望の解決策をご記入ください。起こしてほしいことを明確に、簡潔に説明してください。
+      label: 機能要望の内容を教えてください。
+      description: また、具体的な実装方法（ライブラリ等）がある場合、教えてください。
+      placeholder: 機能要望の内容を教えてください。
     validations:
       required: true
-
-  - type: textarea
-    id: context
-    attributes:
-      label: 追加コンテキスト
-      description: 機能リクエストに関する他のコンテキストやスクリーンショットをここに追加してください。
-    validations:
-      required: false

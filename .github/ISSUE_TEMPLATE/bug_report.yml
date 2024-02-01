@@ -1,42 +1,48 @@
 name: Bug Report
 description: バグレポートを提出する
 title: "[Bug]: "
-labels: [ "bug", "triage me" ]
+labels: [ "bug" ]
 body:
   - type: markdown
     attributes:
       value: |
-        この度はバグレポートにご協力いただき、ありがとうございます。
+        バグレポートをご提出していただき、ありがとうございます。
 
   - type: checkboxes
     attributes:
-      label: これに対する既存の課題はありますか？
-      description: あなたが遭遇したバグについて、すでに課題が存在しないかどうか検索してください。
+      label: 同様のバグレポートはございませんか？
+      description: 既に同様のバグレポートが存在していないか、ご検索ください。
       options:
-        - label: 既存の問題を検索してみました
+        - label: 同様のバグレポートはありませんでした。
           required: true
 
   - type: checkboxes
     attributes:
-      label: この問題についての StackOverflow の質問はありますか？
-      description: あなたが遭遇したバグについて、すでに回答がある問題が存在する場合は [StackOverflow](https://stackoverflow.com/questions/tagged/android-jetpack) を検索してください。
+      label: StackOverflow 上に質問はございますか？
+      description: 今回のバグについて、[StackOverflow](https://stackoverflow.com/questions/tagged/flutter) をご検索ください。
       options:
-        - label: StackOverflow を検索してみました
+        - label: StackOverflow を検索しました。
           required: true
 
   - type: textarea
     id: what-happened
     attributes:
-      label: 何があったんですか？
-      description: また、どのようなことを期待していたのか、教えてください。
-      placeholder: あなたが見たものを教えてください
-      value: "バグが起きた！？"
+      label: バグの内容を教えてください。
+      description: また、想定されていた動作（改善案）を教えてください。
+      placeholder: バグの内容を教えてください。
     validations:
       required: true
 
   - type: textarea
     id: logs
     attributes:
-      label: 関連する Log の出力
-      description: 関連する Logcat の出力をコピーして貼り付けてください。これは自動的にコードにフォーマットされますので、バックティックは必要ありません。
+      label: バグ発生時の Log を添付してください。
+      description: バグ発生時の Log がある場合、添付してください。
       render: shell
+
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: バグの再現手順を教えてください。
+      description: Log がない場合、バグの再現手順を教えてください。
+      placeholder: バグの再現手順を教えてください。
