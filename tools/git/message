@@ -1,19 +1,14 @@
-# ==================== Format ====================
-:emoji: Subject
+type: Subject
 
-# ==================== Emojis ====================
-# ✨  :sparkles: 新機能追加（New Feature）
-# 🎉  :tada: 大きな機能追加（Big New Feature）
-# 👍  :+1: 機能改善（Update）
-# 🐛  :bug: バグ修正（Bugfix）
-# ♻  :recycle: リファクタリング(Refactoring)
-# 📚  :books: ドキュメント修正（Documentation）
-# 🎨  :art: デザインUI/UX(Accessibility)
-# 🚀  :rocket: パフォーマンス改善（Performance）
-# 🔧  :wrench: ツール（Tooling）
-# 💚  :green_heart: テスト/CI（Tests/CI）
-# 💩  :hankey: 非推奨追加（Deprecation）
-# 🗑️  :wastebasket: 削除（Removal）
-# 🆙  :up: ライブラリアップデート(Library Update)
-# 🚧  :construction: WIP(Work In Progress)
-# 🔖  :bookmark: バージョンタグ（Version Tag）
+# ==================== Types ====================
+# ✨ feat: 新機能
+# 🐛 fix: バグ修正
+# 📚 docs: ドキュメントのみの変更
+# 💎 style: コードの意味に影響しない変更（空白、書式、セミコロンの欠落など）
+# 📦 refactor: バグの修正でも機能の追加でもないコード変更
+# 🚀 perf: パフォーマンスを向上させるコード変更
+# 🚨 test: 不足しているテストの追加や既存のテストの修正
+# 🛠 build: ビルドシステムや外部の依存関係に影響する変更 (スコープの例: gulp, npm)
+# ⚙️ ci: CI の設定ファイルやスクリプトの変更 (スコープ例: Travis, Circle)
+# ♻️ chore: src やテストファイルを変更しないその他の変更
+# 🗑 revert: 以前のコミットを取り消す
