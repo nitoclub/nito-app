@@ -10,7 +10,8 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
+      # https://github.com/marketplace/actions/label-manager-for-prs-and-issues-based-on-configurable-conditions
       - name: Label manager for PRs and Issues based on configurable conditions
-        uses: srvaroa/labeler@v1.10.0
+        uses: srvaroa/labeler@0381dc470140eaebc6fd87fc4aedc4dd2f39f997 # v1.10.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
