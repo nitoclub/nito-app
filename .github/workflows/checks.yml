@@ -14,9 +14,9 @@ jobs:
   changed:
     runs-on: ubuntu-22.04
     outputs:
-      android: ${{ steps.needs.outputs.android }}
-      ios: ${{ steps.needs.outputs.ios }}
-      backend: ${{ steps.needs.outputs.backend }}
+      android: ${{ steps.changes.outputs.android }}
+      ios: ${{ steps.changes.outputs.ios }}
+      backend: ${{ steps.changes.outputs.backend }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
@@ -55,12 +55,6 @@ jobs:
               - 'build.gradle.kts'
               - 'gradle.properties'
               - 'settings.gradle.kts'
-      - name: Output Needs
-        id: needs
-        run: |
-          echo "android=${{ steps.changes.outputs.android == 'true' }}" >> $GITHUB_OUTPUT
-          echo "ios=${{ steps.changes.outputs.ios == 'true' }}" >> $GITHUB_OUTPUT
-          echo "backend=${{ steps.changes.outputs.backend == 'true' }}" >> $GITHUB_OUTPUT
 
   check-android:
     runs-on: ubuntu-22.04
