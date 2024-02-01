@@ -1,0 +1,130 @@
+# Default labels
+- name: "bug"
+  color: "d73a4a"
+  description: "Something isn't working"
+
+- name: "dependencies"
+  color: "1d76db"
+  description: "Pull requests that update a dependency file"
+
+- name: "DO NOT MERGE"
+  color: "b60205"
+
+- name: "documentation"
+  color: "0075ca"
+  description: "Improvements or additions to documentation"
+
+- name: "duplicate"
+  color: "cfd8d7"
+  description: "This issue or pull request already exists"
+
+- name: "enhancement"
+  color: "a2eeef"
+  description: "New feature or request"
+
+- name: "good first issue"
+  color: "fe9b9c"
+  description: "Good for newcomers"
+
+- name: "help wanted"
+  color: "008672"
+  description: "Extra attention is needed"
+
+- name: "ignore for release"
+  color: "bfd4f2"
+  description: "Exclude from Release Notes"
+
+- name: "wontfix"
+  color: "ffffff"
+  description: "This will not be worked on"
+
+- name: "work in progress"
+  color: "e5d19e"
+
+# Type labels
+- name: "@type/build"
+  color: "ededed"
+
+- name: "@type/ci"
+  color: "ededed"
+
+- name: "@type/docs"
+  color: "ededed"
+  from_name: "documentation"
+
+- name: "@type/feature"
+  color: "ededed"
+
+- name: "@type/fix"
+  color: "ededed"
+
+- name: "@type/improve"
+  color: "ededed"
+
+# App Package labels
+- name: "@app/android"
+  color: "e261d6"
+  description: "Android development"
+
+- name: "@app/backend"
+  color: "4372d0"
+  description: "Backend development"
+
+- name: "@app/frontend"
+  color: "8489de"
+  description: "Frontend development"
+
+- name: "@app/ios"
+  color: "d4f227"
+  description: "iOS development"
+
+- name: "@app/shared"
+  color: "23d1a7"
+  description: "Shared development"
+
+# Core Package labels
+- name: "@core/analytics"
+  color: "0b2ebd"
+
+- name: "@core/common"
+  color: "e99695"
+
+- name: "@core/data"
+  color: "50D413"
+
+- name: "@core/database"
+  color: "90bf94"
+
+- name: "@core/datastore"
+  color: "1997D2"
+
+- name: "@core/designsystem"
+  color: "936116"
+
+- name: "@core/domain"
+  color: "DC79FD"
+
+- name: "@core/model"
+  color: "D1A70E"
+
+- name: "@core/network"
+  color: "630D81"
+
+- name: "@core/testing"
+  color: "667168"
+
+- name: "@core/ui"
+  color: "b1ade8"
+
+# Feature Package labels
+- name: "@feature/auth"
+  color: "48360E"
+
+- name: "@feature/schedule"
+  color: "3bc0ec"
+
+- name: "@feature/settings"
+  color: "1e266d"
+
+- name: "@feature/top"
+  color: "6fe0ba"
