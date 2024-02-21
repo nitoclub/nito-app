@@ -64,6 +64,10 @@ Thanks to our wonderful contributors!
   <img src="https://contrib.rocks/image?repo=2rabs/nito-app" alt="contributors"/>
 </a>
 
+## Repo Activity
+
+![Repobeats](https://repobeats.axiom.co/api/embed/8869c0e9902dd2a3a23c5f867661521ce2253d19.svg "Repobeats analytics image")
+
 ## License
 
 NITO is distributed under the terms of the MIT License. See the [license](LICENSE) for more information.
