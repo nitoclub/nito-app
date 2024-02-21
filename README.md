@@ -61,7 +61,7 @@ TBD
 Thanks to our wonderful contributors!
 
 <a href="https://github.com/2rabs/nito-app/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=2rabs/nito-app" />
+  <img src="https://contrib.rocks/image?repo=2rabs/nito-app" alt="contributors"/>
 </a>
 
 ## License
