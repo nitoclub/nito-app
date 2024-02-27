@@ -5,6 +5,11 @@ package club.nito.core.model
  */
 public interface BuildConfig {
     /**
+     * Unique ID of the application.
+     */
+    public val applicationId: String
+
+    /**
      * The version name of the application.
      */
     public val versionName: String
@@ -23,6 +28,7 @@ public interface BuildConfig {
  * Empty implementation of [BuildConfig].
  */
 private object EmptyBuildConfig : BuildConfig {
+    override val applicationId: String = ""
     override val versionName: String = ""
     override val debugBuild: Boolean = false
 }

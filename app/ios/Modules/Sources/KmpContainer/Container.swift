@@ -22,16 +22,19 @@ public struct Container {
 }
 
 private class AppBuildConfig: BuildConfig {
-    var debugBuild: Bool
+    var applicationId: String
     var versionName: String
+    var debugBuild: Bool
 
     init() {
+        self.applicationId =
+            Bundle.main.object(forInfoDictionaryKey: "CFBundleIdentifier") as? String ?? ""
+        self.versionName =
+            Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
         #if DEBUG
             self.debugBuild = true
         #else
             self.debugBuild = false
         #endif
-        self.versionName =
-            Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
     }
 }

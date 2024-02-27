@@ -7,6 +7,7 @@ import club.nito.app.BuildConfig as AppBuildConfig
 val appModule = module {
     single<BuildConfig> {
         object : BuildConfig {
+            override val applicationId: String = AppBuildConfig.APPLICATION_ID
             override val versionName: String = AppBuildConfig.VERSION_NAME
             override val debugBuild: Boolean = AppBuildConfig.DEBUG
         }
