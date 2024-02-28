@@ -69,6 +69,12 @@ jobs:
         with:
           lfs: 'true'
 
+      - name: Copy CI gradle.properties
+        shell: bash
+        run: |
+          mkdir -p ~/.gradle
+          cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
       # https://github.com/marketplace/actions/setup-java-jdk
       - name: Setup Java JDK
         uses: actions/setup-java@9704b39bf258b59bc04b50fa2dd55e9ed76b47a8 # v4.1.0
@@ -97,6 +103,12 @@ jobs:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Copy CI gradle.properties
+        shell: bash
+        run: |
+          mkdir -p ~/.gradle
+          cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       # https://github.com/marketplace/actions/setup-java-jdk
       - name: Setup Java JDK
@@ -134,6 +146,12 @@ jobs:
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           lfs: 'true'
+
+      - name: Copy CI gradle.properties
+        shell: bash
+        run: |
+          mkdir -p ~/.gradle
+          cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       # https://github.com/marketplace/actions/setup-java-jdk
       - name: Setup Java JDK
