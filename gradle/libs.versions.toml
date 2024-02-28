@@ -34,7 +34,7 @@ logback = "1.5.0"
 graphqlKotlin = "7.0.2"
 kotest = "5.8.0"
 precompose = "1.5.11"
-imageLoader = "1.7.1"
+imageLoader = "1.7.6"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
