@@ -6,7 +6,7 @@ androidGradlePlugin = "8.2.2"
 kotlin = "1.9.22"
 
 androidDesugarJdkLibs = "2.0.4"
-compose = "1.5.12"
+compose = "1.6.0"
 composeCompiler = "1.5.7"
 androidxActivity = "1.8.2"
 androidxSplashScreen = "1.0.1"
