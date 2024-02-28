@@ -1,16 +1,38 @@
 # https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes
-
 changelog:
   exclude:
     labels:
-      - ignore-for-release
+      - 'ignore for release'
+
   categories:
-    - title: 🏕 Features
+    - title: 🛠 Breaking Changes
       labels:
-        - '*'
-      exclude:
-        labels:
-          - dependencies
+        - 'breaking change'
+
+    - title: ✨ Features
+      labels:
+        - '@type/feature'
+
+    - title: 🐛 Bug Fixes
+      labels:
+        - '@type/fix'
+
+    - title: 📦 Improvements
+      labels:
+        - '@type/improve'
+
+    - title: 📚 Documentation
+      labels:
+        - '@type/docs'
+
+    - title: ⚙️ Maintenance
+      labels:
+        - '@type/ci'
+
     - title: 👒 Dependencies
       labels:
-        - dependencies
+        - 'dependencies'
+
+    - title: 🏕 Other Changes
+      labels:
+        - '*'
