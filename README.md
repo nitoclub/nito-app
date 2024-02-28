@@ -1,3 +1,6 @@
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![renovate](https://img.shields.io/badge/maintaied%20with-renovate-blue?logo=renovatebot)](https://app.renovatebot.com/dashboard)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/2rabs/nito-app)
 [![Maintainability](https://api.codeclimate.com/v1/badges/7144cf7d95ad890dbe19/maintainability)](https://codeclimate.com/github/2rabs/nito-app/maintainability)
 
 ![NITO](docs/images/hero.svg)
