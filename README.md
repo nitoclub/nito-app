@@ -18,7 +18,7 @@ NITO は実施予定の一覧と詳細を表示します。ユーザーはその
 
 ### Screenshots
 
-![Screenshot showing For Top screen and Schedule list screen](docs/images/screenshots.png "Screenshot showing For Top screen and Schedule list screen")
+![Screenshot showing For Top screen and Schedule list screen](docs/images/screenshots.webp "Screenshot showing For Top screen and Schedule list screen")
 
 ## Development Environment
 
