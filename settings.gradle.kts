@@ -24,7 +24,6 @@ include(
     ":app:shared",
     ":app:android",
     ":app:ios-combined",
-    ":app:web",
     ":app:backend",
     ":core:common",
     ":core:database",
