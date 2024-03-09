@@ -1,0 +1,14 @@
+mutation UpsertMutation(
+  $scheduleId: uuid!
+  $userId: String!
+  $status: ParticipantStatusEnum!
+) {
+  insertParticipantsOne(
+    object: { scheduleId: $scheduleId, userId: $userId, status: $status }
+    onConflict: { constraint: participants_pkey, updateColumns: [status] }
+  ) {
+    scheduleId
+    userId
+    status
+  }
+}

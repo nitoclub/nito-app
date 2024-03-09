@@ -1,0 +1,21 @@
+query SchedulesQuery {
+  schedules(orderBy: {scheduledAt: DESC}, limit: 10) {
+    id
+    scheduledAt
+    metAt
+    venueId
+    meetId
+    description
+  }
+}
+
+query ScheduleQuery($id: uuid!) {
+  schedulesByPk(id: $id) {
+    id
+    scheduledAt
+    metAt
+    venueId
+    meetId
+    description
+  }
+}

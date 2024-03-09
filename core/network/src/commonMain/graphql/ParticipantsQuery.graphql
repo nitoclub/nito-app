@@ -1,0 +1,7 @@
+query ParticipantsQuery($scheduleIds: [uuid!]!) {
+  participants(where: {scheduleId: {_in: $scheduleIds}}) {
+    scheduleId
+    userId
+    status
+  }
+}

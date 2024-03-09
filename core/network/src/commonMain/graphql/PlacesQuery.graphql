@@ -1,0 +1,10 @@
+query PlacesQuery($placeIds: [uuid!]!) {
+  places(where: {id: {_in: $placeIds}}) {
+    id
+    name
+    url
+    description
+    mapUrl
+    imageUrl
+  }
+}

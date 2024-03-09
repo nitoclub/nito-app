@@ -1,0 +1,19 @@
+query UsersQuery($userIds: [String!]!) {
+  users(where: {id: {_in: $userIds}}) {
+    id
+    username
+    nickname
+    picture
+    website
+  }
+}
+
+query UserQuery($id: String!) {
+  usersByPk(id: $id) {
+    id
+    username
+    nickname
+    picture
+    website
+  }
+}
