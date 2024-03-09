@@ -6,6 +6,7 @@ androidGradlePlugin = "8.2.2"
 kotlin = "1.9.22"
 
 androidDesugarJdkLibs = "2.0.4"
+apollographql = "3.8.2"
 compose = "1.6.0"
 composeCompiler = "1.5.7"
 androidxActivity = "1.8.2"
@@ -77,6 +78,9 @@ multiplatformSettingsNoArg = { module = "com.russhwolf:multiplatform-settings-no
 multiplatformSettingsCoroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
 kotlinSerializationJson = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
+apolloRuntime = { module = "com.apollographql.apollo3:apollo-runtime", version.ref = "apollographql" }
+apolloAdapters = { module = "com.apollographql.apollo3:apollo-adapters", version.ref = "apollographql" }
+
 ktorClientCore = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktorClientOkHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktorClientDarwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
@@ -134,6 +138,7 @@ kotestRunnerJunit5 = { module = "io.kotest:kotest-runner-junit5" }
 composeGradlePlugin = { id = "org.jetbrains.compose", version.ref = "compose" }
 androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 androidGradleLibraryPlugin = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+apollographql = { id = "com.apollographql.apollo3", version.ref = "apollographql" }
 kotlinGradlePlugin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kspGradlePlugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinxKover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

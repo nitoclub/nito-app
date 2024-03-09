@@ -1,0 +1,1631 @@
+scalar Boolean
+
+"""
+ordering argument of a cursor
+"""
+enum CursorOrdering {
+  """
+  ascending ordering of the cursor
+  """
+  ASC
+
+  """
+  descending ordering of the cursor
+  """
+  DESC
+}
+
+scalar Int
+
+"""
+column ordering options
+"""
+enum OrderBy {
+  """
+  in ascending order, nulls last
+  """
+  ASC
+
+  """
+  in ascending order, nulls first
+  """
+  ASC_NULLS_FIRST
+
+  """
+  in ascending order, nulls last
+  """
+  ASC_NULLS_LAST
+
+  """
+  in descending order, nulls first
+  """
+  DESC
+
+  """
+  in descending order, nulls first
+  """
+  DESC_NULLS_FIRST
+
+  """
+  in descending order, nulls last
+  """
+  DESC_NULLS_LAST
+}
+
+"""
+columns and relationships of "participant_status"
+"""
+type ParticipantStatus {
+  comment: String!
+
+  value: String!
+}
+
+"""
+Boolean expression to filter rows from the table "participant_status". All fields are combined with a logical 'AND'.
+"""
+input ParticipantStatusBoolExp {
+  _and: [ParticipantStatusBoolExp!]
+
+  _not: ParticipantStatusBoolExp
+
+  _or: [ParticipantStatusBoolExp!]
+
+  comment: StringComparisonExp
+
+  value: StringComparisonExp
+}
+
+enum ParticipantStatusEnum {
+  ABSENCE
+
+  ATTENDANCE
+
+  PENDING
+}
+
+"""
+Boolean expression to compare columns of type "ParticipantStatusEnum". All fields are combined with logical 'AND'.
+"""
+input ParticipantStatusEnumComparisonExp {
+  _eq: ParticipantStatusEnum
+
+  _in: [ParticipantStatusEnum!]
+
+  _isNull: Boolean
+
+  _neq: ParticipantStatusEnum
+
+  _nin: [ParticipantStatusEnum!]
+}
+
+"""
+Ordering options when selecting data from "participant_status".
+"""
+input ParticipantStatusOrderBy {
+  comment: OrderBy
+
+  value: OrderBy
+}
+
+"""
+select columns of table "participant_status"
+"""
+enum ParticipantStatusSelectColumn {
+  """
+  column name
+  """
+  comment
+
+  """
+  column name
+  """
+  value
+}
+
+"""
+Streaming cursor of the table "participant_status"
+"""
+input ParticipantStatusStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: ParticipantStatusStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input ParticipantStatusStreamCursorValueInput {
+  comment: String
+
+  value: String
+}
+
+"""
+参加情報
+"""
+type Participants {
+  """
+  作成日時
+  """
+  createdAt: timestamptz!
+
+  """
+  削除日時
+  """
+  deletedAt: timestamptz
+
+  """
+  スケジュールID
+  """
+  scheduleId: uuid!
+
+  """
+  参加状況
+  """
+  status: ParticipantStatusEnum!
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz!
+
+  """
+  参加ユーザーID
+  """
+  userId: String!
+}
+
+"""
+Boolean expression to filter rows from the table "participants". All fields are combined with a logical 'AND'.
+"""
+input ParticipantsBoolExp {
+  _and: [ParticipantsBoolExp!]
+
+  _not: ParticipantsBoolExp
+
+  _or: [ParticipantsBoolExp!]
+
+  createdAt: TimestamptzComparisonExp
+
+  deletedAt: TimestamptzComparisonExp
+
+  scheduleId: UuidComparisonExp
+
+  status: ParticipantStatusEnumComparisonExp
+
+  updatedAt: TimestamptzComparisonExp
+
+  userId: StringComparisonExp
+}
+
+"""
+unique or primary key constraints on table "participants"
+"""
+enum ParticipantsConstraint {
+  """
+  unique or primary key constraint on columns "user_id", "schedule_id"
+  """
+  participants_pkey
+}
+
+"""
+input type for inserting data into table "participants"
+"""
+input ParticipantsInsertInput {
+  """
+  スケジュールID
+  """
+  scheduleId: uuid
+
+  """
+  参加状況
+  """
+  status: ParticipantStatusEnum
+
+  """
+  参加ユーザーID
+  """
+  userId: String
+}
+
+"""
+response of any mutation on the table "participants"
+"""
+type ParticipantsMutationResponse {
+  """
+  number of rows affected by the mutation
+  """
+  affectedRows: Int!
+
+  """
+  data from the rows affected by the mutation
+  """
+  returning: [Participants!]!
+}
+
+"""
+on_conflict condition type for table "participants"
+"""
+input ParticipantsOnConflict {
+  constraint: ParticipantsConstraint!
+
+  updateColumns: [ParticipantsUpdateColumn!]! = []
+
+  where: ParticipantsBoolExp
+}
+
+"""
+Ordering options when selecting data from "participants".
+"""
+input ParticipantsOrderBy {
+  createdAt: OrderBy
+
+  deletedAt: OrderBy
+
+  scheduleId: OrderBy
+
+  status: OrderBy
+
+  updatedAt: OrderBy
+
+  userId: OrderBy
+}
+
+"""
+primary key columns input for table: participants
+"""
+input ParticipantsPkColumnsInput {
+  """
+  スケジュールID
+  """
+  scheduleId: uuid!
+
+  """
+  参加ユーザーID
+  """
+  userId: String!
+}
+
+"""
+select columns of table "participants"
+"""
+enum ParticipantsSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  deletedAt
+
+  """
+  column name
+  """
+  scheduleId
+
+  """
+  column name
+  """
+  status
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  userId
+}
+
+"""
+input type for updating data in table "participants"
+"""
+input ParticipantsSetInput {
+  """
+  参加状況
+  """
+  status: ParticipantStatusEnum
+}
+
+"""
+Streaming cursor of the table "participants"
+"""
+input ParticipantsStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: ParticipantsStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input ParticipantsStreamCursorValueInput {
+  """
+  作成日時
+  """
+  createdAt: timestamptz
+
+  """
+  削除日時
+  """
+  deletedAt: timestamptz
+
+  """
+  スケジュールID
+  """
+  scheduleId: uuid
+
+  """
+  参加状況
+  """
+  status: ParticipantStatusEnum
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz
+
+  """
+  参加ユーザーID
+  """
+  userId: String
+}
+
+"""
+update columns of table "participants"
+"""
+enum ParticipantsUpdateColumn {
+  """
+  column name
+  """
+  status
+}
+
+input ParticipantsUpdates {
+  """
+  sets the columns of the filtered rows to the given values
+  """
+  _set: ParticipantsSetInput
+
+  """
+  filter the rows which have to be updated
+  """
+  where: ParticipantsBoolExp!
+}
+
+"""
+場所
+"""
+type Places {
+  """
+  作成日時
+  """
+  createdAt: timestamptz!
+
+  """
+  削除日時
+  """
+  deletedAt: timestamptz
+
+  """
+  説明文
+  """
+  description: String!
+
+  """
+  場所ID
+  """
+  id: uuid!
+
+  """
+  参考画像URL
+  """
+  imageUrl: String!
+
+  """
+  Google マップのURL
+  """
+  mapUrl: String!
+
+  """
+  An array relationship
+  """
+  meetSchedules("distinct select on columns" distinctOn: [SchedulesSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [SchedulesOrderBy!], "filter the rows returned" where: SchedulesBoolExp): [Schedules!]!
+
+  """
+  場所名
+  """
+  name: String!
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz!
+
+  """
+  URL
+  """
+  url: String!
+
+  """
+  An array relationship
+  """
+  venueSchedules("distinct select on columns" distinctOn: [SchedulesSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [SchedulesOrderBy!], "filter the rows returned" where: SchedulesBoolExp): [Schedules!]!
+}
+
+"""
+Boolean expression to filter rows from the table "places". All fields are combined with a logical 'AND'.
+"""
+input PlacesBoolExp {
+  _and: [PlacesBoolExp!]
+
+  _not: PlacesBoolExp
+
+  _or: [PlacesBoolExp!]
+
+  createdAt: TimestamptzComparisonExp
+
+  deletedAt: TimestamptzComparisonExp
+
+  description: StringComparisonExp
+
+  id: UuidComparisonExp
+
+  imageUrl: StringComparisonExp
+
+  mapUrl: StringComparisonExp
+
+  meetSchedules: SchedulesBoolExp
+
+  name: StringComparisonExp
+
+  updatedAt: TimestamptzComparisonExp
+
+  url: StringComparisonExp
+
+  venueSchedules: SchedulesBoolExp
+}
+
+"""
+Ordering options when selecting data from "places".
+"""
+input PlacesOrderBy {
+  createdAt: OrderBy
+
+  deletedAt: OrderBy
+
+  description: OrderBy
+
+  id: OrderBy
+
+  imageUrl: OrderBy
+
+  mapUrl: OrderBy
+
+  meetSchedulesAggregate: SchedulesAggregateOrderBy
+
+  name: OrderBy
+
+  updatedAt: OrderBy
+
+  url: OrderBy
+
+  venueSchedulesAggregate: SchedulesAggregateOrderBy
+}
+
+"""
+select columns of table "places"
+"""
+enum PlacesSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  deletedAt
+
+  """
+  column name
+  """
+  description
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  imageUrl
+
+  """
+  column name
+  """
+  mapUrl
+
+  """
+  column name
+  """
+  name
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  url
+}
+
+"""
+Streaming cursor of the table "places"
+"""
+input PlacesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: PlacesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input PlacesStreamCursorValueInput {
+  """
+  作成日時
+  """
+  createdAt: timestamptz
+
+  """
+  削除日時
+  """
+  deletedAt: timestamptz
+
+  """
+  説明文
+  """
+  description: String
+
+  """
+  場所ID
+  """
+  id: uuid
+
+  """
+  参考画像URL
+  """
+  imageUrl: String
+
+  """
+  Google マップのURL
+  """
+  mapUrl: String
+
+  """
+  場所名
+  """
+  name: String
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz
+
+  """
+  URL
+  """
+  url: String
+}
+
+"""
+予定
+"""
+type Schedules {
+  """
+  作成日時
+  """
+  createdAt: timestamptz!
+
+  """
+  削除日時
+  """
+  deletedAt: timestamptz
+
+  """
+  説明文
+  """
+  description: String!
+
+  """
+  予定ID
+  """
+  id: uuid!
+
+  """
+  An object relationship
+  """
+  meet: Places!
+
+  """
+  集合場所ID
+  """
+  meetId: uuid!
+
+  """
+  集合日時
+  """
+  metAt: timestamptz!
+
+  """
+  予定日時
+  """
+  scheduledAt: timestamptz!
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz!
+
+  """
+  An object relationship
+  """
+  venue: Places!
+
+  """
+  開催場所ID
+  """
+  venueId: uuid!
+}
+
+"""
+order by aggregate values of table "schedules"
+"""
+input SchedulesAggregateOrderBy {
+  count: OrderBy
+
+  max: SchedulesMaxOrderBy
+
+  min: SchedulesMinOrderBy
+}
+
+"""
+Boolean expression to filter rows from the table "schedules". All fields are combined with a logical 'AND'.
+"""
+input SchedulesBoolExp {
+  _and: [SchedulesBoolExp!]
+
+  _not: SchedulesBoolExp
+
+  _or: [SchedulesBoolExp!]
+
+  createdAt: TimestamptzComparisonExp
+
+  deletedAt: TimestamptzComparisonExp
+
+  description: StringComparisonExp
+
+  id: UuidComparisonExp
+
+  meet: PlacesBoolExp
+
+  meetId: UuidComparisonExp
+
+  metAt: TimestamptzComparisonExp
+
+  scheduledAt: TimestamptzComparisonExp
+
+  updatedAt: TimestamptzComparisonExp
+
+  venue: PlacesBoolExp
+
+  venueId: UuidComparisonExp
+}
+
+"""
+order by max() on columns of table "schedules"
+"""
+input SchedulesMaxOrderBy {
+  """
+  作成日時
+  """
+  createdAt: OrderBy
+
+  """
+  削除日時
+  """
+  deletedAt: OrderBy
+
+  """
+  説明文
+  """
+  description: OrderBy
+
+  """
+  予定ID
+  """
+  id: OrderBy
+
+  """
+  集合場所ID
+  """
+  meetId: OrderBy
+
+  """
+  集合日時
+  """
+  metAt: OrderBy
+
+  """
+  予定日時
+  """
+  scheduledAt: OrderBy
+
+  """
+  更新日時
+  """
+  updatedAt: OrderBy
+
+  """
+  開催場所ID
+  """
+  venueId: OrderBy
+}
+
+"""
+order by min() on columns of table "schedules"
+"""
+input SchedulesMinOrderBy {
+  """
+  作成日時
+  """
+  createdAt: OrderBy
+
+  """
+  削除日時
+  """
+  deletedAt: OrderBy
+
+  """
+  説明文
+  """
+  description: OrderBy
+
+  """
+  予定ID
+  """
+  id: OrderBy
+
+  """
+  集合場所ID
+  """
+  meetId: OrderBy
+
+  """
+  集合日時
+  """
+  metAt: OrderBy
+
+  """
+  予定日時
+  """
+  scheduledAt: OrderBy
+
+  """
+  更新日時
+  """
+  updatedAt: OrderBy
+
+  """
+  開催場所ID
+  """
+  venueId: OrderBy
+}
+
+"""
+Ordering options when selecting data from "schedules".
+"""
+input SchedulesOrderBy {
+  createdAt: OrderBy
+
+  deletedAt: OrderBy
+
+  description: OrderBy
+
+  id: OrderBy
+
+  meet: PlacesOrderBy
+
+  meetId: OrderBy
+
+  metAt: OrderBy
+
+  scheduledAt: OrderBy
+
+  updatedAt: OrderBy
+
+  venue: PlacesOrderBy
+
+  venueId: OrderBy
+}
+
+"""
+select columns of table "schedules"
+"""
+enum SchedulesSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  deletedAt
+
+  """
+  column name
+  """
+  description
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  meetId
+
+  """
+  column name
+  """
+  metAt
+
+  """
+  column name
+  """
+  scheduledAt
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  venueId
+}
+
+"""
+Streaming cursor of the table "schedules"
+"""
+input SchedulesStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: SchedulesStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input SchedulesStreamCursorValueInput {
+  """
+  作成日時
+  """
+  createdAt: timestamptz
+
+  """
+  削除日時
+  """
+  deletedAt: timestamptz
+
+  """
+  説明文
+  """
+  description: String
+
+  """
+  予定ID
+  """
+  id: uuid
+
+  """
+  集合場所ID
+  """
+  meetId: uuid
+
+  """
+  集合日時
+  """
+  metAt: timestamptz
+
+  """
+  予定日時
+  """
+  scheduledAt: timestamptz
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz
+
+  """
+  開催場所ID
+  """
+  venueId: uuid
+}
+
+scalar String
+
+"""
+Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
+"""
+input StringComparisonExp {
+  _eq: String
+
+  _gt: String
+
+  _gte: String
+
+  """
+  does the column match the given case-insensitive pattern
+  """
+  _ilike: String
+
+  _in: [String!]
+
+  """
+  does the column match the given POSIX regular expression, case insensitive
+  """
+  _iregex: String
+
+  _isNull: Boolean
+
+  """
+  does the column match the given pattern
+  """
+  _like: String
+
+  _lt: String
+
+  _lte: String
+
+  _neq: String
+
+  """
+  does the column NOT match the given case-insensitive pattern
+  """
+  _nilike: String
+
+  _nin: [String!]
+
+  """
+  does the column NOT match the given POSIX regular expression, case insensitive
+  """
+  _niregex: String
+
+  """
+  does the column NOT match the given pattern
+  """
+  _nlike: String
+
+  """
+  does the column NOT match the given POSIX regular expression, case sensitive
+  """
+  _nregex: String
+
+  """
+  does the column NOT match the given SQL regular expression
+  """
+  _nsimilar: String
+
+  """
+  does the column match the given POSIX regular expression, case sensitive
+  """
+  _regex: String
+
+  """
+  does the column match the given SQL regular expression
+  """
+  _similar: String
+}
+
+"""
+Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'.
+"""
+input TimestamptzComparisonExp {
+  _eq: timestamptz
+
+  _gt: timestamptz
+
+  _gte: timestamptz
+
+  _in: [timestamptz!]
+
+  _isNull: Boolean
+
+  _lt: timestamptz
+
+  _lte: timestamptz
+
+  _neq: timestamptz
+
+  _nin: [timestamptz!]
+}
+
+"""
+ユーザープロフィール
+"""
+type Users {
+  """
+  作成日時
+  """
+  createdAt: timestamptz!
+
+  """
+  メールアドレス
+  """
+  email: String
+
+  """
+  最初のアクセス日時
+  """
+  firstSeen: timestamptz!
+
+  """
+  ユーザーID
+  """
+  id: String!
+
+  """
+  最終アクセス日時
+  """
+  lastSeen: timestamptz!
+
+  """
+  ニックネーム
+  """
+  nickname: String
+
+  """
+  アイコン画像URL
+  """
+  picture: String
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz!
+
+  """
+  ユーザー名
+  """
+  username: String!
+
+  """
+  ウェブサイトURL
+  """
+  website: String
+}
+
+"""
+Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'.
+"""
+input UsersBoolExp {
+  _and: [UsersBoolExp!]
+
+  _not: UsersBoolExp
+
+  _or: [UsersBoolExp!]
+
+  createdAt: TimestamptzComparisonExp
+
+  email: StringComparisonExp
+
+  firstSeen: TimestamptzComparisonExp
+
+  id: StringComparisonExp
+
+  lastSeen: TimestamptzComparisonExp
+
+  nickname: StringComparisonExp
+
+  picture: StringComparisonExp
+
+  updatedAt: TimestamptzComparisonExp
+
+  username: StringComparisonExp
+
+  website: StringComparisonExp
+}
+
+"""
+Ordering options when selecting data from "users".
+"""
+input UsersOrderBy {
+  createdAt: OrderBy
+
+  email: OrderBy
+
+  firstSeen: OrderBy
+
+  id: OrderBy
+
+  lastSeen: OrderBy
+
+  nickname: OrderBy
+
+  picture: OrderBy
+
+  updatedAt: OrderBy
+
+  username: OrderBy
+
+  website: OrderBy
+}
+
+"""
+select columns of table "users"
+"""
+enum UsersSelectColumn {
+  """
+  column name
+  """
+  createdAt
+
+  """
+  column name
+  """
+  email
+
+  """
+  column name
+  """
+  firstSeen
+
+  """
+  column name
+  """
+  id
+
+  """
+  column name
+  """
+  lastSeen
+
+  """
+  column name
+  """
+  nickname
+
+  """
+  column name
+  """
+  picture
+
+  """
+  column name
+  """
+  updatedAt
+
+  """
+  column name
+  """
+  username
+
+  """
+  column name
+  """
+  website
+}
+
+"""
+Streaming cursor of the table "users"
+"""
+input UsersStreamCursorInput {
+  """
+  Stream column input with initial value
+  """
+  initialValue: UsersStreamCursorValueInput!
+
+  """
+  cursor ordering
+  """
+  ordering: CursorOrdering
+}
+
+"""
+Initial value of the column from where the streaming should start
+"""
+input UsersStreamCursorValueInput {
+  """
+  作成日時
+  """
+  createdAt: timestamptz
+
+  """
+  メールアドレス
+  """
+  email: String
+
+  """
+  最初のアクセス日時
+  """
+  firstSeen: timestamptz
+
+  """
+  ユーザーID
+  """
+  id: String
+
+  """
+  最終アクセス日時
+  """
+  lastSeen: timestamptz
+
+  """
+  ニックネーム
+  """
+  nickname: String
+
+  """
+  アイコン画像URL
+  """
+  picture: String
+
+  """
+  更新日時
+  """
+  updatedAt: timestamptz
+
+  """
+  ユーザー名
+  """
+  username: String
+
+  """
+  ウェブサイトURL
+  """
+  website: String
+}
+
+"""
+Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'.
+"""
+input UuidComparisonExp {
+  _eq: uuid
+
+  _gt: uuid
+
+  _gte: uuid
+
+  _in: [uuid!]
+
+  _isNull: Boolean
+
+  _lt: uuid
+
+  _lte: uuid
+
+  _neq: uuid
+
+  _nin: [uuid!]
+}
+
+type __Directive {
+  args: __InputValue
+
+  description: String!
+
+  isRepeatable: String!
+
+  locations: String!
+
+  name: String!
+}
+
+type __EnumValue {
+  deprecationReason: String!
+
+  description: String!
+
+  isDeprecated: String!
+
+  name: String!
+}
+
+type __Field {
+  args: __InputValue
+
+  deprecationReason: String!
+
+  description: String!
+
+  isDeprecated: String!
+
+  name: String!
+
+  type: __Type
+}
+
+type __InputValue {
+  defaultValue: String!
+
+  description: String!
+
+  name: String!
+
+  type: __Type
+}
+
+type __Schema {
+  description: String!
+
+  directives: __Directive
+
+  mutationType: __Type
+
+  queryType: __Type
+
+  subscriptionType: __Type
+
+  types: __Type
+}
+
+type __Type {
+  description: String!
+
+  enumValues(includeDeprecated: Boolean = false): __EnumValue
+
+  fields(includeDeprecated: Boolean = false): __Field
+
+  inputFields: __InputValue
+
+  interfaces: __Type
+
+  kind: __TypeKind!
+
+  name: String!
+
+  ofType: __Type
+
+  possibleTypes: __Type
+}
+
+enum __TypeKind {
+  ENUM
+
+  INPUT_OBJECT
+
+  INTERFACE
+
+  LIST
+
+  NON_NULL
+
+  OBJECT
+
+  SCALAR
+
+  UNION
+}
+
+"""
+mutation root
+"""
+type mutation_root {
+  """
+  insert data into the table: "participants"
+  """
+  insertParticipants("the rows to be inserted" objects: [ParticipantsInsertInput!]!, "upsert condition" onConflict: ParticipantsOnConflict): ParticipantsMutationResponse
+
+  """
+  insert a single row into the table: "participants"
+  """
+  insertParticipantsOne("the row to be inserted" object: ParticipantsInsertInput!, "upsert condition" onConflict: ParticipantsOnConflict): Participants
+
+  """
+  update data of the table: "participants"
+  """
+  updateParticipants("sets the columns of the filtered rows to the given values" _set: ParticipantsSetInput, "filter the rows which have to be updated" where: ParticipantsBoolExp!): ParticipantsMutationResponse
+
+  """
+  update single row of the table: "participants"
+  """
+  updateParticipantsByPk("sets the columns of the filtered rows to the given values" _set: ParticipantsSetInput, pkColumns: ParticipantsPkColumnsInput!): Participants
+
+  """
+  update multiples rows of table: "participants"
+  """
+  updateParticipantsMany("updates to execute, in order" updates: [ParticipantsUpdates!]!): [ParticipantsMutationResponse]
+}
+
+type query_root {
+  """
+  fetch data from the table: "participant_status"
+  """
+  participantStatus("distinct select on columns" distinctOn: [ParticipantStatusSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [ParticipantStatusOrderBy!], "filter the rows returned" where: ParticipantStatusBoolExp): [ParticipantStatus!]!
+
+  """
+  fetch data from the table: "participant_status" using primary key columns
+  """
+  participantStatusByPk(value: String!): ParticipantStatus
+
+  """
+  fetch data from the table: "participants"
+  """
+  participants("distinct select on columns" distinctOn: [ParticipantsSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [ParticipantsOrderBy!], "filter the rows returned" where: ParticipantsBoolExp): [Participants!]!
+
+  """
+  fetch data from the table: "participants" using primary key columns
+  """
+  participantsByPk("スケジュールID" scheduleId: uuid!, "参加ユーザーID" userId: String!): Participants
+
+  """
+  fetch data from the table: "places"
+  """
+  places("distinct select on columns" distinctOn: [PlacesSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [PlacesOrderBy!], "filter the rows returned" where: PlacesBoolExp): [Places!]!
+
+  """
+  fetch data from the table: "places" using primary key columns
+  """
+  placesByPk("場所ID" id: uuid!): Places
+
+  """
+  fetch data from the table: "schedules"
+  """
+  schedules("distinct select on columns" distinctOn: [SchedulesSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [SchedulesOrderBy!], "filter the rows returned" where: SchedulesBoolExp): [Schedules!]!
+
+  """
+  fetch data from the table: "schedules" using primary key columns
+  """
+  schedulesByPk("予定ID" id: uuid!): Schedules
+
+  """
+  fetch data from the table: "users"
+  """
+  users("distinct select on columns" distinctOn: [UsersSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [UsersOrderBy!], "filter the rows returned" where: UsersBoolExp): [Users!]!
+
+  """
+  fetch data from the table: "users" using primary key columns
+  """
+  usersByPk("ユーザーID" id: String!): Users
+}
+
+type subscription_root {
+  """
+  fetch data from the table: "participant_status"
+  """
+  participantStatus("distinct select on columns" distinctOn: [ParticipantStatusSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [ParticipantStatusOrderBy!], "filter the rows returned" where: ParticipantStatusBoolExp): [ParticipantStatus!]!
+
+  """
+  fetch data from the table: "participant_status" using primary key columns
+  """
+  participantStatusByPk(value: String!): ParticipantStatus
+
+  """
+  fetch data from the table in a streaming manner: "participant_status"
+  """
+  participantStatusStream("maximum number of rows returned in a single batch" batchSize: Int!, "cursor to stream the results returned by the query" cursor: [ParticipantStatusStreamCursorInput]!, "filter the rows returned" where: ParticipantStatusBoolExp): [ParticipantStatus!]!
+
+  """
+  fetch data from the table: "participants"
+  """
+  participants("distinct select on columns" distinctOn: [ParticipantsSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [ParticipantsOrderBy!], "filter the rows returned" where: ParticipantsBoolExp): [Participants!]!
+
+  """
+  fetch data from the table: "participants" using primary key columns
+  """
+  participantsByPk("スケジュールID" scheduleId: uuid!, "参加ユーザーID" userId: String!): Participants
+
+  """
+  fetch data from the table in a streaming manner: "participants"
+  """
+  participantsStream("maximum number of rows returned in a single batch" batchSize: Int!, "cursor to stream the results returned by the query" cursor: [ParticipantsStreamCursorInput]!, "filter the rows returned" where: ParticipantsBoolExp): [Participants!]!
+
+  """
+  fetch data from the table: "places"
+  """
+  places("distinct select on columns" distinctOn: [PlacesSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [PlacesOrderBy!], "filter the rows returned" where: PlacesBoolExp): [Places!]!
+
+  """
+  fetch data from the table: "places" using primary key columns
+  """
+  placesByPk("場所ID" id: uuid!): Places
+
+  """
+  fetch data from the table in a streaming manner: "places"
+  """
+  placesStream("maximum number of rows returned in a single batch" batchSize: Int!, "cursor to stream the results returned by the query" cursor: [PlacesStreamCursorInput]!, "filter the rows returned" where: PlacesBoolExp): [Places!]!
+
+  """
+  fetch data from the table: "schedules"
+  """
+  schedules("distinct select on columns" distinctOn: [SchedulesSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [SchedulesOrderBy!], "filter the rows returned" where: SchedulesBoolExp): [Schedules!]!
+
+  """
+  fetch data from the table: "schedules" using primary key columns
+  """
+  schedulesByPk("予定ID" id: uuid!): Schedules
+
+  """
+  fetch data from the table in a streaming manner: "schedules"
+  """
+  schedulesStream("maximum number of rows returned in a single batch" batchSize: Int!, "cursor to stream the results returned by the query" cursor: [SchedulesStreamCursorInput]!, "filter the rows returned" where: SchedulesBoolExp): [Schedules!]!
+
+  """
+  fetch data from the table: "users"
+  """
+  users("distinct select on columns" distinctOn: [UsersSelectColumn!], "limit the number of rows returned" limit: Int, "skip the first n rows. Use only with order_by" offset: Int, "sort the rows by one or more columns" orderBy: [UsersOrderBy!], "filter the rows returned" where: UsersBoolExp): [Users!]!
+
+  """
+  fetch data from the table: "users" using primary key columns
+  """
+  usersByPk("ユーザーID" id: String!): Users
+
+  """
+  fetch data from the table in a streaming manner: "users"
+  """
+  usersStream("maximum number of rows returned in a single batch" batchSize: Int!, "cursor to stream the results returned by the query" cursor: [UsersStreamCursorInput]!, "filter the rows returned" where: UsersBoolExp): [Users!]!
+}
+
+scalar timestamptz
+
+scalar uuid
+
+"""
+whether this query should be included
+"""
+directive @include (if: Boolean!) on FIELD|FRAGMENT_SPREAD|INLINE_FRAGMENT
+
+"""
+whether this query should be skipped
+"""
+directive @skip (if: Boolean!) on FIELD|FRAGMENT_SPREAD|INLINE_FRAGMENT
+
+"""
+whether this query should be cached (Hasura Cloud only)
+"""
+directive @cached ("measured in seconds" ttl: Int! = 60, "refresh the cache entry" refresh: Boolean! = false) on QUERY
+
+schema {
+  query: query_root
+  mutation: mutation_root
+  subscription: subscription_root
+}
