@@ -4,16 +4,12 @@ import club.nito.core.model.schedule.ScheduleId
 import club.nito.feature.schedule.detail.ScheduleDetailStateMachine
 import club.nito.feature.schedule.list.ScheduleListStateMachine
 import org.koin.core.module.Module
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 public val scheduleFeatureModule: Module = module {
-    factory {
-        ScheduleListStateMachine(
-            getParticipantScheduleList = get(),
-            userMessageStateHolder = get(),
-            dateFormatter = get(),
-        )
-    }
+    factoryOf(::ScheduleListStateMachine)
+
     factory { (scheduleId: ScheduleId) ->
         ScheduleDetailStateMachine(
             scheduleId = scheduleId,
