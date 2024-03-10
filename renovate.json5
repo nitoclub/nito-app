@@ -20,6 +20,7 @@
     {
       "groupName": "kotlin-ksp-compose",
       "matchPackageNames": [
+        "org.jetbrains.kotlin.android",
         "org.jetbrains.kotlin.jvm",
         "com.google.devtools.ksp",
         "androidx.compose.compiler:compiler",
