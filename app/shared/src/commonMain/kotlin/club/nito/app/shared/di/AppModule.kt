@@ -5,14 +5,12 @@ import club.nito.core.common.NitoCoroutineDispatchers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.IO
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 val appModule = module {
-    factory {
-        NitoAppStateMachine(
-            authStatusStream = get(),
-        )
-    }
+    factoryOf(::NitoAppStateMachine)
+
     single {
         @OptIn(ExperimentalCoroutinesApi::class)
         NitoCoroutineDispatchers(

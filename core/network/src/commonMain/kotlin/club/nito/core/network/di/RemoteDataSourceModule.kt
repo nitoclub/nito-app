@@ -17,33 +17,10 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 public val remoteDataSourceModule: Module = module {
-    single<AuthRemoteDataSource> {
-        SupabaseAuthRemoteDataSource(
-            goTrue = get(),
-        )
-    }
-    single {
-        NetworkService(
-            authRemoteDataSource = get(),
-        )
-    }
-    single<ScheduleRemoteDataSource> {
-        SupabaseScheduleRemoteDataSource(
-            networkService = get(),
-            client = get(),
-        )
-    }
-    single<ParticipantRemoteDataSource> {
-        SupabaseParticipantRemoteDataSource(
-            networkService = get(),
-            client = get(),
-        )
-    }
-    single<UserRemoteDataSource> {
-        SupabaseUserRemoteDataSource(
-            networkService = get(),
-            client = get(),
-        )
-    }
+    singleOf(::NetworkService)
+    singleOf(::SupabaseAuthRemoteDataSource) bind AuthRemoteDataSource::class
+    singleOf(::SupabaseScheduleRemoteDataSource) bind ScheduleRemoteDataSource::class
+    singleOf(::SupabaseParticipantRemoteDataSource) bind ParticipantRemoteDataSource::class
+    singleOf(::SupabaseUserRemoteDataSource) bind UserRemoteDataSource::class
     singleOf(::SupabasePlaceRemoteDataSource) bind PlaceRemoteDataSource::class
 }
