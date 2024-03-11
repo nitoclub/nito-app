@@ -19,6 +19,8 @@ public interface BuildConfig {
      */
     public val debugBuild: Boolean
 
+    public val flavor: Flavor
+
     public companion object {
         public val Empty: BuildConfig = EmptyBuildConfig
     }
@@ -31,4 +33,6 @@ private object EmptyBuildConfig : BuildConfig {
     override val applicationId: String = ""
     override val versionName: String = ""
     override val debugBuild: Boolean = false
+
+    override val flavor: Flavor = Flavor.Dev
 }

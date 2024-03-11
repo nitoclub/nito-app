@@ -27,6 +27,8 @@
 		05F1F9142B075E75006C5C63 /* DevApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevApp.swift; sourceTree = "<group>"; };
 		05F1F9182B075E76006C5C63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05F1F91B2B075E76006C5C63 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		509E7D892B9E8F5900072822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		509E7D8A2B9E8F7300072822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 		0518CBC52AEC05BB003599DC /* Prod */ = {
 			isa = PBXGroup;
 			children = (
+				509E7D8A2B9E8F7300072822 /* Info.plist */,
 				0518CBC62AEC05BB003599DC /* ProdApp.swift */,
 				0518CBCA2AEC05BC003599DC /* Assets.xcassets */,
 				0518CBCC2AEC05BC003599DC /* Preview Content */,
@@ -97,6 +100,7 @@
 		05F1F9132B075E75006C5C63 /* Dev */ = {
 			isa = PBXGroup;
 			children = (
+				509E7D892B9E8F5900072822 /* Info.plist */,
 				05F1F9142B075E75006C5C63 /* DevApp.swift */,
 				05F1F9182B075E76006C5C63 /* Assets.xcassets */,
 				05F1F91A2B075E76006C5C63 /* Preview Content */,
@@ -376,6 +380,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Prod/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NITO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -410,6 +415,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Prod/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = NITO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -443,6 +449,7 @@
 				DEVELOPMENT_TEAM = V3Y8WJSRKA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dev/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "(dev) NITO";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -476,6 +483,7 @@
 				DEVELOPMENT_TEAM = V3Y8WJSRKA;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dev/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "(dev) NITO";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
