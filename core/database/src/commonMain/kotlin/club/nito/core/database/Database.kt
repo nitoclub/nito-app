@@ -3,12 +3,16 @@ package club.nito.core.database
 import app.cash.sqldelight.EnumColumnAdapter
 import app.cash.sqldelight.db.SqlDriver
 import club.nito.core.database.adapter.InstantLongColumnAdapter
+import club.nito.core.model.Flavor
 
 internal expect class DriverFactory {
     fun createDriver(): SqlDriver
 }
 
-internal const val DATABASE_NAME = "nito.db"
+internal fun databaseName(flavor: Flavor): String = when (flavor) {
+    Flavor.Dev -> "nito-dev.db"
+    Flavor.Prod -> "nito.db"
+}
 
 internal fun createDatabase(driverFactory: DriverFactory): Database {
     val driver = driverFactory.createDriver()

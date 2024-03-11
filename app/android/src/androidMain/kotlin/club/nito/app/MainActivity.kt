@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import club.nito.app.shared.NitoApp
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 class MainActivity : ComponentActivity() {
@@ -41,7 +42,14 @@ class MainActivity : ComponentActivity() {
                 initKoin = {
                     modules(
                         appModule,
-                        module { single<Context> { this@MainActivity.applicationContext } },
+                        module {
+                            single<Context>(named(name = "application")) {
+                                this@MainActivity.applicationContext
+                            }
+                            single<Context>(named(name = "activity")) {
+                                this@MainActivity
+                            }
+                        },
                     )
                 },
             )
