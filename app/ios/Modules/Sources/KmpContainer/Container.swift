@@ -25,6 +25,7 @@ private class AppBuildConfig: BuildConfig {
     var applicationId: String
     var versionName: String
     var debugBuild: Bool
+    var flavor: Flavor
 
     init() {
         self.applicationId =
@@ -36,5 +37,16 @@ private class AppBuildConfig: BuildConfig {
         #else
             self.debugBuild = false
         #endif
+
+        switch Bundle.main.object(forInfoDictionaryKey: "Flavor") as? String ?? "" {
+        case "dev":
+            self.flavor = Flavor.dev
+        case "prod":
+            self.flavor = Flavor.prod
+        default:
+            self.flavor = Flavor.dev
+        }
     }
 }
+
+
