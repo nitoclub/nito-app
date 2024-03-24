@@ -7,8 +7,8 @@ let package = Package(
     name: "Modules",
     defaultLocalization: "ja",
     platforms: [
-        .iOS(.v16),
-        .macOS(.v12),
+        .iOS(.v17),
+        .macOS(.v14),
     ],
     products: [
         .library(
