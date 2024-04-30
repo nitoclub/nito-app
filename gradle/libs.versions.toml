@@ -6,7 +6,7 @@ androidGradlePlugin = "8.4.0"
 kotlin = "1.9.23"
 
 androidDesugarJdkLibs = "2.0.4"
-apollographql = "3.8.3"
+apollographql = "3.8.4"
 compose = "1.6.2"
 composeCompiler = "1.5.10"
 androidxActivity = "1.9.0"
