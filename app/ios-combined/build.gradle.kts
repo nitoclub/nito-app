@@ -21,9 +21,9 @@ kotlin {
                     // compose for iOS(skiko) needs to be static library
                     isStatic = true
                     embedBitcode(BitcodeEmbeddingMode.DISABLE)
-                    binaryOption("bundleId", "club.nito.Kmp")
-                    binaryOption("bundleVersion", version.toString())
-                    binaryOption("bundleShortVersionString", version.toString())
+                    binaryOption("CFBundleIdentifier", "club.nito.Kmp")
+                    binaryOption("CFBundleVersion", version.toString())
+                    binaryOption("CFBundleShortVersionString", version.toString())
                     xcf.add(this)
 
                     export(projects.core.model)
