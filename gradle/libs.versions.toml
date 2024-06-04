@@ -3,12 +3,11 @@ androidGradlePlugin = "8.4.1"
 # For updating Kotlin and Compose Compiler version, see:
 # https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?#pre-release_kotlin_compatibility
-kotlin = "1.9.23"
+kotlin = "2.0.0"
 
 androidDesugarJdkLibs = "2.0.4"
 apollographql = "3.8.4"
 compose = "1.6.11"
-composeCompiler = "1.5.10"
 androidxActivity = "1.9.0"
 androidxSplashScreen = "1.0.1"
 kotlinxCoroutines = "1.8.1"
@@ -40,7 +39,8 @@ imageLoader = "1.8.1"
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-composeGradlePlugin = { group = "org.jetbrains.compose", name = "compose-gradle-plugin", version.ref = "compose" }
+composeGradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
+composeCompilerGradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 kspGradlePlugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 firebaseGradlePlugin = { module = "com.google.gms:google-services", version = "4.4.2" }
 kotlinxSerializationGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
@@ -135,7 +135,8 @@ kotestFrameworkDatatest = { module = "io.kotest:kotest-framework-datatest" }
 kotestRunnerJunit5 = { module = "io.kotest:kotest-runner-junit5" }
 
 [plugins]
-composeGradlePlugin = { id = "org.jetbrains.compose", version.ref = "compose" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidGradlePlugin = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 androidGradleLibraryPlugin = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 apollographql = { id = "com.apollographql.apollo3", version.ref = "apollographql" }
@@ -150,6 +151,7 @@ plugins = [
     "androidGradlePlugin",
     "kotlinGradlePlugin",
     "composeGradlePlugin",
+    "composeCompilerGradlePlugin",
     "kspGradlePlugin",
     "firebaseGradlePlugin",
     "kotlinxSerializationGradlePlugin",

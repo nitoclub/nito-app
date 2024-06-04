@@ -2,7 +2,9 @@ package club.nito.primitive
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.get
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
 
 @Suppress("unused")
 class KmpComposePlugin : Plugin<Project> {
@@ -10,10 +12,14 @@ class KmpComposePlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("org.jetbrains.compose")
+                apply("org.jetbrains.kotlin.plugin.compose")
             }
-            val compose = (extensions["compose"] as org.jetbrains.compose.ComposeExtension).apply {
-                kotlinCompilerPlugin.set(libs.version("composeCompiler"))
+            composeCompiler {
+                // Enable 'strong skipping'
+                // https://medium.com/androiddevelopers/jetpack-compose-strong-skipping-mode-explained-cbdb2aa4b900
+                enableStrongSkippingMode.set(true)
             }
+            val compose = (extensions["compose"] as org.jetbrains.compose.ComposeExtension)
             kotlin {
                 with(sourceSets) {
                     getByName("commonMain").apply {
@@ -36,4 +42,8 @@ class KmpComposePlugin : Plugin<Project> {
             }
         }
     }
+}
+
+private fun Project.composeCompiler(block: ComposeCompilerGradlePluginExtension.() -> Unit) {
+    extensions.configure<ComposeCompilerGradlePluginExtension>(block)
 }
