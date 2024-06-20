@@ -120,7 +120,7 @@ firebaseCommon = { module = "com.google.firebase:firebase-common" }
 firebaseDynamicLinks = { module = "com.google.firebase:firebase-dynamic-links" }
 firebaseRemoteConfig = { module = "dev.gitlive:firebase-config", version.ref = "multiplatformFirebase" }
 firebaseCrashlyticsGradlePlugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "3.0.2" }
-firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "19.0.1" }
+firebaseCrashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version = "19.0.2" }
 
 ossLicenses = { module = "com.google.android.gms:play-services-oss-licenses", version.ref = "ossLicenses" }
 
