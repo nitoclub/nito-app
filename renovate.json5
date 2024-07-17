@@ -7,16 +7,55 @@
     ":timezone(Asia/Tokyo)",
   ],
   "dependencyDashboard": false,
-  "enabledManagers": [
-    "github-actions",
-    "gradle",
-    "gradle-wrapper",
-    "swift",
-  ],
   "labels": [
     "dependencies"
   ],
   "packageRules": [
+    {
+      "groupName": "github-actions non-major dependencies",
+      "groupSlug": "github-actions-minor-patch",
+      "addLabels": [
+        "ignore for release",
+      ],
+      "matchManagers": [
+        "github-actions",
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+    },
+    {
+      "groupName": "gradle non-major dependencies",
+      "groupSlug": "gradle-minor-patch",
+      "matchManagers": [
+        "gradle",
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+    },
+    {
+      "groupName": "swift non-major dependencies",
+      "groupSlug": "swift-minor-patch",
+      "matchManagers": [
+        "swift",
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
+    },
     {
       "groupName": "kotlin-ksp-compose",
       "matchPackageNames": [
