@@ -17,8 +17,8 @@ val keystoreExits = keystorePropertiesFile.exists()
 android {
     namespace = "club.nito.app"
     defaultConfig {
-        versionCode = 18
-        versionName = "0.7.6"
+        versionCode = 19
+        versionName = "0.7.7"
     }
     signingConfigs {
         create("dev") {
