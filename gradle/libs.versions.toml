@@ -27,14 +27,14 @@ ossLicenses = "17.1.0"
 detekt = "1.23.6"
 twitterComposeRule = "0.0.26"
 kover = "0.8.3"
-supabase = "2.5.3"
+supabase = "2.5.4"
 sqldelight = "2.0.2"
 stately = "2.0.7"
 logback = "1.5.6"
 graphqlKotlin = "7.1.4"
 kotest = "5.9.1"
 precompose = "1.6.1"
-imageLoader = "1.8.1"
+imageLoader = "1.8.2"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
