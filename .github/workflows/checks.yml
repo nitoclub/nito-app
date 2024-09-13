@@ -84,7 +84,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@16bf8bc8fe830fa669c3c9f914d3eb147c629707 # v4.0.1
+        uses: gradle/actions/setup-gradle@d156388eb19639ec20ade50009f3d199ce1e2808 # v4.1.0
 
       - name: Unit Tests
         run: ./gradlew testDebugUnitTest
@@ -119,7 +119,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@16bf8bc8fe830fa669c3c9f914d3eb147c629707 # v4.0.1
+        uses: gradle/actions/setup-gradle@d156388eb19639ec20ade50009f3d199ce1e2808 # v4.1.0
 
       # https://github.com/marketplace/actions/setup-xcode-version
       - name: Setup Xcode version
@@ -162,7 +162,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@16bf8bc8fe830fa669c3c9f914d3eb147c629707 # v4.0.1
+        uses: gradle/actions/setup-gradle@d156388eb19639ec20ade50009f3d199ce1e2808 # v4.1.0
 
       - name: Unit Tests
         run: ./gradlew :app:backend:check
