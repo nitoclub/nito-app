@@ -2,9 +2,12 @@ plugins {
     alias(libs.plugins.androidGradlePlugin) apply false
     alias(libs.plugins.androidGradleLibraryPlugin) apply false
     alias(libs.plugins.kotlinGradlePlugin) apply false
-    alias(libs.plugins.composeMultiplatform) apply false
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinxKover) apply false
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.layout.buildDirectory)
 }
 
 buildscript {

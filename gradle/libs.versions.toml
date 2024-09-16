@@ -34,7 +34,7 @@ logback = "1.5.8"
 graphqlKotlin = "7.1.5"
 kotest = "5.9.1"
 precompose = "1.6.1"
-imageLoader = "1.8.3"
+imageLoader = "1.8.1"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -82,6 +82,7 @@ apolloRuntime = { module = "com.apollographql.apollo3:apollo-runtime", version.r
 apolloAdapters = { module = "com.apollographql.apollo3:apollo-adapters", version.ref = "apollographql" }
 
 ktorClientCore = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktorClientLogging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktorClientOkHttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktorClientDarwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktorKotlinxSerialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
