@@ -27,6 +27,7 @@ kotlin {
 
                 implementation(libs.okIo)
                 implementation(libs.ktorClientCore)
+                implementation(libs.ktorClientLogging)
                 implementation(libs.ktorKotlinxSerialization)
                 implementation(libs.ktorClientContentNegotiation)
 

@@ -1,24 +1,38 @@
+rootProject.name = "nito"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     includeBuild("build-logic")
     repositories {
-        google()
-        gradlePluginPortal()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        gradlePluginPortal()
     }
 }
 
 dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        maven {
+            url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev/")
+        }
+        maven { url = uri("https://jitpack.io") }
     }
 }
-
-rootProject.name = "nito"
 
 include(
     ":app:shared",

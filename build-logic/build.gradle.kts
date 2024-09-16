@@ -4,10 +4,14 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "club.nito.buildlogic"
-
 repositories {
-    google()
+    google {
+        content {
+            includeGroupByRegex("com\\.android.*")
+            includeGroupByRegex("com\\.google.*")
+            includeGroupByRegex("androidx.*")
+        }
+    }
     mavenCentral()
     gradlePluginPortal()
 }
