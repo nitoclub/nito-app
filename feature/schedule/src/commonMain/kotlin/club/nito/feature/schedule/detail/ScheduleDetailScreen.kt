@@ -1,6 +1,5 @@
 package club.nito.feature.schedule.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -60,7 +59,7 @@ import club.nito.core.model.schedule.ScheduleWithPlace
 import club.nito.core.ui.ProfileImage
 import club.nito.core.ui.koinStateMachine
 import club.nito.core.ui.message.SnackbarMessageEffect
-import com.seiko.imageloader.rememberImagePainter
+import coil3.compose.AsyncImage
 import org.koin.core.parameter.parametersOf
 
 @Composable
@@ -243,10 +242,8 @@ private fun VenueSection(
                 .fillMaxWidth()
                 .heightIn(max = 200.dp),
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    url = schedule.venue.imageUrl,
-                ),
+            AsyncImage(
+                model = schedule.venue.imageUrl,
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.FillWidth,
                 contentDescription = null,
@@ -307,10 +304,8 @@ private fun MeetSection(
                 .fillMaxWidth()
                 .heightIn(max = 200.dp),
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    url = schedule.meet.imageUrl,
-                ),
+            AsyncImage(
+                model = schedule.meet.imageUrl,
                 modifier = Modifier.fillMaxWidth(),
                 contentScale = ContentScale.FillWidth,
                 contentDescription = null,

@@ -16,7 +16,8 @@ kotlin {
             dependencies {
                 implementation(compose.components.resources)
                 implementation(compose.materialIconsExtended)
-                api(libs.imageLoader)
+                api(libs.coil)
+                api(libs.coilNetwork)
             }
         }
     }
