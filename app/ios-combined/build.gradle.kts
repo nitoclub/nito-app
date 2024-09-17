@@ -68,6 +68,7 @@ kotlin {
         }
         iosMain {
             dependencies {
+                implementation(project.dependencies.platform(libs.koinBom))
                 implementation(libs.koin)
             }
         }
