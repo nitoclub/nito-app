@@ -29,6 +29,7 @@ kotlin {
 
                 implementation(libs.kotlinxCoroutinesCore)
 
+                implementation(project.dependencies.platform(libs.koinBom))
                 implementation(libs.koin)
                 implementation(libs.koinCompose)
 

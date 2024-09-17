@@ -19,6 +19,7 @@ kotlin {
                 implementation(libs.kotlinxCoroutinesCore)
                 implementation(libs.kotlinSerializationJson)
 
+                implementation(project.dependencies.platform(libs.koinBom))
                 implementation(libs.koin)
                 implementation(libs.kermit)
 

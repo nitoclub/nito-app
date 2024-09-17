@@ -24,6 +24,7 @@ kotlin {
                 api(libs.precomposeViewmodel)
                 implementation(libs.precomposeKoin)
 
+                implementation(project.dependencies.platform(libs.koinBom))
                 implementation(libs.koin)
                 implementation(libs.koinCompose)
 
