@@ -10,9 +10,9 @@ import java.util.concurrent.CompletableFuture
 class BookQueryService : Query {
     @GraphQLDescription("Return list of books based on BookSearchParameter options")
     @Suppress("unused")
-    fun searchBooks(params: BookSearchParameters, dfe: DataFetchingEnvironment): CompletableFuture<List<Book>> =
+    fun searchBooks(params: BookSearchParameters, dfe: DataFetchingEnvironment): CompletableFuture<List<Book>>? =
         dfe.getDataLoader<Int, Book>(BookDataLoader.dataLoaderName)
-            .loadMany(params.ids)
+            ?.loadMany(params.ids)
 }
 
 data class BookSearchParameters(val ids: List<Int>)

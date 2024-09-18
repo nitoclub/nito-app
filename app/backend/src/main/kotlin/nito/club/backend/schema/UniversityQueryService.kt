@@ -10,9 +10,9 @@ class UniversityQueryService : Query {
     fun searchUniversities(
         params: UniversitySearchParameters,
         dfe: DataFetchingEnvironment,
-    ): CompletableFuture<List<University>> =
+    ): CompletableFuture<List<University>>? =
         dfe.getDataLoader<Int, University>(UniversityDataLoader.dataLoaderName)
-            .loadMany(params.ids)
+            ?.loadMany(params.ids)
 }
 
 data class UniversitySearchParameters(val ids: List<Int>)
