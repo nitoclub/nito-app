@@ -33,7 +33,7 @@ logback = "1.5.8"
 graphqlKotlin = "7.1.5"
 kotest = "5.9.1"
 precompose = "1.6.2"
-imageLoader = "1.8.3"
+coil = "3.0.0-alpha10"
 
 [libraries]
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -65,7 +65,9 @@ kotlinxCollectionsImmutable = { module = "org.jetbrains.kotlinx:kotlinx-collecti
 kotlinxDatetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.1" }
 kotlinxAtomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version = "0.25.0" }
 
-imageLoader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
+coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
+coilNetwork = { module = "io.coil-kt.coil3:coil-network-ktor2", version.ref = "coil" }
+coilTest = { module = "io.coil-kt.coil3:coil-test", version.ref = "coil" }
 
 androidxActivityActivityCompose = { module = "androidx.activity:activity-compose", version.ref = "androidxActivity" }
 androidxDatastoreDatastorePreferences = { module = "androidx.datastore:datastore-preferences-core", version = "1.1.1" }
