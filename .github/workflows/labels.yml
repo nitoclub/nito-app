@@ -14,7 +14,7 @@ on:
 
 jobs:
   labeler:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
