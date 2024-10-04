@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   changed:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       android: ${{ steps.changes.outputs.android }}
       ios: ${{ steps.changes.outputs.ios }}
@@ -59,7 +59,7 @@ jobs:
               - 'settings.gradle.kts'
 
   check-android:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: changed
     if: needs.changed.outputs.android == 'true'
     steps:
@@ -137,7 +137,7 @@ jobs:
           destination: ${{ matrix.destination }}
 
   check-backend:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: changed
     if: needs.changed.outputs.backend == 'true'
     steps:
@@ -171,7 +171,7 @@ jobs:
         run: ./gradlew :app:backend:buildFatJar
 
   status-check:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs:
       - check-android
       - check-ios
