@@ -3,11 +3,11 @@ androidGradlePlugin = "8.7.0"
 # For updating Kotlin and Compose Compiler version, see:
 # https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#kotlin-compatibility
 # https://developer.android.com/jetpack/androidx/releases/compose-kotlin?#pre-release_kotlin_compatibility
-kotlin = "2.0.20"
+kotlin = "2.0.21"
 
 androidDesugarJdkLibs = "2.1.2"
 apollographql = "3.8.5"
-compose = "1.6.11"
+compose = "1.7.0+build1877-release-1.7"
 androidxActivity = "1.9.2"
 androidxSplashScreen = "1.0.1"
 kotlinxCoroutines = "1.9.0"
