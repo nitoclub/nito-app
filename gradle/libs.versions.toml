@@ -63,7 +63,7 @@ kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 kermitKoin = { module = "co.touchlab:kermit-koin", version.ref = "kermit" }
 kotlinxCollectionsImmutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version = "0.3.8" }
 kotlinxDatetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version = "0.6.1" }
-kotlinxAtomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version = "0.25.0" }
+kotlinxAtomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version = "0.26.0" }
 
 coil = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coilNetwork = { module = "io.coil-kt.coil3:coil-network-ktor2", version.ref = "coil" }
