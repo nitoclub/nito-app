@@ -12,6 +12,6 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/label-manager-for-prs-and-issues-based-on-configurable-conditions
       - name: Label manager for PRs and Issues based on configurable conditions
-        uses: srvaroa/labeler@fe4b1c73bb8abf2f14a44a6912a8b4fee835d631 # v1.12.0
+        uses: srvaroa/labeler@0a20eccb8c94a1ee0bed5f16859aece1c45c3e55 # v1.13.0
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
