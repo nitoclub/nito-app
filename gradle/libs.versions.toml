@@ -31,7 +31,7 @@ sqldelight = "2.0.2"
 stately = "2.1.0"
 logback = "1.5.12"
 graphqlKotlin = "8.2.1"
-kotest = "5.9.1"
+kotest = "6.0.0-LOCAL"
 precompose = "1.6.2"
 coil = "3.0.2"
 
