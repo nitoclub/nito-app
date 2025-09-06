@@ -37,7 +37,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.3")
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", from: "1.9.4")
     ],
     targets: [
         .target(
