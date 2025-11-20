@@ -20,7 +20,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       # https://github.com/marketplace/actions/paths-changes-filter
       - name: Paths Changes Filter
@@ -65,7 +65,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           lfs: 'true'
 
@@ -84,7 +84,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
+        uses: gradle/actions/setup-gradle@748248ddd2a24f49513d8f472f81c3a07d4d50e1 # v4.4.4
 
       - name: Unit Tests
         run: ./gradlew testDebugUnitTest
@@ -102,7 +102,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Copy CI gradle.properties
         shell: bash
@@ -119,7 +119,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
+        uses: gradle/actions/setup-gradle@748248ddd2a24f49513d8f472f81c3a07d4d50e1 # v4.4.4
 
       # https://github.com/marketplace/actions/setup-xcode-version
       - name: Setup Xcode version
@@ -143,7 +143,7 @@ jobs:
     steps:
       # https://github.com/marketplace/actions/checkout
       - name: Checkout
-        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           lfs: 'true'
 
@@ -162,7 +162,7 @@ jobs:
 
       # https://github.com/marketplace/actions/build-with-gradle
       - name: Build with Gradle
-        uses: gradle/actions/setup-gradle@017a9effdb900e5b5b2fddfb590a105619dca3c3 # v4.4.2
+        uses: gradle/actions/setup-gradle@748248ddd2a24f49513d8f472f81c3a07d4d50e1 # v4.4.4
 
       - name: Unit Tests
         run: ./gradlew :app:backend:check
