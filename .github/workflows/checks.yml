@@ -93,7 +93,7 @@ jobs:
         run: ./gradlew :app:android:assembleDevDebug
 
   check-ios:
-    runs-on: macos-14
+    runs-on: macos-15
     needs: changed
     if: needs.changed.outputs.ios == 'true'
     strategy:
